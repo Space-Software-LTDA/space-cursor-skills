@@ -1,0 +1,15 @@
+# Arquivos temporários
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Credenciais e cache
+clickup.env
+.env
+*.pyc
+__pycache__/
+
+# Node
+node_modules/
+dist/
