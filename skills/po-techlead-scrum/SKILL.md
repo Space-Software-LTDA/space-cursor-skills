@@ -131,7 +131,17 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
 4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` antes se for a 1ª vez no projeto)
-5. Devolver o **link da task** ao PO
+5. **Anexar** na task tudo que o time precisa baixar (OpenAPI, DBML, specs extras) — não só o `.md`
+6. Devolver o **link da task** ao PO
+
+#### 📎 Corpo ClickUp ≠ pasta local do PO
+
+No markdown **publicado** no ClickUp:
+
+- **Proibido** citar paths de workspace do PO (`.docs/`, `.task/`, `C:\...`, clone local)
+- Artefatos (OpenAPI, DBML, JSON, PDF…) → **anexar na task** e referenciar pelo **nome do arquivo** (“anexo `openapi-….yaml`”)
+- Prints → URLs **space-assets** (já padrão)
+- `.docs/` / `.task/` existem só na máquina do PO; o time lê **anexos + links**
 
 | Modo | Tipo custom | Status / extras |
 | --- | --- | --- |
@@ -338,6 +348,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Markdown em `.task/{projeto}/{task-slug}.md` (não `task/` sem ponto; não solto na raiz)
 - [ ] Se workspace é git repo: `.task/` (e `.playwright-capture/` / `.skill/` se usados) no `.gitignore`
 - [ ] Se for publicar: aprovação local explícita + dry-run/script ClickUp (ver [clickup-task-guide.md](clickup-task-guide.md))
+- [ ] Corpo ClickUp **sem** paths `.docs/` / `.task/` / disco local — anexos referenciados por nome de arquivo
+- [ ] OpenAPI/DBML/specs extras **anexados** na task (além do `.md`)
 
 ## O que NÃO fazer
 
@@ -349,6 +361,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não colar blocos ` ```mermaid ` em tarefas ClickUp — sempre imagem via mermaid.ink
 - Não entregar task Front só com texto quando existir protótipo ou print disponível
 - Não usar caminhos `C:\...` ou relativos locais — sempre URL space-assets após push
+- Não citar `.docs/` / `.task/` no corpo ClickUp — anexar o arquivo e referenciar pelo nome
+- Não publicar OpenAPI/DBML só “no disco do PO” sem anexar na task
 - Não colocar no markdown da task: modo SuperAgente, “não é direto pro dev”, complexidade de roteamento, checklist meta do agente
 - Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” sem o PO pedir explicitamente
 - Não escrever task “só para quem já sabe” — default é júnior
