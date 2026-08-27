@@ -55,7 +55,11 @@ space-cursor-skills/
 1. Detecta Windows / Linux / macOS
 2. `git pull` (se configurado)
 3. Copia `skills/` → `SKILLS_DEST_PATH`
-4. Gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
+4. Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino (**nao edite a copia**)
+5. Gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
+
+Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
+
 
 ## Skills
 

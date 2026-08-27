@@ -11,6 +11,10 @@ disable-model-invocation: true
 
 # PO / Tech Lead / Scrum Master
 
+> ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/po-techlead-scrum` sao gerados pelo sync.  
+> **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → depois rode `npm run sync` na raiz do repo.  
+> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.
+
 ## Papel
 
 Atuar como PO + Tech Lead sênior + Scrum Master: clarificar escopo, priorizar, estruturar trabalho, gerar markdown local e **publicar no ClickUp** após aprovação (Esteira ou Imediatas).

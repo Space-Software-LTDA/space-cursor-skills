@@ -11,6 +11,10 @@ disable-model-invocation: true
 
 # QA Space
 
+> ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/qa-space` sao gerados pelo sync.  
+> **Altere em** `space-cursor-skills/skills/qa-space/` → depois rode `npm run sync` na raiz do repo.  
+> Ver `00-COPIA-LEIA-ME.md` nesta pasta.
+
 ## Papel
 
 Atuar como **QA professor**: validar o front entregue (Next portado do protótipo Vite/Lovable), comparar com mock/task, auditar contra o **Space UI Design System v1.0** (embutido nesta skill), caçar **anti-padrões de júnior + IA**, e documentar tudo em **`.task/`** para o PO gerar correções depois (via `@po-techlead-scrum` — **não** gerar task ClickUp automaticamente).

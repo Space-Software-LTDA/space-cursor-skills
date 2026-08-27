@@ -14,6 +14,10 @@ disable-model-invocation: true
 
 # Project Context Doc
 
+> ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/project-context-doc` sao gerados pelo sync.  
+> **Altere em** `space-cursor-skills/skills/project-context-doc/` → depois rode `npm run sync` na raiz do repo.  
+> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.
+
 Gera documento de contexto para devs: foco em **por que**, **para que** e **fluxo end-to-end**.
 
 **Sempre responder em portugues (PT-BR).**

@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeClickupEnv } from "./lib/clickup-env.js";
+import { writeCopyNotices } from "./lib/copy-notice.js";
 import { copySkills } from "./lib/copy-skills.js";
 import { loadConfig, validateConfig } from "./lib/env.js";
 import { gitPull } from "./lib/git.js";
@@ -31,6 +32,15 @@ async function main(): Promise<void> {
 
   console.log("\n📂 Sincronizando skills...");
   const stats = copySkills(config.skillsSource, config.skillsDest, config.dryRun);
+
+  console.log("\n📝 Carimbando aviso de copia...");
+  const noticed = writeCopyNotices(config.skillsDest, {
+    repoRoot: config.repoRoot,
+    dryRun: config.dryRun,
+  });
+  if (noticed.length) {
+    console.log(`   00-COPIA-LEIA-ME.md em: ${noticed.join(", ")}`);
+  }
 
   if (config.clickup) {
     const written = writeClickupEnv(
