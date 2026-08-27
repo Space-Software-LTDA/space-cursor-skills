@@ -13,7 +13,8 @@ disable-model-invocation: true
 
 > ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/po-techlead-scrum` sao gerados pelo sync.  
 > **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → depois rode `npm run sync` na raiz do repo.  
-> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.
+> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.  
+> No repo fonte: **`AGENTS.md`** (raiz) explica o fluxo completo para o agente.
 
 ## Papel
 
@@ -37,7 +38,7 @@ MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU
 | **ENV ClickUp** | `.env` na **raiz** do `space-cursor-skills` (compartilhado com `project-context-doc`) |
 
 Ao alterar a skill: editar no repo → commit/push → `npm run sync` na máquina.  
-Detalhes: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
+No repo: leia **`AGENTS.md`** na raiz (e `.cursor/rules/`). Detalhes ClickUp: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
 
 ---
 

@@ -82,3 +82,5 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 
 Editar skills **neste repo** (`skills/...`), commit/push, depois `npm run sync`.  
 Não tratar `~/.cursor/skills` como fonte da verdade.
+
+**Cursor:** leia [AGENTS.md](AGENTS.md) e a rule em `.cursor/rules/space-cursor-skills.mdc` — direcionamento automático ao abrir este repo. Cada `SKILL.md` (e o `00-COPIA-LEIA-ME.md` no destino) repete o mesmo fluxo.

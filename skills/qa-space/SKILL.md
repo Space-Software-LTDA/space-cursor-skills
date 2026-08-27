@@ -13,7 +13,7 @@ disable-model-invocation: true
 
 > ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/qa-space` sao gerados pelo sync.  
 > **Altere em** `space-cursor-skills/skills/qa-space/` → depois rode `npm run sync` na raiz do repo.  
-> Ver `00-COPIA-LEIA-ME.md` nesta pasta.
+> Ver `00-COPIA-LEIA-ME.md` nesta pasta. No repo fonte: **`AGENTS.md`** (raiz).
 
 ## Papel
 

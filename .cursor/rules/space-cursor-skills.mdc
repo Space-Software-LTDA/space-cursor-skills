@@ -1,0 +1,21 @@
+---
+description: Fonte da verdade das skills Cursor — editar aqui, depois npm run sync
+alwaysApply: true
+---
+
+# space-cursor-skills
+
+Este repo versiona as skills. O destino `~/.cursor/skills` é **cópia**.
+
+## Sempre
+
+1. Editar em `skills/<skill>/` neste repo (não só no destino Cursor)
+2. Credenciais ClickUp no `.env` da **raiz** (não na pasta da skill)
+3. Após mudanças: `npm run sync` na raiz
+4. Ler [AGENTS.md](AGENTS.md) se precisar do fluxo completo
+
+## Nunca
+
+- Tratar `~/.cursor/skills` como fonte da verdade
+- Commitar `.env`, `clickup.env` ou `node_modules`
+- Pedir ao usuário para editar só a cópia e “lembrar” de copiar na mão
