@@ -278,7 +278,7 @@ def main() -> None:
             print(f"WARN skip missing attachment: {p}", file=sys.stderr)
             continue
         att = attach_file(task_id, p)
-        print(f"Attached: {p.name} → {att.get('id') or att.get('title') or 'ok'}")
+        print(f"Attached: {p.name} -> {att.get('id') or att.get('title') or 'ok'}")
 
     print(json.dumps({"id": task_id, "url": task_url}, ensure_ascii=False))
 
