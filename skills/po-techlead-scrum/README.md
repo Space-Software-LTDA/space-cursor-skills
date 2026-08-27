@@ -5,11 +5,11 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 ## Fluxo do agente (ordem)
 
 1. Confirmar projeto, modo de entrega, **responsável** e camadas **no chat** (não na task)
-2. Validar `.gitignore` do projeto: `.playwright-capture/`, `.task/`, `.skill/`
+2. **Onde gravar:** sempre `.task/` — fora de repo: criar `.task/`; dentro de repo: `.task/` + garantir no **`.gitignore`** (`.task/`, `.playwright-capture/`, `.skill/`)
 3. [lovable-vs-local.md](lovable-vs-local.md) — matriz lacunas (se protótipo ou UI)
 4. [playwright-capture.md](playwright-capture.md) — prints → space-assets (se Front)
 5. [decomposicao-tom-professor.md](decomposicao-tom-professor.md) — **1 bloco por unidade mínima** (GLOBAL)
-6. Salvar em `{projeto-cliente}/.task/{projeto}/{task-slug}.md` ou `task/{slug}.md`
+6. Salvar em `.task/{projeto}/{task-slug}.md`
 7. Checklist em [SKILL.md](SKILL.md)
 8. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`)
 

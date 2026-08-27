@@ -339,6 +339,8 @@ Listar todos os `[CONFIRMAR]` em secao final **Revisao pendente** antes de entre
 | Onde salvar | `.docs/` na raiz do workspace |
 | Nome | `.docs/contexto-[slug-produto].md` |
 | Conteudo | Markdown formatado para ClickUp (copiar/colar valido) |
+| Fora de repo git | Criar `.docs/` e gravar ali |
+| Dentro de repo git | Gravar em `.docs/` **e** garantir `.docs/` no **`.gitignore`** (adicionar se faltar) |
 | Git | Nao commitar automaticamente |
 
 ---
@@ -348,6 +350,7 @@ Listar todos os `[CONFIRMAR]` em secao final **Revisao pendente** antes de entre
 - Nao gravar `.docs/contexto-*.md` antes da Fase 4 (gate humano)
 - Nao pular Fase 0b ou Fase 3 por pedido generico ("implemente", "teste agora", "execute plano")
 - Nao commitar automaticamente — salvar sempre em `.docs/` so na Fase 4
+- Nao esquecer `.docs/` no `.gitignore` quando o workspace for um **repo**
 - Nao usar bloco Mermaid inline
 - Nao omitir Por que/ Para que em colunas ou rotas
 - Nao incluir coluna Tipo no dicionario TB (fica no DBML)

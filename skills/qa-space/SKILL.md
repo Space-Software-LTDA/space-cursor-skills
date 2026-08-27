@@ -15,6 +15,17 @@ disable-model-invocation: true
 > **Altere em** `space-cursor-skills/skills/qa-space/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
 > Ver `00-COPIA-LEIA-ME.md`. Fluxo: **`AGENTS.md`**.
 
+## Onde gravar artefatos (`.task/`)
+
+Sempre gravar REPORT/prints/snippets em **`.task/`**.
+
+| Situação | O que fazer |
+|----------|-------------|
+| Workspace **fora** de um git repo | Criar `.task/` no workspace e gravar ali (ex.: `.task/qa-{data}-{slug}/`) |
+| Workspace **dentro** de um git repo | Idem em `.task/` **e** garantir **`.task/`** no **`.gitignore`** — **adicionar se faltar**, antes de gerar arquivos |
+
+Não commitar `.task/` sem o usuário pedir.
+
 ## Papel
 
 Atuar como **QA professor**: validar o front entregue (Next portado do protótipo Vite/Lovable), comparar com mock/task, auditar contra o **Space UI Design System v1.0** (embutido nesta skill), caçar **anti-padrões de júnior + IA**, e documentar tudo em **`.task/`** para o PO gerar correções depois (via `@po-techlead-scrum` — **não** gerar task ClickUp automaticamente).
@@ -95,7 +106,7 @@ Reportar **os dois** quando implementação copiou erro do mock que também fere
 
 ## Fase 1 — Preparar `.task/`
 
-Na **raiz do projeto** validado:
+Na **raiz do workspace** validado (ver seção **Onde gravar artefatos**): se for git repo, **antes** confirmar `.task/` no `.gitignore`.
 
 ```
 .task/qa-{YYYY-MM-DD}-{slug}/
@@ -222,6 +233,8 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 ## O que NÃO fazer
 
 - Não gerar task ClickUp sozinha
+- Não gravar REPORT fora de `.task/`
+- Não esquecer `.task/` no `.gitignore` quando o workspace for um **repo**
 - Não commitar `.task/` sem o usuário pedir
 - Não colar credenciais no REPORT
 - Não aprovar paginação client-side com `limit` absurdo

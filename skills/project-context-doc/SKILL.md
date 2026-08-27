@@ -18,6 +18,17 @@ disable-model-invocation: true
 > **Altere em** `space-cursor-skills/skills/project-context-doc/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
 > Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Fluxo: **`AGENTS.md`**.
 
+## Onde gravar artefatos (`.docs/`)
+
+Sempre gravar o contexto local em **`.docs/`** (monolito, overrides ClickUp, estado de sync). Preferir também a árvore multipágina sob `.docs/` quando possível (ex.: `.docs/docs/`, `.docs/README.md`); se o fluxo ainda gerar `docs/` / `README.md` na raiz do workspace, tratar como artefato local da skill.
+
+| Situação | O que fazer |
+|----------|-------------|
+| Workspace **fora** de um git repo | Criar `.docs/` no workspace e gravar ali (ex.: `.docs/contexto-[slug].md`) |
+| Workspace **dentro** de um git repo | Idem em `.docs/` **e** garantir **`.docs/`** no **`.gitignore`** — **adicionar se faltar**, antes de gravar. Se gerar `docs/` só para esta skill (não for docs versionadas do produto), incluir `docs/` no `.gitignore` também **ou** mover para `.docs/docs/` |
+
+Não commitar automaticamente. Não gravar `.docs/contexto-*.md` antes da Fase 4.
+
 Gera documento de contexto para devs: foco em **por que**, **para que** e **fluxo end-to-end**.
 
 **Sempre responder em portugues (PT-BR).**
@@ -375,6 +386,7 @@ C4 e sequencias refletem **repos reais do recon**. Inserir PNG mermaid.ink — n
 - [ ] Aviso IA no topo
 - [ ] Lista `[CONFIRMAR]` no final (somente o que ficou em aberto)
 - [ ] Arquivo gravado em `.docs/contexto-[slug].md` **somente na Fase 4**
+- [ ] Se workspace e git repo: `.docs/` no `.gitignore` (adicionar se faltar)
 - [ ] `README.md` + `docs/01-*.md` … `docs/NN-*.md` gerados para publicacao ClickUp
 - [ ] README **sem** meta de tooling (sync, coluna "Arquivo local", paragrafo "8 arquivos em docs/")
 - [ ] Subpaginas **sem** H2 duplicando titulo da sidebar ClickUp

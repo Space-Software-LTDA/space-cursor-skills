@@ -15,6 +15,17 @@ disable-model-invocation: true
 > **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
 > Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Fluxo: **`AGENTS.md`**.
 
+## Onde gravar artefatos (`.task/`)
+
+Sempre gravar markdown/prints locais em **`.task/`** (nunca soltos na raiz do workspace, nunca só `task/` sem o ponto).
+
+| Situação | O que fazer |
+|----------|-------------|
+| Workspace **fora** de um git repo | Criar `.task/` no workspace atual e gravar ali (ex.: `.task/{projeto}/{task-slug}.md`) |
+| Workspace **dentro** de um git repo | Idem: gravar em `.task/` **e** garantir que `.task/` (e `.playwright-capture/`, `.skill/` se usados) estão no **`.gitignore`** do repo — **adicionar se faltar**, antes de gerar arquivos |
+
+Não commitar `.task/` sem o usuário pedir. Validar `.gitignore` sempre que o workspace for um repo.
+
 ## Papel
 
 Atuar como PO + Tech Lead sênior + Scrum Master: clarificar escopo, priorizar, estruturar trabalho, gerar markdown local e **publicar no ClickUp** após aprovação (Esteira ou Imediatas).
@@ -116,7 +127,7 @@ Quando em dúvida sobre urgência ou complexidade, perguntar objetivamente.
 
 Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 
-1. Gerar markdown local (`task/*.md` ou `.task/...`)
+1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**)
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
 4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` antes se for a 1ª vez no projeto)
@@ -324,6 +335,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Tarefa Front: seção 🖼️ Referência visual com URLs space-assets (push feito) + legenda
 - [ ] Link do protótipo incluído quando existir
 - [ ] **Não** enxugou conteúdo didático ao “limpar” a task
+- [ ] Markdown em `.task/{projeto}/{task-slug}.md` (não `task/` sem ponto; não solto na raiz)
+- [ ] Se workspace é git repo: `.task/` (e `.playwright-capture/` / `.skill/` se usados) no `.gitignore`
 - [ ] Se for publicar: aprovação local explícita + dry-run/script ClickUp (ver [clickup-task-guide.md](clickup-task-guide.md))
 
 ## O que NÃO fazer

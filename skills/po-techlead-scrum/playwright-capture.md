@@ -22,7 +22,8 @@ Preferir Playwright a browser MCP quando precisar de **várias telas**, **abas**
 
 No **root do projeto cliente**:
 
-**Validar `.gitignore`** contém `.playwright-capture/`, `.task/` e `.skill/` — adicionar se faltar.
+**Validar `.gitignore`** contém `.playwright-capture/`, `.task/` e `.skill/` — adicionar se faltar.  
+Workspace **fora** de repo: criar essas pastas localmente sem gitignore. Workspace **dentro** de repo: pastas + **gitignore obrigatório**.
 
 ```bash
 mkdir -p .playwright-capture/screenshots
