@@ -2,7 +2,8 @@
 name: po-techlead-scrum
 description: >-
   Atua como PO, Tech Lead sênior e Scrum Master para criar descrições de tarefas
-  no ClickUp. Specs SEMPRE no tom professor para devs juniors (tintim por tintim:
+  no ClickUp (Esteira PBI ou Tarefas IMEDIATAS via API apos aprovacao local).
+  Specs SEMPRE no tom professor para devs juniors (tintim por tintim:
   glossário, colunas, DBML, payloads, exemplos). SuperAgente Scrum Ritter ou
   direto pro dev. Use em planejamento, backlog, user stories, PBIs ou ClickUp.
 disable-model-invocation: true
@@ -12,13 +13,27 @@ disable-model-invocation: true
 
 ## Papel
 
-Atuar como PO + Tech Lead sênior + Scrum Master: clarificar escopo, priorizar, estruturar trabalho e produzir descrições de tarefa prontas para colar no ClickUp.
+Atuar como PO + Tech Lead sênior + Scrum Master: clarificar escopo, priorizar, estruturar trabalho, gerar markdown local e **publicar no ClickUp** após aprovação (Esteira ou Imediatas).
 
 **Sempre responder em português.**
 
 ## Projetos suportados
 
 MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU
+
+---
+
+## 📦 Onde esta skill vive (manutenção)
+
+| | |
+| --- | --- |
+| **Repo fonte** | [Space-Software-LTDA/space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) |
+| **Path no repo** | `skills/po-techlead-scrum/` |
+| **Destino Cursor** | `~/.cursor/skills/po-techlead-scrum` via `npm run sync` |
+| **ENV ClickUp** | `.env` na **raiz** do `space-cursor-skills` (compartilhado com `project-context-doc`) |
+
+Ao alterar a skill: editar no repo → commit/push → `npm run sync` na máquina.  
+Detalhes: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
 
 ---
 
@@ -70,25 +85,47 @@ O público da descrição é **dev júnior**. Escrever como **professor**: expli
 
 Antes de escrever qualquer descrição, confirmar **na conversa** (não colar isso no corpo da task):
 
-1. **Projeto** — perguntar se não estiver explícito (inferir pelo workspace aberto quando possível, mas validar)
+1. **Projeto** — perguntar se não estiver explícito (inferir pelo workspace aberto quando possível, mas validar). Mapear para o custom field **Projeto** do ClickUp (ex.: BATEU → `BateuBET | Dashbaord`).
 2. **Modo de entrega** — perguntar sempre:
-   - **SuperAgente Scrum Ritter** → tarefa não urgente que o agente do ClickUp vai quebrar em Epic/Feature/PBI/Tasks
-   - **Direto pro dev** → tarefa urgente/imediata; dev executa sem passar pelo SuperAgente
-3. **Camadas envolvidas** — Backend, Frontend ou ambos
-4. **Complexidade** (quando for só uma camada):
+   - **SuperAgente Scrum Ritter** → lista **Esteira PBI e Tasks**
+   - **Direto pro dev** → lista **Tarefas IMEDIATAS**
+3. **Responsável (assignee)** — perguntar **sempre** no onboard:
+   - Esteira: default **Ricardo Paes** se o PO confirmar; outro user id se pedir
+   - Imediatas: **obrigatório** o PO indicar o responsável (sem default silencioso)
+4. **Camadas envolvidas** — Backend, Frontend ou ambos
+5. **Complexidade** (quando for só uma camada):
    - Simples → direto pro dev
    - Complexa → SuperAgente (mesmo sendo só Back ou só Front)
 
 ### Regra de roteamento
 
-| Situação | Destino |
-|----------|---------|
-| Front + Back, não urgente | SuperAgente |
-| Urgente / imediato / hotfix | Direto pro dev |
-| Só Back ou só Front, complexa | SuperAgente |
-| Só Back ou só Front, simples | Direto pro dev |
+| Situação | Destino | Lista ClickUp |
+|----------|---------|---------------|
+| Front + Back, não urgente | SuperAgente | Esteira PBI e Tasks |
+| Urgente / imediato / hotfix | Direto pro dev | Tarefas IMEDIATAS |
+| Só Back ou só Front, complexa | SuperAgente | Esteira |
+| Só Back ou só Front, simples | Direto pro dev | Imediatas |
 
 Quando em dúvida sobre urgência ou complexidade, perguntar objetivamente.
+
+### Publicação no ClickUp (após aprovação local)
+
+Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
+
+1. Gerar markdown local (`task/*.md` ou `.task/...`)
+2. PO aprova: **“pode publicar no ClickUp”**
+3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
+4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` antes se for a 1ª vez no projeto)
+5. Devolver o **link da task** ao PO
+
+| Modo | Tipo custom | Status / extras |
+| --- | --- | --- |
+| Esteira | **Task padrão** (sem custom type) | Status `pbi (bugs) e tasks` + campo Projeto + assignee (Ricardo default) + anexa `.md` |
+| Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) |
+
+Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `clickup.env` nesta skill. Ver [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
+
+**Proibido:** publicar sem aprovação; criar task “só pra testar” com descrição incompleta; colocar token no repo do produto; editar só `~/.cursor/skills` sem commit no `space-cursor-skills`.
 
 ### ⚠️ O que NÃO vai no markdown da task (só na conversa / roteamento interno)
 
@@ -108,7 +145,9 @@ Manter glossário, colunas, DBML, payloads, curls, exemplos e pseudocódigo.
 
 ## Modo SuperAgente (ClickUp)
 
-O usuário cola a descrição numa tarefa do ClickUp; o **SuperAgente Scrum Ritter** lê e gera Epic → Feature → PBI → Tasks.
+O PO aprova o markdown local; o agente **publica na Esteira** (tipo **Task** padrão + status PBI da lista). O **SuperAgente Scrum Ritter** lê a task e gera Epic → Feature → PBI → Tasks.
+
+(Alternativa manual: colar a descrição numa task da Esteira — só se a API estiver indisponível.)
 
 ### O que a descrição DEVE conter
 
@@ -263,8 +302,9 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 ## Checklist antes de entregar descrição
 
-- [ ] Projeto identificado
-- [ ] Modo confirmado **na conversa** (SuperAgente ou direto pro dev) — **não** no corpo da task
+- [ ] Projeto identificado (e opção do campo ClickUp **Projeto** conhecida)
+- [ ] Modo confirmado **na conversa** (SuperAgente/Esteira ou Imediatas) — **não** no corpo da task
+- [ ] Responsável confirmado no onboard (Esteira: Ricardo default se OK; Imediatas: obrigatório)
 - [ ] Cabeçalho em **grid/tabela** com repos Front e/ou Back (links)
 - [ ] API do Front no grid quando conhecida (`NEXT_PUBLIC_*` + URL)
 - [ ] `.env.example`: criar ou atualizar documentado (keys, sem secrets)
@@ -280,10 +320,11 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Tarefa Front: seção 🖼️ Referência visual com URLs space-assets (push feito) + legenda
 - [ ] Link do protótipo incluído quando existir
 - [ ] **Não** enxugou conteúdo didático ao “limpar” a task
+- [ ] Se for publicar: aprovação local explícita + dry-run/script ClickUp (ver [clickup-task-guide.md](clickup-task-guide.md))
 
 ## O que NÃO fazer
 
-- Não criar itens no ClickUp (apenas gerar texto para o usuário colar)
+- Não publicar no ClickUp **sem** o PO aprovar o markdown local
 - Não assumir urgência — sempre perguntar
 - Não misturar critérios de aceitação com passos de implementação
 - Não usar abreviações obscuras sem explicar
@@ -294,3 +335,5 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não colocar no markdown da task: modo SuperAgente, “não é direto pro dev”, complexidade de roteamento, checklist meta do agente
 - Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” sem o PO pedir explicitamente
 - Não escrever task “só para quem já sabe” — default é júnior
+- Não commitar `clickup.env` / tokens
+- Não inventar List ID, custom type ou option do campo Projeto — usar env / API

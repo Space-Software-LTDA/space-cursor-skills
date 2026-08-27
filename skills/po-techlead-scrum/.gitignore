@@ -1,0 +1,4 @@
+﻿clickup.env
+*.pyc
+__pycache__/
+

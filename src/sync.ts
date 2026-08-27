@@ -38,8 +38,8 @@ async function main(): Promise<void> {
       config.clickup,
       config.dryRun,
     );
-    if (written) {
-      console.log("🔑 clickup.env atualizado em project-context-doc/");
+    if (written.length) {
+      console.log(`🔑 clickup.env atualizado em: ${written.join(", ")}`);
     }
   } else {
     console.log(

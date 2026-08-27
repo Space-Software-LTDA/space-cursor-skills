@@ -1,0 +1,34 @@
+{
+  "steps": [
+    { "name": "dashboard", "selector": null },
+    { "name": "campanhas", "selector": "text=Campanhas" },
+    { "name": "profissoes", "selector": "text=Profissões" },
+    { "name": "usuarios", "selector": "text=Usuários" }
+  ],
+  "subSteps": [
+    {
+      "after": "profissoes",
+      "click": "text=Psicólogo",
+      "tabs": [
+        { "name": "profissao-palavras-chave", "selector": "text=Palavras-chave" },
+        { "name": "profissao-titulos-ads", "selector": "text=Títulos Ads" },
+        { "name": "profissao-descricoes-ads", "selector": "text=Descrições Ads" },
+        { "name": "profissao-landing-page", "selector": "text=Landing Page" },
+        { "name": "profissao-prompt", "selector": "text=Prompt" },
+        { "name": "profissao-tags-google", "selector": "text=Tags Google" },
+        { "name": "profissao-perguntas", "selector": "text=Perguntas" }
+      ]
+    },
+    {
+      "after": "usuarios",
+      "click": "text=Ver",
+      "tabs": [
+        { "name": "usuario-detalhe", "selector": "text=Dados Cadastrais" },
+        { "name": "usuario-campanhas", "selector": "text=Campanhas" },
+        { "name": "usuario-contatos", "selector": "text=Contatos" },
+        { "name": "usuario-financeiro", "selector": "text=Financeiro" },
+        { "name": "usuario-acoes-admin", "selector": "text=Ações Admin" }
+      ]
+    }
+  ]
+}

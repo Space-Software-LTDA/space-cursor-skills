@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
+import type { ClickupCreds } from "./clickup-env.js";
 import { defaultSkillsDest, expandHome } from "./platform.js";
 
 export interface SyncConfig {
@@ -9,15 +10,17 @@ export interface SyncConfig {
   skillsDest: string;
   gitPull: boolean;
   dryRun: boolean;
-  clickup?: {
-    apiToken: string;
-    workspaceId: string;
-  };
+  clickup?: ClickupCreds;
 }
 
 function parseBool(value: string | undefined, fallback: boolean): boolean {
   if (value === undefined || value.trim() === "") return fallback;
   return !["false", "0", "no", "off"].includes(value.trim().toLowerCase());
+}
+
+function opt(name: string): string | undefined {
+  const v = process.env[name]?.trim();
+  return v || undefined;
 }
 
 export function loadConfig(repoRoot: string, dryRun: boolean): SyncConfig {
@@ -41,7 +44,18 @@ export function loadConfig(repoRoot: string, dryRun: boolean): SyncConfig {
   };
 
   if (token && workspaceId) {
-    config.clickup = { apiToken: token, workspaceId };
+    config.clickup = {
+      apiToken: token,
+      workspaceId,
+      listEsteira: opt("CLICKUP_LIST_ESTEIRA"),
+      listImediatas: opt("CLICKUP_LIST_IMEDIATAS"),
+      assigneeRicardo: opt("CLICKUP_ASSIGNEE_RICARDO"),
+      customTypeImediata: opt("CLICKUP_CUSTOM_TYPE_IMEDIATA"),
+      statusEsteiraPbi: opt("CLICKUP_STATUS_ESTEIRA_PBI"),
+      cfProjeto: opt("CLICKUP_CF_PROJETO"),
+      cfProjetoOptionBateu: opt("CLICKUP_CF_PROJETO_OPTION_BATEU"),
+      cfProjetoOrderindexBateu: opt("CLICKUP_CF_PROJETO_ORDERINDEX_BATEU"),
+    };
   }
 
   return config;
