@@ -43,9 +43,11 @@ Uma única fonte de credenciais ClickUp para **project-context-doc** e **po-tech
 ```
 space-cursor-skills/
 ├── skills/                 ← fonte versionada
+│   ├── skill-update/       ← hub /skill-update
 │   ├── po-techlead-scrum/
 │   ├── qa-space/
 │   └── project-context-doc/
+├── AGENTS.md               ← direcionamento do agente no repo
 ├── src/
 │   └── sync.ts             ← npm run sync
 ├── .env.example
@@ -67,6 +69,7 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 
 | Skill | Uso |
 |-------|-----|
+| `skill-update` | **Hub** do pack (`/skill-update`): sync, catálogo, nova/alterar skill, PC vs Coders |
 | `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor |
 | `qa-space` | QA / design system |
 | `project-context-doc` | Doc de contexto + sync Docs ClickUp |

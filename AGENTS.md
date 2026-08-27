@@ -50,9 +50,12 @@ npm run sync
 
 | Pasta | Função |
 |-------|--------|
+| `skills/skill-update` | **Hub** — sync, catálogo, criar/alterar skills (`/skill-update`) |
 | `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) |
 | `skills/project-context-doc` | Doc de contexto + Docs ClickUp |
 | `skills/qa-space` | QA front / Design System |
+
+Manutenção do pack: skill **`skill-update`** (não espalhar o fluxo só nas skills de produto).
 
 ## Regras curtas
 

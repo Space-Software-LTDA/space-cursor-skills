@@ -13,7 +13,7 @@ disable-model-invocation: true
 
 > ⚠️ **COPIA:** destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
 > **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
-> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Fluxo: **`AGENTS.md`**.
+> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Hub pack: **`/skill-update`**. Fluxo repo: **`AGENTS.md`**.
 
 ## Onde gravar artefatos (`.task/`)
 
