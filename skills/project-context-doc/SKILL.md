@@ -14,10 +14,9 @@ disable-model-invocation: true
 
 # Project Context Doc
 
-> ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/project-context-doc` sao gerados pelo sync.  
-> **Altere em** `space-cursor-skills/skills/project-context-doc/` → depois rode `npm run sync` na raiz do repo.  
-> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.  
-> No repo fonte: **`AGENTS.md`** (raiz) explica o fluxo completo para o agente.
+> ⚠️ **COPIA:** gerada pelo sync — destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
+> **Altere em** `space-cursor-skills/skills/project-context-doc/` → `npm run sync` na raiz (maquina alvo).  
+> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Fluxo: **`AGENTS.md`**.
 
 Gera documento de contexto para devs: foco em **por que**, **para que** e **fluxo end-to-end**.
 

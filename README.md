@@ -16,17 +16,19 @@ npm run sync
 ## Uso diário
 
 ```bash
-npm run sync          # git pull + copia skills/ → ~/.cursor/skills + gera clickup.env
+npm run sync          # git pull + copia skills/ → SKILLS_DEST_PATH + gera clickup.env
 npm run sync:dry      # simula sem alterar nada
 ```
 
-## .env (compartilhado)
+## .env (por máquina)
 
-Uma única fonte de credenciais ClickUp para **project-context-doc** e **po-techlead-scrum**.
+Cada ambiente (PC, Coders, etc.) tem o **próprio** `.env`. Destino e credenciais vêm daí.
+
+Uma única fonte de credenciais ClickUp para **project-context-doc** e **po-techlead-scrum** **nessa máquina**.
 
 | Variável | Descrição |
 |----------|-----------|
-| `SKILLS_DEST_PATH` | Onde o Cursor lê skills (default: `~/.cursor/skills`) |
+| `SKILLS_DEST_PATH` | Onde o Cursor **desta máquina** lê skills. **Obrigatório no Coders** (path ≠ home). Vazio → fallback `$HOME/.cursor/skills` |
 | `CLICKUP_API_TOKEN` | Personal token ClickUp |
 | `CLICKUP_WORKSPACE_ID` | Workspace (SPACE DEV = `90131082033`) |
 | `CLICKUP_LIST_ESTEIRA` / `CLICKUP_LIST_IMEDIATAS` | List IDs (criar tasks) |
@@ -80,7 +82,7 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 
 ## Regra de ouro para o agente
 
-Editar skills **neste repo** (`skills/...`), commit/push, depois `npm run sync`.  
-Não tratar `~/.cursor/skills` como fonte da verdade.
+Editar skills **neste repo** (`skills/...`), commit/push, depois `npm run sync` **na máquina alvo**.  
+Não tratar a pasta de destino (`SKILLS_DEST_PATH`) como fonte da verdade — e não assumir o mesmo path em PC e Coders.
 
-**Cursor:** leia [AGENTS.md](AGENTS.md) e a rule em `.cursor/rules/space-cursor-skills.mdc` — direcionamento automático ao abrir este repo. Cada `SKILL.md` (e o `00-COPIA-LEIA-ME.md` no destino) repete o mesmo fluxo.
+**Cursor:** leia [AGENTS.md](AGENTS.md) e a rule em `.cursor/rules/space-cursor-skills.mdc`. Cada `SKILL.md` e o `00-COPIA-LEIA-ME.md` no destino repetem o fluxo.

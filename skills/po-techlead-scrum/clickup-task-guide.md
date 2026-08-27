@@ -10,7 +10,7 @@ Espelha o gate do `project-context-doc`: **só após aprovação local**.
 | --- | --- |
 | **Fonte versionada** | Repo [Space-Software-LTDA/space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) → `skills/po-techlead-scrum/` |
 | **Clone típico** | `G:\space\Documents\space\space-cursor-skills` (ou equivalente na máquina) |
-| **Destino Cursor** | `~/.cursor/skills/po-techlead-scrum` (gerado/atualizado pelo sync) |
+| **Destino Cursor** | `SKILLS_DEST_PATH` / `po-techlead-scrum` (path do `.env` **desta** máquina — PC ≠ Coders) |
 | **Credenciais ClickUp** | `.env` na **raiz do repo** `space-cursor-skills` (compartilhado com `project-context-doc`) |
 
 **Nunca** editar só em `~/.cursor/skills/...` e esquecer o repo — a próxima `npm run sync` **sobrescreve** com o que está em `skills/`.

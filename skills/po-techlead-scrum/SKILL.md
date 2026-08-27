@@ -11,10 +11,9 @@ disable-model-invocation: true
 
 # PO / Tech Lead / Scrum Master
 
-> ⚠️ **COPIA:** os arquivos em `~/.cursor/skills/po-techlead-scrum` sao gerados pelo sync.  
-> **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → depois rode `npm run sync` na raiz do repo.  
-> Ver `00-COPIA-LEIA-ME.md` nesta pasta. Credenciais ClickUp: `.env` na raiz do `space-cursor-skills`.  
-> No repo fonte: **`AGENTS.md`** (raiz) explica o fluxo completo para o agente.
+> ⚠️ **COPIA:** esta pasta e gerada pelo sync — destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
+> **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → `npm run sync` na raiz (maquina alvo).  
+> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz do repo. Fluxo: **`AGENTS.md`**.
 
 ## Papel
 
@@ -34,8 +33,8 @@ MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU
 | --- | --- |
 | **Repo fonte** | [Space-Software-LTDA/space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) |
 | **Path no repo** | `skills/po-techlead-scrum/` |
-| **Destino Cursor** | `~/.cursor/skills/po-techlead-scrum` via `npm run sync` |
-| **ENV ClickUp** | `.env` na **raiz** do `space-cursor-skills` (compartilhado com `project-context-doc`) |
+| **Destino Cursor** | `SKILLS_DEST_PATH` / `po-techlead-scrum` (path **por ambiente** — ver `.env`) |
+| **ENV** | `.env` na **raiz** do clone **desta máquina** (ClickUp + destino; compartilhado com `project-context-doc`) |
 
 Ao alterar a skill: editar no repo → commit/push → `npm run sync` na máquina.  
 No repo: leia **`AGENTS.md`** na raiz (e `.cursor/rules/`). Detalhes ClickUp: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
@@ -130,7 +129,7 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 
 Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `clickup.env` nesta skill. Ver [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
 
-**Proibido:** publicar sem aprovação; criar task “só pra testar” com descrição incompleta; colocar token no repo do produto; editar só `~/.cursor/skills` sem commit no `space-cursor-skills`.
+**Proibido:** publicar sem aprovação; criar task “só pra testar” com descrição incompleta; colocar token no repo do produto; editar só a pasta de destino (`SKILLS_DEST_PATH`) sem commit no `space-cursor-skills`.
 
 ### ⚠️ O que NÃO vai no markdown da task (só na conversa / roteamento interno)
 

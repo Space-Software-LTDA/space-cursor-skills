@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 /**
- * Carimba aviso em cada skill no destino (~/.cursor/skills).
+ * Carimba aviso em cada skill no destino (SKILLS_DEST_PATH do .env desta maquina).
  * Esta pasta e COPIA — editar no repo space-cursor-skills e rodar npm run sync.
  */
 export function writeCopyNotices(
@@ -28,13 +28,16 @@ export function writeCopyNotices(
     const sourcePath = path.join(repoRoot, "skills", entry.name);
     const content = `# ⚠️ COPIA — nao edite aqui
 
-Os arquivos desta pasta (\`${entry.name}\` em \`${skillsDest}\`) sao uma **copia** gerada pelo sync.
+Os arquivos desta pasta (\`${entry.name}\`) sao uma **copia** gerada pelo sync nesta maquina.
+
+**Destino atual:** \`${skillsDest}\`  
+(vem de \`SKILLS_DEST_PATH\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
 
 ## Onde alterar
 
 1. Edite em: \`${sourcePath}\`
 2. Repo: [${repoUrl}](${repoUrl})
-3. Depois rode na raiz do repo:
+3. Depois rode **nesta maquina** (usa o \`.env\` local):
 
 \`\`\`bash
 cd ${repoRoot}
