@@ -11,9 +11,9 @@ disable-model-invocation: true
 
 # PO / Tech Lead / Scrum Master
 
-> ⚠️ **COPIA:** esta pasta e gerada pelo sync — destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
-> **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → `npm run sync` na raiz (maquina alvo).  
-> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz do repo. Fluxo: **`AGENTS.md`**.
+> ⚠️ **COPIA:** destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
+> **Altere em** `space-cursor-skills/skills/po-techlead-scrum/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
+> Ver `00-COPIA-LEIA-ME.md`. Credenciais: `.env` na raiz. Fluxo: **`AGENTS.md`**.
 
 ## Papel
 

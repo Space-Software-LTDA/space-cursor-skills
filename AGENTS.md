@@ -22,8 +22,16 @@ Se `SKILLS_DEST_PATH` estiver vazio, o sync usa o default da plataforma (`$HOME/
 
 1. Editar em `skills/<nome-da-skill>/` **neste repo**
 2. Commit + push (quando o usuário pedir)
-3. Na raiz deste repo (na máquina alvo): `npm run sync` — usa o `.env` **daquela** máquina
+3. **OBRIGATÓRIO — rodar o Sync** na raiz deste repo, **na máquina onde o Cursor lê as skills**:
+
+```bash
+npm run sync
+```
+
+   Sem esse comando a cópia no destino **não atualiza**. Usa o `.env` **daquela** máquina (`SKILLS_DEST_PATH`).
 4. Reiniciar o chat do Cursor se a skill já estiver carregada
+
+**Lembrete ao agente:** depois de alterar qualquer skill, **avise / execute** `npm run sync` — não encerrar só com o commit.
 
 ## O que o sync faz
 
@@ -49,9 +57,10 @@ Se `SKILLS_DEST_PATH` estiver vazio, o sync usa o default da plataforma (`$HOME/
 ## Regras curtas
 
 - Alterar skill → sempre no path `skills/...` deste clone
-- Pasta de destino (seja home ou coders) = **cópia**; apontar para este repo + `npm run sync`
-- Não assumir que o destino é sempre `~/.cursor/skills` — ler `SKILLS_DEST_PATH` / `00-COPIA-LEIA-ME.md`
-- Não inventar segundo fluxo de deploy; sync é o único espelhamento
+- **Depois de alterar: `npm run sync`** — passo obrigatório, não opcional
+- Pasta de destino (home ou Coders) = **cópia**; apontar para este repo + Sync
+- Não assumir destino fixo `~/.cursor/skills` — ler `SKILLS_DEST_PATH` / `00-COPIA-LEIA-ME.md`
+- Não inventar segundo fluxo de deploy; Sync é o único espelhamento
 - Responder em português quando trabalhar nestas skills (padrão Space)
 
 ## Docs humanas

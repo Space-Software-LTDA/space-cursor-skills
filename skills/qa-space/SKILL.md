@@ -11,8 +11,8 @@ disable-model-invocation: true
 
 # QA Space
 
-> ⚠️ **COPIA:** gerada pelo sync — destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
-> **Altere em** `space-cursor-skills/skills/qa-space/` → `npm run sync` na raiz (maquina alvo).  
+> ⚠️ **COPIA:** destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
+> **Altere em** `space-cursor-skills/skills/qa-space/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
 > Ver `00-COPIA-LEIA-ME.md`. Fluxo: **`AGENTS.md`**.
 
 ## Papel

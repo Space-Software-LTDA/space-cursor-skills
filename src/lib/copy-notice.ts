@@ -37,12 +37,14 @@ Os arquivos desta pasta (\`${entry.name}\`) sao uma **copia** gerada pelo sync n
 
 1. Edite em: \`${sourcePath}\`
 2. Repo: [${repoUrl}](${repoUrl})
-3. Depois rode **nesta maquina** (usa o \`.env\` local):
+3. **OBRIGATORIO — rode o Sync** nesta maquina (sem isso a copia nao atualiza):
 
 \`\`\`bash
 cd ${repoRoot}
 npm run sync
 \`\`\`
+
+O Sync usa o \`.env\` local (\`SKILLS_DEST_PATH\` + ClickUp).
 
 ## Credenciais ClickUp
 

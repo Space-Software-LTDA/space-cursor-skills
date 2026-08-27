@@ -12,12 +12,14 @@ Este repo versiona as skills. O destino no Cursor é **cópia**, e o path **muda
 1. Editar em `skills/<skill>/` neste repo
 2. Destino: `SKILLS_DEST_PATH` no `.env` **desta** máquina (PC ≠ coders)
 3. Credenciais ClickUp no mesmo `.env` da raiz
-4. Após mudanças: `npm run sync` na raiz (na máquina onde o Cursor lê as skills)
-5. Detalhes: [AGENTS.md](AGENTS.md)
+4. **OBRIGATÓRIO:** após mudanças, rodar `npm run sync` na raiz (máquina alvo) — sem Sync a cópia não atualiza
+5. Ao terminar edições na skill, lembrar o usuário de rodar Sync (ou rodar se estiver no ambiente certo)
+6. Detalhes: [AGENTS.md](AGENTS.md)
 
 ## Nunca
 
 - Assumir destino fixo `~/.cursor/skills` em todo ambiente
 - Tratar a pasta de destino como fonte da verdade
 - Commitar `.env`, `clickup.env` ou `node_modules`
+- Considerar a mudança “pronta” só com commit — **falta o Sync**
 - Pedir cópia manual em vez de `npm run sync`
