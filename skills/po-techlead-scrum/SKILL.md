@@ -32,6 +32,24 @@ Atuar como PO + Tech Lead sênior + Scrum Master: clarificar escopo, priorizar, 
 
 **Sempre responder em português.**
 
+## Constituição (obrigatório ler antes de escrever task)
+
+A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
+
+1. Ler **[`../docs/README.md`](../docs/README.md)** — o README diz *como esta skill* usa cada arquivo (PO **não** é QA).
+2. Seguir a seção `po-techlead-scrum` desse README. Não inventar outro mapa. Não resumir `entry-point.md` aqui.
+
+| Escopo da task | Ler (após o README) |
+| --- | --- |
+| Backend (ou Front+Back) | `../docs/entry-point.md` **inteiro**, `../docs/padrao-ouro.md`, `../docs/anti-padroes.md`, `../docs/nomenclatura.md` |
+| Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar `../docs/design-system.md` **sem** resumir as 19 seções; prints + “não copiar neon Lovable” |
+| Branch / PR / hotfix | `../docs/git-fluxo.md` |
+| Projeto novo / stack | `../docs/backend.md` e/ou `../docs/frontend.md` |
+
+**Task Back incompleta** se o agente não leu `entry-point.md`. **Task que cria tabela/repo/serviço incompleta** se não leu `nomenclatura.md` (tabela `snake_case`, coluna camelCase, `createdAt`/`updatedAt`). Critérios descrevem comportamento; podem citar IDs `AP-*` / `GO-*` (GO-12 = nomes da empresa). **Não** preencher matriz visual §19 nem REPORT.md — isso é `qa-space`.
+
+---
+
 ## Projetos suportados
 
 MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU
@@ -327,6 +345,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 ## Checklist antes de entregar descrição
 
+- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir
 - [ ] Projeto identificado (e opção do campo ClickUp **Projeto** conhecida)
 - [ ] Modo confirmado **na conversa** (SuperAgente/Esteira ou Imediatas) — **não** no corpo da task
 - [ ] Responsável confirmado no onboard (Esteira: Ricardo default se OK; Imediatas: obrigatório)
@@ -366,5 +385,6 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não colocar no markdown da task: modo SuperAgente, “não é direto pro dev”, complexidade de roteamento, checklist meta do agente
 - Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” sem o PO pedir explicitamente
 - Não escrever task “só para quem já sabe” — default é júnior
+- Não auditar pixel / preencher REPORT no lugar do `qa-space` — PO **referencia** o DS; QA **audita**
 - Não commitar `clickup.env` / tokens
 - Não inventar List ID, custom type ou option do campo Projeto — usar env / API

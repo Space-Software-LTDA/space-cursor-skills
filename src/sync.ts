@@ -2,7 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeClickupEnv } from "./lib/clickup-env.js";
 import { writeCopyNotices } from "./lib/copy-notice.js";
-import { copySkills } from "./lib/copy-skills.js";
+import { copyDocs, copySkills } from "./lib/copy-skills.js";
 import { loadConfig, validateConfig } from "./lib/env.js";
 import { gitPull } from "./lib/git.js";
 import { detectPlatform } from "./lib/platform.js";
@@ -33,6 +33,13 @@ async function main(): Promise<void> {
   console.log("\n📂 Sincronizando skills...");
   const stats = copySkills(config.skillsSource, config.skillsDest, config.dryRun);
 
+  console.log("\n📂 Sincronizando docs (constituição)...");
+  const docsSource = path.join(config.repoRoot, "docs");
+  const docsStats = copyDocs(docsSource, config.skillsDest, config.dryRun);
+  if (docsStats.copied === 0 && docsStats.skipped === 0) {
+    console.log("   (pasta docs/ ausente no repo — pulado)");
+  }
+
   console.log("\n📝 Carimbando aviso de copia...");
   const noticed = writeCopyNotices(config.skillsDest, {
     repoRoot: config.repoRoot,
@@ -59,7 +66,8 @@ async function main(): Promise<void> {
 
   console.log("\n✅ Sync concluído");
   console.log(`   Skills:  ${stats.skills.join(", ")}`);
-  console.log(`   Arquivos: ${stats.copied} copiados, ${stats.skipped} ignorados`);
+  console.log(`   Docs:    ${docsStats.copied} arquivos → ${path.join(config.skillsDest, "docs")}`);
+  console.log(`   Arquivos (skills): ${stats.copied} copiados, ${stats.skipped} ignorados`);
   console.log(`\n   Reinicie o chat do Cursor para recarregar as skills.\n`);
 }
 

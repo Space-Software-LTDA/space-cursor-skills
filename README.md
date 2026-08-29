@@ -16,7 +16,7 @@ npm run sync
 ## Uso diário
 
 ```bash
-npm run sync          # git pull + copia skills/ → SKILLS_DEST_PATH + gera clickup.env
+npm run sync          # git pull + copia skills/ e docs/ → SKILLS_DEST_PATH + gera clickup.env
 npm run sync:dry      # simula sem alterar nada
 ```
 
@@ -42,6 +42,7 @@ Uma única fonte de credenciais ClickUp para **project-context-doc** e **po-tech
 
 ```
 space-cursor-skills/
+├── docs/                   ← constituição (README = mapa PO vs QA vs contexto)
 ├── skills/                 ← fonte versionada
 │   ├── skill-update/       ← hub /skill-update
 │   ├── po-techlead-scrum/
@@ -59,8 +60,9 @@ space-cursor-skills/
 1. Detecta Windows / Linux / macOS
 2. `git pull` (se configurado)
 3. Copia `skills/` → `SKILLS_DEST_PATH`
-4. Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino (**nao edite a copia**)
-5. Gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
+4. Copia `docs/` → `SKILLS_DEST_PATH/docs/`
+5. Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino **e** em `docs/` (**nao edite a copia**)
+6. Gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
 
 Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 
@@ -70,9 +72,11 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 | Skill | Uso |
 |-------|-----|
 | `skill-update` | **Hub** do pack (`/skill-update`): sync, catálogo, nova/alterar skill, PC vs Coders |
-| `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor |
-| `qa-space` | QA / design system |
-| `project-context-doc` | Doc de contexto + sync Docs ClickUp |
+| `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor — constituição via `docs/README.md` (escreve task) |
+| `qa-space` | QA / design system — constituição via `docs/README.md` (audita o feito; lê DS inteiro) |
+| `project-context-doc` | Doc de contexto + sync Docs ClickUp — constituição via `docs/README.md` (G-xxx) |
+
+Constituição (não é skill): pasta [`docs/`](docs/). **Toda skill de produto lê [`docs/README.md`](docs/README.md) primeiro** — PO, QA e contexto não usam os arquivos do mesmo jeito.
 
 ## O que NÃO entra no repo
 

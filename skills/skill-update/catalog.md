@@ -12,6 +12,8 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | `project-context-doc` | anexar / contexto produto | Doc de contexto + Docs ClickUp | `.docs/` (+ multipágina se aplicável) | Sim |
 | `qa-space` | `/qa-space` | QA front + Design System + REPORT | `.task/` | Não |
 
+Skills de produto **leem `docs/README.md` primeiro**. PO escreve task; QA audita o feito; contexto documenta o produto. Não misturar os três usos — detalhe no README da constituição.
+
 ## Quem chama quem
 
 ```text
@@ -23,9 +25,10 @@ project-context-doc    → grava .docs/; publica Doc ClickUp após aprovação
 
 ## Docs do repo (não são skills)
 
-| Arquivo | Papel |
-|---------|--------|
+| Arquivo / pasta | Papel |
+|-----------------|--------|
+| `docs/` | **Constituição** (entry-point, ouro, anti-padrões, DS, git, stack). Mapa: `docs/README.md` — cada skill lê esse README primeiro |
 | `AGENTS.md` | Direcionamento do agente ao abrir o repo |
 | `.cursor/rules/space-cursor-skills.mdc` | Rule always-on no repo |
 | `README.md` | Setup humano + tabela `.env` |
-| `src/sync.ts` | Implementação do `npm run sync` |
+| `src/sync.ts` | Implementação do `npm run sync` (copia `skills/` **e** `docs/`) |

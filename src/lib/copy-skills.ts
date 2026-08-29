@@ -14,6 +14,7 @@ function shouldSkip(name: string, isDir: boolean): boolean {
   if (isDir && SKIP_DIRS.has(name)) return true;
   if (!isDir && SKIP_FILES.has(name)) return true;
   if (!isDir && name.endsWith(".pyc")) return true;
+  if (!isDir && name === "00-COPIA-LEIA-ME.md") return true;
   return false;
 }
 
@@ -68,5 +69,26 @@ export function copySkills(
     stats.skills.push(skillName);
   }
 
+  return stats;
+}
+
+/**
+ * Copia `docs/` da raiz do repo para `{SKILLS_DEST_PATH}/docs/`.
+ * Sem isso o agente no Cursor não lê a constituição (skills só apontam para `../docs/`).
+ */
+export function copyDocs(
+  source: string,
+  skillsDest: string,
+  dryRun: boolean,
+): CopyStats {
+  const stats: CopyStats = { copied: 0, skipped: 0, skills: [] };
+  const dest = path.join(skillsDest, "docs");
+
+  if (!fs.existsSync(source)) {
+    return stats;
+  }
+
+  copyEntry(source, dest, dryRun, stats);
+  stats.skills.push("docs");
   return stats;
 }

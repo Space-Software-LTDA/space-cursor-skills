@@ -2,7 +2,7 @@
 
 Checklists, **matriz de auditoria do Design System** (seção a seção), anti-padrões detalhados e template do `REPORT.md`.
 
-**Design System completo:** [design-system.md](design-system.md) — ler antes de usar esta referência.
+**Design System completo:** [`../docs/design-system.md`](../docs/design-system.md) — ler **depois** de [`../docs/README.md`](../docs/README.md) (seção QA) e **antes** de usar esta referência. O arquivo `design-system.md` nesta pasta é só um ponteiro.
 
 ---
 
@@ -198,7 +198,7 @@ Helpers esperados: `col.text()` · `col.numeric()` · `col.money()` · `col.meta
 
 ### §19 Checklist de aceite (copiar para REPORT)
 
-Reproduzir a checklist do §19 de [design-system.md](design-system.md) no REPORT com `[x]` / `[ ]` por item.
+Reproduzir a checklist do §19 de [`../docs/design-system.md`](../docs/design-system.md) no REPORT com `[x]` / `[ ]` por item.
 
 ### Apêndice B — KPI Widget (se aplicável)
 
@@ -256,7 +256,7 @@ Copiar para `.task/qa-{data}-{slug}/REPORT.md` e ir preenchendo **durante** a in
 
 ## Design System
 
-Referência: [design-system.md](design-system.md) (skill) · `docs/SPACE_DESIGN_SYSTEM.md` (repo se existir)
+Referência: [`../docs/design-system.md`](../docs/design-system.md) · `docs/SPACE_DESIGN_SYSTEM.md` (repo do produto, se existir)
 
 **Primary do produto:** {hex} · **Surface:** {hex}
 
@@ -378,7 +378,7 @@ Referência: [design-system.md](design-system.md) (skill) · `docs/SPACE_DESIGN_
 
 ## Checklist — Design System
 
-Usar a **Matriz de auditoria** (topo deste arquivo) + §19 de design-system.md.
+Usar a **Matriz de auditoria** (topo deste arquivo) + §19 de [`../docs/design-system.md`](../docs/design-system.md).
 
 Atalho mínimo (não substituir matriz completa):
 

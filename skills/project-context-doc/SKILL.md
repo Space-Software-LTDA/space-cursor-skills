@@ -37,6 +37,14 @@ Gera documento de contexto para devs: foco em **por que**, **para que** e **flux
 
 **Gate obrigatorio:** so gravar o arquivo na **Fase 4**, apos **Fase 0b confirmada** e **Fase 3 respondida** pelo usuario (ver secao Gates abaixo).
 
+## Constituição (quando o recon achar código)
+
+A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
+
+1. Ler **[`../docs/README.md`](../docs/README.md)** — a seção `project-context-doc` diz *como* esta skill usa os arquivos (documentar o produto que existe; **não** gerar PBI; **não** auditar pixel).
+3. Se o recon achar fluxo / API / jobs: [`../docs/padrao-ouro.md`](../docs/padrao-ouro.md) e, para código de entrada de feature, [`../docs/entry-point.md`](../docs/entry-point.md). Guardrails G-xxx **apontam** GO-* / o padrão de entry; não copiam o catálogo inteiro. Se achar entities/migrations: [`../docs/nomenclatura.md`](../docs/nomenclatura.md) (tabela/coluna/user) — G pode citar GO-12 / AP-NAM-05.
+3. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
+
 ## Principio rector
 
 ```text

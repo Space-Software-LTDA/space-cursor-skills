@@ -28,14 +28,16 @@ Esta skill é o **ponto único de verdade operacional** do pack de skills:
 - Catálogo do que existe e para que serve
 - Como criar / alterar / deprecar uma skill
 - Regras transversais (`.task/`, `.docs/`, gitignore, idioma)
+- Constituição do time (`docs/` na raiz — **não** é skill; mapa em `docs/README.md`)
 
 Quando o usuário falar de **manutenção de skill**, **sync**, **nova skill** ou **“como funciona o pack”**, usar **esta** skill — não reinventar o fluxo em cada skill de produto.
 
 ## Wizard (perguntar se não estiver claro)
 
-1. **Ação:** sync | alterar skill existente | criar skill nova | diagnosticar (cópia desatualizada / path errado) | explicar catálogo
+1. **Ação:** sync | alterar skill existente | criar skill nova | diagnosticar (cópia desatualizada / path errado) | explicar catálogo | **atualizar constituição** (`docs/` na raiz do repo)
 2. **Skill alvo** (se alterar/criar): nome da pasta `skills/<nome>/`
 3. **Máquina alvo do Sync:** PC local | Coders | ambas (lembrar: cada uma tem seu `.env`)
+4. **Constituição** (se a ação for atualizar constituição): qual arquivo em `docs/` muda; **atualizar `docs/README.md` primeiro** (mapa skill → arquivo → por quê)
 
 ## Fonte da verdade
 
@@ -45,6 +47,7 @@ Quando o usuário falar de **manutenção de skill**, **sync**, **nova skill** o
 | Clone típico (PC) | `G:\space\Documents\space\space-cursor-skills` (ou path do usuário) |
 | Skills versionadas | `skills/<nome>/` **neste repo** |
 | Destino Cursor | `SKILLS_DEST_PATH` no `.env` **da máquina** (não hardcodar) |
+| Constituição | `docs/` na raiz deste repo → sync copia para `{SKILLS_DEST_PATH}/docs/` |
 | Direcionamento agente no repo | `AGENTS.md` + `.cursor/rules/space-cursor-skills.mdc` |
 | Credenciais ClickUp | `.env` na **raiz** do repo (sync gera `clickup.env` nas skills que usam) |
 
@@ -60,7 +63,7 @@ npm run sync
 npm run sync:dry
 ```
 
-O Sync: `git pull` (se ligado) → copia `skills/` → destino → carimba `00-COPIA-LEIA-ME.md` → gera `clickup.env` onde couber.
+O Sync: `git pull` (se ligado) → copia `skills/` **e** `docs/` → destino → carimba `00-COPIA-LEIA-ME.md` → gera `clickup.env` onde couber.
 
 Sem Sync, a cópia **não atualiza**. Após Sync, sugerir **reiniciar o chat** se a skill já estava carregada.
 
@@ -69,6 +72,16 @@ Detalhes: [playbook.md](playbook.md).
 ## Catálogo
 
 Lista viva: [catalog.md](catalog.md). Manter atualizado ao criar/remover skill.
+
+### Constituição (`docs/`)
+
+Não é skill. Fonte: `space-cursor-skills/docs/`. Destino após sync: `{SKILLS_DEST_PATH}/docs/`.
+
+**Antes de qualquer alteração nos arquivos temáticos:** ler e, se o mapa mudou, atualizar [`docs/README.md`](../../docs/README.md). Esse README é o que **todas** as skills de produto leem primeiro — PO, QA e contexto **não** usam os mesmos arquivos do mesmo jeito.
+
+Skills de produto só têm ponteiro (`../docs/README.md` + tabela curta). **Proibido** colar resumo do entry-point ou do DS no `SKILL.md`.
+
+Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook.md](playbook.md#atualizar-constituição).
 
 ## Regras transversais (todas as skills de produto)
 
@@ -90,7 +103,7 @@ Não commitar essas pastas sem o usuário pedir.
 
 - Respostas das skills Space: **português**
 - Meta de manutenção de skill (sync, path, COPIA): falar **aqui** (`/skill-update`) ou apontar para esta skill
-- Skills de produto focam no domínio; no topo delas fica só o banner COPIA + ponteiro para `AGENTS.md` / esta hub
+- Skills de produto focam no domínio; leem **`../docs/README.md` primeiro** (PO ≠ QA ≠ contexto); banner COPIA + ponteiro `AGENTS.md` / esta hub
 
 ## Fluxos rápidos
 
@@ -125,9 +138,18 @@ Seguir [playbook.md](playbook.md#criar-skill-nova). Checklist mínimo:
 
 Sintomas comuns → [playbook.md](playbook.md#diagnóstico).
 
+### E — Atualizar constituição
+
+1. Ler `docs/README.md` (quem lê o quê — PO ≠ QA)
+2. Editar `docs/<arquivo>.md` no **repo**
+3. Se o mapa mudou, atualizar só o README — skills de produto continuam com ponteiro fino
+4. **`npm run sync`** (precisa copiar `docs/` para o destino)
+5. Pedir restart do chat
+
 ## Checklist final (qualquer ação desta skill)
 
 - [ ] Mudança feita no **repo** `space-cursor-skills`, não só no destino
+- [ ] Constituição: mapa em `docs/README.md` ainda verdadeiro (se mexeu em `docs/`)
 - [ ] `SKILLS_DEST_PATH` respeitado (PC ≠ Coders)
 - [ ] **`npm run sync`** rodado (ou instruído) na máquina alvo
 - [ ] Catálogo / AGENTS atualizados se skill nova ou removida

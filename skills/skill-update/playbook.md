@@ -53,8 +53,9 @@ disable-model-invocation: true
    - [catalog.md](catalog.md)
    - `AGENTS.md` (tabela Skills)
    - `README.md` (tabela Skills)
-6. `npm run sync`
-7. Commit/push só se o usuário pedir
+6. Se a skill de produto usar a constituição: ponteiro para `../docs/README.md` (não copiar o texto)
+7. `npm run sync`
+8. Commit/push só se o usuário pedir
 
 ## Alterar skill existente
 
@@ -64,6 +65,17 @@ disable-model-invocation: true
 4. `npm run sync` na máquina alvo
 5. Resumo curto ao usuário
 
+## Atualizar constituição
+
+1. Ler `docs/README.md` (mapa skill → arquivo → por quê / como)
+2. Editar o arquivo temático em `docs/` (`entry-point.md`, `design-system.md`, …)
+3. Se mudou **quem lê o quê** ou o objetivo PO vs QA: atualizar **só** o `docs/README.md` — não resumir o conteúdo nas skills
+4. Conferir que os `SKILL.md` de produto ainda apontam `../docs/README.md` primeiro
+5. `npm run sync` (copia `docs/` → `{SKILLS_DEST_PATH}/docs/`)
+6. Avisar restart do chat
+
+**Proibido:** duplicar GO/AP/DS dentro de `po-techlead-scrum` ou `qa-space`. Uma fonte em `docs/`.
+
 ## Diagnóstico
 
 | Sintoma | Checagem |
@@ -72,9 +84,9 @@ disable-model-invocation: true
 | Path errado / skill some no Coders | `.env` local tem `SKILLS_DEST_PATH` certo? |
 | `clickup.env` ausente | `.env` raiz tem `CLICKUP_API_TOKEN` + `CLICKUP_WORKSPACE_ID`? Sync regenera |
 | Editou e perdeu mudança | Editou a **cópia**? Voltar ao repo e reaplicar |
-| Arquivos da skill no git do produto | Falta `.task/` / `.docs/` no `.gitignore` |
+| Constituição “não apareceu” no Cursor | Sync copiou `docs/`? Existe `{SKILLS_DEST_PATH}/docs/README.md`? |
 
 ## Comunicação padrão (respostas ao usuário)
 
-- Manutenção: “Isso é do pack — uso `/skill-update`: editar em `skills/…` → `npm run sync`.”
-- Produto (task/QA/doc): apontar a skill de domínio; se perguntarem de sync/path, redirecionar para esta hub.
+- Manutenção: “Isso é do pack — uso `/skill-update`: editar em `skills/…` ou `docs/` → `npm run sync`.”
+- Produto (task/QA/doc): apontar a skill de domínio **e** `docs/README.md` (PO ≠ QA); se perguntarem de sync/path, redirecionar para esta hub.

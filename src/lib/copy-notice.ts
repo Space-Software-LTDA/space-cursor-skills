@@ -64,5 +64,40 @@ _Gerado automaticamente por \`npm run sync\`. Nao versionar este arquivo no dest
     written.push(entry.name);
   }
 
+  const docsDest = path.join(skillsDest, "docs");
+  if (fs.existsSync(docsDest) && fs.statSync(docsDest).isDirectory()) {
+    const docsSource = path.join(repoRoot, "docs");
+    const docsNotice = `# ⚠️ COPIA — nao edite aqui
+
+Os arquivos desta pasta (\`docs/\`) sao uma **copia** da constituição do time, gerada pelo sync nesta maquina.
+
+**Destino atual:** \`${docsDest}\`  
+(vem de \`SKILLS_DEST_PATH\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
+
+## Onde alterar
+
+1. Edite em: \`${docsSource}\`
+2. Repo: [${repoUrl}](${repoUrl})
+3. **OBRIGATORIO — rode o Sync** nesta maquina:
+
+\`\`\`bash
+cd ${repoRoot}
+npm run sync
+\`\`\`
+
+Skills leem estes arquivos via \`../docs/<arquivo>.md\`. Comecar pelo \`README.md\` (roteador).
+
+---
+_Gerado automaticamente por \`npm run sync\`. Nao versionar este arquivo no destino._
+`;
+    const docsNoticePath = path.join(docsDest, "00-COPIA-LEIA-ME.md");
+    if (opts.dryRun) {
+      console.log(`🔍 [dry-run] escrever ${docsNoticePath}`);
+    } else {
+      fs.writeFileSync(docsNoticePath, docsNotice, "utf8");
+    }
+    written.push("docs");
+  }
+
   return written;
 }

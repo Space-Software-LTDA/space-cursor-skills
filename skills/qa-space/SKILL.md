@@ -2,8 +2,9 @@
 name: qa-space
 description: >-
   QA de front-end Space: wizard de escopo, validação no browser (visual, console,
-  network), comparação feito × mock/task, Design System embutido (design-system.md),
-  anti-padrões júnior/IA, contrato REST e relatório incremental em .task/REPORT.md.
+  network), comparação feito × mock/task, Design System em docs/design-system.md
+  (ler inteiro; mapa em docs/README.md), anti-padrões júnior/IA, contrato REST e
+  relatório incremental em .task/REPORT.md.
   Use com /qa-space, "validar front", "QA", "revisar implementação" ou quando o PO
   pedir inspeção antes de gerar task de correção.
 disable-model-invocation: true
@@ -28,13 +29,32 @@ Não commitar `.task/` sem o usuário pedir.
 
 ## Papel
 
-Atuar como **QA professor**: validar o front entregue (Next portado do protótipo Vite/Lovable), comparar com mock/task, auditar contra o **Space UI Design System v1.0** (embutido nesta skill), caçar **anti-padrões de júnior + IA**, e documentar tudo em **`.task/`** para o PO gerar correções depois (via `@po-techlead-scrum` — **não** gerar task ClickUp automaticamente).
+Atuar como **QA professor**: validar o front entregue (Next portado do protótipo Vite/Lovable), comparar com mock/task, auditar contra o **Space UI Design System** (`../docs/design-system.md` — arquivo **completo**), caçar **anti-padrões de júnior + IA** (seção Front de `../docs/anti-padroes.md`), e documentar tudo em **`.task/`** para o PO gerar correções depois (via `@po-techlead-scrum` — **não** gerar task ClickUp automaticamente).
 
 **Sempre responder em português.**
 
 **Projetos:** MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU e demais do time.
 
 **Trigger:** `/qa-space` (anexar skill manualmente se necessário).
+
+---
+
+## Constituição (obrigatório — QA não é PO)
+
+A constituição **não** está resumida neste `SKILL.md`.
+
+1. Ler **[`../docs/README.md`](../docs/README.md)** — a seção `qa-space` diz *como* esta skill usa cada arquivo (régua de auditoria, não escrita de PBI).
+2. Só então abrir os arquivos da linha “Sempre ler” do README.
+
+| Arquivo | Papel nesta skill |
+| --- | --- |
+| [`../docs/design-system.md`](../docs/design-system.md) | **Inteiro** antes da Fase 2. Matriz em [reference.md](reference.md). |
+| [`../docs/anti-padroes.md`](../docs/anti-padroes.md) | Sobretudo **AP-FE-*** no código da rota e no Network |
+| [`../docs/frontend.md`](../docs/frontend.md) | Se o trabalho tocar stack/FDD — só aplicar FDD se o repo tiver o `AGENTS.md` do boilerplate |
+
+**Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL.
+
+O stub [design-system.md](design-system.md) nesta pasta só redireciona. A fonte é `../docs/design-system.md`.
 
 ---
 
@@ -52,12 +72,13 @@ No fim: **organizar/editar** o `REPORT.md` já parcialmente escrito.
 | Arquivo | Quando ler |
 |---------|------------|
 | **Este `SKILL.md`** | Fluxo, wizard, severidades |
-| **[design-system.md](design-system.md)** | **OBRIGATÓRIO** antes de auditar visual — constituição DS completa (805 linhas; §11 v7/v8 tabelas) |
-| **[reference.md](reference.md)** | Template REPORT, checklists, anti-padrões, matriz de auditoria DS |
-| **`docs/SPACE_DESIGN_SYSTEM.md`** (no repo) | Se existir no projeto validado, preferir sobre a cópia embutida |
+| **[`../docs/README.md`](../docs/README.md)** | **Primeiro** — como o QA usa a constituição (diferente do PO) |
+| **[`../docs/design-system.md`](../docs/design-system.md)** | **OBRIGATÓRIO** antes de auditar visual — constituição DS completa |
+| **[reference.md](reference.md)** | Template REPORT, checklists, matriz de auditoria DS |
+| **`docs/SPACE_DESIGN_SYSTEM.md`** (no repo do produto) | Se existir no projeto validado, preferir a versão mais recente |
 | **`AGENTS.md`** (boilerplate Next) | Só quando o projeto for o boilerplate FDD |
 
-> **Nunca** validar visual só com o resumo deste SKILL. O DS embutido é a fonte — não substituir por memória ou checklist curto.
+> **Nunca** validar visual só com o resumo deste SKILL. A fonte é `../docs/design-system.md` (ou o DS do repo do produto, se mais novo) — não substituir por memória ou checklist curto.
 
 ---
 
@@ -85,16 +106,17 @@ Inputs aceitos para task: **conteúdo colado OU link** (preferir colar quando po
 
 ## Fase 0.5 — Carregar Design System (OBRIGATÓRIO)
 
-1. Ler **[design-system.md](design-system.md)** desta skill (§1–§19 + apêndices).
-2. Se o projeto tiver `docs/SPACE_DESIGN_SYSTEM.md`, ler também; usar a versão **mais recente**.
-3. Montar mentalmente a **matriz de auditoria** (ver [reference.md](reference.md) § Auditoria DS).
-4. Anotar no REPORT: versão do DS usada + Primary/Surface do produto.
+1. Confirmar que leu [`../docs/README.md`](../docs/README.md) (seção QA).
+2. Ler **[`../docs/design-system.md`](../docs/design-system.md)** (§1–§19 + apêndices). **Inteiro.**
+3. Se o projeto tiver `docs/SPACE_DESIGN_SYSTEM.md`, ler também; usar a versão **mais recente**.
+4. Montar mentalmente a **matriz de auditoria** (ver [reference.md](reference.md) § Auditoria DS).
+5. Anotar no REPORT: versão do DS usada + Primary/Surface do produto.
 
 ### Prioridade de verdade (visual)
 
 1. **Mock Lovable** (o que foi proposto visualmente)
 2. **Task** (critérios de aceite, escopo)
-3. **`design-system.md`** / `docs/SPACE_DESIGN_SYSTEM.md`
+3. **`../docs/design-system.md`** / `docs/SPACE_DESIGN_SYSTEM.md` (repo do produto)
 
 Se mock viola DS: **perguntar** qual manda antes de reprovar só implementação ou só mock.  
 Reportar **os dois** quando implementação copiou erro do mock que também fere o DS.
@@ -241,7 +263,7 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 - Não ignorar console vermelho “porque a tela parece ok”
 - Não usar caminhos `C:\...` no REPORT para terceiros — paths relativos ao repo
 - Não substituir wizard por suposições quando input faltar
-- **Não** auditar visual sem ler `design-system.md`
+- **Não** auditar visual sem ler `../docs/design-system.md` **inteiro**
 - **Não** reduzir DS a 10 bullets — usar §19 + matriz em reference.md
 
 ---
@@ -250,8 +272,10 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 
 | Recurso | Caminho |
 |---------|---------|
-| **Design System embutido** | [design-system.md](design-system.md) |
-| Checklists, anti-padrões, matriz DS, template REPORT | [reference.md](reference.md) |
-| DS no boilerplate (se existir) | `docs/SPACE_DESIGN_SYSTEM.md` |
+| **Mapa skill → docs** | [`../docs/README.md`](../docs/README.md) |
+| **Design System (constituição)** | [`../docs/design-system.md`](../docs/design-system.md) |
+| Checklists, matriz DS, template REPORT | [reference.md](reference.md) |
+| Anti-padrões Front | [`../docs/anti-padroes.md`](../docs/anti-padroes.md) (AP-FE-*) |
+| DS no produto (se existir) | `docs/SPACE_DESIGN_SYSTEM.md` |
 | Arquitetura FDD | `AGENTS.md` (boilerplate Next) |
 | Gerar task de correção | `@po-techlead-scrum` (usuário chama) |
