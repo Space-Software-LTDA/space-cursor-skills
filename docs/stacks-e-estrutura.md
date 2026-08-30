@@ -4,9 +4,9 @@
 
 Este é o documento de orientação para quem chega no time: repositórios, git, servidores, banco, stack, testes, Coder e Apidog. A **manufatura de nomes** (repo, branch, tabela, coluna, EasyPanel) é padrão obrigatório — texto normativo em [nomenclatura.md](nomenclatura.md), princípio GO-12, anti-padrões AP-NAM-04…06.
 
-A versão para colar no Doc ClickUp de onboarding é **este mesmo texto** (sem o banner de constituição no topo, se o ClickUp poluir). URL humana do Doc atual:
+Onboarding humano (Doc com subpáginas): **Bíblia da Space** — https://app.clickup.com/90131082033/docs/2ky3path-37093
 
-https://doc.clickup.com/90131082033/d/h/2ky3path-17153/368dc66a198e994
+Doc antigo (“Staks e Estruturas”): https://doc.clickup.com/90131082033/d/h/2ky3path-17153/368dc66a198e994
 
 O título antigo “Staks e Estruturas” estava grafado errado. O nome correto é **Stacks e estrutura**.
 
