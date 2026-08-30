@@ -40,6 +40,7 @@ npm run sync
 - Copia `docs/` → **`SKILLS_DEST_PATH/docs/`** (constituição; skills leem `../docs/README.md` primeiro)
 - Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino (com o path real desta máquina)
 - Gera `clickup.env` em skills que usam ClickUp (a partir do mesmo `.env`)
+- Gera `apidog.env` em `po-techlead-scrum` (a partir do mesmo `.env`)
 
 ## Credenciais
 
@@ -52,7 +53,7 @@ npm run sync
 | Pasta | Função |
 |-------|--------|
 | `skills/skill-update` | **Hub** — sync, catálogo, criar/alterar skills, constituição (`/skill-update`) |
-| `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) — lê `docs/README.md` como **PO** (escreve task) |
+| `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) + contrato Apidog — lê `docs/README.md` como **PO** |
 | `skills/project-context-doc` | Doc de contexto + Docs ClickUp — lê `docs/README.md` como **contexto** (G-xxx apontam ouro/entry) |
 | `skills/qa-space` | QA front / Design System — lê `docs/README.md` como **QA** (audita o feito; DS inteiro) |
 | `docs/` | Constituição (não é skill). Índice obrigatório: `docs/README.md` |
@@ -67,6 +68,7 @@ Manutenção do pack: skill **`skill-update`** (não espalhar o fluxo só nas sk
 - Pasta de destino (home ou Coders) = **cópia**; apontar para este repo + Sync
 - Não assumir destino fixo `~/.cursor/skills` — ler `SKILLS_DEST_PATH` / `00-COPIA-LEIA-ME.md`
 - Não inventar segundo fluxo de deploy; Sync é o único espelhamento
+- Skills e constituição **genéricas**: sem IDs/URLs/defaults de um cliente; perguntar na conversa
 - Responder em português quando trabalhar nestas skills (padrão Space)
 
 ## Docs humanas

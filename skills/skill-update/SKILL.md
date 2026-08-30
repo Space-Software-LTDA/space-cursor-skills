@@ -3,7 +3,7 @@ name: skill-update
 description: >-
   Hub central das skills Space (space-cursor-skills): sync, destino por ambiente
   (SKILLS_DEST_PATH / PC vs Coders), criar ou alterar skills, aviso de COPIA,
-  .env ClickUp, catalogo e comunicacao padrao entre skills. Use com /skill-update,
+  .env ClickUp / Apidog, catalogo e comunicacao padrao entre skills. Use com /skill-update,
   "atualizar skill", "sync skills", "nova skill", "onde editar skill" ou quando
   o usuario falar de manutencao do pack de skills do Cursor.
 disable-model-invocation: true
@@ -29,8 +29,23 @@ Esta skill é o **ponto único de verdade operacional** do pack de skills:
 - Como criar / alterar / deprecar uma skill
 - Regras transversais (`.task/`, `.docs/`, gitignore, idioma)
 - Constituição do time (`docs/` na raiz — **não** é skill; mapa em `docs/README.md`)
+- **Skills 100% genéricas** — nenhum cliente/produto hardcoded (BATEU, SPACEBET, …)
 
 Quando o usuário falar de **manutenção de skill**, **sync**, **nova skill** ou **“como funciona o pack”**, usar **esta** skill — não reinventar o fluxo em cada skill de produto.
+
+## Skills são genéricas (obrigatório)
+
+O pack roda em **vários produtos**. `SKILL.md`, playbooks, scripts, templates e `.env.example` descrevem **processo**, não um cliente.
+
+| Pode | Não pode |
+|------|----------|
+| Token da **conta** (ClickUp, Apidog) | Project ID / moduleId Apidog de um produto |
+| Listas/workspace ClickUp da Space | URL de staging, repo, docs Apidog de um cliente |
+| Placeholder `{projeto}`, `{ID}` | Default silencioso “usar BATEU / Data lake” |
+| Pasta `exemplos/` com caso de um produto | Copiar esse caso para regra global |
+
+IDs, URLs e nomes de um produto: **perguntar na conversa** (ou inferir do workspace aberto **e validar**).  
+Ao criar/alterar skill: se o texto só fizer sentido para um cliente, **generalizar** antes do sync.
 
 ## Wizard (perguntar se não estiver claro)
 
@@ -50,6 +65,7 @@ Quando o usuário falar de **manutenção de skill**, **sync**, **nova skill** o
 | Constituição | `docs/` na raiz deste repo → sync copia para `{SKILLS_DEST_PATH}/docs/` |
 | Direcionamento agente no repo | `AGENTS.md` + `.cursor/rules/space-cursor-skills.mdc` |
 | Credenciais ClickUp | `.env` na **raiz** do repo (sync gera `clickup.env` nas skills que usam) |
+| Credenciais Apidog | Mesmo `.env` (`APIDOG_*`) — sync gera `apidog.env` em `po-techlead-scrum` |
 
 **Nunca** editar só a pasta de destino e considerar pronto.
 
@@ -63,7 +79,7 @@ npm run sync
 npm run sync:dry
 ```
 
-O Sync: `git pull` (se ligado) → copia `skills/` **e** `docs/` → destino → carimba `00-COPIA-LEIA-ME.md` → gera `clickup.env` onde couber.
+O Sync: `git pull` (se ligado) → copia `skills/` **e** `docs/` → destino → carimba `00-COPIA-LEIA-ME.md` → gera `clickup.env` / `apidog.env` onde couber.
 
 Sem Sync, a cópia **não atualiza**. Após Sync, sugerir **reiniciar o chat** se a skill já estava carregada.
 
@@ -90,7 +106,7 @@ Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook
 | Pasta | Skills típicas |
 |-------|----------------|
 | `.task/` | `po-techlead-scrum`, `qa-space` |
-| `.docs/` | `project-context-doc` |
+| `.docs/` | `project-context-doc` (e espelho OpenAPI/DBML do PO antes do Apidog) |
 
 | Situação | Regra |
 |----------|--------|
@@ -98,6 +114,11 @@ Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook
 | Dentro de git repo | Idem **e** garantir a pasta no **`.gitignore`** (adicionar se faltar) |
 
 Não commitar essas pastas sem o usuário pedir.
+
+### Pipeline PO (task com API)
+
+Na skill `po-techlead-scrum`: **Objetivo → regra de negócio → DB → rotas no Apidog → task ClickUp**.  
+Project ID e moduleId: **perguntar sempre** (não ficam no `.env`). Detalhe: `skills/po-techlead-scrum/apidog.md`.
 
 ### Comunicação
 
@@ -132,6 +153,7 @@ Seguir [playbook.md](playbook.md#criar-skill-nova). Checklist mínimo:
 - [ ] Seção artefatos (`.task/` / `.docs/` / N/A) se gravar arquivos
 - [ ] Entrada em [catalog.md](catalog.md)
 - [ ] Linha em `AGENTS.md` + README do repo
+- [ ] Conteúdo **genérico** (sem IDs/URLs/defaults de um cliente)
 - [ ] `npm run sync`
 
 ### D — Diagnosticar
@@ -153,4 +175,6 @@ Sintomas comuns → [playbook.md](playbook.md#diagnóstico).
 - [ ] `SKILLS_DEST_PATH` respeitado (PC ≠ Coders)
 - [ ] **`npm run sync`** rodado (ou instruído) na máquina alvo
 - [ ] Catálogo / AGENTS atualizados se skill nova ou removida
+- [ ] Nada específico de um produto nas regras globais (IDs/URLs/defaults de cliente)
+- [ ] `apidog.env` / `clickup.env` gerados no destino se os tokens existem no `.env` (nunca commitados)
 - [ ] Usuário avisado para reiniciar chat se skill já estava em uso

@@ -8,17 +8,17 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | Skill (pasta) | Trigger | Função | Artefatos locais | ClickUp env |
 |---------------|---------|--------|------------------|-------------|
 | `skill-update` | `/skill-update` | Hub: sync, manutenção, catálogo, regras transversais | N/A (só docs da skill) | Não |
-| `po-techlead-scrum` | anexar / PO-task | Tasks ClickUp (Esteira / Imediatas), tom professor | `.task/` | Sim (`clickup.env` via sync) |
+| `po-techlead-scrum` | anexar / PO-task | Tasks ClickUp + contrato Apidog (Objetivo → regra → DB → rotas → task) | `.task/` | Sim (`clickup.env` + `apidog.env`) |
 | `project-context-doc` | anexar / contexto produto | Doc de contexto + Docs ClickUp | `.docs/` (+ multipágina se aplicável) | Sim |
 | `qa-space` | `/qa-space` | QA front + Design System + REPORT | `.task/` | Não |
 
-Skills de produto **leem `docs/README.md` primeiro**. PO escreve task; QA audita o feito; contexto documenta o produto. Não misturar os três usos — detalhe no README da constituição.
+Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **genérico** (qualquer produto); dado de cliente só na conversa ou em `exemplos/`.
 
 ## Quem chama quem
 
 ```text
 /skill-update          → mantém o pack (sync, nova skill, path, .env)
-po-techlead-scrum      → gera task; após QA pode consumir .task/ do qa-space
+po-techlead-scrum      → Objetivo → regra → DB → Apidog → task ClickUp
 qa-space               → grava .task/; NÃO publica ClickUp (passa pro PO)
 project-context-doc    → grava .docs/; publica Doc ClickUp após aprovação
 ```

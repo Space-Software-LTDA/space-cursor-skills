@@ -12,6 +12,7 @@ Espelha o gate do `project-context-doc`: **só após aprovação local**.
 | **Clone típico** | `G:\space\Documents\space\space-cursor-skills` (ou equivalente na máquina) |
 | **Destino Cursor** | `SKILLS_DEST_PATH` / `po-techlead-scrum` (path do `.env` **desta** máquina — PC ≠ Coders) |
 | **Credenciais ClickUp** | `.env` na **raiz do repo** `space-cursor-skills` (compartilhado com `project-context-doc`) |
+| **Credenciais Apidog** | Mesmo `.env` (`APIDOG_*`) — sync gera `apidog.env` nesta skill |
 
 **Nunca** editar só em `~/.cursor/skills/...` e esquecer o repo — a próxima `npm run sync` **sobrescreve** com o que está em `skills/`.
 
@@ -24,7 +25,8 @@ git push
 npm run sync          # copia skills/ → SKILLS_DEST_PATH + gera clickup.env
 ```
 
-O sync gera `clickup.env` em **project-context-doc** e **po-techlead-scrum** a partir do `.env` do repo.
+O sync gera `clickup.env` em **project-context-doc** e **po-techlead-scrum** a partir do `.env` do repo.  
+O sync gera `apidog.env` em **po-techlead-scrum**. Contrato de rotas: [apidog.md](apidog.md).
 
 ## Listas
 

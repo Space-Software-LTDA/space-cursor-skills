@@ -67,6 +67,8 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 | [backend.md](backend.md) | Projeto novo ou stack da task | Mandar partir do [boilerplate-back-elysia](https://github.com/Space-Software-LTDA/boilerplate-back-elysia), feature-based, entry no `index.ts`. |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding, Coder, Apidog | Só quando a task for de setup/ambiente — a **nomenclatura** em si já está em `nomenclatura.md` (leitura sempre). |
 
+Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skill. **Project ID e moduleId: perguntar** (não ficam no env). Operação: `apidog.md`. Constituição: [backend.md](backend.md#apidog).
+
 **Esta skill não lê para:** pixel-perfect, REPORT.md, veredito Aprovado/Reprovado de tela. Se o PO pediu inspeção do feito, redirecionar para `qa-space` e depois gerar a task de correção a partir do `.task/` do QA.
 
 ---
@@ -127,7 +129,8 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 
 **Se o trabalho tocar:** o arquivo temático que o usuário pediu para alterar (`entry-point.md`, `design-system.md`, …). Wizard: ação **atualizar constituição**.
 
-**Não** duplicar listas GO/AP/DS dentro de `skill-update`. Não resumir entry-point no catálogo.
+**Não** duplicar listas GO/AP/DS dentro de `skill-update`. Não resumir entry-point no catálogo.  
+**Não** colocar ID/URL/default de um cliente nas skills — o pack é genérico (`/skill-update`).
 
 ---
 

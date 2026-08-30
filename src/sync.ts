@@ -1,5 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { writeApidogEnv } from "./lib/apidog-env.js";
 import { writeClickupEnv } from "./lib/clickup-env.js";
 import { writeCopyNotices } from "./lib/copy-notice.js";
 import { copyDocs, copySkills } from "./lib/copy-skills.js";
@@ -61,6 +62,21 @@ async function main(): Promise<void> {
   } else {
     console.log(
       "⚠️  CLICKUP_API_TOKEN/WORKSPACE_ID não configurados — clickup.env não gerado",
+    );
+  }
+
+  if (config.apidog) {
+    const written = writeApidogEnv(
+      config.skillsDest,
+      config.apidog,
+      config.dryRun,
+    );
+    if (written.length) {
+      console.log(`🔑 apidog.env atualizado em: ${written.join(", ")}`);
+    }
+  } else {
+    console.log(
+      "⚠️  APIDOG_ACCESS_TOKEN não configurado — apidog.env não gerado",
     );
   }
 

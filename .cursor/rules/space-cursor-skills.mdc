@@ -11,7 +11,7 @@ Este repo versiona as skills. O destino no Cursor é **cópia**, e o path **muda
 
 1. Editar em `skills/<skill>/` neste repo (constituição: `docs/`; mapa em `docs/README.md`)
 2. Destino: `SKILLS_DEST_PATH` no `.env` **desta** máquina (PC ≠ coders)
-3. Credenciais ClickUp no mesmo `.env` da raiz
+3. Credenciais ClickUp e Apidog no mesmo `.env` da raiz
 4. **OBRIGATÓRIO:** após mudanças, rodar `npm run sync` na raiz (máquina alvo) — sem Sync a cópia não atualiza
 5. Ao terminar edições na skill, lembrar o usuário de rodar Sync (ou rodar se estiver no ambiente certo)
 6. Manutenção do pack: skill **`skill-update`** (`/skill-update`) + [AGENTS.md](AGENTS.md)
@@ -20,6 +20,7 @@ Este repo versiona as skills. O destino no Cursor é **cópia**, e o path **muda
 
 - Assumir destino fixo `~/.cursor/skills` em todo ambiente
 - Tratar a pasta de destino como fonte da verdade
-- Commitar `.env`, `clickup.env` ou `node_modules`
+- Commitar `.env`, `clickup.env`, `apidog.env` ou `node_modules`
+- Colocar na skill ID/URL/default de um produto (BATEU, SPACEBET, …) — skills são genéricas
 - Considerar a mudança “pronta” só com commit — **falta o Sync**
 - Pedir cópia manual em vez de `npm run sync`

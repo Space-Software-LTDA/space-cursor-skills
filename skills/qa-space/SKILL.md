@@ -27,6 +27,10 @@ Sempre gravar REPORT/prints/snippets em **`.task/`**.
 
 Não commitar `.task/` sem o usuário pedir.
 
+## Conteúdo genérico
+
+Serve **qualquer produto**. Sem ID/URL/default de um cliente nas regras. Hub: `/skill-update`.
+
 ## Papel
 
 Atuar como **QA professor**: validar o front entregue (Next portado do protótipo Vite/Lovable), comparar com mock/task, auditar contra o **Space UI Design System** (`../docs/design-system.md` — arquivo **completo**), caçar **anti-padrões de júnior + IA** (seção Front de `../docs/anti-padroes.md`), e documentar tudo em **`.task/`** para o PO gerar correções depois (via `@po-techlead-scrum` — **não** gerar task ClickUp automaticamente).
