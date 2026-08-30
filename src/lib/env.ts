@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
+import { collectApidogVarsFromProcessEnv, type ApidogCreds } from "./apidog-env.js";
 import type { ClickupCreds } from "./clickup-env.js";
 import { defaultSkillsDest, expandHome } from "./platform.js";
 
@@ -11,6 +12,7 @@ export interface SyncConfig {
   gitPull: boolean;
   dryRun: boolean;
   clickup?: ClickupCreds;
+  apidog?: ApidogCreds;
 }
 
 function parseBool(value: string | undefined, fallback: boolean): boolean {
@@ -56,6 +58,11 @@ export function loadConfig(repoRoot: string, dryRun: boolean): SyncConfig {
       cfProjetoOptionBateu: opt("CLICKUP_CF_PROJETO_OPTION_BATEU"),
       cfProjetoOrderindexBateu: opt("CLICKUP_CF_PROJETO_ORDERINDEX_BATEU"),
     };
+  }
+
+  const apidogVars = collectApidogVarsFromProcessEnv();
+  if (apidogVars.APIDOG_ACCESS_TOKEN) {
+    config.apidog = { vars: apidogVars };
   }
 
   return config;

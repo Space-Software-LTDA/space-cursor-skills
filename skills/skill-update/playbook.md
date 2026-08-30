@@ -4,7 +4,7 @@
 
 ```bash
 cd <clone-space-cursor-skills>
-# conferir .env: SKILLS_DEST_PATH (+ CLICKUP_* se for usar)
+# conferir .env: SKILLS_DEST_PATH (+ CLICKUP_* / APIDOG_* se for usar)
 npm run sync
 ```
 
@@ -54,13 +54,14 @@ disable-model-invocation: true
    - `AGENTS.md` (tabela Skills)
    - `README.md` (tabela Skills)
 6. Se a skill de produto usar a constituição: ponteiro para `../docs/README.md` (não copiar o texto)
-7. `npm run sync`
-8. Commit/push só se o usuário pedir
+7. **Conteúdo genérico** — sem IDs/URLs/defaults de um cliente; casos reais só em `exemplos/`
+8. `npm run sync`
+9. Commit/push só se o usuário pedir
 
 ## Alterar skill existente
 
 1. Abrir `skills/<nome>/` no **repo**
-2. Editar
+2. Editar (**generalizar** se colou dado de um cliente)
 3. Se mudou responsabilidade no pack → [catalog.md](catalog.md)
 4. `npm run sync` na máquina alvo
 5. Resumo curto ao usuário
@@ -83,6 +84,7 @@ disable-model-invocation: true
 | Skill “não mudou” no Cursor | Rodou `npm run sync` **nesta** máquina? Restart do chat? |
 | Path errado / skill some no Coders | `.env` local tem `SKILLS_DEST_PATH` certo? |
 | `clickup.env` ausente | `.env` raiz tem `CLICKUP_API_TOKEN` + `CLICKUP_WORKSPACE_ID`? Sync regenera |
+| `apidog.env` ausente | `.env` raiz tem `APIDOG_ACCESS_TOKEN`? Sync regenera |
 | Editou e perdeu mudança | Editou a **cópia**? Voltar ao repo e reaplicar |
 | Constituição “não apareceu” no Cursor | Sync copiou `docs/`? Existe `{SKILLS_DEST_PATH}/docs/README.md`? |
 

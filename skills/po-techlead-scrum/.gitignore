@@ -1,4 +1,5 @@
 ﻿clickup.env
+apidog.env
 *.pyc
 __pycache__/
 

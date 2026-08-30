@@ -6,6 +6,7 @@ Thumbs.db
 
 # Credenciais e cache
 clickup.env
+apidog.env
 .env
 *.pyc
 __pycache__/

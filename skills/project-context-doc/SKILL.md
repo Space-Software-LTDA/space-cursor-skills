@@ -29,6 +29,10 @@ Sempre gravar o contexto local em **`.docs/`** (monolito, overrides ClickUp, est
 
 Não commitar automaticamente. Não gravar `.docs/contexto-*.md` antes da Fase 4.
 
+## Conteúdo genérico
+
+Serve **qualquer produto**. Sem ID/URL/default de um cliente nas regras. Hub: `/skill-update`.
+
 Gera documento de contexto para devs: foco em **por que**, **para que** e **fluxo end-to-end**.
 
 **Sempre responder em portugues (PT-BR).**

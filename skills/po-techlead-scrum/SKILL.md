@@ -3,9 +3,10 @@ name: po-techlead-scrum
 description: >-
   Atua como PO, Tech Lead sênior e Scrum Master para criar descrições de tarefas
   no ClickUp (Esteira PBI ou Tarefas IMEDIATAS via API apos aprovacao local).
+  Pipeline: Objetivo → regra de negócio → DB → rotas no Apidog → task.
   Specs SEMPRE no tom professor para devs juniors (tintim por tintim:
   glossário, colunas, DBML, payloads, exemplos). SuperAgente Scrum Ritter ou
-  direto pro dev. Use em planejamento, backlog, user stories, PBIs ou ClickUp.
+  direto pro dev. Use em planejamento, backlog, user stories, PBIs, ClickUp ou Apidog.
 disable-model-invocation: true
 ---
 
@@ -25,6 +26,10 @@ Sempre gravar markdown/prints locais em **`.task/`** (nunca soltos na raiz do wo
 | Workspace **dentro** de um git repo | Idem: gravar em `.task/` **e** garantir que `.task/` (e `.playwright-capture/`, `.skill/` se usados) estão no **`.gitignore`** do repo — **adicionar se faltar**, antes de gerar arquivos |
 
 Não commitar `.task/` sem o usuário pedir. Validar `.gitignore` sempre que o workspace for um repo.
+
+## Conteúdo genérico
+
+Esta skill serve **qualquer produto**. Regras, templates e scripts não carregam ID/URL/repo de um cliente. Dado do produto da vez: **perguntar** (ou inferir do workspace e validar). Casos reais só em `exemplos/`. Hub: `/skill-update`.
 
 ## Papel
 
@@ -114,6 +119,26 @@ O público da descrição é **dev júnior**. Escrever como **professor**: expli
 
 ---
 
+## Pipeline de produto (obrigatório — antes da task ClickUp)
+
+Quando a entrega tiver **API** (CMS, público, ingest), **não** pular para o markdown da task. Ordem na conversa:
+
+| # | Passo | O que o agente faz | Gate |
+|---|--------|-------------------|------|
+| 1 | **Objetivo** | Entender o quê / para quem / o que sai de escopo | PO confirma |
+| 2 | **Regra de negócio** | Flags, sync, CRUD vs só config, edge cases | PO fecha regras |
+| 3 | **DB** | DBML + tabela coluna a coluna (nomenclatura GO-12) | PO valida DBML |
+| 4 | **Rotas → Apidog** | OpenAPI + import. **Sem Project ID ou moduleId deste produto/módulo → perguntar.** Não reusar ID de outro cliente | Pastas visíveis no docs **deste** produto |
+| 5 | **Task ClickUp** | Markdown professor; contrato canônico = Apidog | PO aprova publicar |
+
+Front-only **sem** endpoint novo: pular o passo 4.
+
+Detalhe operacional: **[apidog.md](apidog.md)**. Doc: [openapi.apidog.io](https://openapi.apidog.io/). Token da conta: `APIDOG_ACCESS_TOKEN`. **Project ID e moduleId: perguntar sempre** — não ficam no `.env`.
+
+**Proibido:** task com API nova só no yaml local, sem import; critério “o dev que atualize o Apidog”.
+
+---
+
 ## Fluxo obrigatório ao criar tarefa
 
 Antes de escrever qualquer descrição, confirmar **na conversa** (não colar isso no corpo da task):
@@ -151,6 +176,8 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` antes se for a 1ª vez no projeto)
 5. **Anexar** na task tudo que o time precisa baixar (OpenAPI, DBML, specs extras) — não só o `.md`
 6. Devolver o **link da task** ao PO
+
+Se a task tem API: o import Apidog (passo 4 do pipeline) já aconteceu **antes** deste bloco. Ver [apidog.md](apidog.md).
 
 #### 📎 Corpo ClickUp ≠ pasta local do PO
 
@@ -224,6 +251,7 @@ Sempre montar uma **tabela** no topo (após o aviso de IA), com o que o dev prec
 | **API (Front)** | Se Front consome API — URL base conhecida (ex. staging) + nome da env (`NEXT_PUBLIC_API_URL`) |
 | **`.env.example`** | Sempre que houver vars novas ou a task tocar config: dizer **criar** se não existir, ou **atualizar** listando as keys (sem secrets) |
 | **Protótipo / Diagrama DB** | Quando existir URL |
+| **Contrato API (Apidog)** | Se a task tem rotas — link do **docs deste produto** + pasta. Sem ID → perguntar. Nunca path local `.docs/` |
 
 Inferir repos pelo `git remote` do workspace quando possível. Se não achar, perguntar.
 
@@ -307,7 +335,7 @@ Tarefas de **Frontend** ou com **protótipo/print** devem incluir imagens da UI 
 ### Hospedagem no ClickUp — space-assets (padrão)
 
 **Repo:** [Space-Software-LTDA/space-assets](https://github.com/Space-Software-LTDA/space-assets) (público)  
-**Clone local:** `c:\Users\space\Documents\BATEU\space-assets`
+**Clone:** o clone local de `space-assets` nesta máquina (não hardcodar path de um produto).
 
 O agente salva prints em `space-assets/{projeto}/{task-slug}/`, faz **commit + push**, e embute URLs na task:
 
@@ -352,6 +380,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Cabeçalho em **grid/tabela** com repos Front e/ou Back (links)
 - [ ] API do Front no grid quando conhecida (`NEXT_PUBLIC_*` + URL)
 - [ ] `.env.example`: criar ou atualizar documentado (keys, sem secrets)
+- [ ] **Pipeline:** Objetivo → regra de negócio → DB → **Apidog importado** (se houver API) → só então markdown da task
+- [ ] **Apidog:** IDs deste produto/módulo confirmados (senão perguntou); grid com link do docs **deste** produto; anexo OpenAPI ([apidog.md](apidog.md))
 - [ ] **Tom professor**: glossário / colunas explicadas / DBML / exemplos — júnior não precisa adivinhar
 - [ ] Back e Front claramente separados (quando aplicável)
 - [ ] Critérios de aceitação em Dado/Quando/Então (separados Back/Front se ambos)
@@ -386,5 +416,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” sem o PO pedir explicitamente
 - Não escrever task “só para quem já sabe” — default é júnior
 - Não auditar pixel / preencher REPORT no lugar do `qa-space` — PO **referencia** o DS; QA **audita**
-- Não commitar `clickup.env` / tokens
+- Não commitar `clickup.env` / `apidog.env` / tokens
 - Não inventar List ID, custom type ou option do campo Projeto — usar env / API
+- Não publicar task de API **antes** do contrato estar no Apidog **deste** produto
+- Não usar Project ID / moduleId de outro produto; se faltar ID, **perguntar**
+- Não usar `deleteUnmatchedResources: true` no import de módulo compartilhado

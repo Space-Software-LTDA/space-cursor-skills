@@ -81,11 +81,15 @@ Não substituem [padrao-ouro.md](padrao-ouro.md) nem [nomenclatura.md](nomenclat
 
 ## Apidog
 
-Toda API entregue precisa estar documentada no **Apidog** (rotas, params, body, respostas, erros) **antes** da entrega. Convite e permissão: o líder libera o projeto.
+O contrato de rotas vive no **Apidog** **antes** da task ClickUp (não como “lembrar o dev de documentar no fim”).
 
-Link de convite usado no onboarding: [https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9](https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9)
+Pipeline do PO (`po-techlead-scrum`): Objetivo → regra de negócio → DB → **import OpenAPI no Apidog do produto certo** → markdown da task. Sem Project ID ou moduleId → **perguntar**. Operação: skill `apidog.md` + API [openapi.apidog.io](https://openapi.apidog.io/).
 
-A skill de contexto cruza código com Apidog quando o humano informar o projeto. A skill de PO, em task de endpoint novo, inclui “atualizar Apidog” nos critérios.
+Critérios da PBI: **seguir o Apidog**; não inventar path. O anexo OpenAPI é espelho.
+
+Convite/onboarding: [https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9](https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9) — o líder libera o projeto.
+
+A skill de contexto cruza código com Apidog quando o humano informar o projeto.
 
 ---
 
@@ -97,8 +101,9 @@ Desenvolvimento no [Coder](https://coder.spacedev.pro/) é **obrigatório**. Amb
 
 ## O que a skill de PO faz com isto
 
-- Grid da task: repo backend + `.env.example`.
+- Grid da task: repo backend + `.env.example` + **link Apidog** (se houver API).
 - Alterações Back: schema coluna a coluna, DBML, payloads, **e** “o fluxo vive no `index.ts` da feature X seguindo entry-point”.
+- Rotas: publicar no Apidog **antes** da task; critérios citam o contrato, não “criar OpenAPI depois”.
 - Critérios podem citar `GO-*` e `AP-*`.
 - Não colar as 16 seções do entry-point na task — apontar o arquivo e exigir o teste de ouro + o que for específico daquela PBI.
 

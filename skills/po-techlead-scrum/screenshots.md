@@ -12,7 +12,7 @@ Diagramas de fluxo continuam em [diagrams.md](diagrams.md) (mermaid.ink). **Prin
 
 **Repo:** [Space-Software-LTDA/space-assets](https://github.com/Space-Software-LTDA/space-assets) (público)
 
-**Clone local:** `c:\Users\space\Documents\BATEU\space-assets`
+**Clone:** clone local de [space-assets](https://github.com/Space-Software-LTDA/space-assets) nesta máquina (não amarrar a pasta de um produto).
 
 **URL base para ClickUp:**
 
@@ -71,13 +71,13 @@ Espelhar em `task/assets/{task-slug}/` se a task `.md` ficar no repo do projeto 
 ```markdown
 ## 🖼️ Referência visual
 
-**Protótipo:** [Lovable — Pixels](https://bateu-datalake-exemple.lovable.app/pixels)
+**Protótipo:** [URL do protótipo desta task](https://…)
 
-### Listagem de cards
-![Listagem de pixels com ícones por plataforma](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/bateu/pixels-platform-affiliate/01-listagem.png)
+### {tela 1}
+![{o que observar}](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/01-….png)
 
-### Formulário — combobox afiliado
-![Combobox com opção Adicionar ID novo](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/bateu/pixels-platform-affiliate/03-combobox-afiliado.png)
+### {tela 2}
+![{o que observar}](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/02-….png)
 ```
 
 Sempre incluir **link do protótipo** como backup interativo.

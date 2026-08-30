@@ -25,14 +25,15 @@ Colar **logo após** o aviso de IA. Só campos úteis ao dev. **Nunca** incluir 
 
 | | |
 | --- | --- |
-| **Projeto** | BATEU — Datalake |
+| **Projeto** | {nome do produto} |
 | **Camadas** | Frontend + Backend |
-| **Repositório Frontend** | [Space-Software-LTDA/bateubet-datalake-frontend](https://github.com/Space-Software-LTDA/bateubet-datalake-frontend) |
-| **Repositório Backend** | [Space-Software-LTDA/bateubet-datalake-backend](https://github.com/Space-Software-LTDA/bateubet-datalake-backend) |
-| **API (Front)** | `NEXT_PUBLIC_API_URL` → `https://datalake-bateu-api.ck7vma.easypanel.host` (ver `.env.example` do front) |
-| **Env Backend** | Criar/atualizar `bateubet-datalake-backend/.env.example` com as keys listadas na seção Backend |
+| **Repositório Frontend** | [org/repo-front](https://github.com/…) |
+| **Repositório Backend** | [org/repo-back](https://github.com/…) |
+| **API (Front)** | `NEXT_PUBLIC_API_URL` → `https://…` (ver `.env.example` do front) |
+| **Env Backend** | Criar/atualizar `.env.example` do back com as keys da seção Backend |
 | **Protótipo** | [URL](https://...) |
 | **Diagrama DB** | [dbdiagram](https://...) |
+| **Contrato API (Apidog)** | [URL do docs deste produto](https://…) → pasta **…** |
 ```
 
 Omite a linha do repo que não se aplica (só Front ou só Back).
@@ -58,6 +59,7 @@ O **modo** (SuperAgente vs direto) decide-se no chat. O markdown entregue é o m
 | **Env** | Front: `.env.example` · Back: criar/atualizar `.env.example` (keys na seção Backend) |
 | **Protótipo** | [URL](https://…) |
 | **Diagrama DB** | [URL](https://…) |
+| **Contrato API (Apidog)** | [URL do docs deste produto](https://…) → pasta **…** |
 
 ---
 

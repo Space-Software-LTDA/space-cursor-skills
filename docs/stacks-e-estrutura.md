@@ -142,7 +142,9 @@ Teste de back de feature: comportamento do capítulo (dado fake de HTTP/repo, as
 
 ### Apidog (documentação de API)
 
-A API precisa estar completa no Apidog **antes** de qualquer entrega: rota, parâmetro, body, resposta, erros.
+A API precisa estar completa no Apidog **antes** da task de implementação: rota, parâmetro, body, resposta, erros.
+
+O PO publica o contrato via API ([openapi.apidog.io](https://openapi.apidog.io/)) no pipeline Objetivo → regra → DB → rotas. O time implementa a partir do Apidog.
 
 Convite: [https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9](https://app.apidog.com/invite/user?token=EbW6GkmQVWacuXqzHMos9) — peça ao líder a permissão do projeto.
 

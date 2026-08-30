@@ -44,12 +44,12 @@ cd ${repoRoot}
 npm run sync
 \`\`\`
 
-O Sync usa o \`.env\` local (\`SKILLS_DEST_PATH\` + ClickUp).
+O Sync usa o \`.env\` local (\`SKILLS_DEST_PATH\` + ClickUp + Apidog).
 
-## Credenciais ClickUp
+## Credenciais ClickUp / Apidog
 
 Ficam no \`.env\` da **raiz** do \`space-cursor-skills\` (nao nesta pasta).
-O sync gera \`clickup.env\` aqui a partir desse \`.env\`.
+O sync gera \`clickup.env\` e \`apidog.env\` aqui a partir desse \`.env\`.
 
 ---
 _Gerado automaticamente por \`npm run sync\`. Nao versionar este arquivo no destino._

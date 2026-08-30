@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const SKIP_DIRS = new Set(["__pycache__", ".git"]);
-const SKIP_FILES = new Set(["clickup.env", ".DS_Store", "Thumbs.db"]);
+const SKIP_FILES = new Set(["clickup.env", "apidog.env", ".DS_Store", "Thumbs.db"]);
 
 export interface CopyStats {
   copied: number;
