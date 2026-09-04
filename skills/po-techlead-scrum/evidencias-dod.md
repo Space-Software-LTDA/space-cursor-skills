@@ -4,6 +4,13 @@
 
 Vale para **Esteira e Imediatas**. Imediatas: cada prova **nomeada**; sem “testa depois do merge” (caminho até `main` é mais curto).
 
+**Quebra do trabalho não é a mesma:**
+
+| Lista | Quem lê | Como vira “tarefa” |
+| --- | --- | --- |
+| **Esteira** | SuperAgente Ritter | `## Passo a passo sugerido` com PBI + Espera/Bloqueia |
+| **Imediatas** | O **dev** | **Checklist nativo do ClickUp** na tarefa principal de cada dev. **Proibido** tabela PBI / Espera / Bloqueia / “Dependência”. **Proibido** `- [ ]` no markdown no lugar disso |
+
 HML trata-se como **1:1 com `main`**, inclusive banco — ver constituição `../docs/git-fluxo.md`.
 
 ---
@@ -48,11 +55,29 @@ Listar superfícies que compartilham **rota, service, tipo, header ou nome parec
 | BACK | Prova em HML (contrato/curl) + doc se a spec pediu (Apidog, `.env.example`) |
 | Front+Back | Os dois |
 
-Imediatas: uma linha de prova por item do “pronto”; nada de “cobre no QA depois”.
+Imediatas: uma linha de prova por item do “pronto” **da camada que altera código**; nada de “cobre no QA depois”.
+
+### Prova na camada que mudou (não na que só consome)
+
+Contar superfícies **e** quem mexe no código:
+
+| Situação | Quem anexa a prova |
+| --- | --- |
+| Front **altera** tela, campo, handler, copy, estado de erro | `P-FRONT-n` (gravação) |
+| Front **zero** alteração nessa superfície (tela já existe, payload igual, sem handler novo) | **Não** cria `P-FRONT`. Quem mudou a API / o gateway anexa `P-BACK-n` |
+| Back muda contrato que o Front **também** ajusta (ex. message de 400 que o app precisa mostrar) | Os dois: Back prova o 400; Front prova a message visível |
+
+**Proibido:** mandar o Front gravar regressão de uma tela em que ele **não** vai commitar nada. “Não mexer no dash” ≠ “abre o dash e anexa vídeo”. Isso vira prova do Back (curl / Postman / HML na rota que o dash já chama).
+
+Antes de fechar as linhas `P-*`: listar cada `BE-n` / `FE-n` e cada bloco do Pronto. Cada um mapeia para **uma** prova da **mesma** camada. Sobra de Pronto Front sem `P-FRONT` **só** é válida se aquele bloco for “zero código Front” — nesse caso o Pronto vai para o Back e a prova é `P-BACK`.
 
 ---
 
-## `## Passo a passo sugerido` (quando houver mais de um passo)
+## Esteira — `## Passo a passo sugerido` (PBI + dependência)
+
+**Só Esteira.** O Ritter precisa disto para gerar PBI/Task e linkar Dependência.
+
+Imediatas: **não** incluir esta seção. Ver [clickup-task-guide.md](clickup-task-guide.md#imediatas--checklist-nativo-do-clickup).
 
 Uma **tabela = um PBI**. Uma **linha = uma Task**. IDs `PBI.item` (`1.1`, `2.3`).
 

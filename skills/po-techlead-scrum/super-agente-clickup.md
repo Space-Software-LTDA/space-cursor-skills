@@ -2,6 +2,8 @@
 
 Calibra **como escrever** a spec para o agente do ClickUp absorver. **Não** copiar o prompt do Ritter na task. Meta de roteamento (Esteira vs Imediatas) fica no chat.
 
+**Este arquivo vale só para a Esteira.** Imediatas: o SuperAgente **não** passa. Sem PBI, sem Dependência — checklist nativo na task do dev ([clickup-task-guide.md](clickup-task-guide.md#imediatas--checklist-nativo-do-clickup)).
+
 ## Hierarquia que ele gera
 
 ```
@@ -60,11 +62,11 @@ Campos `Tipo de Tarefa` / `Tipo de Task`: preencher **só se vazios**. Não cria
 | `## REGRAS DE DDD` | Pronto / prova / paralelos — copiar para a PBI, não resumir embora. Tom ordenante. |
 | `## ⛔ NÃO DEVE` | Anti-critérios — copiar para a PBI (último bloco). Não resumir embora. |
 
-Deixar explícito na spec: Backend, Frontend, CA, DDD, passo a passo. Sem isso o Ritter inventa quebra e vínculo.
+Deixar explícito na spec Esteira: Backend, Frontend, CA, DDD, passo a passo. Sem isso o Ritter inventa quebra e vínculo.
 
 ## Front+Back no ClickUp (publicação)
 
-A spec no disco é **um** `.md`. Na publicação Front+Back o agente cria **três** tasks (ver [clickup-task-guide.md](clickup-task-guide.md)). O Ritter deve ler sobretudo a **MASTER** (spec completa + passo a passo inteiro). As irmãs Backend/Frontend são recorte para o dev da camada.
+A spec no disco é **um** `.md`. Na publicação Front+Back o agente cria **1 MAIN + 2 subtasks** (ver [clickup-task-guide.md](clickup-task-guide.md)). O Ritter deve ler sobretudo a **MAIN** (spec completa + passo a passo inteiro). Backend e Frontend são **subtasks** com recorte para o dev da camada.
 
 ## Boilerplate Front
 

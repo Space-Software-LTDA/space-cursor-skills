@@ -8,12 +8,13 @@ Modos:
               assignee Ricardo (default), campo Projeto
   imediatas — Direto pro dev → lista Tarefas IMEDIATAS
               tipo custom 0-IMEDIATA, assignee informado no onboard
+              checklist NATIVO (--checklist-name + --checklist-item) na tarefa de cada dev
 
 Uso:
   python clickup_create_task.py --mode esteira --file task/cms-central-ajuda.md --dry-run
   python clickup_create_task.py --mode esteira --file task/cms-central-ajuda.md --project BATEU
   python clickup_create_task.py --mode imediatas --file task/x.md --assignee 72158089 \\
-      --attach task/x.md
+      --attach task/x.md --checklist-name Execução --checklist-item "P-BACK-1"
 
 Credenciais: clickup.env nesta skill (ver clickup.env.example).
 """
@@ -132,12 +133,15 @@ def build_payload(
     markdown: str,
     assignee_ids: list[int],
     project_key: str | None,
+    parent: str | None = None,
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "name": title,
         "markdown_description": markdown,
         "assignees": assignee_ids,
     }
+    if parent:
+        payload["parent"] = parent
 
     if mode == "esteira":
         # Tipo = Task padrao do ClickUp (NAO usar custom 3-PBI).
@@ -162,6 +166,23 @@ def build_payload(
         raise SystemExit("--mode deve ser esteira|imediatas")
 
     return payload
+
+
+def add_native_checklist(task_id: str, name: str, items: list[str]) -> str:
+    """Cria checklist nativo do ClickUp (nao e markdown). Imediatas."""
+    if not items:
+        raise SystemExit("Checklist nativo exige pelo menos um --checklist-item.")
+    created = api_request("POST", f"/task/{task_id}/checklist", data={"name": name})
+    checklist = created.get("checklist") or created
+    cid = checklist.get("id")
+    if not cid:
+        raise SystemExit(f"ClickUp nao devolveu id do checklist: {created}")
+    for item in items:
+        text = str(item).strip()
+        if not text:
+            continue
+        api_request("POST", f"/checklist/{cid}/checklist_item", data={"name": text})
+    return str(cid)
 
 
 def attach_file(task_id: str, file_path: Path) -> Any:
@@ -206,8 +227,8 @@ def main() -> None:
     load_env_file(SKILL_DIR / "clickup.env")
 
     parser = argparse.ArgumentParser(description="Cria task ClickUp a partir de markdown")
-    parser.add_argument("--mode", choices=["esteira", "imediatas"], required=True)
-    parser.add_argument("--file", required=True, help="Markdown da task local")
+    parser.add_argument("--mode", choices=["esteira", "imediatas"], default=None)
+    parser.add_argument("--file", default=None, help="Markdown da task local")
     parser.add_argument("--title", default=None, help="Override do titulo (default = H1)")
     parser.add_argument(
         "--project",
@@ -226,8 +247,56 @@ def main() -> None:
         default=[],
         help="Arquivo para anexar apos criar (pode repetir). Use o .md da task.",
     )
+    parser.add_argument(
+        "--parent",
+        default=None,
+        help="Task ID pai: cria esta task como SUBTASK. Front+Back: MASTER sem --parent; Back/Front com --parent <id da MASTER>.",
+    )
+    parser.add_argument(
+        "--checklist-name",
+        default="Execução",
+        help="Nome do checklist NATIVO do ClickUp (Imediatas). Nao e markdown.",
+    )
+    parser.add_argument(
+        "--checklist-item",
+        action="append",
+        default=[],
+        help="Item do checklist nativo (repetir). Imediatas: obrigatorio na tarefa de cada dev.",
+    )
+    parser.add_argument(
+        "--checklist-only",
+        action="store_true",
+        help="So adiciona checklist nativo em --task-id (task ja criada).",
+    )
+    parser.add_argument("--task-id", default=None, help="Task ID para --checklist-only.")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+
+    checklist_items = [str(x).strip() for x in args.checklist_item if str(x).strip()]
+
+    if args.checklist_only:
+        if not args.task_id:
+            raise SystemExit("--checklist-only exige --task-id.")
+        if not checklist_items:
+            raise SystemExit("--checklist-only exige --checklist-item.")
+        plan = {
+            "checklist_only": True,
+            "task_id": args.task_id,
+            "checklist_name": args.checklist_name,
+            "checklist_items": checklist_items,
+        }
+        print(json.dumps(plan, ensure_ascii=False, indent=2))
+        if args.dry_run:
+            print("\nDRY-RUN — nada criado no ClickUp.")
+            return
+        cid = add_native_checklist(args.task_id, args.checklist_name, checklist_items)
+        print(json.dumps({"task_id": args.task_id, "checklist_id": cid}, ensure_ascii=False))
+        return
+
+    if args.mode is None or not args.file:
+        raise SystemExit("Criar task exige --mode e --file. Para so checklist: --checklist-only --task-id.")
+    if args.mode == "esteira" and checklist_items:
+        raise SystemExit("Checklist nativo e so Imediatas. Esteira: o Ritter vira PBI/Task.")
 
     md_path = Path(args.file).resolve()
     if not md_path.is_file():
@@ -245,6 +314,7 @@ def main() -> None:
         markdown=markdown,
         assignee_ids=assignees,
         project_key=args.project,
+        parent=args.parent,
     )
 
     plan = {
@@ -253,13 +323,23 @@ def main() -> None:
         "title": title,
         "assignees": assignees,
         "project": args.project,
+        "parent": args.parent,
         "attachments": args.attach or [str(md_path)],
+        "checklist_name": args.checklist_name if checklist_items else None,
+        "checklist_items": checklist_items,
         "payload_preview": {
             k: v for k, v in payload.items() if k != "markdown_description"
         },
         "markdown_chars": len(markdown),
     }
     print(json.dumps(plan, ensure_ascii=False, indent=2))
+    if args.mode == "imediatas" and not checklist_items:
+        print(
+            "WARN: Imediatas sem --checklist-item. "
+            "Checklist nativo e obrigatorio na tarefa principal de cada dev "
+            "(pai se uma camada; subtask Back/Front se as duas; MAIN sem checklist).",
+            file=sys.stderr,
+        )
 
     if args.dry_run:
         print("\nDRY-RUN — nada criado no ClickUp.")
@@ -279,6 +359,10 @@ def main() -> None:
             continue
         att = attach_file(task_id, p)
         print(f"Attached: {p.name} -> {att.get('id') or att.get('title') or 'ok'}")
+
+    if checklist_items:
+        cid = add_native_checklist(task_id, args.checklist_name, checklist_items)
+        print(f"Checklist nativo id={cid} itens={len(checklist_items)}")
 
     print(json.dumps({"id": task_id, "url": task_url}, ensure_ascii=False))
 

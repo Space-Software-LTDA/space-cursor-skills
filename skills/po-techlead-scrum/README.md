@@ -12,7 +12,7 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 6. [decomposicao-tom-professor.md](decomposicao-tom-professor.md) — **1 bloco por unidade mínima** (GLOBAL)
 7. Salvar em `.task/{projeto}/{task-slug}.md`
 8. Checklist em [SKILL.md](SKILL.md) + DDD/passo a passo em [evidencias-dod.md](evidencias-dod.md)
-9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`; Front+Back = **3** creates)
+9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`; Front+Back = **1 MAIN + 2 subtasks**; Imediatas = checklist nativo na task de cada dev)
 
 **Manutenção:** editar em [space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) (`skills/po-techlead-scrum/`) → `git push` → `npm run sync`. ENV ClickUp e Apidog ficam no `.env` da raiz do repo.
 
@@ -28,7 +28,7 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 | [playwright-capture.md](playwright-capture.md) | Scripts Playwright | ✅ |
 | [diagrams.md](diagrams.md) | mermaid.ink | ✅ |
 | [super-agente-clickup.md](super-agente-clickup.md) | Calibragem SuperAgente | ✅ |
-| [evidencias-dod.md](evidencias-dod.md) | REGRAS DE DDD + passo a passo (PBI/tabela) + NÃO DEVE | ✅ |
+| [evidencias-dod.md](evidencias-dod.md) | REGRAS DE DDD + passo a passo Esteira (PBI) + Imediatas (sem PBI) + NÃO DEVE | ✅ |
 | [clickup-task-guide.md](clickup-task-guide.md) | Publicar task via API + onde editar/sync | ✅ |
 | [apidog.md](apidog.md) | Contrato de rotas: pipeline + import OpenAPI | ✅ |
 | [clickup.env.example](clickup.env.example) | Keys ClickUp (geradas no sync) | ✅ |
@@ -48,6 +48,6 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 | --- | --- |
 | `scripts/playwright-capture/` | Genérico — copiar para `.playwright-capture/` do projeto |
 | `scripts/render-mermaid.sh` | Diagramas para task |
-| `scripts/clickup_create_task.py` | Criar task no ClickUp (Esteira / Imediatas) + anexos |
+| `scripts/clickup_create_task.py` | Criar task ClickUp (Esteira / Imediatas) + anexos + checklist nativo (Imediatas) |
 | `scripts/apidog_import_openapi.py` | Importar OpenAPI no Apidog (AUTO_MERGE) |
 | `exemplos/*/playwright/` | Configs específicas de projeto (opcional) |

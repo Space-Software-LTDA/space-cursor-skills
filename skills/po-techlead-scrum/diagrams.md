@@ -19,7 +19,7 @@ No restante: sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.i
 3. Montar URL: `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar que a URL retorna imagem (HTTP 200)
 5. Inserir `![...](url)`
-6. **Só no passo a passo:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
+6. **Só no passo a passo da Esteira:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
 
 ---
 
@@ -85,7 +85,7 @@ flowchart TD
   WH --> PH
 ```
 
-O código acima é o que se cola **somente** no passo a passo (além da imagem). Nos outros diagramas da task: **não** colar — só a PNG.
+O código acima é o que se cola **somente** no passo a passo da Esteira (além da imagem). Nos outros diagramas e em Imediatas: **não** colar — só a PNG.
 
 ---
 
@@ -95,4 +95,4 @@ O código acima é o que se cola **somente** no passo a passo (além da imagem).
 - [ ] URL validada (200 OK)
 - [ ] `bgColor=!white` para legibilidade no ClickUp
 - [ ] Legenda `alt` descritiva no Markdown
-- [ ] Bloco ` ```mermaid ` na descrição **só** se for o passo a passo (imagem + fonte)
+- [ ] Bloco ` ```mermaid ` na descrição **só** no passo a passo da **Esteira** (imagem + fonte). Imediatas: só a PNG.

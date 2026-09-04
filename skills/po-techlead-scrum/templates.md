@@ -152,6 +152,8 @@ Usar `NEXT_PUBLIC_API_URL` (valor no grid).
 
 ## Passo a passo sugerido
 
+**Só Esteira** (Ritter). Imediatas: **omitir** esta seção inteira — a quebra é checklist nativo do ClickUp, não PBI.
+
 Quadro-resumo se 4+ PBIs. Depois mermaid: **imagem** + fonte (SuperAgente). Molde: evidencias-dod.md
 
 ![Fila dos PBIs](https://mermaid.ink/img/{encoded}?type=png&bgColor=!white)
@@ -220,18 +222,13 @@ flowchart TD
 
 ---
 
-## Template — Direto pro Dev (urgente) — extra opcional
+## Template — Direto pro Dev (Imediatas)
 
-Além do template acima (mesmo detalhe didático), pode acrescentar:
+Mesmo detalhe didático do template acima **exceto**:
 
-```markdown
-## 🚀 Ordem de Execução
-
-1. [Migration / endpoint]
-2. [Front]
-3. [Testes manuais]
-4. [Deploy]
-```
+- **Sem** `## Passo a passo sugerido` (sem PBI, sem Espera/Bloqueia, sem Dependência)
+- **Sem** `## 🚀 Ordem de Execução` e **sem** `- [ ]` no markdown
+- A ordem que o dev tica é o **checklist nativo** do ClickUp na tarefa dele (pai se uma camada; subtask Back/Front se as duas)
 
 ---
 
@@ -252,7 +249,7 @@ Mesmo template; omitir a seção da camada ausente e a linha do repo corresponde
 | Env | Keys no `.env.example` + placeholder | Secret real colado na task |
 | Critério | Dado/Quando/Então por camada | "Deve funcionar corretamente" |
 | DDD | Pronto + paralelos + prova HML | "Testar no final" |
-| Passo a passo | Tabela 5 colunas + Por quê + mermaid duplo | "Ver ordem no chat" |
+| Passo a passo | Esteira: tabela 5 colunas + Por quê + mermaid duplo. Imediatas: **omitir**; checklist nativo no ClickUp | "Ver ordem no chat" / `- [ ]` no markdown da Imediata |
 | Front | Campo + print com legenda; visual **repo → DS → mock** | "Ajustar a tela" / copiar neon do Lovable |
 | UI | Legenda + URL space-assets; chrome do produto | Caminho `C:\...`; hex do mock |
 | Tamanho | Longo e claro | Curto e ambíguo |

@@ -57,6 +57,7 @@ Workspace: `90131082033` (SPACE DEV).
 | Assignee | **Obrigatório perguntar** no onboard |
 | Campo **Projeto** | Recomendado (`--project BATEU`) |
 | Anexo | `.md` da task |
+| **Checklist nativo** | Obrigatório na tarefa principal de cada dev (não é `- [ ]` no markdown) |
 
 ⚠️ “TAG do projeto” = custom field **Projeto**, não Tag nativa do ClickUp.
 
@@ -76,23 +77,61 @@ Após `npm run sync`, cada skill recebe `clickup.env` gerado (gitignored).
 | Aprovação | PO: **“pode publicar no ClickUp”** |
 | Confirmar lista | Esteira vs Imediatas |
 | Onboard | Responsável + Projeto |
-| Execução | Script **1 arquivo → 1 task**. Front+Back: agente recorta 3 bodies e roda o script **3 vezes** |
+| Execução | Script **1 arquivo → 1 task**. Front+Back: **1 MAIN + 2 subtasks** (agente recorta 3 bodies; Back/Front com `--parent`) |
 
-## Front+Back: três tasks no ClickUp
+## Front+Back: 1 MAIN + 2 subtasks
 
 O Python **não** fatia markdown. Quem recorta é o agente.
 
-| Task | Título | Corpo | Anexos |
-| --- | --- | --- | --- |
-| MASTER | `{título}` | Aviso IA, grid, contexto, objetivo, **passo a passo inteiro** (tabelas + mermaid imagem e fonte), REGRAS DE DDD, observações curtas, **NÃO DEVE** (último bloco). Ritter lê **esta**. | `.md` completo + OpenAPI/DBML se houver |
-| Backend | `{título} — Backend` | Grid + alterações Back + CA Back + linhas `BACK` do passo a passo (Espera/Bloqueia intactos) + DDD (prova Back + paralelos) + **NÃO DEVE** | OpenAPI/DBML |
-| Frontend | `{título} — Frontend` | Grid + alterações Front + CA Front + linhas `FRONT` + DDD (vídeo HML + paralelos de UI) + **NÃO DEVE** | prints se houver |
+**Não** criar 3 tasks irmãs na lista. Hierarquia:
 
-Uma camada só → um create, spec inteira.
+1. Criar a **MAIN** (MASTER) — task normal da lista.
+2. Criar **Backend** com `--parent <id da MAIN>`.
+3. Criar **Frontend** com `--parent <id da MAIN>`.
 
-Mesma lista, modo, assignee e campo Projeto nas três. Devolver **3 links**.
+| Task | Tipo | Título | Corpo (Esteira) | Corpo (Imediatas) | Anexos |
+| --- | --- | --- | --- | --- | --- |
+| MAIN | Task (pai) | `{título}` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML se houver |
+| Backend | **Subtask** | `{título} — Backend` | Grid + Back + CA Back + linhas BACK do passo a passo + DDD Back + NÃO DEVE | Idem **sem** linhas PBI. **Checklist nativo Back** (itens = o que o dev tica, incl. `P-BACK-*`) | OpenAPI/DBML |
+| Frontend | **Subtask** | `{título} — Frontend` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints se houver |
 
-Esteira e Imediatas: o mesmo ritual. Imediatas: DDD com cada prova nomeada.
+Uma camada só → um create, spec inteira (sem subtask). Imediatas: o checklist nativo vai **nessa** task pai.
+
+Mesma lista, modo e campo Projeto nas três. Assignee: o que o PO mandou (pode diferir Back vs Front). Devolver **o link da MAIN**.
+
+Esteira e Imediatas: o mesmo ritual de **1 MAIN + 2 subtasks**. Corpo e quebra **não** são iguais:
+
+| | Esteira | Imediatas |
+| --- | --- | --- |
+| Passo a passo PBI | Sim (Ritter) | **Não** |
+| Checklist nativo ClickUp | Não (Ritter vira Task) | **Sim** — na tarefa de cada dev |
+| DDD | Provas; Imediatas nomeiam cada uma | Idem + prova só na camada que mudou código |
+
+## Imediatas — checklist nativo do ClickUp
+
+O SuperAgente **não** lê a lista Imediatas. Não existe PBI nem campo Dependência para o Ritter preencher. O dev abre a task e **tica**.
+
+**O que é:** o módulo Checklist da task no ClickUp (`POST /task/{id}/checklist` + itens). **Não** é lista `- [ ]` no markdown da descrição.
+
+**Onde entra (tarefa principal de cada dev):**
+
+| Publicação | Onde criar o checklist |
+| --- | --- |
+| Uma task só (sem subtask Back/Front) | Na **pai** |
+| Front+Back (MAIN + 2 subtasks) | **Um** checklist na subtask Backend e **um** na subtask Frontend. A MAIN **não** leva checklist |
+
+**O que vai em cada item:** passo executável daquela camada (o que seria linha de PBI na Esteira) **e** as provas `P-*` daquela camada. Um item = uma coisa que o júnior marca.
+
+**Proibido:**
+
+- Checklist na MAIN quando há subtasks Back e Front
+- Duplicar o mesmo checklist nas três tasks
+- Inventar `P-FRONT` para superfície com **zero** alteração de Front (prova é item `P-BACK` no checklist do Back)
+- Usar markdown `- [ ]` / `## 🚀 Ordem de Execução` numerada **no lugar** do checklist nativo
+
+Script: `--checklist-name` + `--checklist-item` (repetir) no **mesmo** create da task que deve ter o checklist. Para task já criada: `--checklist-only --task-id …`.
+
+---
 
 ## Comandos
 
@@ -104,5 +143,16 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --mode esteira --file task/cms-central-ajuda.md --project BATEU
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
-  --mode imediatas --file task/hotfix.md --assignee 106175112 --project BATEU
+  --mode esteira --file task/cms-backend.md --project BATEU --parent 86abc123
+
+python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
+  --mode imediatas --file task/hotfix.md --assignee 106175112 --project BATEU \
+  --checklist-name "Execução" \
+  --checklist-item "Migration + endpoint" \
+  --checklist-item "Anexar P-BACK-1"
+
+python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
+  --checklist-only --task-id 86abc123 --checklist-name "Frontend" \
+  --checklist-item "Conferir modal" \
+  --checklist-item "Anexar P-FRONT-1"
 ```

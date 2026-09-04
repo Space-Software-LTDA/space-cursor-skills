@@ -100,7 +100,7 @@ O público da descrição é **dev júnior**. Escrever como **professor**: expli
 | **Prints + legenda** | Cada imagem diz o que o júnior deve observar |
 | **CA Back e Front separados** | Dado/Quando/Então testáveis por camada |
 | **REGRAS DE DDD** | Pronto em HML, paralelos, prova — **tom ordenante** (Faça / Abra / Confirme), não “Imagine” ([evidencias-dod.md](evidencias-dod.md)) |
-| **Passo a passo** | Se mais de um passo: tabela PBI + IDs Espera/Bloqueia |
+| **Passo a passo** | **Só Esteira:** tabela PBI + Espera/Bloqueia. **Imediatas:** não. A quebra é checklist **nativo** do ClickUp |
 | **NÃO DEVE** | Último `##` da task: anti-critérios em tabela + quotes ClickUp ([evidencias-dod.md](evidencias-dod.md)) |
 
 ### Tom na prosa
@@ -177,9 +177,10 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**) — **um** arquivo, mesmo Front+Back
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
-4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e roda o script **três vezes** (MASTER, Backend, Frontend). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
-5. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints se houver.
-6. Devolver os **links** (um ou três) ao PO
+4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e cria **1 MAIN + 2 subtasks** (MASTER primeiro; Backend e Frontend com `--parent` da MASTER). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
+5. **Imediatas:** criar **checklist nativo** do ClickUp (`--checklist-name` + `--checklist-item`) na **tarefa principal de cada dev** — não `- [ ]` no markdown. Uma camada → checklist na task pai. Front+Back → checklist na subtask Back **e** na subtask Front; **MAIN sem** checklist. Esteira: **não** criar esse checklist (o Ritter vira PBI).
+6. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints se houver.
+7. Devolver os **links** (MAIN + 2 subtasks) ao PO
 
 Se a task tem API: o import Apidog (passo 4 do pipeline) já aconteceu **antes** deste bloco. Ver [apidog.md](apidog.md).
 
@@ -195,7 +196,7 @@ No markdown **publicado** no ClickUp:
 | Modo | Tipo custom | Status / extras |
 | --- | --- | --- |
 | Esteira | **Task padrão** (sem custom type) | Status `pbi (bugs) e tasks` + campo Projeto + assignee (Ricardo default) + anexa `.md` |
-| Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) |
+| Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) + checklist nativo na tarefa de cada dev |
 
 Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `clickup.env` nesta skill. Ver [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
 
@@ -239,8 +240,8 @@ Tom **professor** (seção 🎓): tintim por tintim, para júnior não adivinhar
    - **Backend** — numerado; schema com **tabela coluna a coluna**; **DBML**; payloads; endpoints; fluxos; **env / `.env.example`**; “por quê” das decisões
    - **Frontend** — numerado; telas; campos; comportamentos; estados; **URL da API / `NEXT_PUBLIC_*`**; alinhamento aos prints
 7. **Critérios de Aceitação** — Dado / Quando / Então; em Front+Back, **separar Backend e Frontend**
-8. **`## Passo a passo sugerido`** — se houver mais de um passo: uma tabela = PBI, linha = Task (`1.1`). Molde: [evidencias-dod.md](evidencias-dod.md)
-9. **`## REGRAS DE DDD`** — o que é obrigatório para chamar de pronto (prova em HML + paralelos). Tom **ordenante**. [evidencias-dod.md](evidencias-dod.md)
+8. **`## Passo a passo sugerido`** — **só Esteira.** Tabela = PBI, linha = Task (`1.1`) + Espera/Bloqueia. **Imediatas: omitir esta seção** (sem PBI, sem Dependência). Molde: [evidencias-dod.md](evidencias-dod.md)
+9. **`## REGRAS DE DDD`** — o que é obrigatório para chamar de pronto (prova em HML + paralelos). Tom **ordenante**. Prova na **camada que alterou código**; superfície Front sem alteração NENHUMA = prova Back. [evidencias-dod.md](evidencias-dod.md)
 10. **Observações** — riscos, edge cases, delays, env vars
 11. **Referência visual** (se Front) — prints space-assets + link protótipo + legenda do que observar
 12. **`## ⛔ NÃO DEVE`** — **sempre o último `##`**. Anti-critérios + quotes (`>`) para o ClickUp pintar o bloco. [evidencias-dod.md](evidencias-dod.md)
@@ -286,13 +287,19 @@ O que o SuperAgente espera ao quebrar PBIs/Tasks: [super-agente-clickup.md](supe
 
 ## Modo Direto pro Dev
 
-Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contexto, glossário, colunas, DBML, Back/Front, critérios, DDD, passo a passo, observações), mas:
+Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBML, Back/Front, critérios, DDD, observações, NÃO DEVE), mas:
 
 - Escrita como **instrução de execução imediata**
-- Pode incluir passos técnicos mais granulares (arquivos, módulos, ordem de implementação)
-- Não precisa otimizar para hierarquia Epic/Feature/PBI — foco em "o que fazer agora"
-- **Não** enxugar explicações por ser “urgente” — júnior ainda precisa do tintim por tintim
+- **Não** incluir `## Passo a passo sugerido` com PBI / Espera / Bloqueia / Dependência — o SuperAgente **não** passa nesta lista
+- A quebra do trabalho é **checklist nativo do ClickUp** (módulo Checklist da task), **não** `- [ ]` no markdown
+- Onde colar o checklist: **tarefa principal de cada dev**
+  - Uma task só (sem subtask Back/Front) → checklist na **pai**
+  - Front+Back → **um** checklist na subtask Backend e **um** na subtask Frontend; a MAIN **não** leva checklist
+- Cada item do checklist = uma “tarefa” que o dev marca. Incluir implementação **e** as provas `P-*` daquela camada
+- Pode detalhar arquivos/módulos no **corpo** (tom professor); a ordem de execução que o dev tica é o checklist
+- **Não** enxugar explicações por ser “urgente”
 - DDD **mais fechado**: cada prova nomeada; sem “testa depois”
+- Prova só na camada que **altera código**. Front com alteração zero naquela tela → Back prova
 
 ## Estilo de comunicação
 
@@ -316,7 +323,7 @@ Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contex
 ![Fluxo de migração](https://mermaid.ink/img/{base64url}?type=png&bgColor=!white)
 ```
 
-**Exceção — só `## Passo a passo sugerido`:** imagem **e** o fonte logo abaixo (`Código do diagrama (SuperAgente)`), para o Ritter ler o código. Detalhe: [evidencias-dod.md](evidencias-dod.md) e [diagrams.md](diagrams.md).
+**Exceção — só `## Passo a passo sugerido` da Esteira:** imagem **e** o fonte logo abaixo (`Código do diagrama (SuperAgente)`), para o Ritter ler o código. Imediatas: se houver diagrama, **só** a imagem mermaid.ink. Detalhe: [evidencias-dod.md](evidencias-dod.md) e [diagrams.md](diagrams.md).
 
 ### Fluxo (imagem)
 
@@ -324,7 +331,7 @@ Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contex
 2. Codificar com **base64url** (`Buffer.from(code).toString('base64url')`)
 3. Montar URL `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar HTTP 200 antes de incluir
-5. Inserir `![alt](url)`. No passo a passo, **também** o bloco fonte; no resto da task, **não**.
+5. Inserir `![alt](url)`. No passo a passo da **Esteira**, **também** o bloco fonte; no resto (e em Imediatas), **não**.
 
 Usar o script `scripts/render-mermaid.sh` da skill ou ver [diagrams.md](diagrams.md).
 
@@ -404,15 +411,17 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] **Tom professor**: glossário / colunas explicadas / DBML / exemplos — júnior não precisa adivinhar
 - [ ] Back e Front claramente separados (quando aplicável)
 - [ ] Critérios de aceitação em Dado/Quando/Então (separados Back/Front se ambos)
-- [ ] **REGRAS DE DDD** (pronto + paralelos + prova HML); tom **ordenante** (Faça/Abra/Confirme, sem “Imagine”); Imediatas: provas nomeadas ([evidencias-dod.md](evidencias-dod.md))
+- [ ] **REGRAS DE DDD** (pronto + paralelos + prova HML); tom **ordenante**; prova na camada que **mudou código**; Imediatas: provas nomeadas ([evidencias-dod.md](evidencias-dod.md))
 - [ ] **`## ⛔ NÃO DEVE`** no **final** da task (tabela desta entrega + `>` no bloqueio e na frase de ouro; tabela fora do quote)
-- [ ] **Passo a passo** se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte)
+- [ ] **Esteira:** passo a passo se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte). **Imediatas:** **sem** essa seção; checklist nativo na task de cada dev
+- [ ] **Imediatas ao publicar:** `--checklist-name` + `--checklist-item` na pai (uma camada) **ou** nas subtasks Back e Front (não na MAIN)
 - [ ] Payloads, endpoints, curls e fluxos documentados onde necessário
 - [ ] Edge cases e riscos em Observações
 - [ ] Aviso de IA no topo
-- [ ] Sem meta de Scrum/roteamento no corpo da task (passo a passo e DDD **são** para o time, não “modo SuperAgente”)
+- [ ] Sem meta de Scrum/roteamento no corpo da task (passo a passo da Esteira e DDD **são** para o time, não “modo SuperAgente”)
 - [ ] Sem ambiguidade que force o agente ou o júnior a "adivinhar"
-- [ ] Diagramas: imagem mermaid.ink; fonte mermaid **somente** no passo a passo
+- [ ] Diagramas: imagem mermaid.ink; fonte mermaid **somente** no passo a passo da **Esteira**
+- [ ] Imediatas: **sem** `- [ ]` no markdown fingindo de task; checklist é o nativo do ClickUp
 - [ ] Tarefa Front: seção 🖼️ Referência visual com URLs space-assets (push feito) + legenda
 - [ ] Link do protótipo incluído quando existir
 - [ ] **Não** enxugou conteúdo didático ao “limpar” a task
@@ -426,6 +435,10 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 - Não publicar no ClickUp **sem** o PO aprovar o markdown local
 - Não escrever DDD com “Imagine que…” — DDD é ordem: Faça / Abra / Confirme
+- Não criar `P-FRONT` para tela em que o Front **não altera nada** — a prova é do Back
+- Não colocar tabela PBI / Espera / Bloqueia / Dependência em **Imediatas**
+- Não usar `- [ ]` no markdown no lugar do checklist **nativo** do ClickUp (Imediatas)
+- Não colocar o checklist da Imediata na MAIN quando existem subtasks Back e Front — vai na **tarefa de cada dev**
 - Não entregar task sem `## ⛔ NÃO DEVE` no final (anti-critérios desta entrega)
 - Não colocar tabela do NÃO DEVE dentro de blockquote (quebra no ClickUp)
 - Não usar `:::danger` / `> [!CAUTION]` no lugar do `>` — a API não vira Banner
@@ -433,7 +446,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não misturar critérios de aceitação com passos de implementação
 - Não usar abreviações obscuras sem explicar
 - Não entregar descrição vaga para tarefas front+back
-- Não colar ` ```mermaid ` fora do passo a passo — lá imagem **e** fonte; no resto, só mermaid.ink
+- Não colar ` ```mermaid ` fora do passo a passo da **Esteira** — lá imagem **e** fonte; no resto e em Imediatas, só mermaid.ink
 - Não mandar a task Front copiar cor, glow ou radius do Lovable, nem trocar o tema **já no repo** “porque o DS / o mock é outro” — ordem: repo → DS (buraco) → mock (campos/ações)
 - Não resumir as 19 seções do Design System na task — apontar o arquivo
 - Não usar caminhos `C:\...` ou relativos locais — sempre URL space-assets após push
