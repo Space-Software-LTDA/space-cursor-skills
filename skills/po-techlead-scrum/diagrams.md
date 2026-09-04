@@ -2,9 +2,9 @@
 
 ## Regra
 
-Em entregáveis (descrições de tarefa ClickUp, specs, ADRs), **nunca** incluir blocos ` ```mermaid `.
+Em entregáveis (descrições de tarefa ClickUp, specs, ADRs), **não** incluir blocos ` ```mermaid ` — **exceto** a seção `## Passo a passo sugerido`, que leva **imagem e fonte** para o SuperAgente ([evidencias-dod.md](evidencias-dod.md)).
 
-Sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.ink) e inserir com sintaxe Markdown:
+No restante: sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.ink):
 
 ```markdown
 ![Descrição do diagrama](https://mermaid.ink/img/{encoded}?type=png&bgColor=!white)
@@ -18,7 +18,8 @@ Sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.ink) e inserir
 2. Codificar com **base64url** (não base64 padrão — evita 404 por `/` na URL)
 3. Montar URL: `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar que a URL retorna imagem (HTTP 200)
-5. Inserir na descrição da tarefa como `![...](url)` — **não** colar o código Mermaid
+5. Inserir `![...](url)`
+6. **Só no passo a passo:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
 
 ---
 
@@ -84,14 +85,14 @@ flowchart TD
   WH --> PH
 ```
 
-O código acima é só para **gerar** a imagem — **não** colar na tarefa final.
+O código acima é o que se cola **somente** no passo a passo (além da imagem). Nos outros diagramas da task: **não** colar — só a PNG.
 
 ---
 
 ## Checklist do diagrama
 
-- [ ] Imagem gerada via mermaid.ink (não Mermaid inline)
+- [ ] Imagem gerada via mermaid.ink (não só Mermaid no chat)
 - [ ] URL validada (200 OK)
 - [ ] `bgColor=!white` para legibilidade no ClickUp
 - [ ] Legenda `alt` descritiva no Markdown
-- [ ] Nenhum bloco ` ```mermaid ` na descrição entregue
+- [ ] Bloco ` ```mermaid ` na descrição **só** se for o passo a passo (imagem + fonte)

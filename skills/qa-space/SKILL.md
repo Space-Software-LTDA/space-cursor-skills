@@ -82,7 +82,7 @@ No fim: **organizar/editar** o `REPORT.md` já parcialmente escrito.
 | **`docs/SPACE_DESIGN_SYSTEM.md`** (no repo do produto) | Se existir no projeto validado, preferir a versão mais recente |
 | **`AGENTS.md`** (boilerplate Next) | Só quando o projeto for o boilerplate FDD |
 
-> **Nunca** validar visual só com o resumo deste SKILL. A fonte é `../docs/design-system.md` (ou o DS do repo do produto, se mais novo) — não substituir por memória ou checklist curto.
+> **Nunca** validar visual só com o resumo deste SKILL. A fonte é `../docs/design-system.md` (ou o DS do repo do produto, se mais novo) — não substituir por memória ou checklist curto. Tokens **já no código do produto** prevalecem sobre hex de exemplo do DS e sobre o mock.
 
 ---
 
@@ -118,12 +118,16 @@ Inputs aceitos para task: **conteúdo colado OU link** (preferir colar quando po
 
 ### Prioridade de verdade (visual)
 
-1. **Mock Lovable** (o que foi proposto visualmente)
-2. **Task** (critérios de aceite, escopo)
-3. **`../docs/design-system.md`** / `docs/SPACE_DESIGN_SYSTEM.md` (repo do produto)
+Não inverter. O mock **não** é a régua de cor/borda.
 
-Se mock viola DS: **perguntar** qual manda antes de reprovar só implementação ou só mock.  
-Reportar **os dois** quando implementação copiou erro do mock que também fere o DS.
+1. **Repo do produto** — primary, surface, cards, tabela, chrome já no código. O PO não pediu trocar o tema → **não reprove** o feito por manter esse tema.
+2. **Task** — critérios, escopo, o que esta entrega mudou.
+3. **`../docs/design-system.md`** — só o que o repo **ainda não** define (abrir o arquivo inteiro). `docs/SPACE_DESIGN_SYSTEM.md` do produto, se mais novo.
+4. **Mock Lovable** — último: campos, hierarquia, ações. Copiar neon/glow do mock = falha, não “fidelidade”.
+
+Se o mock viola o chrome do produto ou o DS no buraco: **não** peça para o Next ficar igual ao mock. Reportar o mock como errado.
+
+Greenfield (sem tema no repo): o passo 1 está vazio → o DS manda; o mock continua último em chrome.
 
 **Stack:** protótipo Vite → validar o **Next entregue**.  
 **FDD / AGENTS.md:** aplicar regras de arquitetura **só** quando o projeto for o boilerplate Next.
@@ -176,7 +180,7 @@ Para **cada rota** do escopo:
 | **Composição** | Stats no hero? Cards dentro de cards? CTA primary duplicado? |
 | **Tabelas** | Pagination + Per page + zebra + sort + ⋯ + reorder DnD? v7 `cellVariant`? v8 `meta.align`? Server-side? |
 | **Badges** | Padding ≥5×12? Evolução usa success/destructive (não Primary)? |
-| **Identidade** | Roxo/neon do Lovable copiado literal vs Primary/Surface do produto? |
+| **Identidade** | Primary/Surface **deste** produto (repo)? Neon/glow do Lovable colado por cima? |
 | **Shell** | Sidebar/header/footer conforme §13? Logo vs ícone no rodapé? |
 
 Checklist completo por seção do DS: [reference.md](reference.md).
@@ -269,6 +273,8 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 - Não substituir wizard por suposições quando input faltar
 - **Não** auditar visual sem ler `../docs/design-system.md` **inteiro**
 - **Não** reduzir DS a 10 bullets — usar §19 + matriz em reference.md
+- **Não** reprovar o produto por manter o primary/chrome **já no repo**
+- **Não** tratar fidelidade ao Lovable (cor/glow) como critério de aceite
 
 ---
 

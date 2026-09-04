@@ -72,11 +72,27 @@ Após `npm run sync`, cada skill recebe `clickup.env` gerado (gitignored).
 
 | Passo | Gate |
 | --- | --- |
-| Task local pronta | `task/*.md` escrito |
+| Task local pronta | **Um** `.task/{projeto}/{slug}.md` |
 | Aprovação | PO: **“pode publicar no ClickUp”** |
 | Confirmar lista | Esteira vs Imediatas |
-| Onboard | Responsável + Projeto (BATEU etc.) |
-| Execução | `scripts/clickup_create_task.py` → link |
+| Onboard | Responsável + Projeto |
+| Execução | Script **1 arquivo → 1 task**. Front+Back: agente recorta 3 bodies e roda o script **3 vezes** |
+
+## Front+Back: três tasks no ClickUp
+
+O Python **não** fatia markdown. Quem recorta é o agente.
+
+| Task | Título | Corpo | Anexos |
+| --- | --- | --- | --- |
+| MASTER | `{título}` | Aviso IA, grid, contexto, objetivo, **passo a passo inteiro** (tabelas + mermaid imagem e fonte), REGRAS DE DDD, observações curtas, **NÃO DEVE** (último bloco). Ritter lê **esta**. | `.md` completo + OpenAPI/DBML se houver |
+| Backend | `{título} — Backend` | Grid + alterações Back + CA Back + linhas `BACK` do passo a passo (Espera/Bloqueia intactos) + DDD (prova Back + paralelos) + **NÃO DEVE** | OpenAPI/DBML |
+| Frontend | `{título} — Frontend` | Grid + alterações Front + CA Front + linhas `FRONT` + DDD (vídeo HML + paralelos de UI) + **NÃO DEVE** | prints se houver |
+
+Uma camada só → um create, spec inteira.
+
+Mesma lista, modo, assignee e campo Projeto nas três. Devolver **3 links**.
+
+Esteira e Imediatas: o mesmo ritual. Imediatas: DDD com cada prova nomeada.
 
 ## Comandos
 

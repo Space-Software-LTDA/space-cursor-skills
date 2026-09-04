@@ -47,7 +47,7 @@ A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 | Escopo da task | Ler (após o README) |
 | --- | --- |
 | Backend (ou Front+Back) | `../docs/entry-point.md` **inteiro**, `../docs/padrao-ouro.md`, `../docs/anti-padroes.md`, `../docs/nomenclatura.md` |
-| Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar `../docs/design-system.md` **sem** resumir as 19 seções; prints + “não copiar neon Lovable” |
+| Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar `../docs/design-system.md` **sem** resumir as 19 seções; prioridade **repo → DS (buraco) → Lovable (campos/ações)** |
 | Branch / PR / hotfix | `../docs/git-fluxo.md` |
 | Projeto novo / stack | `../docs/backend.md` e/ou `../docs/frontend.md` |
 
@@ -99,12 +99,16 @@ O público da descrição é **dev júnior**. Escrever como **professor**: expli
 | **Edge cases** | O que acontece em falha, omitir campo, dia fora da recorrência, etc. |
 | **Prints + legenda** | Cada imagem diz o que o júnior deve observar |
 | **CA Back e Front separados** | Dado/Quando/Então testáveis por camada |
+| **REGRAS DE DDD** | Pronto em HML, paralelos, prova — **tom ordenante** (Faça / Abra / Confirme), não “Imagine” ([evidencias-dod.md](evidencias-dod.md)) |
+| **Passo a passo** | Se mais de um passo: tabela PBI + IDs Espera/Bloqueia |
+| **NÃO DEVE** | Último `##` da task: anti-critérios em tabela + quotes ClickUp ([evidencias-dod.md](evidencias-dod.md)) |
 
 ### Tom na prosa
 
 - Frases curtas; subtítulos; tabelas  
 - Explicar abreviação na primeira vez  
-- “Imagine que…” / “Exemplo:” quando a regra for abstrata  
+- **Contexto / regra abstrata:** “Exemplo:” + cenário concreto (o expert clica X). **Não** usar “Imagine que…” no DDD.  
+- **DDD:** verbo no imperativo no topo do bloco — **Faça login** como Expert no dashboard de HML; **Abra** duas sessões; **Dispare** o POST; **Confirme** o paralelo; **Grave** e **anexe**. Dado/Quando/Então = roteiro do teste, não conto.  
 - Destacar `⚠️` o que o protótipo mente ou o que não fazer  
 - Não assumir que o júnior já conhece MinIO, JSONB, soft delete, RBAC, etc.
 
@@ -170,12 +174,12 @@ Quando em dúvida sobre urgência ou complexidade, perguntar objetivamente.
 
 Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 
-1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**)
+1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**) — **um** arquivo, mesmo Front+Back
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
-4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` antes se for a 1ª vez no projeto)
-5. **Anexar** na task tudo que o time precisa baixar (OpenAPI, DBML, specs extras) — não só o `.md`
-6. Devolver o **link da task** ao PO
+4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e roda o script **três vezes** (MASTER, Backend, Frontend). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
+5. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints se houver.
+6. Devolver os **links** (um ou três) ao PO
 
 Se a task tem API: o import Apidog (passo 4 do pipeline) já aconteceu **antes** deste bloco. Ver [apidog.md](apidog.md).
 
@@ -235,8 +239,11 @@ Tom **professor** (seção 🎓): tintim por tintim, para júnior não adivinhar
    - **Backend** — numerado; schema com **tabela coluna a coluna**; **DBML**; payloads; endpoints; fluxos; **env / `.env.example`**; “por quê” das decisões
    - **Frontend** — numerado; telas; campos; comportamentos; estados; **URL da API / `NEXT_PUBLIC_*`**; alinhamento aos prints
 7. **Critérios de Aceitação** — Dado / Quando / Então; em Front+Back, **separar Backend e Frontend**
-8. **Observações** — riscos, edge cases, delays, env vars, dependências
-9. **Referência visual** (se Front) — prints space-assets + link protótipo + legenda do que observar
+8. **`## Passo a passo sugerido`** — se houver mais de um passo: uma tabela = PBI, linha = Task (`1.1`). Molde: [evidencias-dod.md](evidencias-dod.md)
+9. **`## REGRAS DE DDD`** — o que é obrigatório para chamar de pronto (prova em HML + paralelos). Tom **ordenante**. [evidencias-dod.md](evidencias-dod.md)
+10. **Observações** — riscos, edge cases, delays, env vars
+11. **Referência visual** (se Front) — prints space-assets + link protótipo + legenda do que observar
+12. **`## ⛔ NÃO DEVE`** — **sempre o último `##`**. Anti-critérios + quotes (`>`) para o ClickUp pintar o bloco. [evidencias-dod.md](evidencias-dod.md)
 
 ### Cabeçalho em grid (obrigatório em toda task)
 
@@ -274,16 +281,18 @@ Inferir repos pelo `git remote` do workspace quando possível. Se não achar, pe
 - Texto da task = útil para o **dev**; meta de roteamento PO fica só no chat
 
 Para template completo e exemplo, ver [templates.md](templates.md).
-Para o que o SuperAgente espera ao quebrar PBIs/Tasks, ver [super-agente-clickup.md](super-agente-clickup.md).
+DDD e passo a passo: [evidencias-dod.md](evidencias-dod.md).
+O que o SuperAgente espera ao quebrar PBIs/Tasks: [super-agente-clickup.md](super-agente-clickup.md).
 
 ## Modo Direto pro Dev
 
-Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contexto, glossário, colunas, DBML, Back/Front, critérios, observações), mas:
+Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contexto, glossário, colunas, DBML, Back/Front, critérios, DDD, passo a passo, observações), mas:
 
 - Escrita como **instrução de execução imediata**
 - Pode incluir passos técnicos mais granulares (arquivos, módulos, ordem de implementação)
 - Não precisa otimizar para hierarquia Epic/Feature/PBI — foco em "o que fazer agora"
 - **Não** enxugar explicações por ser “urgente” — júnior ainda precisa do tintim por tintim
+- DDD **mais fechado**: cada prova nomeada; sem “testa depois”
 
 ## Estilo de comunicação
 
@@ -301,21 +310,21 @@ Mesma estrutura **e o mesmo nível de detalhe didático** do SuperAgente (contex
 - Exemplos concretos sempre que houver regra abstrata
 ## Diagramas (obrigatório em entregáveis)
 
-**Nunca** incluir blocos ` ```mermaid ` em descrições de tarefa ou specs para ClickUp.
-
-Sempre gerar **imagem** via API [mermaid.ink](https://mermaid.ink) e inserir assim:
+**Regra geral:** não colar ` ```mermaid ` — só **imagem** [mermaid.ink](https://mermaid.ink):
 
 ```markdown
 ![Fluxo de migração](https://mermaid.ink/img/{base64url}?type=png&bgColor=!white)
 ```
 
-### Fluxo
+**Exceção — só `## Passo a passo sugerido`:** imagem **e** o fonte logo abaixo (`Código do diagrama (SuperAgente)`), para o Ritter ler o código. Detalhe: [evidencias-dod.md](evidencias-dod.md) e [diagrams.md](diagrams.md).
+
+### Fluxo (imagem)
 
 1. Escrever código Mermaid internamente
 2. Codificar com **base64url** (`Buffer.from(code).toString('base64url')`)
 3. Montar URL `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar HTTP 200 antes de incluir
-5. Inserir **somente a imagem** (Markdown `![alt](url)`), nunca o código fonte
+5. Inserir `![alt](url)`. No passo a passo, **também** o bloco fonte; no resto da task, **não**.
 
 Usar o script `scripts/render-mermaid.sh` da skill ou ver [diagrams.md](diagrams.md).
 
@@ -324,6 +333,16 @@ Usar o script `scripts/render-mermaid.sh` da skill ou ver [diagrams.md](diagrams
 ## Prints e referência visual (Frontend / UI)
 
 Tarefas de **Frontend** ou com **protótipo/print** devem incluir imagens da UI alvo. Detalhes em [screenshots.md](screenshots.md).
+
+### Prioridade visual (não inverter)
+
+1. **Repo do produto** — tokens, primary, cards, tabela, filtros já no código. O PO **não** pediu trocar o tema → a task **não** manda trocar.
+2. **Design System do time** (`../docs/design-system.md`) — só o que o repo **ainda não** define. Apontar o arquivo; **não** resumir as 19 seções.
+3. **Lovable / Figma** — último: **campos, hierarquia, ações**. Nunca cor, glow, neon, radius gamer, botão do mock (AP-FE-08).
+
+Greenfield (repo sem tema): o passo 1 está vazio → o DS manda. O mock continua último em chrome.
+
+A task Front **declara essa ordem** no bloco de UI. Se o print e o dash discordarem em cor/borda, **ganha o dash**.
 
 ### Regra resumida
 
@@ -373,7 +392,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 ## Checklist antes de entregar descrição
 
-- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir
+- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir **e** declara prioridade repo → DS → mock
 - [ ] Projeto identificado (e opção do campo ClickUp **Projeto** conhecida)
 - [ ] Modo confirmado **na conversa** (SuperAgente/Esteira ou Imediatas) — **não** no corpo da task
 - [ ] Responsável confirmado no onboard (Esteira: Ricardo default se OK; Imediatas: obrigatório)
@@ -385,12 +404,15 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] **Tom professor**: glossário / colunas explicadas / DBML / exemplos — júnior não precisa adivinhar
 - [ ] Back e Front claramente separados (quando aplicável)
 - [ ] Critérios de aceitação em Dado/Quando/Então (separados Back/Front se ambos)
+- [ ] **REGRAS DE DDD** (pronto + paralelos + prova HML); tom **ordenante** (Faça/Abra/Confirme, sem “Imagine”); Imediatas: provas nomeadas ([evidencias-dod.md](evidencias-dod.md))
+- [ ] **`## ⛔ NÃO DEVE`** no **final** da task (tabela desta entrega + `>` no bloqueio e na frase de ouro; tabela fora do quote)
+- [ ] **Passo a passo** se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte)
 - [ ] Payloads, endpoints, curls e fluxos documentados onde necessário
 - [ ] Edge cases e riscos em Observações
 - [ ] Aviso de IA no topo
-- [ ] Sem meta de Scrum/roteamento no corpo da task
+- [ ] Sem meta de Scrum/roteamento no corpo da task (passo a passo e DDD **são** para o time, não “modo SuperAgente”)
 - [ ] Sem ambiguidade que force o agente ou o júnior a "adivinhar"
-- [ ] Diagramas como **imagem** (mermaid.ink), nunca bloco Mermaid inline
+- [ ] Diagramas: imagem mermaid.ink; fonte mermaid **somente** no passo a passo
 - [ ] Tarefa Front: seção 🖼️ Referência visual com URLs space-assets (push feito) + legenda
 - [ ] Link do protótipo incluído quando existir
 - [ ] **Não** enxugou conteúdo didático ao “limpar” a task
@@ -403,12 +425,17 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 ## O que NÃO fazer
 
 - Não publicar no ClickUp **sem** o PO aprovar o markdown local
+- Não escrever DDD com “Imagine que…” — DDD é ordem: Faça / Abra / Confirme
+- Não entregar task sem `## ⛔ NÃO DEVE` no final (anti-critérios desta entrega)
+- Não colocar tabela do NÃO DEVE dentro de blockquote (quebra no ClickUp)
+- Não usar `:::danger` / `> [!CAUTION]` no lugar do `>` — a API não vira Banner
 - Não assumir urgência — sempre perguntar
 - Não misturar critérios de aceitação com passos de implementação
 - Não usar abreviações obscuras sem explicar
 - Não entregar descrição vaga para tarefas front+back
-- Não colar blocos ` ```mermaid ` em tarefas ClickUp — sempre imagem via mermaid.ink
-- Não entregar task Front só com texto quando existir protótipo ou print disponível
+- Não colar ` ```mermaid ` fora do passo a passo — lá imagem **e** fonte; no resto, só mermaid.ink
+- Não mandar a task Front copiar cor, glow ou radius do Lovable, nem trocar o tema **já no repo** “porque o DS / o mock é outro” — ordem: repo → DS (buraco) → mock (campos/ações)
+- Não resumir as 19 seções do Design System na task — apontar o arquivo
 - Não usar caminhos `C:\...` ou relativos locais — sempre URL space-assets após push
 - Não citar `.docs/` / `.task/` no corpo ClickUp — anexar o arquivo e referenciar pelo nome
 - Não publicar OpenAPI/DBML só “no disco do PO” sem anexar na task

@@ -57,13 +57,19 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 | Arquivo | Por quê | Como usar |
 | --- | --- | --- |
 | [frontend.md](frontend.md) | Stack e contrato HTTP do Front | A task manda usar o client do boilerplate, três estados, endpoint que existe. **Não** substituir o Design System: para tokens/tabela/shell, apontar [design-system.md](design-system.md) **sem resumir** as 19 seções. |
-| [design-system.md](design-system.md) | Constituição visual | PO **referencia** (prints + “seguir DS, não copiar neon do Lovable”). PO **não** preenche matriz §19 nem tira print de console — isso é `qa-space`. |
+| [design-system.md](design-system.md) | Constituição visual | PO **referencia** sem resumir as 19 seções. **Prioridade:** repo do produto (tema já definido) → DS só no buraco → mock só campos/ações. Prints + “não copiar neon do Lovable”. PO **não** preenche matriz §19 — isso é `qa-space`. |
+
+**Sempre (qualquer camada — entrega):**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [git-fluxo.md](git-fluxo.md) | HML 1:1 com `main` (banco); prova de pronto | A task inclui `## REGRAS DE DDD` (tom **ordenante**: Faça/Abra/Confirme), `## ⛔ NÃO DEVE` no **final**, e, se houver mais de um passo, `## Passo a passo sugerido`. Molde na skill: `evidencias-dod.md`. **Não** resumir git-fluxo no `SKILL.md`. |
 
 **Se o trabalho tocar:**
 
 | Arquivo | Quando | Como usar |
 | --- | --- | --- |
-| [git-fluxo.md](git-fluxo.md) | Branch, PR, hotfix, “pra qual branch?” | Escrever o fluxo **corrigido** na task (merge PBI→`dev` permitido; `hml`/`main` só PR). |
+| [git-fluxo.md](git-fluxo.md) | Branch, PR, hotfix, “pra qual branch?” (além da leitura **Sempre** de HML/DDD) | Escrever o fluxo **corrigido** na task (merge PBI→`dev` permitido; `hml`/`main` só PR). |
 | [backend.md](backend.md) | Projeto novo ou stack da task | Mandar partir do [boilerplate-back-elysia](https://github.com/Space-Software-LTDA/boilerplate-back-elysia), feature-based, entry no `index.ts`. |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding, Coder, Apidog | Só quando a task for de setup/ambiente — a **nomenclatura** em si já está em `nomenclatura.md` (leitura sempre). |
 
@@ -81,7 +87,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 | Arquivo | Por quê | Como usar (não é o mesmo que o PO) |
 | --- | --- | --- |
-| [design-system.md](design-system.md) | Constituição visual **integral** (~805 linhas) | Ler **o arquivo inteiro** antes da Fase 2. Auditar tela a tela contra §§. Matriz em `qa-space/reference.md`. **Proibido** validar visual só com memória ou com 10 bullets do `SKILL.md`. Se o repo do produto tiver `docs/SPACE_DESIGN_SYSTEM.md` mais novo, preferir o do repo e registrar a versão no REPORT. |
+| [design-system.md](design-system.md) | Constituição visual **integral** (~805 linhas) | Ler **o arquivo inteiro** antes da Fase 2. Auditar tela a tela contra §§. Matriz em `qa-space/reference.md`. **Proibido** validar visual só com memória ou com 10 bullets do `SKILL.md`. **Prioridade:** chrome/tokens **já no repo do produto** prevalecem; DS preenche o que o repo não define; mock **não** é régua de cor/borda. Não reprovar o produto por manter o primary que já está no código. Se o repo tiver `docs/SPACE_DESIGN_SYSTEM.md` mais novo, preferir o do repo e registrar a versão no REPORT. |
 | [anti-padroes.md](anti-padroes.md) — **Parte Frontend (AP-FE-*)** e, se o código Front tocar contrato, AP-TYPE-03 | O que o júnior/IA copia no UI | Caçar no código da rota e no Network. Cada achado: esperado × feito + evidência. **Não** reescrever a task de Back nem exigir `index.ts` de um módulo de API — isso é PO + entry-point. |
 
 **Se o trabalho tocar:**
@@ -143,7 +149,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* (cenário / por quê / ouro / exemplo / erro comum) + Front | Sim |
 | [design-system.md](design-system.md) | Space UI DS v1.0 | Sim — QA lê inteiro |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding empresa (git, stack, Coder, Apidog, EasyPanel) | Sim |
-| [git-fluxo.md](git-fluxo.md) | PBI → dev / PR hml / PR main, hotfix, commit, proteção | Sim — sem contradizer “commit direto” vs merge em `dev` |
+| [git-fluxo.md](git-fluxo.md) | PBI → dev / PR hml / PR main, hotfix; HML ≈ main (banco); evidência de pronto | Sim — sem contradizer “commit direto” vs merge em `dev` |
 | [backend.md](backend.md) | Bun + Elysia + TypeORM + boilerplate | Sim |
 | [frontend.md](frontend.md) | Next + Tailwind + DS + boilerplate | Sim |
 | [nomenclatura.md](nomenclatura.md) | Repos, branches, commits, EasyPanel, **banco** (tabela/coluna/user) | Sim — padrão de manufatura (GO-12) |

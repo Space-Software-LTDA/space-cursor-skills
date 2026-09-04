@@ -11,8 +11,8 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 5. [playwright-capture.md](playwright-capture.md) — prints → space-assets (se Front)
 6. [decomposicao-tom-professor.md](decomposicao-tom-professor.md) — **1 bloco por unidade mínima** (GLOBAL)
 7. Salvar em `.task/{projeto}/{task-slug}.md`
-8. Checklist em [SKILL.md](SKILL.md)
-9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`)
+8. Checklist em [SKILL.md](SKILL.md) + DDD/passo a passo em [evidencias-dod.md](evidencias-dod.md)
+9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`; Front+Back = **3** creates)
 
 **Manutenção:** editar em [space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) (`skills/po-techlead-scrum/`) → `git push` → `npm run sync`. ENV ClickUp e Apidog ficam no `.env` da raiz do repo.
 
@@ -28,6 +28,7 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 | [playwright-capture.md](playwright-capture.md) | Scripts Playwright | ✅ |
 | [diagrams.md](diagrams.md) | mermaid.ink | ✅ |
 | [super-agente-clickup.md](super-agente-clickup.md) | Calibragem SuperAgente | ✅ |
+| [evidencias-dod.md](evidencias-dod.md) | REGRAS DE DDD + passo a passo (PBI/tabela) + NÃO DEVE | ✅ |
 | [clickup-task-guide.md](clickup-task-guide.md) | Publicar task via API + onde editar/sync | ✅ |
 | [apidog.md](apidog.md) | Contrato de rotas: pipeline + import OpenAPI | ✅ |
 | [clickup.env.example](clickup.env.example) | Keys ClickUp (geradas no sync) | ✅ |

@@ -108,8 +108,8 @@ Exemplo e anti-typo (`createdAt`, não `createAt`): [nomenclatura.md](nomenclatu
 
 - **Next.js** + **Tailwind CSS**
 - HTTP: client do boilerplate (não inventar um segundo client nas pages)
-- Protótipo Lovable = referência visual; entrega = Next
-- Design System: [design-system.md](design-system.md) — **não** copiar neon/gamer do mock
+- Protótipo Lovable = campos/ações; chrome = **repo do produto**, depois DS no buraco. Entrega = Next
+- Design System: [design-system.md](design-system.md) — **não** copiar neon/gamer do mock; **não** trocar o primary que o produto já tem
 - FDD / `AGENTS.md`: só quando o repo for o boilerplate Next FDD
 
 Texto normativo: [frontend.md](frontend.md).

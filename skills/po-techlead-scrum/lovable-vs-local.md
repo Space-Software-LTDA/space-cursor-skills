@@ -18,6 +18,8 @@ Funciona para **qualquer projeto** da skill (ONESET, BATEU, SPACEBET…).
 
 A task descreve **lacunas**, não reimplementar o que já funciona.
 
+**Prioridade visual (não inverter):** repo do produto (tema já definido) → Design System só no buraco → protótipo só **campos/ações**. Não listar “falta o neon do Lovable” como lacuna. Não listar “primary diferente do apêndice do DS” como lacuna se o produto já tem token.
+
 **Exemplo preenchido (ONESET):** [exemplos/oneset-admin-lacunas-exemplo.md](exemplos/oneset-admin-lacunas-exemplo.md)
 
 ---
@@ -83,7 +85,7 @@ Por **cada linha** do mapa do protótipo:
 1. UI local existe?
 2. API / schema suporta?
 3. Comportamento alinhado?
-4. Tema: copiar layout, não paleta literal?
+4. Tema: copiar **layout/campos**, não paleta. Chrome = repo do produto; DS só no buraco; mock nunca manda cor/borda.
 
 | Símbolo | Significado |
 | --- | --- |
@@ -133,7 +135,9 @@ Por **cada linha** do mapa do protótipo:
 | Monorepo / submodules | Inventariar **cada repo** |
 | Só Back ou só Front | Matriz só da camada relevante |
 | Protótipo dark, app light | Não implementar dark por causa do Lovable — validar grep na execução |
-| Protótipo light, app dark | Idem — seguir design system **do app** |
+| Protótipo light, app dark | Idem — seguir o tema **já no app** |
+| Print com glow/neon e o dash sem | **Não** é lacuna. Ganha o dash. |
+| Primary do produto ≠ hex de exemplo do DS | **Não** é lacuna. Repo prevalece até o PO mandar mudar o tema. |
 
 ---
 

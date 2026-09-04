@@ -97,7 +97,8 @@ Copiar **para cada** unidade mínima (tela, aba, KPI, endpoint crítico):
 - Formatação (R$, %, data)
 
 **Exemplo didático**
-> Imagine que [persona] faz [ação]. O sistema …
+> Exemplo: o [persona] faz [ação]. O sistema …
+> No DDD **não** usar este bloco hipotético — lá é ordem: Faça login / Abra / Confirme.
 
 **⚠️ Armadilhas**
 - Protótipo **dark** vs app **light** — copiar layout, não paleta (validar dark mode no repo na execução)
@@ -182,6 +183,7 @@ Exemplo concreto ONESET Profissões: ver [exemplos/oneset-profissoes-tokens.md](
 - [ ] Exemplo didático com persona fictícia **por módulo complexo**
 - [ ] Código/repo existente citado (grep feito)
 - [ ] PO **não** precisaria abrir Lovable só para entender escopo
+- [ ] Visual: repo (tema atual) > DS (buraco) > mock (campos/ações) — print neon **não** vira critério
 - [ ] Critérios de aceitação específicos (não "conforme protótipo")
 
 ---

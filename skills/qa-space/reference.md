@@ -438,6 +438,8 @@ Atalho mínimo (não substituir matriz completa):
 
 ### Visual / Lovable
 - Copiar purple glow / card decorativo do protótipo
+- Reprovar o produto por usar o primary **já no repo** (em vez do hex de exemplo do DS)
+- Tratar fidelidade ao mock como mais importante que o chrome do dash
 - Tabela sem ⋯ quando listagem tem colunas opcionais na API
 - Link azul permanente em célula quando DS pede texto normal + row click
 - Alturas de linha inconsistentes entre tabelas (badges altos, botões h-7)

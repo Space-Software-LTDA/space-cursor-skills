@@ -14,7 +14,7 @@ Projeto **novo** de frontend **parte** deste repositório, não de pasta vazia n
 
 [https://github.com/Space-Software-LTDA/boilerplate-front-nextjs](https://github.com/Space-Software-LTDA/boilerplate-front-nextjs)
 
-O protótipo (Vite/Lovable) é **referência visual**, não a stack de entrega. Entrega = **Next.js**.
+O protótipo (Vite/Lovable) é **referência de campos, hierarquia e ações**, não de cor/borda/glow. Entrega = **Next.js**. Visual: ver **Prioridade visual** abaixo — o repo do produto manda no tema que já existe.
 
 Quando o repo for o boilerplate FDD, as regras de pasta/hooks/client HTTP estão no `AGENTS.md` **daquele** repo. Não aplicar FDD em um Next legado que não segue esse `AGENTS.md`.
 
@@ -30,7 +30,23 @@ Quando o repo for o boilerplate FDD, as regras de pasta/hooks/client HTTP estão
 | Componentes | Libs de componente **permitidas**, com as restrições do Design System (ícone = Lucide, tabela = contrato do DS, sem copiar kit gamer/neon) |
 | Design | Tokens e regras de [design-system.md](design-system.md) |
 
-Biblioteca de componente não autoriza furar radius, glow, ou tabela ad-hoc. O DS manda.
+Biblioteca de componente não autoriza furar radius, glow, ou tabela ad-hoc. O DS manda **onde o repo ainda não definiu**.
+
+---
+
+## Prioridade visual (não inverter)
+
+Produto **já existente** (tokens, primary, cards, tabela no código):
+
+| # | Fonte | O que manda |
+| --- | --- | --- |
+| 1 | **Repo do produto** | Cor, chrome, radius, componentes já usados (lista, banners, filtros). O PO **não** pediu trocar o tema → **não troque**. |
+| 2 | **[design-system.md](design-system.md)** | Só o buraco: o que o repo **ainda não** define. Abrir o arquivo. **Não** resumir as 19 seções na task. |
+| 3 | **Protótipo (Lovable/Figma)** | Último recurso: **campos, ordem, ações**. Nunca cor, glow, neon, radius gamer, botão do mock ([AP-FE-08](anti-padroes.md)). |
+
+Greenfield / produto sem token: o passo 1 está vazio → o DS manda; o mock continua último em chrome.
+
+**Proibido:** tratar o hex de exemplo do apêndice do DS como se anulasse o primary do produto; copiar a paleta do Lovable “porque o print é assim”.
 
 ---
 
@@ -54,7 +70,7 @@ Biblioteca de componente não autoriza furar radius, glow, ou tabela ad-hoc. O D
 
 ## Visual: o que este arquivo não substitui
 
-`qa-space` lê [design-system.md](design-system.md) **inteiro** e preenche a matriz. `po-techlead-scrum` **aponta** o DS na task Front (“não copiar neon do Lovable; tabela §11; um CTA primary por seção”) e coloca prints no space-assets. Nenhum dos dois cola um resumo de 10 bullets no lugar das 19 seções.
+`qa-space` lê [design-system.md](design-system.md) **inteiro** e preenche a matriz. `po-techlead-scrum` **aponta** o DS na task Front **sem resumir** as 19 seções, declara a prioridade repo → DS → mock, e coloca prints no space-assets.
 
 Proibido de produto (lembrete, não substitui o DS):
 
@@ -78,5 +94,5 @@ Mesma regra do back: desenvolver no [Coder](https://coder.spacedev.pro/). Env de
 
 ## O que a skill de PO faz com isto
 
-- Task Front: telas, estados, URL da API, prints, “seguir DS / boilerplate”.
+- Task Front: telas, estados, URL da API, prints, prioridade **repo → DS (buraco) → mock (campos/ações)**.
 - Não preencher veredito Aprovado/Reprovado de pixel — isso é o REPORT do QA.

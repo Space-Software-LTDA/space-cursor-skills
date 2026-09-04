@@ -86,9 +86,11 @@ Depois dos testes em `dev` (quando houver) e da validação da tarefa:
 
 Só então o merge do PR vai para homologação.
 
+**HML ≈ `main`**, inclusive **banco**. Teste e prova de pronto valem neste ambiente como se fosse produção (sem inventar dado que produção nunca teria como único cenário).
+
 ### 3. `hml` → `main` (Pull Request)
 
-Com homologação validada e evidências da tarefa anexadas:
+Com homologação validada e **evidências de pronto** anexadas (o que a task listou em `REGRAS DE DDD`: gravação Front, prova Back/contrato, regressão dos paralelos) **e nenhum item do `NÃO DEVE` verdadeiro**:
 
 - Origem: `hml`
 - Destino: `main`

@@ -3,7 +3,7 @@
 > Constituição visual Space. Skills leem [README.md](README.md) **primeiro**.  
 > `qa-space` lê **este arquivo inteiro** antes de auditar. `po-techlead-scrum` **referencia** (não preenche matriz §19).  
 > Se o projeto validado tiver `docs/SPACE_DESIGN_SYSTEM.md`, preferir a versão **mais recente** e registrar no REPORT.  
-> Arquitetura de código Front: `AGENTS.md` do boilerplate Next. **Visual / UI:** este arquivo.
+> Arquitetura de código Front: `AGENTS.md` do boilerplate Next. **Visual / UI:** este arquivo, **depois** dos tokens já definidos no repo do produto (ver §1 Prioridade visual).
 
 ---
 
@@ -36,6 +36,18 @@
 
 ## 1. Como usar
 
+### Prioridade visual (não inverter)
+
+Produto que **já tem** tema no código (CSS variables, primary, cards, tabela):
+
+1. **Repo do produto** — tokens e chrome atuais. O PO não pediu mudar o tema → **não mude**.
+2. **Este arquivo** — só o que o repo ainda não define. Não resumir as 19 seções em outro doc.
+3. **Protótipo (Lovable/Figma)** — campos, hierarquia, ações. **Nunca** cor, glow, neon, radius gamer.
+
+Greenfield: o passo 1 está vazio → este DS manda. O mock continua último em chrome.
+
+Hex de exemplo dos apêndices **não** anula o Primary/Surface já no `globals.css` (ou equivalente) do produto.
+
 ### Para humanos
 1. Leia Filosofia → Cores → Tipografia → Componentes.
 2. Defina **Primary** e **Surface** do produto (hex).
@@ -45,9 +57,10 @@
 ### Para IAs (Lovable, Cursor, v0, etc.)
 Anexe este documento no contexto e ordene:
 
-> Siga estritamente o Space UI Design System v1.0.  
-> Não invente radius, tipografia, badges ou padrões fora deste doc.  
-> Primary e Surface deste projeto são: `[HEX_PRIMARY]` e `[HEX_SURFACE]`.
+> Siga o Space UI Design System v1.0 **depois** dos tokens já no repo do produto.  
+> Não invente radius, tipografia, badges ou padrões fora deste doc **no que o repo ainda não define**.  
+> Primary e Surface: hex **já no produto**, se existirem; senão `[HEX_PRIMARY]` e `[HEX_SURFACE]`.  
+> Protótipo = campos e ações. Nunca copiar glow/neon/radius do mock.
 
 ### O que cada projeto pode mudar
 | Pode mudar | Não pode mudar |

@@ -111,6 +111,8 @@ KEY=
 
 ### 🖥️ Frontend
 
+**Visual (não inverter):** 1) chrome **deste** repo  2) DS só no buraco (`design-system.md`, sem resumir)  3) protótipo = campos/ações — zero neon/glow.
+
 #### 1. [Telas / campos / comportamentos]
 
 #### 2. API base
@@ -148,9 +150,72 @@ Usar `NEXT_PUBLIC_API_URL` (valor no grid).
 
 ---
 
+## Passo a passo sugerido
+
+Quadro-resumo se 4+ PBIs. Depois mermaid: **imagem** + fonte (SuperAgente). Molde: evidencias-dod.md
+
+![Fila dos PBIs](https://mermaid.ink/img/{encoded}?type=png&bgColor=!white)
+
+Código do diagrama (SuperAgente):
+
+```mermaid
+flowchart TD
+  t11["1.1 Schema"] --> t12["1.2 GET lista"]
+  t12 --> t21["2.1 Página lista"]
+```
+
+#### PBI 1 — Fundação Back
+
+| Nº | Camada | Task | Espera | Bloqueia |
+| --- | --- | --- | --- | --- |
+| 1.1 | BACK | Schema / migration | - | 1.2, 2.1 |
+| 1.2 | BACK | GET da listagem | 1.1 | 2.1 |
+
+**Por quê**
+
+- **1.1** bloqueia 1.2 e 2.1: sem schema o GET e a lista não existem
+- **1.2** espera 1.1: SELECT nas colunas novas · bloqueia 2.1: a tabela consome este JSON
+
+---
+
+#### PBI 2 — Lista
+
+| Nº | Camada | Task | Espera | Bloqueia |
+| --- | --- | --- | --- | --- |
+| 2.1 | FRONT | Página de lista | 1.2 | 2.2 |
+| 2.2 | FRONT | Excluir na linha | 2.1 | - |
+
+**Por quê**
+
+- **2.2** espera 2.1: o botão mora na tabela
+
+---
+
+## REGRAS DE DDD
+
+**Pronto:** **Faça login** no papel certo em HML. [o que executar — Dado/Quando/Então]. Sem “Imagine”.
+
+**Paralelos:** **Confirme em HML** [telas/rotas/tipos]. Cada um = ação (abra / dispare / confira).
+
+**Prova:** Front — **grave** em HML + o que fez. Back — **anexe** curl/contrato + doc se a spec pediu. Sem anexo = não entregue.
+
+---
+
 ## ⚠️ Observações
 
 - [Risco, dependência, env, edge case, o que o protótipo mente]
+
+---
+
+## ⛔ NÃO DEVE
+
+> **BLOQUEIO.** Se qualquer linha abaixo for verdade, a entrega **não** está pronta — mesmo que o caminho feliz “pareça ok”. Não negociar. Não “quase pronto”.
+
+| Se isto acontecer | Por que é falha |
+| --- | --- |
+| [ação concreta desta spec] | [por que é falha — uma frase] |
+
+> **Frase de ouro.** [pronto de verdade desta entrega.] Qualquer linha da tabela = **não** está pronto.
 ```
 
 ---
@@ -186,6 +251,8 @@ Mesmo template; omitir a seção da camada ausente e a linha do repo corresponde
 | Payload | Formato completo com tipos | "Enviar os dados do cadastro" |
 | Env | Keys no `.env.example` + placeholder | Secret real colado na task |
 | Critério | Dado/Quando/Então por camada | "Deve funcionar corretamente" |
-| Front | Campo + print com legenda | "Ajustar a tela" |
-| UI | Legenda + URL space-assets | Caminho `C:\...` |
+| DDD | Pronto + paralelos + prova HML | "Testar no final" |
+| Passo a passo | Tabela 5 colunas + Por quê + mermaid duplo | "Ver ordem no chat" |
+| Front | Campo + print com legenda; visual **repo → DS → mock** | "Ajustar a tela" / copiar neon do Lovable |
+| UI | Legenda + URL space-assets; chrome do produto | Caminho `C:\...`; hex do mock |
 | Tamanho | Longo e claro | Curto e ambíguo |

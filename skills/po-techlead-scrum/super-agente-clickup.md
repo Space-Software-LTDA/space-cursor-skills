@@ -1,84 +1,71 @@
 # Referência — SuperAgente Scrum Ritter (ClickUp)
 
-Este arquivo descreve o que o SuperAgente do ClickUp espera ao ler a descrição que você produz. Use para calibrar o nível de detalhe.
+Calibra **como escrever** a spec para o agente do ClickUp absorver. **Não** copiar o prompt do Ritter na task. Meta de roteamento (Esteira vs Imediatas) fica no chat.
 
-## Hierarquia SCRUM
+## Hierarquia que ele gera
 
 ```
 Epic → Feature → PBI (User Story) → Tasks
 ```
 
-O SuperAgente quebra a descrição do usuário nessa hierarquia. Sua descrição deve dar contexto suficiente para ele classificar corretamente.
+Nós entregamos **uma** spec local. Ele quebra. O **passo a passo** (`## Passo a passo sugerido`) é o mapa para virar PBI/Task e **linkar** dependências.
 
-## Convenções de nomenclatura (geradas pelo SuperAgente)
+| Nível | Padrão de título (Ritter) | De onde sai na nossa spec |
+| --- | --- | --- |
+| Epic | `EPIC \| <módulo>` | Módulo principal do grid / contexto |
+| Feature | `FEATURE \| <módulo> \| <capacidade>` | Agrupamento de PBIs correlatos |
+| PBI | `PBI \| <módulo> \| <ação>` | **Uma tabela** do passo a passo (`#### PBI N — …`) |
+| Task | `[FRONTEND]` ou `[BACKEND]` + texto | **Uma linha** da tabela (`1.1`, `2.3`) |
 
-| Nível | Padrão |
-|-------|--------|
-| Epic | `EPIC \| <Módulo principal>` |
-| Feature | `FEATURE \| <Módulo> \| <Funcionalidade>` |
-| PBI | `PBI \| <Módulo> \| <Ação/resultado>` |
-| Task | `[FRONTEND]` ou `[BACKEND]` + descrição |
+## Passo a passo → vínculos ClickUp
 
-## O que o SuperAgente extrai da sua descrição
+Cada tabela do passo a passo = um PBI. Cada linha = uma Task.
 
-### Para PBIs
-- **Contexto** — de `## 📌 Contexto`
-- **Objetivo** — de `## 🎯 Objetivo`
-- **Escopo** — de `## 🔧 Alterações Necessárias`
-- **Fora de escopo** — implícito ou em Observações (deixar explícito quando houver)
-- **Critérios de aceitação** — de `## ✅ Critérios de Aceitação` (formato Dado/Quando/Então)
+| Coluna | O Ritter faz |
+| --- | --- |
+| `Nº` (`1.1`) | ID estável da Task |
+| `Camada` | Prefixo `[BACKEND]` / `[FRONTEND]` e agrupamento |
+| `Espera` | Task **bloqueada por** esses IDs |
+| `Bloqueia` | Task **bloqueando** esses IDs |
+| Lista **Por quê** | Texto da seção Dependências (não inventar outro racional) |
 
-### Para Tasks
-O SuperAgente cria subtarefas por camada:
+Proibido na spec: “todos abaixo”, “o resto”. Só IDs.
 
-| Camada | Quando criar |
-|--------|--------------|
-| Só FRONTEND | Alterações apenas em UI (componentes, páginas, estilos) |
-| Só BACKEND | Alterações em API, serviços, jobs, banco, integrações |
-| Ambos | Mudanças em front e back, ou escopo compartilhado |
+**Mermaid:** o Ritter lê o **fonte** (`Código do diagrama (SuperAgente)`). A imagem mermaid.ink é para o humano. Os dois vão na seção passo a passo. Outros diagramas da task continuam só imagem ([diagrams.md](diagrams.md)).
 
-Cada PBI gera tasks dos tipos:
-- **Implementação**
-- **Testes**
-- **Documentação**
-- **Code Review**
+## Tasks que ele cria (e as que não cria)
 
-Prefixo obrigatório: `[FRONTEND]` ou `[BACKEND]`
+Front+Back na mesma PBI: agrupadores `Tasks de FRONTEND` e `Tasks de BACKEND`; tasks técnicas **dentro**.
 
-## O que você DEVE deixar explícito na descrição
+Uma camada só: tasks direto na PBI, sem agrupador.
 
-Para o SuperAgente não interpretar errado:
+| Camada | Tipos de Task | Não criar |
+| --- | --- | --- |
+| FRONTEND | Implementação + Testes | Documentação específica de Front; **Code Review** |
+| BACKEND | Implementação + Testes + Documentação (se a spec pediu doc) | **Code Review** |
 
-1. **Seção Backend** — tudo que é API, banco, fila, cron, integração externa, regra de negócio server-side
-2. **Seção Frontend** — tudo que é tela, formulário, estado, chamada HTTP do client, UX
-3. **Critérios de Aceitação** — comportamento verificável; sem mencionar classes, arquivos ou padrões de código
-4. **Observações** — delays, retries, env vars, dados fixos vs configuráveis, estrutura antiga vs nova
+Code review = PR. Links de PR em comentário no agrupador (ou na PBI se não houver agrupador).
 
-## Exemplo de separação Back/Front
+Campos `Tipo de Tarefa` / `Tipo de Task`: preencher **só se vazios**. Não criar Task classificada como Code Review.
 
-**Backend:**
-- Receber body de cadastro com campos X, Y, Z
-- Extrair `aff_id` da `btag`
-- Consultar banco para config de troca
-- Criar fila + cron a cada 1 min
-- Integrar API Smartico (auth + swap)
+## O que extrair das outras seções
 
-**Frontend:**
-- Trocar campo "BTags de destino" por "deal_id de destino"
-- Remover interceptação JS de troca de BTag no body
+| Seção da spec | Vira |
+| --- | --- |
+| `## 📌 Contexto` | Contexto da PBI |
+| `## 🎯 Objetivo` | Objetivo |
+| `## 🔧 Alterações Necessárias` | Escopo (Back / Front separados) |
+| Fora de escopo / Observações | Fora de escopo (deixar explícito) |
+| `## ✅ Critérios de Aceitação` | CA Dado/Quando/Então por camada |
+| `## REGRAS DE DDD` | Pronto / prova / paralelos — copiar para a PBI, não resumir embora. Tom ordenante. |
+| `## ⛔ NÃO DEVE` | Anti-critérios — copiar para a PBI (último bloco). Não resumir embora. |
 
-**Critérios de Aceitação:**
-- Dado usuário cadastrado com btag válida, Quando o cron processar após disponibilidade na Smartico, Então o registro é marcado como migrado no banco
+Deixar explícito na spec: Backend, Frontend, CA, DDD, passo a passo. Sem isso o Ritter inventa quebra e vínculo.
 
-## Projetos e contexto
+## Front+Back no ClickUp (publicação)
 
-Códigos: MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA
+A spec no disco é **um** `.md`. Na publicação Front+Back o agente cria **três** tasks (ver [clickup-task-guide.md](clickup-task-guide.md)). O Ritter deve ler sobretudo a **MASTER** (spec completa + passo a passo inteiro). As irmãs Backend/Frontend são recorte para o dev da camada.
 
-Cada projeto pode ter múltiplos repositórios (front + back). Quando souber o projeto, mencionar na conversa para calibrar vocabulário e módulos.
+## Boilerplate Front
 
-## Frontend boilerplate de referência
-
-Para tasks de front, o SuperAgente alinha convenções ao boilerplate:
-`https://github.com/Space-Software-LTDA/boilerplate-front-nextjs`
-
-Ao descrever alterações de front, usar nomenclatura compatível (componentes, páginas, hooks, etc.).
+Tasks de UI alinham nomenclatura ao [boilerplate-front-nextjs](https://github.com/Space-Software-LTDA/boilerplate-front-nextjs).
