@@ -86,14 +86,16 @@ O Python **não** fatia markdown. Quem recorta é o agente.
 **Não** criar 3 tasks irmãs na lista. Hierarquia:
 
 1. Criar a **MAIN** (MASTER) — task normal da lista.
-2. Criar **Backend** com `--parent <id da MAIN>`.
-3. Criar **Frontend** com `--parent <id da MAIN>`.
+2. Criar **Backend** com `--parent <id da MAIN> --layer back`.
+3. Criar **Frontend** com `--parent <id da MAIN> --layer front`.
+
+`--parent` **exige** `--layer`. Não usar sufixo `— Backend` / `— Frontend` no lugar do prefixo: na listagem o ClickUp corta o fim do título; `[BACK]` / `[FRONT]` no começo é o que dá para ler ao abrir.
 
 | Task | Tipo | Título | Corpo (Esteira) | Corpo (Imediatas) | Anexos |
 | --- | --- | --- | --- | --- | --- |
-| MAIN | Task (pai) | `{título}` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML + PNGs de diagramas |
-| Backend | **Subtask** | `{título} — Backend` | Grid + Back + CA Back + linhas BACK do passo a passo + DDD Back + NÃO DEVE | Idem **sem** linhas PBI. **Checklist nativo Back** (itens = o que o dev tica, incl. `P-BACK-*`) | OpenAPI/DBML |
-| Frontend | **Subtask** | `{título} — Frontend` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints (PNG anexados) |
+| MAIN | Task (pai) | `{título}` — **sem** `[BACK]`/`[FRONT]` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML + PNGs de diagramas |
+| Backend | **Subtask** | `[BACK] {título}` — prefixo no **início**, mesmo se o título ficar longo. `--layer back` | Grid + Back + CA Back + linhas BACK do passo a passo + DDD Back + NÃO DEVE | Idem **sem** linhas PBI. **Checklist nativo Back** (itens = o que o dev tica, incl. `P-BACK-*`) | OpenAPI/DBML |
+| Frontend | **Subtask** | `[FRONT] {título}` — prefixo no **início**, mesmo se o título ficar longo. `--layer front` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints (PNG anexados) |
 
 Uma camada só → um create, spec inteira (sem subtask). Imediatas: o checklist nativo vai **nessa** task pai.
 
@@ -147,7 +149,7 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --attach /path/to/space-assets/proj/feature/01-listagem.png
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
-  --mode esteira --file task/cms-backend.md --project BATEU --parent 86abc123
+  --mode esteira --file task/cms-backend.md --project BATEU --parent 86abc123 --layer back
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --mode imediatas --file task/hotfix.md --assignee 106175112 --project BATEU \
@@ -159,13 +161,16 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --checklist-only --task-id 86abc123 --checklist-name "Frontend" \
   --checklist-item "Conferir modal" \
   --checklist-item "Anexar P-FRONT-1"
+
+python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
+  --update-description --task-id 86abc123 --file .task/proj/feature.md --no-banner
 ```
 
 Anexe **todos** os PNGs (diagramas + prints) junto com o `.md` / OpenAPI / DBML. O script:
 
 1. Cria a task (`--parent` se for subtask)
 2. Anexa os arquivos
-3. Reescreve `![](mermaid.ink|raw.githubusercontent)` no corpo para URL de attachment (`<img src>` via API)
+3. Reescreve `![](mermaid.ink|raw.githubusercontent)` para `![](attachment-url)` e grava em **`markdown_content`** (não `markdown_description`)
 4. Atualiza a descrição (`PUT`)
 5. Imediatas: cria o checklist nativo se `--checklist-item` foi passado
 
@@ -175,7 +180,7 @@ Blocos ` ```mermaid ` (fonte para o Ritter no passo a passo da Esteira) **não**
 
 ## Imagens inline no ClickUp (crítico)
 
-Alinhado ao **Estruturador de Tarefas** do ClickUp.
+Alinhado ao **Estruturador de Tarefas**. O ClickUp só renderiza imagem inline com markdown apontando para attachment **da própria task**.
 
 | Fonte no `.md` local | No corpo ClickUp |
 | --- | --- |
@@ -183,19 +188,24 @@ Alinhado ao **Estruturador de Tarefas** do ClickUp.
 | `![](mermaid.ink/…)` | Baixar PNG → anexar → attachment URL |
 | `![](https://….p.clickup-attachments.com/…)` | Já ok |
 
-Sintaxe no **editor** ClickUp / Estruturador:
+Sintaxe (editor, Estruturador **e** API):
 
 ```markdown
-![Legenda](https://t….p.clickup-attachments.com/t…/uuid/arquivo.png)
+![](https://t….p.clickup-attachments.com/t…/uuid/arquivo.png)
 ```
 
-Via **API** (`markdown_description`): o ClickUp costuma stripar `![](…)`. O script publica como:
+Linha em branco **antes e depois**. Alt vazio — o Estruturador usa exatamente `![](url)`.
 
-```html
-<p><img src="https://t….p.clickup-attachments.com/…/arquivo.png" alt="Legenda" /></p>
-```
+O script **não** injeta `\n\n` extra em volta da imagem (isso abria um vão enorme entre `**Print:**` e o print). A linha em branco do `.md` local já basta.
 
-Mesma URL de attachment; formato que a API preserva.
+### Campo da API (não confundir)
+
+| Campo | Papel |
+| --- | --- |
+| **`markdown_content`** | **Escrita** (POST create / PUT update). É o que o ClickUp documenta e o que vira bloco nativo de imagem. |
+| **`markdown_description`** | **Leitura** (`GET ?include_markdown_description=true`). **Não** gravar neste campo. |
+
+O script antigo gravava `markdown_description` + `<img>` / `<p><img>`. A UI mostra as tags como texto. `![]()` nesse campo errado não vira imagem.
 
 Detalhes: [diagrams.md](diagrams.md), [screenshots.md](screenshots.md).
 

@@ -177,7 +177,7 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**) — **um** arquivo, mesmo Front+Back
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
-4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e cria **1 MAIN + 2 subtasks** (MASTER primeiro; Backend e Frontend com `--parent` da MASTER). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
+4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e cria **1 MAIN + 2 subtasks** (MASTER primeiro; Backend `--parent --layer back`; Frontend `--parent --layer front`). Títulos das subtasks: `[BACK] …` / `[FRONT] …` no **início** (não truncar). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
 5. **Imediatas:** criar **checklist nativo** do ClickUp (`--checklist-name` + `--checklist-item`) na **tarefa principal de cada dev** — não `- [ ]` no markdown. Uma camada → checklist na task pai. Front+Back → checklist na subtask Back **e** na subtask Front; **MAIN sem** checklist. Esteira: **não** criar esse checklist (o Ritter vira PBI).
 6. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs **e PNGs** de diagramas/prints). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints. O script reescreve `![](mermaid.ink|raw.githubusercontent)` para URL de **attachment** e dá PUT na descrição.
 7. Devolver os **links** (MAIN + 2 subtasks) ao PO
@@ -326,7 +326,7 @@ Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBM
 1. Gerar PNG via mermaid.ink (`scripts/render-mermaid.sh`)
 2. Salvar em **space-assets** + referenciar no `.md` local (`![alt](mermaid.ink/…)` ou raw.githubusercontent)
 3. No passo a passo da **Esteira**, **também** o bloco fonte; no resto (e em Imediatas), **não**
-4. Na publicação ClickUp: o script **anexa** o PNG e reescreve a imagem para URL de **attachment** (`<img src>` via API). Não deixar só mermaid.ink / raw.githubusercontent como única fonte no corpo publicado
+4. Na publicação ClickUp: o script **anexa** o PNG e reescreve para `![](attachment-url)` no campo **`markdown_content`** (igual ao Estruturador). **Proibido** `<img>` / gravar em `markdown_description`. Não deixar só mermaid.ink / raw.githubusercontent como única fonte no corpo publicado
 
 ```markdown
 ![Fluxo de migração](https://t….p.clickup-attachments.com/…/fluxo.png)
@@ -428,7 +428,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Se for publicar: aprovação local explícita + dry-run/script ClickUp (ver [clickup-task-guide.md](clickup-task-guide.md))
 - [ ] Corpo ClickUp **sem** paths `.docs/` / `.task/` / disco local — anexos referenciados por nome de arquivo
 - [ ] OpenAPI/DBML/specs extras **anexados** na task (além do `.md`)
-- [ ] Imagens no corpo ClickUp usam URL de **attachment** (não só mermaid.ink / raw.githubusercontent)
+- [ ] Imagens no corpo ClickUp: `![](attachment-url)` gravado em `markdown_content` (nunca `<img>`; nunca o campo `markdown_description`)
 
 ## O que NÃO fazer
 
@@ -437,10 +437,11 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não criar `P-FRONT` para tela em que o Front **não altera nada** — a prova é do Back
 - Não colocar tabela PBI / Espera / Bloqueia / Dependência em **Imediatas**
 - Não usar `- [ ]` no markdown no lugar do checklist **nativo** do ClickUp (Imediatas)
-- Não colocar o checklist da Imediata na MAIN quando existem subtasks Back e Front — vai na **tarefa de cada dev**
+- Não titular subtask Back/Front com sufixo `— Backend` / `— Frontend` no lugar do prefixo — use `[BACK]` / `[FRONT]` no **início** (`--layer`); não truncar o título
 - Não entregar task sem `## ⛔ NÃO DEVE` no final (anti-critérios desta entrega)
 - Não colocar tabela do NÃO DEVE dentro de blockquote (quebra no ClickUp)
 - Não usar `:::danger` / `> [!CAUTION]` no lugar do `>` — a API não vira Banner
+- Não publicar imagem como `<img>` / `<p><img>` nem gravar descrição em `markdown_description` — a UI mostra HTML cru; use `![](attachment-url)` em **`markdown_content`** (Estruturador)
 - Não assumir urgência — sempre perguntar
 - Não misturar critérios de aceitação com passos de implementação
 - Não usar abreviações obscuras sem explicar

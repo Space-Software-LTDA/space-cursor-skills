@@ -97,7 +97,7 @@ Dois papéis distintos:
 
 1. Prints em space-assets (push) — markdown local usa essas URLs
 2. Ao criar/atualizar a task: **anexar** cada PNG na task via API
-3. Reescrever o corpo com URL de attachment (`<img src>` via API; o Estruturador usa `![](attachment)`)
+3. Reescrever o corpo com `![](attachment-url)` e gravar em **`markdown_content`** (nunca `<img>`, nunca o campo `markdown_description`)
 4. O script `clickup_create_task.py` faz anexar + reescrever automaticamente
 
 ```markdown
@@ -119,6 +119,9 @@ Dois papéis distintos:
 | `![](assets/foo.png)` relativo | Não |
 | Só `![](raw.githubusercontent.com/…)` | **Instável** — ClickUp costuma stripar/não renderizar |
 | Só `![](mermaid.ink/…)` | **Instável** — mesma limitação (diagramas: ver [diagrams.md](diagrams.md)) |
+| `<img>` / `<p><img>` no corpo | **Não** — a UI mostra as tags como texto |
+| Gravar em `markdown_description` | **Não** — campo de leitura. Escrita = `markdown_content` |
+| `![](attachment da própria task)` via `markdown_content` | **Sim** — formato do Estruturador |
 | Print só no chat do Cursor | Não — anexar na task |
 | Repo privado sem auth | Não |
 
@@ -133,7 +136,7 @@ Dois papéis distintos:
 4. git add, commit, push em space-assets
 5. Escrever task.md com seção 🖼️ Referência visual (URLs space-assets no .md local)
 6. Legendar cada print (o que mostra, o que mudou vs código atual)
-7. Ao publicar: clickup_create_task.py anexa PNGs e reescreve para URL de attachment
+7. Ao publicar: clickup_create_task.py anexa PNGs e grava `![](attachment-url)` em markdown_content
 8. Manter link do protótipo
 ```
 

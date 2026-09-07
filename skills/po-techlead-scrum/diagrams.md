@@ -36,7 +36,7 @@ O caminho completo:
 ### B — Publicar no ClickUp
 
 1. `clickup_create_task.py` **anexa** cada PNG (`--attach` ou baixa mermaid.ink/raw)
-2. Substitui no corpo a URL da imagem pela do attachment (`<img src>` via API)
+2. Substitui no corpo a URL da imagem por `![](attachment-url)` e grava em `markdown_content`
 3. `PUT` da descrição
 4. **Não** deixar só mermaid.ink / raw.githubusercontent como única fonte de imagem no corpo ClickUp
 5. Fonte ` ```mermaid ` da Esteira **não** é reescrita

@@ -17,7 +17,7 @@ Nós entregamos **uma** spec local. Ele quebra. O **passo a passo** (`## Passo a
 | Epic | `EPIC \| <módulo>` | Módulo principal do grid / contexto |
 | Feature | `FEATURE \| <módulo> \| <capacidade>` | Agrupamento de PBIs correlatos |
 | PBI | `PBI \| <módulo> \| <ação>` | **Uma tabela** do passo a passo (`#### PBI N — …`) |
-| Task | `[FRONTEND]` ou `[BACKEND]` + texto | **Uma linha** da tabela (`1.1`, `2.3`) |
+| Task | `[BACK]` ou `[FRONT]` + texto (prefixo no **início**, não truncar) | **Uma linha** da tabela (`1.1`, `2.3`) |
 
 ## Passo a passo → vínculos ClickUp
 
@@ -26,7 +26,7 @@ Cada tabela do passo a passo = um PBI. Cada linha = uma Task.
 | Coluna | O Ritter faz |
 | --- | --- |
 | `Nº` (`1.1`) | ID estável da Task |
-| `Camada` | Prefixo `[BACKEND]` / `[FRONTEND]` e agrupamento |
+| `Camada` | Prefixo `[BACK]` / `[FRONT]` no início do título e agrupamento |
 | `Espera` | Task **bloqueada por** esses IDs |
 | `Bloqueia` | Task **bloqueando** esses IDs |
 | Lista **Por quê** | Texto da seção Dependências (não inventar outro racional) |

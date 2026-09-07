@@ -10,19 +10,26 @@ Modos:
               tipo custom 0-IMEDIATA, assignee informado no onboard
               checklist NATIVO (--checklist-name + --checklist-item) na tarefa de cada dev
 
-Imagens:
-  ClickUp renderiza de forma confiavel URL de attachment (API: <img src>).
-  URLs externas (mermaid.ink, raw.githubusercontent) costumam ser stripadas.
-  Este script anexa PNGs e reescreve o corpo para attachment URLs.
+Imagens (igual ao Estruturador de Tarefas):
+  Escrever no campo markdown_content (NAO markdown_description).
+  Sintaxe: ![](attachment-url) em linha isolada.
+  markdown_description e o campo de LEITURA. Se gravar nele, HTML <img>
+  aparece cru na UI e ![]() nao vira bloco nativo de imagem.
+  URLs externas (mermaid.ink, raw.githubusercontent) sao stripadas;
+  anexe o PNG e reescreva para URL de attachment da propria task.
 
 Uso:
   python clickup_create_task.py --mode esteira --file task.md --project BATEU --dry-run
   python clickup_create_task.py --mode esteira --file task.md --project BATEU \\
       --attach task.md --attach diagram.png --attach print.png
   python clickup_create_task.py --mode esteira --file task/cms-backend.md --project BATEU \\
-      --parent 86abc123
+      --parent 86abc123 --layer back
+  python clickup_create_task.py --mode esteira --file task/cms-frontend.md --project BATEU \\
+      --parent 86abc123 --layer front
   python clickup_create_task.py --mode imediatas --file x.md --assignee 72158089 \\
       --attach x.md --checklist-name Execução --checklist-item "P-BACK-1"
+  python clickup_create_task.py --update-description --task-id 86abc123 \\
+      --file task.md --no-banner
 
 Credenciais: clickup.env nesta skill (ver clickup.env.example).
 """
@@ -47,6 +54,12 @@ API_V2 = "https://api.clickup.com/api/v2"
 
 H1_RE = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 EMOJI_PREFIX_RE = re.compile(r"^[\W_🔗📌🎯]+", re.UNICODE)
+LEADING_LAYER_RE = re.compile(r"^\[(?:BACKEND|FRONTEND|BACK|FRONT)\]\s*", re.IGNORECASE)
+TRAILING_LAYER_RE = re.compile(
+    r"\s*[—\-–]\s*(?:Backend|Frontend|Back|Front)\s*$",
+    re.IGNORECASE,
+)
+LAYER_PREFIX = {"back": "[BACK]", "front": "[FRONT]"}
 # ![alt](url) — captura alt e url
 MD_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 # <img src="url" ...>
@@ -54,6 +67,16 @@ HTML_IMG_RE = re.compile(
     r'<img\s+[^>]*src=["\']([^"\']+)["\'][^>]*/?>',
     re.IGNORECASE,
 )
+# <p> aninhado em volta de <img> (o que a API antiga gerava e o ClickUp mostra cru)
+NESTED_P_IMG_RE = re.compile(
+    r"(?:<p>\s*)+<img\b([^>]*?)/?>\s*(?:</p>\s*)+",
+    re.IGNORECASE,
+)
+ATTR_SRC_RE = re.compile(r"""src=["']([^"']+)["']""", re.IGNORECASE)
+ATTR_ALT_RE = re.compile(r"""alt=["']([^"']*)["']""", re.IGNORECASE)
+# ClickUp autolinka URL dentro de atributo HTML: src="[https://x](https://x)"
+AUTOLINK_SRC_RE = re.compile(r"^\[(https?://[^\]]+)\]\(\1\)$")
+LEAKED_P_HEADING_RE = re.compile(r"^(#{1,6})\s*</p>", re.MULTILINE)
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
 
 
@@ -117,6 +140,16 @@ def extract_title(markdown: str, override: str | None) -> str:
     return title
 
 
+def apply_layer_prefix(title: str, layer: str | None) -> str:
+    """[BACK] / [FRONT] no INICIO. Nao truncar. Nao repetir sufixo '— Backend'."""
+    if not layer:
+        return title
+    prefix = LAYER_PREFIX[layer]
+    cleaned = LEADING_LAYER_RE.sub("", title).strip()
+    cleaned = TRAILING_LAYER_RE.sub("", cleaned).strip()
+    return f"{prefix} {cleaned}"
+
+
 def resolve_project_option(project_key: str) -> tuple[str, int | None]:
     """Return (option_uuid, orderindex?) for custom field Projeto."""
     key = project_key.strip().upper()
@@ -177,17 +210,55 @@ def apply_clickup_banners(markdown: str) -> str:
     return text
 
 
+def unwrap_autolinked_url(url: str) -> str:
+    """Desfaz src='[https://x](https://x)' que o GET do ClickUp inventa."""
+    raw = (url or "").strip()
+    m = AUTOLINK_SRC_RE.match(raw)
+    return m.group(1) if m else raw
+
+
+def md_image_tag(alt: str, url: str) -> str:
+    """
+    Estruturador: ![](attachment-url). Sem \\n extra — o .md local já tem
+    a linha em branco do parágrafo; \\n\\n aqui vira o vão enorme na UI.
+    """
+    del alt
+    clean = unwrap_autolinked_url(url)
+    return f"![]({clean})"
+
+
+def html_img_blocks_to_markdown(text: str) -> str:
+    """
+    Converte <p><img> / <img> legado em ![](url).
+    Também limpa `### </p>Título` de publicações antigas.
+    """
+
+    def repl(m: re.Match[str]) -> str:
+        attrs = m.group(1)
+        src_m = ATTR_SRC_RE.search(attrs)
+        if not src_m:
+            return m.group(0)
+        alt_m = ATTR_ALT_RE.search(attrs)
+        alt = alt_m.group(1) if alt_m else ""
+        return md_image_tag(alt, src_m.group(1))
+
+    text = NESTED_P_IMG_RE.sub(repl, text)
+    text = LEAKED_P_HEADING_RE.sub(r"\1 ", text)
+    return text
+
+
 def collect_image_urls(markdown: str) -> list[tuple[str, str]]:
     """Lista (alt_or_empty, url) na ordem do documento."""
     found: list[tuple[str, str]] = []
     seen: set[str] = set()
-    for m in MD_IMAGE_RE.finditer(markdown):
-        url = m.group(2).strip()
+    normalized = html_img_blocks_to_markdown(markdown)
+    for m in MD_IMAGE_RE.finditer(normalized):
+        url = unwrap_autolinked_url(m.group(2).strip())
         if url not in seen:
             seen.add(url)
             found.append((m.group(1), url))
-    for m in HTML_IMG_RE.finditer(markdown):
-        url = m.group(1).strip()
+    for m in HTML_IMG_RE.finditer(normalized):
+        url = unwrap_autolinked_url(m.group(1).strip())
         if url not in seen:
             seen.add(url)
             found.append(("", url))
@@ -263,33 +334,67 @@ def attach_file(task_id: str, file_path: Path) -> Any:
     )
 
 
+def attachment_url_from_meta(att: dict[str, Any]) -> str:
+    direct = attachment_public_url(att)
+    if direct:
+        return direct
+    att_id = str(att.get("id") or "")
+    title = str(att.get("title") or att.get("name") or "")
+    if not att_id or not title:
+        return ""
+    uuid = Path(att_id).stem
+    ws = os.environ.get("CLICKUP_WORKSPACE_ID") or ""
+    if not ws:
+        return ""
+    return f"https://t{ws}.p.clickup-attachments.com/t{ws}/{uuid}/{title}"
+
+
+def list_task_attachments(task_id: str) -> dict[str, str]:
+    """filename → URL pública. Reusa anexos já na task (update-description)."""
+    data = api_request("GET", f"/task/{task_id}")
+    out: dict[str, str] = {}
+    for att in data.get("attachments") or []:
+        if not isinstance(att, dict):
+            continue
+        url = attachment_url_from_meta(att)
+        title = str(att.get("title") or att.get("name") or "")
+        name = Path(title).name
+        if url and name:
+            out[name] = url
+            alias = re.sub(r"^cu-img-\d+-", "", name)
+            if alias != name:
+                out.setdefault(alias, url)
+    return out
+
+
 def rewrite_images_to_attachments(
     markdown: str,
     url_map: dict[str, str],
 ) -> str:
     """
-    Substitui URLs de imagem por attachment URLs.
+    Substitui URLs de imagem por ![](attachment-url) — formato do Estruturador.
 
-    Via API `markdown_description`, o ClickUp costuma **stripar** `![](url)`.
-    HTML `<img src="attachment-url">` é o que sobrevive de forma confiável
-    (validado em produção). O Estruturador usa `![](attachment)` no editor
-    nativo; na API preferimos <img>. Blocos ```mermaid não são tocados.
+    Gravado em markdown_content. Proibido <img> / <p><img>: no campo errado
+    (markdown_description) isso aparece como HTML cru. Blocos ```mermaid
+    não são tocados.
     """
 
-    def to_img(alt: str, url: str) -> str:
-        new = url_map.get(url, url)
-        safe_alt = (alt or "").replace('"', "'")
-        return f'\n<p><img src="{new}" alt="{safe_alt}" /></p>\n'
+    def mapped(url: str) -> str:
+        clean = unwrap_autolinked_url(url)
+        return unwrap_autolinked_url(url_map.get(clean, url_map.get(url, clean)))
 
     def repl_md(m: re.Match[str]) -> str:
-        return to_img(m.group(1), m.group(2).strip())
-
-    text = MD_IMAGE_RE.sub(repl_md, markdown)
+        return md_image_tag(m.group(1), mapped(m.group(2).strip()))
 
     def repl_html(m: re.Match[str]) -> str:
-        return to_img("", m.group(1).strip())
+        alt_m = ATTR_ALT_RE.search(m.group(0))
+        alt = alt_m.group(1) if alt_m else ""
+        return md_image_tag(alt, mapped(m.group(1).strip()))
 
+    text = html_img_blocks_to_markdown(markdown)
+    text = MD_IMAGE_RE.sub(repl_md, text)
     text = HTML_IMG_RE.sub(repl_html, text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text
 
 
@@ -307,6 +412,7 @@ def embed_images_after_attach(
 
     try:
         for _alt, url in collect_image_urls(markdown):
+            url = unwrap_autolinked_url(url)
             if is_clickup_attachment_url(url):
                 url_map[url] = url
                 continue
@@ -321,7 +427,7 @@ def embed_images_after_attach(
                     tmp = download_url_to_temp(url)
                     temps.append(tmp)
                     att = attach_file(task_id, tmp)
-                    att_url = attachment_public_url(att)
+                    att_url = attachment_url_from_meta(att) or attachment_public_url(att)
                     if not att_url:
                         print(f"WARN attachment sem URL: {filename}", file=sys.stderr)
                         continue
@@ -332,7 +438,7 @@ def embed_images_after_attach(
                     local = Path(url)
                     if local.is_file():
                         att = attach_file(task_id, local)
-                        att_url = attachment_public_url(att)
+                        att_url = attachment_url_from_meta(att) or attachment_public_url(att)
                         if att_url:
                             attached_by_name[local.name] = att_url
                             url_map[url] = att_url
@@ -360,7 +466,7 @@ def build_payload(
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "name": title,
-        "markdown_description": markdown,
+        "markdown_content": markdown,
         "assignees": assignee_ids,
     }
     if parent:
@@ -450,6 +556,12 @@ def main() -> None:
         help="Task ID pai: cria esta task como SUBTASK. Front+Back: MASTER sem --parent; Back/Front com --parent <id da MASTER>.",
     )
     parser.add_argument(
+        "--layer",
+        choices=["back", "front"],
+        default=None,
+        help="Prefixa o titulo com [BACK] ou [FRONT]. Obrigatorio com --parent.",
+    )
+    parser.add_argument(
         "--checklist-name",
         default="Execução",
         help="Nome do checklist NATIVO do ClickUp (Imediatas). Nao e markdown.",
@@ -470,6 +582,11 @@ def main() -> None:
         "--no-banner",
         action="store_true",
         help="Nao converter aviso de IA / anexos em <banner> ClickUp.",
+    )
+    parser.add_argument(
+        "--update-description",
+        action="store_true",
+        help="Nao cria task: PUT da descricao em --task-id a partir de --file (reescreve imagens).",
     )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -495,8 +612,82 @@ def main() -> None:
         print(json.dumps({"task_id": args.task_id, "checklist_id": cid}, ensure_ascii=False))
         return
 
+    if args.update_description:
+        if not args.task_id:
+            raise SystemExit("--update-description exige --task-id.")
+        if not args.file:
+            raise SystemExit("--update-description exige --file.")
+        md_path = Path(args.file).resolve()
+        if not md_path.is_file():
+            raise SystemExit(f"Arquivo nao encontrado: {md_path}")
+        markdown = md_path.read_text(encoding="utf-8")
+        if not args.no_banner:
+            markdown = apply_clickup_banners(markdown)
+        attach_paths = args.attach or []
+        plan = {
+            "update_description": True,
+            "task_id": args.task_id,
+            "file": str(md_path),
+            "attachments": attach_paths,
+            "images_in_md": [u for _, u in collect_image_urls(markdown)],
+            "no_banner": args.no_banner,
+            "markdown_chars": len(markdown),
+        }
+        print(json.dumps(plan, ensure_ascii=False, indent=2))
+        if args.dry_run:
+            preview = rewrite_images_to_attachments(
+                markdown,
+                {
+                    u: (
+                        f"https://example.invalid/"
+                        f"{Path(urllib.parse.urlparse(u).path).name or 'img.png'}"
+                    )
+                    for _, u in collect_image_urls(markdown)
+                },
+            )
+            nested = len(NESTED_P_IMG_RE.findall(preview))
+            html_img = len(HTML_IMG_RE.findall(preview))
+            print(f"\nDRY-RUN rewrite: nested_p_img={nested} leftover_html_img={html_img}")
+            print("DRY-RUN — nada alterado no ClickUp.")
+            return
+        attached_by_name = list_task_attachments(args.task_id)
+        print(f"Existing attachments: {list(attached_by_name)}")
+        for ap in attach_paths:
+            p = Path(ap).resolve()
+            if not p.is_file():
+                print(f"WARN skip missing attachment: {p}", file=sys.stderr)
+                continue
+            if p.name in attached_by_name:
+                print(f"Reuse attachment: {p.name}")
+                continue
+            att = attach_file(args.task_id, p)
+            att_url = attachment_url_from_meta(att) if isinstance(att, dict) else ""
+            if not att_url and isinstance(att, dict):
+                att_url = attachment_public_url(att)
+            if att_url:
+                attached_by_name[p.name] = att_url
+            print(f"Attached: {p.name} -> {att_url[:80] if att_url else 'ok'}")
+        final_md = embed_images_after_attach(args.task_id, markdown, attached_by_name)
+        api_request(
+            "PUT",
+            f"/task/{args.task_id}",
+            data={"markdown_content": final_md},
+        )
+        print(json.dumps({
+            "id": args.task_id,
+            "updated": True,
+            "nested_p_img": len(NESTED_P_IMG_RE.findall(final_md)),
+            "html_img": len(HTML_IMG_RE.findall(final_md)),
+            "md_images": len(MD_IMAGE_RE.findall(final_md)),
+        }, ensure_ascii=False))
+        return
+
     if args.mode is None or not args.file:
-        raise SystemExit("Criar task exige --mode e --file. Para so checklist: --checklist-only --task-id.")
+        raise SystemExit(
+            "Criar task exige --mode e --file. "
+            "Para so checklist: --checklist-only --task-id. "
+            "Para republicar descricao: --update-description --task-id --file."
+        )
     if args.mode == "esteira" and checklist_items:
         raise SystemExit("Checklist nativo e so Imediatas. Esteira: o Ritter vira PBI/Task.")
 
@@ -507,6 +698,11 @@ def main() -> None:
     if not args.no_banner:
         markdown = apply_clickup_banners(markdown)
     title = extract_title(markdown, args.title)
+    if args.parent and not args.layer:
+        raise SystemExit("Subtask (--parent) exige --layer back|front ([BACK]/[FRONT] no inicio do titulo).")
+    if args.layer and not args.parent:
+        print("WARN: --layer sem --parent. MAIN normalmente nao leva [BACK]/[FRONT].", file=sys.stderr)
+    title = apply_layer_prefix(title, args.layer)
     assignees = parse_assignees(args, args.mode)
     list_id = env(
         "CLICKUP_LIST_ESTEIRA" if args.mode == "esteira" else "CLICKUP_LIST_IMEDIATAS"
@@ -534,7 +730,7 @@ def main() -> None:
         "checklist_name": args.checklist_name if checklist_items else None,
         "checklist_items": checklist_items,
         "payload_preview": {
-            k: v for k, v in payload.items() if k != "markdown_description"
+            k: v for k, v in payload.items() if k != "markdown_content"
         },
         "markdown_chars": len(markdown),
     }
@@ -573,7 +769,7 @@ def main() -> None:
     api_request(
         "PUT",
         f"/task/{task_id}",
-        data={"markdown_description": final_md},
+        data={"markdown_content": final_md},
     )
     if final_md != markdown:
         print("Updated description with ClickUp attachment image URLs.")
