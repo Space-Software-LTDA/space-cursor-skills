@@ -211,18 +211,22 @@ Detalhes: [diagrams.md](diagrams.md), [screenshots.md](screenshots.md).
 
 ---
 
-## Banners ClickUp (opcional, recomendado)
+## Destaque no ClickUp (aviso de IA / anexos)
 
-No corpo publicado, o aviso de IA pode usar banner nativo (sem emoji duplicado no texto):
+A API **não** cria Banner nativo. Tag `<banner …>` no `markdown_content` aparece **crua** na UI. O que a API pinta é o **blockquote** (`>`). Ver [evidencias-dod.md](evidencias-dod.md).
 
-```markdown
-<banner background-color="yellow" icon="⚠️">Esta tarefa foi estruturada com auxílio de Inteligência Artificial com base nas informações fornecidas. Embora o conteúdo tenha sido organizado para facilitar o entendimento, podem existir interpretações incorretas ou incompletas. Em caso de dúvida, valide com o solicitante antes de iniciar o desenvolvimento.</banner>
-```
-
-Se houver imagens/anexos relevantes:
+O script **não** injeta `<banner>`. Mantém (ou garante) o quote do `.md` local:
 
 ```markdown
-<banner background-color="blue" icon="📎">Esta tarefa contém imagens e/ou anexos que fazem parte do requisito e devem ser analisados com atenção.</banner>
+> ⚠️ Esta tarefa foi estruturada com auxílio de Inteligência Artificial …
 ```
 
-O script converte o blockquote `> ⚠️ Esta tarefa foi estruturada…` do markdown local para o banner amarelo na publicação. `--no-banner` desliga isso.
+Se houver imagens, acrescenta um segundo quote:
+
+```markdown
+> 📎 Esta tarefa contém imagens e/ou anexos que fazem parte do requisito e devem ser analisados com atenção.
+```
+
+`--no-banner` desliga esse acréscimo (não mexe no quote de IA que já está no arquivo).
+
+Opcional **depois** de publicar: no editor, selecionar o quote → Turn into → Banner. Não fazer isso via API.

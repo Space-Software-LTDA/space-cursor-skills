@@ -29,7 +29,7 @@ Uso:
   python clickup_create_task.py --mode imediatas --file x.md --assignee 72158089 \\
       --attach x.md --checklist-name Execução --checklist-item "P-BACK-1"
   python clickup_create_task.py --update-description --task-id 86abc123 \\
-      --file task.md --no-banner
+      --file task.md
 
 Credenciais: clickup.env nesta skill (ver clickup.env.example).
 """
@@ -176,37 +176,38 @@ def resolve_project_option(project_key: str) -> tuple[str, int | None]:
     return option, order
 
 
-def apply_clickup_banners(markdown: str) -> str:
-    """Converte aviso de IA em banner ClickUp; adiciona banner de anexos se houver imagens."""
-    banner_ai = (
-        '<banner background-color="yellow" icon="⚠️">Esta tarefa foi estruturada com '
-        "auxílio de Inteligência Artificial com base nas informações fornecidas. Embora o "
-        "conteúdo tenha sido organizado para facilitar o entendimento, podem existir "
-        "interpretações incorretas ou incompletas. Em caso de dúvida, valide com o "
-        "solicitante antes de iniciar o desenvolvimento.</banner>\n\n"
-    )
-    text = markdown
-    text2, n = re.subn(
-        r"^>\s*⚠️?\s*Esta tarefa foi estruturada com auxílio de Inteligência Artificial"
-        r".*?(?:\n>.*)*\n*",
-        "",
-        text,
-        count=1,
-        flags=re.MULTILINE,
-    )
-    if n:
-        text = banner_ai + text2.lstrip()
-    elif not text.lstrip().startswith("<banner"):
-        text = banner_ai + text
+# A API markdown_content NAO converte <banner> em Banner nativo — a UI mostra a tag crua.
+BANNER_HTML_RE = re.compile(r"<banner\b[^>]*>.*?</banner>\s*", re.IGNORECASE | re.DOTALL)
+QUOTE_AI = (
+    "> ⚠️ Esta tarefa foi estruturada com auxílio de Inteligência Artificial "
+    "com base nas informações fornecidas. Embora o conteúdo tenha sido organizado "
+    "para facilitar o entendimento, podem existir interpretações incorretas ou "
+    "incompletas. Em caso de dúvida, valide com o solicitante antes de iniciar "
+    "o desenvolvimento."
+)
+QUOTE_ATT = (
+    "> 📎 Esta tarefa contém imagens e/ou anexos que fazem parte do requisito "
+    "e devem ser analisados com atenção."
+)
 
+
+def apply_clickup_banners(markdown: str) -> str:
+    """Destaque via blockquote `>` (o que a API pinta). Nunca injeta `<banner>` HTML."""
+    text = BANNER_HTML_RE.sub("", markdown).lstrip()
+    head = text[:1500]
+    if "Esta tarefa foi estruturada com auxílio de Inteligência Artificial" not in head:
+        text = QUOTE_AI + "\n\n" + text
+        head = text[:1500]
     if MD_IMAGE_RE.search(text) or HTML_IMG_RE.search(text):
-        banner_att = (
-            '<banner background-color="blue" icon="📎">Esta tarefa contém imagens e/ou '
-            "anexos que fazem parte do requisito e devem ser analisados com atenção.</banner>\n\n"
-        )
-        parts = text.split("</banner>", 1)
-        if len(parts) == 2:
-            text = parts[0] + "</banner>\n\n" + banner_att + parts[1].lstrip()
+        if "Esta tarefa contém imagens e/ou anexos" not in head:
+            if head.startswith(">"):
+                first_nl = text.find("\n\n")
+                if first_nl == -1:
+                    text = text.rstrip() + "\n\n" + QUOTE_ATT + "\n\n"
+                else:
+                    text = text[: first_nl + 2] + QUOTE_ATT + "\n\n" + text[first_nl + 2 :].lstrip()
+            else:
+                text = QUOTE_ATT + "\n\n" + text
     return text
 
 
@@ -581,7 +582,8 @@ def main() -> None:
     parser.add_argument(
         "--no-banner",
         action="store_true",
-        help="Nao converter aviso de IA / anexos em <banner> ClickUp.",
+        help="Nao garantir quotes de aviso de IA / anexos (blockquote `>`). "
+        "Nunca injeta <banner> HTML — a API mostra a tag crua.",
     )
     parser.add_argument(
         "--update-description",
