@@ -1,25 +1,45 @@
-# Diagramas como imagem (mermaid.ink)
+# Diagramas como imagem (mermaid.ink → PNG → ClickUp)
 
 ## Regra
 
 Em entregáveis (descrições de tarefa ClickUp, specs, ADRs), **não** incluir blocos ` ```mermaid ` — **exceto** a seção `## Passo a passo sugerido`, que leva **imagem e fonte** para o SuperAgente ([evidencias-dod.md](evidencias-dod.md)).
 
-No restante: sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.ink):
+No restante: sempre gerar **imagem PNG** via API [mermaid.ink](https://mermaid.ink).
+
+O caminho completo:
+
+1. Gerar via mermaid.ink
+2. Baixar o PNG
+3. Guardar cópia em **space-assets** (backup + markdown local)
+4. Na **publicação ClickUp**: anexar o PNG na task e embutir com URL do **attachment** (o script faz isso)
 
 ```markdown
-![Descrição do diagrama](https://mermaid.ink/img/{encoded}?type=png&bgColor=!white)
+![Descrição do diagrama](https://t….p.clickup-attachments.com/…/diagrama.png)
 ```
+
+⚠️ O ClickUp **remove** ou **não renderiza** de forma confiável `![](https://mermaid.ink/…)` e muitas URLs externas no corpo. O padrão que funciona (igual ao Estruturador de Tarefas) é a URL do attachment. A **fonte Mermaid** no passo a passo da Esteira não é imagem — permanece como bloco de código para o Ritter.
 
 ---
 
 ## Fluxo obrigatório
 
+### A — Markdown local (`.task/`)
+
 1. Escrever o código Mermaid internamente (flowchart, sequenceDiagram, etc.)
 2. Codificar com **base64url** (não base64 padrão — evita 404 por `/` na URL)
 3. Montar URL: `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar que a URL retorna imagem (HTTP 200)
-5. Inserir `![...](url)`
-6. **Só no passo a passo da Esteira:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
+5. Baixar PNG (`render-mermaid.sh` ou `curl`) e push em `space-assets/{projeto}/{task-slug}/diagram-….png`
+6. No `.md` local: `![…](mermaid.ink/…)` ou `raw.githubusercontent.com/…`
+7. **Só no passo a passo da Esteira:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
+
+### B — Publicar no ClickUp
+
+1. `clickup_create_task.py` **anexa** cada PNG (`--attach` ou baixa mermaid.ink/raw)
+2. Substitui no corpo a URL da imagem pela do attachment (`<img src>` via API)
+3. `PUT` da descrição
+4. **Não** deixar só mermaid.ink / raw.githubusercontent como única fonte de imagem no corpo ClickUp
+5. Fonte ` ```mermaid ` da Esteira **não** é reescrita
 
 ---
 
@@ -92,7 +112,10 @@ O código acima é o que se cola **somente** no passo a passo da Esteira (além 
 ## Checklist do diagrama
 
 - [ ] Imagem gerada via mermaid.ink (não só Mermaid no chat)
-- [ ] URL validada (200 OK)
-- [ ] `bgColor=!white` para legibilidade no ClickUp
+- [ ] PNG baixado + push em space-assets (markdown local)
+- [ ] No ClickUp: PNG **anexado** + URL de attachment no corpo (o script faz isso)
+- [ ] URL mermaid.ink validada (200 OK) na geração
+- [ ] `bgColor=!white` para legibilidade
 - [ ] Legenda `alt` descritiva no Markdown
 - [ ] Bloco ` ```mermaid ` na descrição **só** no passo a passo da **Esteira** (imagem + fonte). Imediatas: só a PNG.
+- [ ] Nenhum `mermaid.ink` solto como **única** fonte de imagem no corpo ClickUp publicado

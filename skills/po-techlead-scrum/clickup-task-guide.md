@@ -47,7 +47,7 @@ Workspace: `90131082033` (SPACE DEV).
 | Status | `pbi (bugs) e tasks` (`CLICKUP_STATUS_ESTEIRA_PBI`) |
 | Assignee | Ricardo Paes por default (`CLICKUP_ASSIGNEE_RICARDO`) — **ainda perguntar no onboard** |
 | Campo **Projeto** | Dropdown (`CLICKUP_CF_PROJETO`) — BATEU → `BateuBET \| Dashbaord` |
-| Anexo | `.md` da task |
+| Anexo | `.md` da task + PNGs (diagramas/prints); o script reescreve imagens para attachment |
 
 ### Imediatas
 
@@ -56,7 +56,7 @@ Workspace: `90131082033` (SPACE DEV).
 | Tipo custom | `0- IMEDIATA` (`CLICKUP_CUSTOM_TYPE_IMEDIATA=1016`) |
 | Assignee | **Obrigatório perguntar** no onboard |
 | Campo **Projeto** | Recomendado (`--project BATEU`) |
-| Anexo | `.md` da task |
+| Anexo | `.md` da task + PNGs; o script reescreve imagens para attachment |
 | **Checklist nativo** | Obrigatório na tarefa principal de cada dev (não é `- [ ]` no markdown) |
 
 ⚠️ “TAG do projeto” = custom field **Projeto**, não Tag nativa do ClickUp.
@@ -91,9 +91,9 @@ O Python **não** fatia markdown. Quem recorta é o agente.
 
 | Task | Tipo | Título | Corpo (Esteira) | Corpo (Imediatas) | Anexos |
 | --- | --- | --- | --- | --- | --- |
-| MAIN | Task (pai) | `{título}` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML se houver |
+| MAIN | Task (pai) | `{título}` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML + PNGs de diagramas |
 | Backend | **Subtask** | `{título} — Backend` | Grid + Back + CA Back + linhas BACK do passo a passo + DDD Back + NÃO DEVE | Idem **sem** linhas PBI. **Checklist nativo Back** (itens = o que o dev tica, incl. `P-BACK-*`) | OpenAPI/DBML |
-| Frontend | **Subtask** | `{título} — Frontend` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints se houver |
+| Frontend | **Subtask** | `{título} — Frontend` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints (PNG anexados) |
 
 Uma camada só → um create, spec inteira (sem subtask). Imediatas: o checklist nativo vai **nessa** task pai.
 
@@ -140,7 +140,11 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --mode esteira --file task/cms-central-ajuda.md --project BATEU --dry-run
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
-  --mode esteira --file task/cms-central-ajuda.md --project BATEU
+  --mode esteira --file .task/proj/feature.md --project ONESET \
+  --attach .task/proj/feature.md \
+  --attach .task/proj/attachments/openapi.yaml \
+  --attach /path/to/space-assets/proj/feature/diagram-a.png \
+  --attach /path/to/space-assets/proj/feature/01-listagem.png
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --mode esteira --file task/cms-backend.md --project BATEU --parent 86abc123
@@ -156,3 +160,59 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --checklist-item "Conferir modal" \
   --checklist-item "Anexar P-FRONT-1"
 ```
+
+Anexe **todos** os PNGs (diagramas + prints) junto com o `.md` / OpenAPI / DBML. O script:
+
+1. Cria a task (`--parent` se for subtask)
+2. Anexa os arquivos
+3. Reescreve `![](mermaid.ink|raw.githubusercontent)` no corpo para URL de attachment (`<img src>` via API)
+4. Atualiza a descrição (`PUT`)
+5. Imediatas: cria o checklist nativo se `--checklist-item` foi passado
+
+Blocos ` ```mermaid ` (fonte para o Ritter no passo a passo da Esteira) **não** são reescritos.
+
+---
+
+## Imagens inline no ClickUp (crítico)
+
+Alinhado ao **Estruturador de Tarefas** do ClickUp.
+
+| Fonte no `.md` local | No corpo ClickUp |
+| --- | --- |
+| `![](raw.githubusercontent.com/…/space-assets/…)` | **Reescrever** para attachment |
+| `![](mermaid.ink/…)` | Baixar PNG → anexar → attachment URL |
+| `![](https://….p.clickup-attachments.com/…)` | Já ok |
+
+Sintaxe no **editor** ClickUp / Estruturador:
+
+```markdown
+![Legenda](https://t….p.clickup-attachments.com/t…/uuid/arquivo.png)
+```
+
+Via **API** (`markdown_description`): o ClickUp costuma stripar `![](…)`. O script publica como:
+
+```html
+<p><img src="https://t….p.clickup-attachments.com/…/arquivo.png" alt="Legenda" /></p>
+```
+
+Mesma URL de attachment; formato que a API preserva.
+
+Detalhes: [diagrams.md](diagrams.md), [screenshots.md](screenshots.md).
+
+---
+
+## Banners ClickUp (opcional, recomendado)
+
+No corpo publicado, o aviso de IA pode usar banner nativo (sem emoji duplicado no texto):
+
+```markdown
+<banner background-color="yellow" icon="⚠️">Esta tarefa foi estruturada com auxílio de Inteligência Artificial com base nas informações fornecidas. Embora o conteúdo tenha sido organizado para facilitar o entendimento, podem existir interpretações incorretas ou incompletas. Em caso de dúvida, valide com o solicitante antes de iniciar o desenvolvimento.</banner>
+```
+
+Se houver imagens/anexos relevantes:
+
+```markdown
+<banner background-color="blue" icon="📎">Esta tarefa contém imagens e/ou anexos que fazem parte do requisito e devem ser analisados com atenção.</banner>
+```
+
+O script converte o blockquote `> ⚠️ Esta tarefa foi estruturada…` do markdown local para o banner amarelo na publicação. `--no-banner` desliga isso.

@@ -20,7 +20,7 @@ Diagramas de fluxo continuam em [diagrams.md](diagrams.md) (mermaid.ink). **Prin
 https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/{arquivo}.png
 ```
 
-O agente **salva, commita e dá push** neste repo — o markdown da task já sai com URLs públicas, pronto para colar no ClickUp.
+O agente **salva, commita e dá push** neste repo — o markdown **local** (`.task/`) usa essas URLs. No **corpo ClickUp publicado**, o script reescreve para URL de **attachment**.
 
 ---
 
@@ -86,21 +86,41 @@ Sempre incluir **link do protótipo** como backup interativo.
 
 ## Hospedagem para o ClickUp
 
+Dois papéis distintos:
+
+| Papel | Onde | Para quê |
+|---|---|---|
+| **Backup / markdown local** | space-assets (`raw.githubusercontent.com/…`) | `.task/*.md` no disco do PO; histórico no Git |
+| **Corpo da task ClickUp** | URL do **attachment** da própria task | ClickUp renderiza inline de forma confiável |
+
+### Fluxo de publicação (obrigatório)
+
+1. Prints em space-assets (push) — markdown local usa essas URLs
+2. Ao criar/atualizar a task: **anexar** cada PNG na task via API
+3. Reescrever o corpo com URL de attachment (`<img src>` via API; o Estruturador usa `![](attachment)`)
+4. O script `clickup_create_task.py` faz anexar + reescrever automaticamente
+
+```markdown
+![Listagem](https://t9013….p.clickup-attachments.com/t9013…/uuid/01-listagem.png)
+```
+
 | Opção | Quem faz | Quando |
 |---|---|---|
-| **space-assets + push** | Agente | **Padrão** — markdown pronto com `![](raw.githubusercontent.com/...)` |
-| Arrastar PNG no ClickUp | PO | Fallback se push falhar ou imagem não puder ir pro repo |
+| **Attachment ClickUp + URL de attachment** | Agente (script) | **Padrão no corpo ClickUp** |
+| space-assets + push | Agente | Markdown local + backup |
+| Arrastar PNG no ClickUp | PO | Fallback manual |
 | Link do protótipo | Agente | Sempre, além dos prints |
 
-### O que NÃO funciona no ClickUp
+### O que NÃO funciona bem no corpo ClickUp
 
 | Abordagem | Funciona? |
 |---|---|
 | `![](C:\Users\...)` | Não |
-| `![](assets/foo.png)` sem URL pública | Não ao colar só o .md |
-| Print só no chat do Cursor | Não — dev não vê; precisa ir para space-assets |
-| mermaid.ink para UI | Não — só diagramas; UI = screenshot real |
-| Repo privado sem auth | Não — imagem quebrada para o time |
+| `![](assets/foo.png)` relativo | Não |
+| Só `![](raw.githubusercontent.com/…)` | **Instável** — ClickUp costuma stripar/não renderizar |
+| Só `![](mermaid.ink/…)` | **Instável** — mesma limitação (diagramas: ver [diagrams.md](diagrams.md)) |
+| Print só no chat do Cursor | Não — anexar na task |
+| Repo privado sem auth | Não |
 
 ---
 
@@ -111,9 +131,10 @@ Sempre incluir **link do protótipo** como backup interativo.
 2. Se URL → browser: navegar, screenshot das telas-chave
 3. Se usuário enviou imagem → copiar para space-assets/{projeto}/{slug}/
 4. git add, commit, push em space-assets
-5. Escrever task.md com seção 🖼️ Referência visual (URLs raw.githubusercontent.com)
+5. Escrever task.md com seção 🖼️ Referência visual (URLs space-assets no .md local)
 6. Legendar cada print (o que mostra, o que mudou vs código atual)
-7. Manter link do protótipo
+7. Ao publicar: clickup_create_task.py anexa PNGs e reescreve para URL de attachment
+8. Manter link do protótipo
 ```
 
 **Telas mínimas a capturar (quando aplicável):**
@@ -131,7 +152,7 @@ Sempre incluir **link do protótipo** como backup interativo.
 1. Arquivos ficam em `assets/` do workspace do Cursor
 2. **Copiar** para `space-assets/{projeto}/{task-slug}/` com nome descritivo
 3. Push no space-assets
-4. Referenciar na task com URL pública — **não** depender só do anexo da conversa
+4. Na publicação ClickUp, anexar o mesmo PNG e usar URL do attachment no corpo
 
 ---
 
@@ -140,6 +161,7 @@ Sempre incluir **link do protótipo** como backup interativo.
 - [ ] Tarefa Front tem seção 🖼️ Referência visual
 - [ ] Cada print tem legenda (não só imagem solta)
 - [ ] PNGs em `space-assets/{projeto}/{slug}/` com push feito
-- [ ] URLs `raw.githubusercontent.com/Space-Software-LTDA/space-assets/...` na task
+- [ ] Markdown **local** com URLs space-assets
+- [ ] Corpo **ClickUp** com URL de attachment (não depender só de raw.githubusercontent)
 - [ ] Link do protótipo incluído
 - [ ] Nenhum caminho absoluto do Windows no markdown
