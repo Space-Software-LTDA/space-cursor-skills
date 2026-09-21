@@ -106,7 +106,7 @@ Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook
 | Pasta | Skills típicas |
 |-------|----------------|
 | `.task/` | `po-techlead-scrum`, `qa-space` |
-| `.docs/` | `project-context-doc` (e espelho OpenAPI/DBML do PO antes do Apidog) |
+| `.docs/` | `project-context-doc`, `design-system-forge`, `design-system-apply` (e espelho OpenAPI/DBML do PO antes do Apidog) |
 
 | Situação | Regra |
 |----------|--------|
