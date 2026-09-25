@@ -16,10 +16,12 @@ PO, QA e contexto de produto **não** são o mesmo leitor. O mesmo arquivo serve
 | --- | --- | --- |
 | `po-techlead-scrum` | Escrever a task (ClickUp) que o júnior vai implementar | A constituição vira **critério, proibição e exemplo na task**. O PO não audita pixel no browser. |
 | `qa-space` | Inspecionar o front **já feito** (browser + código) | A constituição vira **régua de auditoria**. O QA não publica ClickUp e não redesenha a arquitetura do back. |
+| `design-system-forge` | Compor o DS **do produto** a partir de fonte visual | Space DS = **método/gosto**, não tokens do produto. Laws of UX + gates; grava `.docs/DESIGN_SYSTEM.md`. |
+| `design-system-apply` | Validar/aplicar o DS **já aprovado** do produto | Régua = DS do produto + **[ui-gosto.md](ui-gosto.md)** (Fase A limpa DS; Fase B front). Space DS apoia gaps. Loop sob `.docs/`. |
 | `project-context-doc` | Documentar o produto que **já existe** no código | A constituição vira **guardrail G-xxx** quando o código de fluxo/contrato importa. Não gera PBI. |
 | `skill-update` | Manter o pack | Garante que o mapa deste README continue verdadeiro. Não usa a constituição para task nem para QA. |
 
-**Proibido:** a skill de QA “completar” uma task de back com entry point. A skill de PO “aprovar visual” no lugar do QA. A skill de contexto inventar stack nova em vez de descrever o que o repo faz.
+**Proibido:** a skill de QA “completar” uma task de back com entry point. A skill de PO “aprovar visual” no lugar do QA. A skill de contexto inventar stack nova em vez de descrever o que o repo faz. Forge inventariar mock como lei. Apply inventar `P-…` ausente (voltar ao Forge).
 
 ---
 
@@ -106,6 +108,43 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 **Esta skill não lê para:** montar PBI, critério de aceite de um fluxo novo de backend, publicar Doc ClickUp. Depois do REPORT, o humano chama `po-techlead-scrum`.
 
+**Não confundir com:** `design-system-forge` / `design-system-apply` (DS **do produto** sob `.docs/`, loop IKEA). `qa-space` audita o feito contra a constituição Space + task e grava `.task/`.
+
+---
+
+### `design-system-forge` — forjar DS do produto
+
+**Objetivo com estas docs:** transformar fonte visual em **constituição do produto** (`.docs/DESIGN_SYSTEM.md` + tokens), com padrões `P-…` pretendidos — não inventário do mock.
+
+**Sempre ler:**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [design-system.md](design-system.md) | Método / gosto Space | Ler **inteiro** como referência de *como* decidir — **não** copiar primary/surfaces do Space para o produto. Tokens e `P-…` saem da fonte + Q1–Q10 + humano. |
+| Laws of UX (`lawsofux.com/llms.txt`) | Porquê psicológico | Abrir o arquivo; mapear ≥10 leis no §2 do template da skill. |
+
+**Artefatos:** só sob `.docs/` (ver skill). Gates: fonte insuficiente → parar; Q abertas → não gravar DS final.
+
+**Esta skill não lê para:** patch no produto, REPORT `.task/`, task ClickUp. Depois da aprovação humana → `design-system-apply`.
+
+---
+
+### `design-system-apply` — limpar DS + aplicar gosto no front
+
+**Objetivo com estas docs:** (A) normalizar o DS do produto contra o gosto Miguel; (B) refatorar UI (Lovable) até ALIGNED. Visual only.
+
+**Sempre ler:**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| **DS do produto** (`.docs/DESIGN_SYSTEM.md`) | CORE forjado | Sem `P-…` → Forge. Fase A **edita** este arquivo. |
+| [ui-gosto.md](ui-gosto.md) | DO / DON’T Miguel | **Inteiro**. Marca > gosto; Cadastro deslogado = Primary; admin ≠ cassino. |
+| [design-system.md](design-system.md) | Apoio metodológico | Escalas / §18 / tabelas admin; **não** sobrescrever marca do produto. |
+
+**Artefatos:** Fase A → DS + EXTRACTION_NOTES; Fase B → `QA_REPORTS/`. Método na skill.
+
+**Esta skill não lê para:** extrair DS do zero, REPORT `qa-space`, ClickUp, AP-FE no Lovable.
+
 ---
 
 ### `project-context-doc` — contexto de produto
@@ -162,6 +201,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-11 | Sim |
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* (cenário / por quê / ouro / exemplo / erro comum) + Front | Sim |
 | [design-system.md](design-system.md) | Space UI DS v1.0 | Sim — QA lê inteiro |
+| [ui-gosto.md](ui-gosto.md) | DO / DON’T visual (Miguel) p/ Apply refator | Sim — Apply lê; não resumir na skill |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding empresa (git, stack, Coder, Apidog, EasyPanel) | Sim |
 | [git-fluxo.md](git-fluxo.md) | PBI → dev / PR hml / PR main, hotfix; HML ≈ main (banco); evidência de pronto | Sim — sem contradizer “commit direto” vs merge em `dev` |
 | [backend.md](backend.md) | Bun + Elysia + TypeORM + boilerplate | Sim |

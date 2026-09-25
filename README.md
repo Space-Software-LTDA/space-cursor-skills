@@ -51,6 +51,8 @@ space-cursor-skills/
 │   ├── skill-update/       ← hub /skill-update
 │   ├── po-techlead-scrum/
 │   ├── qa-space/
+│   ├── design-system-forge/
+│   ├── design-system-apply/
 │   └── project-context-doc/
 ├── AGENTS.md               ← direcionamento do agente no repo
 ├── src/
@@ -78,7 +80,9 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 |-------|-----|
 | `skill-update` | **Hub** do pack (`/skill-update`): sync, catálogo, nova/alterar skill, PC vs Coders |
 | `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor — pipeline Objetivo → regra → DB → Apidog → task |
-| `qa-space` | QA / design system — constituição via `docs/README.md` (audita o feito; lê DS inteiro) |
+| `qa-space` | QA / Design System Space — constituição via `docs/README.md` (audita o feito; lê DS inteiro) |
+| `design-system-forge` | Forjar DS **do produto** (`.docs/`) — interpretar, Q1–Q10, parar na aprovação |
+| `design-system-apply` | Limpar DS pelo gosto Miguel + refator visual (`.docs/`) até ALIGNED |
 | `project-context-doc` | Doc de contexto + sync Docs ClickUp — constituição via `docs/README.md` (G-xxx) |
 
 Constituição (não é skill): pasta [`docs/`](docs/). **Toda skill de produto lê [`docs/README.md`](docs/README.md) primeiro** — PO, QA e contexto não usam os arquivos do mesmo jeito.
