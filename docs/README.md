@@ -43,13 +43,19 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 
 **Objetivo com estas docs:** a task sair **implementável por um júnior** sem adivinhar padrão. Critérios descrevem comportamento. Anti-padrão vira `⚠️` e, quando couber, ID `AP-*` / `GO-*` nos critérios de aceite.
 
+**Sempre ler (qualquer task — didática):**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [tom-professor.md](tom-professor.md) | Tom compartilhado PO ↔ Context | Princípios: júnior não adivinha; explicativo ≠ redundante; professor vs ordenante no DDD. **Não** resumir aqui. Granularidade da spec (tela/aba/KPI) continua na skill: `decomposicao-tom-professor.md`. |
+
 **Sempre ler (task com Backend, ou Front+Back):**
 
 | Arquivo | Por quê | Como usar (não é o mesmo que o QA) |
 | --- | --- | --- |
 | [entry-point.md](entry-point.md) | Padrão central de fluxo Back | A task **exige** roteiro no `index.ts` da feature. Checklist da task incompleto se não citar o teste de ouro (“abri só o entry, sei o fluxo?”). **Não** auditar um PR no browser — isso não é QA. |
 | [padrao-ouro.md](padrao-ouro.md) | Princípios GO-02…GO-12 | Viram decisão na task: type por operação, JWT, HTTP, jobs, **e nomes da empresa** (repo/tabela/coluna — GO-12). Escrever o **porquê** para o júnior. |
-| [anti-padroes.md](anti-padroes.md) | Catálogo AP-* | O que a task **proíbe**. Critérios podem citar o ID (`AP-HTTP-01`, `AP-NAM-05` no banco). Tom professor: cenário + ouro. |
+| [anti-padroes.md](anti-padroes.md) | Catálogo AP-* | O que a task **proíbe**. Critérios podem citar o ID (`AP-HTTP-01`, `AP-NAM-05` no banco). Forma pedagógica: cenário + ouro (ver [tom-professor.md](tom-professor.md)). |
 | [nomenclatura.md](nomenclatura.md) | Manufatura: GitHub, branch, commit, EasyPanel, **PostgreSQL** | **Sempre.** Toda task nomeia alguma coisa. Tabela `snake_case`, coluna camelCase, `createdAt`/`updatedAt`, usuário `space_[cliente]`. Não deixar isso só no onboarding. |
 
 **Sempre ler (task com Frontend):**
@@ -96,6 +102,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | --- | --- | --- |
 | [frontend.md](frontend.md) | Stack Next, client HTTP, FDD | Conferir se o projeto é o boilerplate FDD (`AGENTS.md` local). Não aplicar FDD em repo que não é esse boilerplate. |
 | [padrao-ouro.md](padrao-ouro.md) — só **GO-11** | Contrato real, três estados | Apoio à Fase 4 (API). O restante dos GO-* é para task de Back, não para o REPORT visual. |
+| [tom-professor.md](tom-professor.md) | Só no texto “Como deveria ser” | Explicar o esperado citando § DS / `AP-FE-*`. **Não** copiar decomposição de task do PO. |
 
 **Esta skill não lê para:** montar PBI, critério de aceite de um fluxo novo de backend, publicar Doc ClickUp. Depois do REPORT, o humano chama `po-techlead-scrum`.
 
@@ -104,6 +111,12 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 ### `project-context-doc` — contexto de produto
 
 **Objetivo com estas docs:** o doc de contexto ensina o **produto que o código faz hoje**. Guardrails (G-xxx) sobre *como o time escreve código* apontam para a constituição em vez de inventar uma segunda bíblia.
+
+**Sempre ler (didática — qualquer doc):**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [tom-professor.md](tom-professor.md) | Mesmo princípio do PO | Júnior não adivinha; explicativo ≠ redundante. **Artefato diferente:** aqui é FL/RN/G, não task. Layout/mínimos do doc ficam em `language-guide.md` e `pedagogical-examples.md` na skill. |
 
 **Sempre ler (quando o recon achar código de fluxo / API / jobs):**
 
@@ -144,6 +157,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 | Arquivo | Tema | Integral? |
 | --- | --- | --- |
+| [tom-professor.md](tom-professor.md) | Didática para júnior (PO + Context; QA opcional) | Sim — princípios; moldes de artefato ficam nas skills |
 | [entry-point.md](entry-point.md) | Roteiro no topo do `index.ts`; 16 seções; proibido `prepare`/`handle` | Sim — não resumir |
 | [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-11 | Sim |
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* (cenário / por quê / ouro / exemplo / erro comum) + Front | Sim |

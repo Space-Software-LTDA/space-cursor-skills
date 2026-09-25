@@ -55,6 +55,7 @@ A constituição **não** está resumida neste `SKILL.md`.
 | [`../docs/design-system.md`](../docs/design-system.md) | **Inteiro** antes da Fase 2. Matriz em [reference.md](reference.md). |
 | [`../docs/anti-padroes.md`](../docs/anti-padroes.md) | Sobretudo **AP-FE-*** no código da rota e no Network |
 | [`../docs/frontend.md`](../docs/frontend.md) | Se o trabalho tocar stack/FDD — só aplicar FDD se o repo tiver o `AGENTS.md` do boilerplate |
+| [`../docs/tom-professor.md`](../docs/tom-professor.md) | Opcional: “Como deveria ser” no achado — citar § DS / AP-FE; **não** copiar decomposição de task |
 
 **Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL.
 
@@ -242,7 +243,7 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 2. Resumo executivo (3–5 linhas para leigos)
 3. Consolidar P0 / P1 / P2 / P3
 4. Seção **Design System** — tabela §19 preenchida (pass/fail por item)
-5. Seção **Como deveria ser** por achado relevante (tom professor — citar § do DS)
+5. Seção **Como deveria ser** por achado relevante (explicar citando § do DS / AP-FE — ver [`../docs/tom-professor.md`](../docs/tom-professor.md); sem decomposição de task)
 6. Listar inputs usados e lacunas (sem task, sem mock, etc.)
 
 **Não** criar task ClickUp — informar que o PO pode chamar `@po-techlead-scrum` com o conteúdo de `.task/`.

@@ -53,7 +53,7 @@ npm run sync
 | Pasta | Função |
 |-------|--------|
 | `skills/skill-update` | **Hub** — sync, catálogo, criar/alterar skills, constituição (`/skill-update`) |
-| `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) + contrato Apidog — lê `docs/README.md` como **PO** |
+| `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) + contrato Apidog — lê `docs/README.md` como **PO**. Inclui prompt do **Estruturador** ClickUp: `estruturador-clickup.md` (espelho `skill.md` na raiz; colar na AI Skill do ClickUp — não é skill Cursor) |
 | `skills/project-context-doc` | Doc de contexto + Docs ClickUp — lê `docs/README.md` como **contexto** (G-xxx apontam ouro/entry) |
 | `skills/qa-space` | QA front / Design System — lê `docs/README.md` como **QA** (audita o feito; DS inteiro) |
 | `docs/` | Constituição (não é skill). Índice obrigatório: `docs/README.md` |

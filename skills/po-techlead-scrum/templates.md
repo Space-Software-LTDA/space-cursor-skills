@@ -2,9 +2,9 @@
 
 ## Tom professor (lembrar sempre)
 
-Toda task segue o padrão da skill: **explicar tintim por tintim para júnior**.  
-Incluir glossário, tabela de colunas, DBML, exemplos e “por quê” — ver seção 🎓 no `SKILL.md`.  
-**Não** enxugar isso no template.
+Princípios: [`../docs/tom-professor.md`](../docs/tom-professor.md).  
+Granularidade: [decomposicao-tom-professor.md](decomposicao-tom-professor.md).  
+Incluir glossário, colunas, DBML, exemplos e “por quê” — **não** enxugar.
 
 ---
 

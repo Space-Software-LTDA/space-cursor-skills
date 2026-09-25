@@ -46,8 +46,9 @@ Gera documento de contexto para devs: foco em **por que**, **para que** e **flux
 A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 
 1. Ler **[`../docs/README.md`](../docs/README.md)** — a seção `project-context-doc` diz *como* esta skill usa os arquivos (documentar o produto que existe; **não** gerar PBI; **não** auditar pixel).
+2. **Sempre** (didática): [`../docs/tom-professor.md`](../docs/tom-professor.md). Layout/mínimos do doc: [language-guide.md](language-guide.md) + [pedagogical-examples.md](pedagogical-examples.md).
 3. Se o recon achar fluxo / API / jobs: [`../docs/padrao-ouro.md`](../docs/padrao-ouro.md) e, para código de entrada de feature, [`../docs/entry-point.md`](../docs/entry-point.md). Guardrails G-xxx **apontam** GO-* / o padrão de entry; não copiam o catálogo inteiro. Se achar entities/migrations: [`../docs/nomenclatura.md`](../docs/nomenclatura.md) (tabela/coluna/user) — G pode citar GO-12 / AP-NAM-05.
-3. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
+4. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
 
 ## Principio rector
 
@@ -57,7 +58,7 @@ Didatico antes de exaustivo — RN/FL/G bem escritos valem mais que catalogo com
 Fluxo end-to-end e o eixo de leitura.
 Uma narrativa por tema — FL/RN explicam por que; RT aponta de volta (nao repete cenario).
 ClickUp-first — sem <details>; indice curto no topo; listas longas no Apendice.
-Tom professor: cenario, exemplo, erro comum — ver pedagogical-examples.md.
+Tom professor: ../docs/tom-professor.md (+ pedagogical-examples.md para exemplos preenchidos).
 Indices longos: checklist "Vale a pena agrupar?" — ver index-grouping-guide.md.
 ```
 
@@ -79,7 +80,7 @@ Toda decisao de escopo vem do **recon do codigo**:
 | Arquivo | Uso |
 |---------|-----|
 | [document-layout.md](document-layout.md) | **Layout ClickUp** — indice curto, apendice, referencia rapida, anti-duplicacao FL/RT |
-| [language-guide.md](language-guide.md) | Tom professor, anchors, anti-enxugamento |
+| [language-guide.md](language-guide.md) | Aplicação do tom no doc (após `../docs/tom-professor.md`); anchors; anti-enxugamento |
 | [pedagogical-examples.md](pedagogical-examples.md) | Casos de uso, exemplos RN/FL/G, checklist |
 | [template-clickup.md](template-clickup.md) | Estrutura master + Indice global |
 | [template-flows.md](template-flows.md) | FL-xxx end-to-end |

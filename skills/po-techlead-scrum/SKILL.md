@@ -46,6 +46,7 @@ A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 
 | Escopo da task | Ler (após o README) |
 | --- | --- |
+| **Sempre** (qualquer task) | `../docs/tom-professor.md` — princípios didáticos; granularidade da spec: [decomposicao-tom-professor.md](decomposicao-tom-professor.md) |
 | Backend (ou Front+Back) | `../docs/entry-point.md` **inteiro**, `../docs/padrao-ouro.md`, `../docs/anti-padroes.md`, `../docs/nomenclatura.md` |
 | Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar `../docs/design-system.md` **sem** resumir as 19 seções; prioridade **repo → DS (buraco) → Lovable (campos/ações)** |
 | Branch / PR / hotfix | `../docs/git-fluxo.md` |
@@ -71,55 +72,46 @@ MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU
 | **ENV** | `.env` na **raiz** do clone **desta máquina** (ClickUp + destino; compartilhado com `project-context-doc`) |
 
 Ao alterar a skill: editar no repo → commit/push → `npm run sync` na máquina.  
-No repo: leia **`AGENTS.md`** na raiz (e `.cursor/rules/`). Detalhes ClickUp: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
+No repo: leia **`AGENTS.md`** na raiz (e `.cursor/rules/`). Detalhes ClickUp: [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).  
+Prompt da AI Skill **Estruturador** (ClickUp, não Cursor): [estruturador-clickup.md](estruturador-clickup.md).
 
 ---
 
 ## 🎓 Tom professor (OBRIGATÓRIO em toda task)
 
-O público da descrição é **dev júnior**. Escrever como **professor**: explicar tintim por tintim.  
-**Explicar nunca é demais.** Preferir longo e claro a curto e ambíguo.
+**Fonte dos princípios:** [`../docs/tom-professor.md`](../docs/tom-professor.md) (constituição — compartilhada com `project-context-doc`).  
+**Granularidade da task** (tela/aba/KPI/endpoint): [decomposicao-tom-professor.md](decomposicao-tom-professor.md).  
+**Cola markdown:** [templates.md](templates.md). **DDD / NÃO DEVE:** [evidencias-dod.md](evidencias-dod.md).
 
-### Princípio
+Público da descrição = **dev júnior**. Se precisar adivinhar coluna, status, env ou botão → task incompleta.
 
-> Se um júnior precisar “adivinhar” o que uma coluna, status, env ou botão significa — a task está incompleta.
-
-### O que SEMPRE incluir (quando aplicável ao escopo)
+### O que SEMPRE incluir na task (quando aplicável ao escopo)
 
 | Item | Por quê |
 | --- | --- |
-| **Glossário** | Termos do domínio (CMS, slug, JSONB, soft delete, status derivado…) em português simples |
-| **Tabela coluna a coluna** | Cada campo do schema com “para que serve” (não só o tipo SQL) |
-| **DBML completo** | Bloco para colar no dbdiagram.io + Notes dos JSONB |
+| **Glossário** | Termos do domínio em português simples |
+| **Tabela coluna a coluna** | Cada campo com “para que serve” (não só o tipo SQL) |
+| **DBML completo** | Bloco para dbdiagram.io + Notes dos JSONB |
 | **Shapes JSON** | Exemplo comentado campo a campo |
-| **Por quê** | Motivo da decisão (ex.: por que status não é coluna; por que espelhar `validFrom`) |
-| **Exemplos didáticos** | Tabelas “se X então Y” (status, roles, filtros) |
+| **Por quê** | Motivo da decisão |
+| **Exemplos didáticos** | Tabelas “se X então Y” |
 | **Pseudocódigo / curl** | Helpers críticos e exemplos de chamada |
 | **Payloads e rotas** | Completos, com tipos e obrigatoriedade |
-| **Edge cases** | O que acontece em falha, omitir campo, dia fora da recorrência, etc. |
-| **Prints + legenda** | Cada imagem diz o que o júnior deve observar |
+| **Edge cases** | Falha, omitir campo, dia fora da recorrência, etc. |
+| **Prints + legenda** | O que o júnior deve observar |
 | **CA Back e Front separados** | Dado/Quando/Então testáveis por camada |
-| **REGRAS DE DDD** | Pronto em HML, paralelos, prova — **tom ordenante** (Faça / Abra / Confirme), não “Imagine” ([evidencias-dod.md](evidencias-dod.md)) |
-| **Passo a passo** | **Só Esteira:** tabela PBI + Espera/Bloqueia. **Imediatas:** não. A quebra é checklist **nativo** do ClickUp |
-| **NÃO DEVE** | Último `##` da task: anti-critérios em tabela + quotes ClickUp ([evidencias-dod.md](evidencias-dod.md)) |
+| **REGRAS DE DDD** | Tom **ordenante** (Faça/Abra/Confirme) — ver `tom-professor.md` + [evidencias-dod.md](evidencias-dod.md) |
+| **Passo a passo** | **Só Esteira.** Imediatas: checklist **nativo** do ClickUp |
+| **NÃO DEVE** | Último `##` — [evidencias-dod.md](evidencias-dod.md) |
 
-### Tom na prosa
+### Tom na prosa (task)
 
-- Frases curtas; subtítulos; tabelas  
-- Explicar abreviação na primeira vez  
-- **Contexto / regra abstrata:** “Exemplo:” + cenário concreto (o expert clica X). **Não** usar “Imagine que…” no DDD.  
-- **DDD:** verbo no imperativo no topo do bloco — **Faça login** como Expert no dashboard de HML; **Abra** duas sessões; **Dispare** o POST; **Confirme** o paralelo; **Grave** e **anexe**. Dado/Quando/Então = roteiro do teste, não conto.  
-- Destacar `⚠️` o que o protótipo mente ou o que não fazer  
-- Não assumir que o júnior já conhece MinIO, JSONB, soft delete, RBAC, etc.
+- Seguir [`../docs/tom-professor.md`](../docs/tom-professor.md)
+- **Contexto / regra:** “Exemplo:” + cenário concreto. **DDD:** sem “Imagine que…” — Faça / Abra / Confirme
+- Destacar `⚠️` o que o protótipo mente
+- **Não** enxugar glossário, DBML, colunas ou exemplos sem o PO pedir
 
-### O que NÃO fazer sob pretexto de “enxugar”
-
-- Remover glossário, DBML, tabela de colunas ou exemplos  
-- Trocar explicação por “ver o plano” / “ver o protótipo” sem copiar a regra  
-- Entregar só checklist vago (“implementar CRUD”, “ajustar status”)  
-- Cortar conteúdo didático ao limpar meta de Scrum (SuperAgente etc.)
-
-**Default do time:** se o PO não disser o contrário, a task é **máximo detalhe para júnior**.
+**Default:** máximo detalhe para júnior.
 
 ---
 
@@ -397,7 +389,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 ## Checklist antes de entregar descrição
 
-- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir **e** declara prioridade repo → DS → mock
+- [ ] **Constituição:** leu `../docs/README.md` + `../docs/tom-professor.md`; demais arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir **e** declara prioridade repo → DS → mock
 - [ ] Projeto identificado (e opção do campo ClickUp **Projeto** conhecida)
 - [ ] Modo confirmado **na conversa** (SuperAgente/Esteira ou Imediatas) — **não** no corpo da task
 - [ ] Responsável confirmado no onboard (Esteira: Ricardo default se OK; Imediatas: obrigatório)

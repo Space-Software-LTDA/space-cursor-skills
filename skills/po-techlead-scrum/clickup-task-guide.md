@@ -178,9 +178,17 @@ Blocos ` ```mermaid ` (fonte para o Ritter no passo a passo da Esteira) **não**
 
 ---
 
+## Estruturador de Tarefas (ClickUp AI Skill)
+
+Prompt versionado (colar na AI Skill do ClickUp): **[estruturador-clickup.md](estruturador-clickup.md)**. Espelho na raiz do repo: `skill.md`.
+
+Não é skill Cursor — reorganiza task bruta **dentro** do ClickUp. Prefixo de subtarefas alinhado a este guia: `[BACK]` / `[FRONT]` no início (não `[BACKEND]` / `[FRONTEND]`).
+
+Banners `<banner>`: OK no Estruturador (UI ClickUp). A API deste script usa blockquote (`>`) — ver seção abaixo.
+
 ## Imagens inline no ClickUp (crítico)
 
-Alinhado ao **Estruturador de Tarefas**. O ClickUp só renderiza imagem inline com markdown apontando para attachment **da própria task**.
+Alinhado ao **Estruturador de Tarefas** ([estruturador-clickup.md](estruturador-clickup.md)). O ClickUp só renderiza imagem inline com markdown apontando para attachment **da própria task**.
 
 | Fonte no `.md` local | No corpo ClickUp |
 | --- | --- |

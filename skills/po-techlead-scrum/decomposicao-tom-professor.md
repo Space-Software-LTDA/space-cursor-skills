@@ -1,8 +1,11 @@
 # Decomposição tom professor — regra GLOBAL (OBRIGATÓRIO)
 
-**Toda task** gerada por `po-techlead-scrum` segue este arquivo — **não** só telas com abas, **não** só ONESET, **não** só Front.
+**Princípios didáticos (constituição):** [`../docs/tom-professor.md`](../docs/tom-professor.md) — leia antes.  
+Este arquivo é só a **granularidade da task** (unidade mínima tela/aba/KPI/…): **não** substitui o doc central.
 
-Se o júnior precisar abrir o protótipo ou adivinhar o que um campo faz → **task incompleta**.
+**Toda task** gerada por `po-techlead-scrum` segue este arquivo — **não** só telas com abas, **não** só um produto, **não** só Front.
+
+Se o júnior precisar abrir o protótipo ou adivinhar o que um campo faz → **task incompleta** (ver também `tom-professor.md`).
 
 ---
 

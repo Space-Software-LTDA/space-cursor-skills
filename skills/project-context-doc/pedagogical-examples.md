@@ -2,7 +2,7 @@
 
 Guia de preenchimento para documento **esclarecedor** — dev junior entende sem ler codigo.
 
-Referencia: [language-guide.md](language-guide.md) (tom professor) · [template-rn-guardrail.md](template-rn-guardrail.md) · [template-flows.md](template-flows.md)
+Referencia: [`../docs/tom-professor.md`](../docs/tom-professor.md) (principios) · [language-guide.md](language-guide.md) (aplicacao no doc) · [template-rn-guardrail.md](template-rn-guardrail.md) · [template-flows.md](template-flows.md)
 
 ---
 
