@@ -14,3 +14,6 @@ __pycache__/
 # Node
 node_modules/
 dist/
+
+# Dump acidental (não é skill / não é constituição)
+/index.html

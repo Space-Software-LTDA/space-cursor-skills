@@ -55,6 +55,7 @@ A constituição **não** está resumida neste `SKILL.md`.
 | [`../docs/design-system.md`](../docs/design-system.md) | **Inteiro** antes da Fase 2. Matriz em [reference.md](reference.md). |
 | [`../docs/anti-padroes.md`](../docs/anti-padroes.md) | Sobretudo **AP-FE-*** no código da rota e no Network |
 | [`../docs/frontend.md`](../docs/frontend.md) | Se o trabalho tocar stack/FDD — só aplicar FDD se o repo tiver o `AGENTS.md` do boilerplate |
+| [`../docs/tom-professor.md`](../docs/tom-professor.md) | Opcional: “Como deveria ser” no achado — citar § DS / AP-FE; **não** copiar decomposição de task |
 | **DS do produto** (`.docs/DESIGN_SYSTEM.md` / anexo da task) | Se existir `P-…`: auditar contra eles. **Não** editar o DS (isso é Apply/Forge) |
 | [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §5.5 | Se a tela tiver prova social / jackpot / ticker — global ≠ contextual |
 
@@ -249,7 +250,7 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 3. Consolidar P0 / P1 / P2 / P3
 4. Seção **Design System** — tabela §19 preenchida (pass/fail por item); se houver DS do produto, listar `P-…` auditados
 5. Se Home/player: checklist **prova social** (reference.md) — global ≠ contextual
-6. Seção **Como deveria ser** por achado relevante (tom professor — citar § do DS / `P-…`)
+6. Seção **Como deveria ser** por achado relevante (explicar citando § do DS / `P-…` / AP-FE — ver [`../docs/tom-professor.md`](../docs/tom-professor.md); sem decomposição de task)
 7. Listar inputs usados e lacunas (sem task, sem mock, sem DS produto, etc.)
 
 **Não** criar task ClickUp — informar que o PO pode chamar `@po-techlead-scrum` com o conteúdo de `.task/`.

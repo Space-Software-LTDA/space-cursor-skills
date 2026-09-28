@@ -36,3 +36,4 @@ design-system-apply    → A (DS×gosto)+OK → B (Scan+relatório)+OK → C (Fi
 | `.cursor/rules/space-cursor-skills.mdc` | Rule always-on no repo |
 | `README.md` | Setup humano + tabela `.env` |
 | `src/sync.ts` | Implementação do `npm run sync` (copia `skills/` **e** `docs/`) |
+| `skills/po-techlead-scrum/estruturador-clickup.md` (+ espelho `skill.md` na raiz) | **Prompt ClickUp** (AI Skill Estruturador) — não é skill Cursor; colar no ClickUp após editar |

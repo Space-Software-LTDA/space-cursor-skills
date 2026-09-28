@@ -1,6 +1,7 @@
 # Linguagem Space — Documento de Contexto (ClickUp)
 
-Convencoes compartilhadas com a skill `po-techlead-scrum`. Este doc e **conhecimento do sistema existente**, nao tarefa de implementacao.
+**Princípios didáticos (constituição):** [`../docs/tom-professor.md`](../docs/tom-professor.md) — mesmo núcleo do `po-techlead-scrum`.  
+**Artefato diferente:** este guia é **conhecimento do sistema existente** (FL/RN/G), não tarefa de implementação.
 
 **Sempre responder e gerar documentacao em portugues (PT-BR), salvo pedido contrario.**
 
@@ -10,11 +11,12 @@ Ver tambem [pedagogical-examples.md](pedagogical-examples.md) para estruturas de
 
 ## Tom — professor, nao telegrafico
 
+Aplicar [`../docs/tom-professor.md`](../docs/tom-professor.md). Resumo para o doc de contexto:
+
 **Publico-alvo:** dev junior que **nunca viu** o produto e vai ler o doc para entender e tirar duvidas — nao para decidir em 30 segundos.
 
-| Fazer | Nao fazer |
+| Fazer (alem do doc central) | Nao fazer |
 |-------|-----------|
-| Explicar como um **professor paciente** — contexto, cenario, exemplo, consequencia | Jogar informacao solta ("Unique email+app. Por que: white-label.") |
 | Secoes longas quando **ensinam** (FL, RN, G criticos) | Resumir RN/G/FL para "caber" catalogo enorme |
 | Exemplos concretos do produto (URLs, domains, emails ficticios mas realistas) | Abstracoes sem ancoragem ("o tenant", "a bet") |
 | Casos de uso narrativos antes de tabelas tecnicas | Ir direto para tabela sem cenario |
@@ -22,17 +24,7 @@ Ver tambem [pedagogical-examples.md](pedagogical-examples.md) para estruturas de
 
 ### "Nao ser redundante" ≠ "nao ser explicativo"
 
-Importado de `po-techlead-scrum` — regra central desta skill:
-
-- **Redundante** = repetir a mesma decisao 3 vezes **sem agregar informacao**
-- **Explicativo** = dar contexto, exemplo e regra para o junior executar **sem adivinhar**
-- Em duvida, **prefira mais exemplo** (curl, JSON, cenario, certo vs errado) a menos texto abstrato
-
-### Verboso ≠ ambiguo
-
-- **Verboso:** cada parágrafo desenvolve **uma ideia** com exemplo ou consequência prática
-- **Ambiguo:** frases vagas que permitem duas interpretações opostas
-- Um RN bem escrito tem **15+ linhas uteis** — nao 3 linhas telegraficas
+Definicao canonica em [`../docs/tom-professor.md`](../docs/tom-professor.md). Neste artefato: RN bem escrito tem **15+ linhas uteis** — nao 3 linhas telegraficas.
 
 ---
 
