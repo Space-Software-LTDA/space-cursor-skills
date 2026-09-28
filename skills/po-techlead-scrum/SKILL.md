@@ -47,7 +47,7 @@ A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 | Escopo da task | Ler (após o README) |
 | --- | --- |
 | Backend (ou Front+Back) | `../docs/entry-point.md` **inteiro**, `../docs/padrao-ouro.md`, `../docs/anti-padroes.md`, `../docs/nomenclatura.md` |
-| Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar `../docs/design-system.md` **sem** resumir as 19 seções; prioridade **repo → DS (buraco) → Lovable (campos/ações)** |
+| Frontend | `../docs/frontend.md` + `../docs/nomenclatura.md`; apontar DS **sem** resumir; prioridade **repo/BO → DS produto → Space DS (buraco) → Lovable (campos/ações)**; Home/player: **modais → Home** |
 | Branch / PR / hotfix | `../docs/git-fluxo.md` |
 | Projeto novo / stack | `../docs/backend.md` e/ou `../docs/frontend.md` |
 
@@ -195,7 +195,7 @@ No markdown **publicado** no ClickUp:
 
 | Modo | Tipo custom | Status / extras |
 | --- | --- | --- |
-| Esteira | **Task padrão** (sem custom type) | Status `pbi (bugs) e tasks` + campo Projeto + assignee (Ricardo default) + anexa `.md` |
+| Esteira | **Task padrão** (sem custom type) | Status `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`) + campo Projeto + assignee (Ricardo default) + anexa `.md` |
 | Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) + checklist nativo na tarefa de cada dev |
 
 Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `clickup.env` nesta skill. Ver [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
@@ -212,11 +212,35 @@ Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `cli
 
 A descrição colada no ClickUp é **para o time de desenvolvimento**. Meta de PO/Scrum fica fora.
 
+### ⚠️ Filtro conversa → corpo da task (obrigatório)
+
+A conversa com o PO tem **ruído útil para o agente** (decisões, rejeições, “não usamos X”, histórico). O júnior **não** precisa desse histórico. Colar contexto irrelevante **confunde** e vira “lei” falsa.
+
+**Antes de qualquer parágrafo no `.md` / ClickUp, passar o teste:**
+
+| Pergunta | Se a resposta for não → |
+|----------|-------------------------|
+| O júnior precisa disso para **implementar** ou **provar** esta entrega? | **Não colar** |
+| Está no **caminho oficial** (o que **fazer**), ou só nega algo que a conversa matou? | Preferir descrever o caminho oficial; ver NÃO DEVE abaixo |
+| Se eu **apagar** esta frase, o júnior inventaria o erro sozinho? | Se não inventaria → era **ruído** — apagar |
+
+**Proibido no corpo** (além da meta de roteamento):
+
+- Ferramenta / abordagem **fora do padrão** citada só para dizer “não usamos” (ensina o desvio; o júnior passa a considerar)
+- “Não criar Y / sem Y / não documentar Y” quando **Y nunca esteve no escopo** — isso **ensina Y**
+- Anedota da conversa, “fulano disse”, “na call vimos que…”
+- Alternativas descartadas, comparação com outro cliente, “não confundir com o projeto Z” sem Z estar na entrega
+- Checklist interno do agente, path `.task/` / `.docs/`, status de skill
+
+**Como escrever o caminho certo:** diga o que **é** (ex.: Dockerfile no EasyPanel; DB como serviço separado; vars de env). **Não** abra parêntese “e não use [ferramenta rejeitada na conversa]”.
+
+Detalhe do `## ⛔ NÃO DEVE`: [evidencias-dod.md](evidencias-dod.md) — só falha **real** desta entrega.
+
 ### ⚠️ Ao limpar meta de roteamento, NÃO remover conteúdo didático
 
-Remover só processo interno (modo SuperAgente, complexidade de roteamento).  
-**Nunca** trocar “explicativo” por “enxuto” sem o PO pedir explicitamente.  
-Manter glossário, colunas, DBML, payloads, curls, exemplos e pseudocódigo.
+Remover só processo interno (modo SuperAgente, complexidade de roteamento) **e** o ruído do filtro acima.  
+**Nunca** trocar “explicativo útil ao júnior” por “enxuto” sem o PO pedir explicitamente.  
+Manter glossário, colunas, DBML, payloads, curls, exemplos e pseudocódigo **quando forem desta entrega**.
 
 ## Modo SuperAgente (ClickUp)
 
@@ -340,14 +364,27 @@ Tarefas de **Frontend** ou com **protótipo/print** devem incluir imagens da UI 
 
 ### Prioridade visual (não inverter)
 
-1. **Repo do produto** — tokens, primary, cards, tabela, filtros já no código. O PO **não** pediu trocar o tema → a task **não** manda trocar.
-2. **Design System do time** (`../docs/design-system.md`) — só o que o repo **ainda não** define. Apontar o arquivo; **não** resumir as 19 seções.
-3. **Lovable / Figma** — último: **campos, hierarquia, ações**. Nunca cor, glow, neon, radius gamer, botão do mock (AP-FE-08).
+1. **Repo do produto / tema BO** — tokens, primary, logo, banners, cards, tabela, chrome já no código ou injetados pelo backoffice. O PO **não** pediu trocar o tema → a task **não** manda trocar nem gravar hex do mock (white-label).
+2. **DS do produto** (anexo `DESIGN_SYSTEM.md` / `P-…`) — se a entrega for Apply/Forge: patterns e hierarquia.
+3. **Design System do time** (`../docs/design-system.md`) — só o que o repo **ainda não** define. Apontar o arquivo; **não** resumir as 19 seções.
+4. **Lovable / Figma** — último: **campos, hierarquia, ações**. Nunca cor, glow, neon, radius gamer, botão do mock (AP-FE-08).
 
 Greenfield (repo sem tema): o passo 1 está vazio → o DS manda. O mock continua último em chrome.
 
-A task Front **declara essa ordem** no bloco de UI. Se o print e o dash discordarem em cor/borda, **ganha o dash**.
+A task Front **declara essa ordem** no bloco de UI. Se o print e o dash discordarem em cor/borda, **ganha o dash** (ou o BO).
 
+### Task Home / player com DS (quando couber)
+
+Escrever no **afirmativo** (filtro conversa → corpo):
+
+| O quê | Como na task |
+|-------|----------------|
+| Ordem de entrega | Fundação de shells → **overlays/modais** (login, cadastro, depósito…) → **depois** Home/chrome |
+| Marca | Cores/logo/banners = **backoffice / tema do repo**; DS = patterns `P-…` |
+| Prova social | Se o DS tiver: no máx. 1 global (`P-WINS` / `P-TICKER`); nested no jackpot = `P-JACKPOT-WINNERS` ([ui-gosto](../docs/ui-gosto.md) §5.5) |
+| Anexos | `DESIGN_SYSTEM.md` + tokens pelo **nome do arquivo** (sem path `.docs/`) |
+
+Não inverter: Home densa **antes** dos modais estáveis.
 ### Regra resumida
 
 - **Front ou alteração de tela** → capturar prints (protótipo Lovable, staging ou prints que o PO enviar no chat)
@@ -397,7 +434,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 
 ## Checklist antes de entregar descrição
 
-- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir **e** declara prioridade repo → DS → mock
+- [ ] **Constituição:** leu `../docs/README.md` e os arquivos da seção PO; task Back com teste de ouro do entry point; schema/repo com `../docs/nomenclatura.md`; Front aponta DS sem resumir **e** declara prioridade repo/BO → DS produto → Space DS → mock; se Home/player: ordem **modais → Home**
 - [ ] Projeto identificado (e opção do campo ClickUp **Projeto** conhecida)
 - [ ] Modo confirmado **na conversa** (SuperAgente/Esteira ou Imediatas) — **não** no corpo da task
 - [ ] Responsável confirmado no onboard (Esteira: Ricardo default se OK; Imediatas: obrigatório)
@@ -411,6 +448,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Critérios de aceitação em Dado/Quando/Então (separados Back/Front se ambos)
 - [ ] **REGRAS DE DDD** (pronto + paralelos + prova HML); tom **ordenante**; prova na camada que **mudou código**; Imediatas: provas nomeadas ([evidencias-dod.md](evidencias-dod.md))
 - [ ] **`## ⛔ NÃO DEVE`** no **final** da task (tabela desta entrega + `>` no bloqueio e na frase de ouro; tabela fora do quote)
+- [ ] **Filtro conversa → corpo:** nada de ferramenta/abordagem fora do caminho “só para negar”; NÃO DEVE só com falha **real** desta entrega ([evidencias-dod.md](evidencias-dod.md))
+- [ ] Caminho oficial no **afirmativo** (o que fazer). Não citar o que não entra, salvo tentação real desta spec
 - [ ] **Esteira:** passo a passo se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte). **Imediatas:** **sem** essa seção; checklist nativo na task de cada dev
 - [ ] **Imediatas ao publicar:** `--checklist-name` + `--checklist-item` na pai (uma camada) **ou** nas subtasks Back e Front (não na MAIN)
 - [ ] Payloads, endpoints, curls e fluxos documentados onde necessário
@@ -447,14 +486,17 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não usar abreviações obscuras sem explicar
 - Não entregar descrição vaga para tarefas front+back
 - Não colar ` ```mermaid ` fora do passo a passo da **Esteira** — lá imagem **e** fonte; no resto e em Imediatas, só PNG (no ClickUp via attachment)
-- Não mandar a task Front copiar cor, glow ou radius do Lovable, nem trocar o tema **já no repo** “porque o DS / o mock é outro” — ordem: repo → DS (buraco) → mock (campos/ações)
+- Não mandar a task Front copiar cor, glow ou radius do Lovable, nem trocar o tema **já no repo/BO** “porque o DS / o mock é outro” — ordem: repo/BO → DS produto → Space DS (buraco) → mock (campos/ações)
+- Não entregar Home/player **antes** dos modais/overlays se a task for Apply de DS nessa ordem
 - Não resumir as 19 seções do Design System na task — apontar o arquivo
 - Não usar caminhos `C:\...` ou relativos locais — space-assets no `.md` local; **attachment URL** no corpo ClickUp
 - Não citar `.docs/` / `.task/` no corpo ClickUp — anexar o arquivo e referenciar pelo nome
 - Não publicar OpenAPI/DBML só “no disco do PO” sem anexar na task
 - Não deixar no corpo ClickUp só `mermaid.ink` / `raw.githubusercontent` como única fonte de imagem (stripa/quebra)
 - Não colocar no markdown da task: modo SuperAgente, “não é direto pro dev”, complexidade de roteamento, checklist meta do agente
-- Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” sem o PO pedir explicitamente
+- Não colar ruído da conversa (ferramenta rejeitada, “sem Y”, anedota, outro cliente) — filtrar; caminho oficial no **afirmativo**
+- Não usar o `## ⛔ NÃO DEVE` para listar o que o time “não usa” em geral — só falha **real** desta entrega
+- Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” **úteis ao júnior nesta entrega** sem o PO pedir explicitamente
 - Não escrever task “só para quem já sabe” — default é júnior
 - Não auditar pixel / preencher REPORT no lugar do `qa-space` — PO **referencia** o DS; QA **audita**
 - Não commitar `clickup.env` / `apidog.env` / tokens

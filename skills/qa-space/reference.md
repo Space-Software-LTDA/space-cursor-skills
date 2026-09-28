@@ -4,6 +4,23 @@ Checklists, **matriz de auditoria do Design System** (seção a seção), anti-p
 
 **Design System completo:** [`../docs/design-system.md`](../docs/design-system.md) — ler **depois** de [`../docs/README.md`](../docs/README.md) (seção QA) e **antes** de usar esta referência. O arquivo `design-system.md` nesta pasta é só um ponteiro.
 
+Se a task/produto tiver DS forjado: auditar também os `P-…`. Prova social: [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §5.5.
+
+---
+
+## Prova social / jackpot (quando a tela tiver)
+
+Régua: ui-gosto §5.5. IDs sugeridos no DS do produto: `P-WINS` (global), `P-TICKER` (global opcional), `P-JACKPOT`, `P-JACKPOT-WINNERS` (contextual nested).
+
+| Check | Pass? | Notas |
+|-------|-------|-------|
+| No máx. **1** superfície de prova social **global** (ticker **ou** painel) | | |
+| Sem ticker full-bleed **e** painel “maiores ganhos” competindo | | |
+| Lista nested no card jackpot = contextual (não conta como 2ª global) | | |
+| Se a task exige `P-JACKPOT-WINNERS`: lista está **dentro** do card, não no chrome | | |
+| Sem glow/teatro no jackpot; valor legível no mobile | | |
+| Tema/BO: não falhou por hex do mock diferente do tenant | | |
+
 ---
 
 ## Matriz de auditoria — Design System (por seção)

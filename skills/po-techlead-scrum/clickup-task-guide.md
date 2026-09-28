@@ -44,7 +44,7 @@ Workspace: `90131082033` (SPACE DEV).
 | Campo | Valor |
 | --- | --- |
 | **Tipo** | **Task padrão** (sem `custom_item_id` — **não** usar `3- PBI`) |
-| Status | `pbi (bugs) e tasks` (`CLICKUP_STATUS_ESTEIRA_PBI`) |
+| Status | `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`) — conferir na lista se o workspace renomear |
 | Assignee | Ricardo Paes por default (`CLICKUP_ASSIGNEE_RICARDO`) — **ainda perguntar no onboard** |
 | Campo **Projeto** | Dropdown (`CLICKUP_CF_PROJETO`) — BATEU → `BateuBET \| Dashbaord` |
 | Anexo | `.md` da task + PNGs (diagramas/prints); o script reescreve imagens para attachment |

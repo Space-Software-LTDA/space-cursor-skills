@@ -55,8 +55,10 @@ A constituição **não** está resumida neste `SKILL.md`.
 | [`../docs/design-system.md`](../docs/design-system.md) | **Inteiro** antes da Fase 2. Matriz em [reference.md](reference.md). |
 | [`../docs/anti-padroes.md`](../docs/anti-padroes.md) | Sobretudo **AP-FE-*** no código da rota e no Network |
 | [`../docs/frontend.md`](../docs/frontend.md) | Se o trabalho tocar stack/FDD — só aplicar FDD se o repo tiver o `AGENTS.md` do boilerplate |
+| **DS do produto** (`.docs/DESIGN_SYSTEM.md` / anexo da task) | Se existir `P-…`: auditar contra eles. **Não** editar o DS (isso é Apply/Forge) |
+| [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §5.5 | Se a tela tiver prova social / jackpot / ticker — global ≠ contextual |
 
-**Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL.
+**Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL. **Não** rodar mini-A / Fix Lovable — só REPORT.
 
 O stub [design-system.md](design-system.md) nesta pasta só redireciona. A fonte é `../docs/design-system.md`.
 
@@ -98,11 +100,12 @@ Antes de abrir browser ou ler código, perguntar o que faltar (nunca assumir em 
 | 4 | Paths **Front** e **Back** no workspace (se existirem)? |
 | 5 | **Login**: já logado? credenciais em `.env`? skill tenta logar? |
 | 6 | **Escopo de navegação**: só task / task + relacionadas / módulo inteiro? |
-| 7 | **Rigor visual**: só P0/P1 ou incluir nitpicks P2/P3? |
-| 8 | **Mobile**: validar breakpoint mobile do DS (§15)? |
-| 9 | **Fonte da API**: OpenAPI/doc, código back, Network, prod — o que existe? |
-| 10 | Mock **conflita** com DS — manda mock ou DS? (se aplicável) |
-| 11 | **Primary / Surface** do produto (hex)? Se não souber, inferir do front e registrar no REPORT |
+| 7 | Existe **DS do produto** (`.docs/DESIGN_SYSTEM.md` ou anexo ClickUp com `P-…`)? Se sim → path/versão |
+| 8 | **Rigor visual**: só P0/P1 ou incluir nitpicks P2/P3? |
+| 9 | **Mobile**: validar breakpoint mobile do DS (§15)? |
+| 10 | **Fonte da API**: OpenAPI/doc, código back, Network, prod — o que existe? |
+| 11 | Mock **conflita** com DS — manda mock ou DS? (se aplicável) |
+| 12 | **Primary / Surface** do produto (hex)? Se não souber, inferir do front e registrar no REPORT. Se white-label/BO → Primary vem do tema, não do mock |
 
 Inputs aceitos para task: **conteúdo colado OU link** (preferir colar quando possível).
 
@@ -113,23 +116,26 @@ Inputs aceitos para task: **conteúdo colado OU link** (preferir colar quando po
 1. Confirmar que leu [`../docs/README.md`](../docs/README.md) (seção QA).
 2. Ler **[`../docs/design-system.md`](../docs/design-system.md)** (§1–§19 + apêndices). **Inteiro.**
 3. Se o projeto tiver `docs/SPACE_DESIGN_SYSTEM.md`, ler também; usar a versão **mais recente**.
-4. Montar mentalmente a **matriz de auditoria** (ver [reference.md](reference.md) § Auditoria DS).
-5. Anotar no REPORT: versão do DS usada + Primary/Surface do produto.
+4. Se o wizard apontou **DS do produto** (`.docs/DESIGN_SYSTEM.md` / anexo): ler os `P-…` relevantes à task — **sem** editar o arquivo.
+5. Se a Home/player tiver jackpot, ticker ou “maiores ganhos”: ler [`../docs/ui-gosto.md`](../docs/ui-gosto.md) **§5.5** (global ≠ contextual).
+6. Montar mentalmente a **matriz de auditoria** (ver [reference.md](reference.md) § Auditoria DS + prova social).
+7. Anotar no REPORT: versão do Space DS + (se houver) versão/nome do DS do produto + Primary/Surface.
 
 ### Prioridade de verdade (visual)
 
 Não inverter. O mock **não** é a régua de cor/borda.
 
-1. **Repo do produto** — primary, surface, cards, tabela, chrome já no código. O PO não pediu trocar o tema → **não reprove** o feito por manter esse tema.
+1. **Repo do produto / tema BO** — primary, surface, cards, tabela, chrome, logo, banners já no código ou injetados pelo backoffice. O PO não pediu trocar o tema → **não reprove** o feito por manter esse tema / hex do tenant.
 2. **Task** — critérios, escopo, o que esta entrega mudou.
-3. **`../docs/design-system.md`** — só o que o repo **ainda não** define (abrir o arquivo inteiro). `docs/SPACE_DESIGN_SYSTEM.md` do produto, se mais novo.
-4. **Mock Lovable** — último: campos, hierarquia, ações. Copiar neon/glow do mock = falha, não “fidelidade”.
+3. **DS do produto** (`P-…`) — se existir e a task apontar; patterns (auth sheet, jackpot nested, etc.).
+4. **`../docs/design-system.md`** — só o que o repo **ainda não** define (abrir o arquivo inteiro). `docs/SPACE_DESIGN_SYSTEM.md` do produto, se mais novo.
+5. **Mock Lovable** — último: campos, hierarquia, ações. Copiar neon/glow / hex do mock = falha, não “fidelidade”.
 
 Se o mock viola o chrome do produto ou o DS no buraco: **não** peça para o Next ficar igual ao mock. Reportar o mock como errado.
 
 Greenfield (sem tema no repo): o passo 1 está vazio → o DS manda; o mock continua último em chrome.
 
-**Stack:** protótipo Vite → validar o **Next entregue**.  
+**Stack:** protótipo Vite → validar o **Next entregue** (ou o stack da task — ex. Vue legado se a task disser).  
 **FDD / AGENTS.md:** aplicar regras de arquitetura **só** quando o projeto for o boilerplate Next.
 
 ---
@@ -241,9 +247,10 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 1. Veredito: **Aprovado** / **Aprovado com ressalvas** / **Reprovado**
 2. Resumo executivo (3–5 linhas para leigos)
 3. Consolidar P0 / P1 / P2 / P3
-4. Seção **Design System** — tabela §19 preenchida (pass/fail por item)
-5. Seção **Como deveria ser** por achado relevante (tom professor — citar § do DS)
-6. Listar inputs usados e lacunas (sem task, sem mock, etc.)
+4. Seção **Design System** — tabela §19 preenchida (pass/fail por item); se houver DS do produto, listar `P-…` auditados
+5. Se Home/player: checklist **prova social** (reference.md) — global ≠ contextual
+6. Seção **Como deveria ser** por achado relevante (tom professor — citar § do DS / `P-…`)
+7. Listar inputs usados e lacunas (sem task, sem mock, sem DS produto, etc.)
 
 **Não** criar task ClickUp — informar que o PO pode chamar `@po-techlead-scrum` com o conteúdo de `.task/`.
 
@@ -273,8 +280,10 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 - Não substituir wizard por suposições quando input faltar
 - **Não** auditar visual sem ler `../docs/design-system.md` **inteiro**
 - **Não** reduzir DS a 10 bullets — usar §19 + matriz em reference.md
-- **Não** reprovar o produto por manter o primary/chrome **já no repo**
+- **Não** reprovar o produto por manter o primary/chrome **já no repo** (nem hex do tenant/BO)
 - **Não** tratar fidelidade ao Lovable (cor/glow) como critério de aceite
+- **Não** editar `.docs/DESIGN_SYSTEM.md` nem rodar mini-A / Fix — QA só REPORT; Apply é outra skill
+- **Não** ignorar prova social duplicada (ticker global + painel) quando §5.5 / task `P-WINS` aplicam
 
 ---
 

@@ -2,7 +2,7 @@
 
 # Stacks e estrutura — onboarding
 
-Este é o documento de orientação para quem chega no time: repositórios, git, servidores, banco, stack, testes, Coder e Apidog. A **manufatura de nomes** (repo, branch, tabela, coluna, EasyPanel) é padrão obrigatório — texto normativo em [nomenclatura.md](nomenclatura.md), princípio GO-12, anti-padrões AP-NAM-04…06.
+Este é o documento de orientação para quem chega no time: repositórios, git, servidores, banco, stack, testes, Coder e Apidog. A **manufatura de nomes** (repo, branch, tabela, coluna, EasyPanel) é padrão obrigatório — texto normativo em [nomenclatura.md](nomenclatura.md), princípio GO-12, anti-padrões AP-NAM-04…07.
 
 Onboarding humano (Doc com subpáginas): **Bíblia da Space** — https://app.clickup.com/90131082033/docs/2ky3path-37093
 
@@ -85,7 +85,17 @@ Gerenciamos servidores com **EasyPanel**.
 - Projeto: `[nome-do-cliente]_[nome-do-projeto]`
 - Aplicação: `[nome-do-servico]`
 
-Sempre backup de banco e arquivos em local seguro.
+### Como sobe uma aplicação
+
+| Peça | Como |
+| --- | --- |
+| App (API, home, dash, partners…) | **Serviço próprio** no EasyPanel, build a partir do **`Dockerfile`** do repo |
+| Banco, Redis, fila, storage | **Outros serviços** no EasyPanel (não vão “dentro” do serviço do app) |
+| Ligação app → banco/cache | Variáveis de ambiente no serviço do app (host, porta, credenciais do serviço separado) |
+
+O **README** do repo documenta: o que o `Dockerfile` espera, porta, `.env.example`, e como apontar para os serviços separados no EasyPanel.
+
+Nomes de projeto/app: [nomenclatura.md](nomenclatura.md). Sempre backup de banco e arquivos em local seguro.
 
 ---
 

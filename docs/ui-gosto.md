@@ -30,13 +30,14 @@
 
 | Contexto | O que aplicar deste guia |
 |----------|---------------------------|
-| **Admin / dashboard / B2B** | Método: 1 Primary, anti-glow, encaixe, Inter, Lucide, densidade corporativa. **Proibido** puxar energia cassino / tiles 3:4 / jackpot language. |
+| **Admin / dashboard / B2B** | Método: 1 Primary, anti-glow, encaixe, Inter, Lucide, densidade corporativa. **Proibido** puxar energia cassino / tiles 3:4 / jackpot language. **Obrigatório** ler §5.6 (padrões/anti-padrões admin). |
 | **Player / bet home / marketing** | Princípios P1–P10 + checklist §10 (abaixo). |
 
 ### Job da Apply
 
 1. **Fase A:** confrontar DS do produto com este gosto → **alterar o DS** (remover fora-do-gosto).  
-2. **Fase B:** Scan → Diagnose → Fix no front até ALIGNED (ver skill Apply).
+2. **Fase B:** Scan → Diagnose → Fix no front até ALIGNED (ver skill Apply).  
+3. **Review humano no workspace** (notas, prints, clip): se existir, é checklist ALTA — **não** ALIGNED enquanto bullet ALTA falhar no preview. Conflito DS × review → mini-A, não PASS silencioso.
 
 ---
 
@@ -77,8 +78,8 @@ Cada princípio: **regra / por quê / exemplo bom / anti-exemplo**.
 - **Deslogado (player):** sem Depositar, a ação principal é **Cadastro** → Cadastro = **Primary sólido da marca** (header e/ou FAB). **Proibido** deixar Cadastro só outline “por conceito” se a ação principal for cadastrar.
 - **Logado:** Primary tipicamente Depositar / jogar conforme o DS do produto.
 - **Por quê:** Von Restorff + Goal-Gradient — o olho deve achar a conversão.
-- **Bom:** Header Cadastrar Primary (deslogado); ticker **ou** painel (não os dois); hero estático.
-- **Anti:** Dois Primaries competindo (header sólido + FAB sólido no mesmo papel); Cadastro outline no header deslogado “porque o FAB é Primary”; WinnersTicker + painel + sticky + BottomNav todos gritando.
+- **Bom:** Header Cadastrar Primary (deslogado); **uma** prova social **global** (ticker **ou** painel); hero estático. Lista nested **dentro** de um card nomeado (ex. jackpot) ≠ segunda superfície global — ver §5.5.
+- **Anti:** Dois Primaries competindo (header sólido + FAB sólido no mesmo papel); Cadastro outline no header deslogado “porque o FAB é Primary”; ticker **no chrome** + painel + sticky + BottomNav todos gritando; remountar ticker full-bleed sob o Header depois de removê-lo no Apply “só porque pediram lista de ganhadores”.
 
 ### P3 — Hero estático > motion theater
 - **Regra `[AS-IS Miguel]`:** Hero pode ter carrossel **discreto**, mas **não** overload de parallax, partículas, glow pulse, texto ilegível em degradê, chips HTML soltos sobre arte.
@@ -211,15 +212,19 @@ Botão Google: tipografia alinhada ao sistema (Inter / tamanhos do form), **não
 ```
 [Banner urgência opcional — máx 1]
 [Header — Primary = Cadastrar]
-[Winners / prova social — UMA superfície]
+[Prova social GLOBAL — UMA superfície (ticker OU painel) — ou ausente]
 [Hero — estático / carrossel discreto]
 [Category rail + Sidebar conforme breakpoint]
-[Jackpot]
+[Jackpot — pode incluir strip CONTEXTUAL de últimos ganhadores (nested)]
 [Game rows densos]
+[Painel Maiores ganhos / top winners — se for a prova social GLOBAL escolhida]
 [Providers / trust COM logos]
 [Footer estruturado — responsável + +18]
 [Mobile: BottomNav; sem segundo Primary competindo]
 ```
+
+> **Global** = faixa/painel full-bleed ou seção própria sob o chrome.  
+> **Contextual** = lista dentro do card de um componente (jackpot etc.). Não contar contextual como “segunda prova social global”.
 
 ### 5.2 Sidebar `[AS-IS Miguel]` (gosta desktop + mobile)
 - Desktop: sidebar de categorias/navegação com item ativo = accent brand (purple SpaceBET).
@@ -238,9 +243,96 @@ Botão Google: tipografia alinhada ao sistema (Inter / tamanhos do form), **não
 | Depósito | Média (quick amounts, 1 Popular) |
 | Marketing Stripe-like | **Proibido** como home bet |
 
-### 5.5 Jackpot / top winners `[AS-IS Miguel]` (gosta)
-- Jackpot mobile: informação clara (valor + lista) **sem** glow; evitar densidade que vire muro ilegível — polish > teatro.
-- Top winners / maiores ganhos: thumbs 3:4, rank consistente; **uma** prova social contínua por viewport.
+### 5.5 Jackpot / prova social `[AS-IS Miguel]` (atualizado 2026-09-21)
+
+**Prova social GLOBAL** (chrome / faixa sob header / seção própria):
+
+- Máximo **1** superfície contínua por viewport: ticker **ou** painel “maiores ganhos” (ou equivalente).
+- **Anti:** ticker no chrome **e** painel de ranking na mesma Home competindo como duas faixas globais.
+- Se o Apply removeu o ticker global para sanar FAIL de duplicata → **não** remountar o mesmo ticker no chrome sem mini-A + OK.
+
+**Prova social CONTEXTUAL** (dentro de um componente nomeado):
+
+- Lista de “últimos ganhadores” **dentro** do card Jackpot (ou equivalente) = **encaixe do componente**, não segunda superfície global.
+- Pode coexistir com painel “Maiores ganhos” **se** o DS do produto nomear um `P-…` contextual e **não** houver ticker full-bleed sob o Header.
+- Relocar dados do antigo ticker **para dentro** do card pedido pelo humano = caminho certo; remountar o componente global = caminho errado.
+
+**IDs sugeridos no DS do produto** (quando o domínio tiver esses papéis — Forge §10.5):
+
+| Papel | ID sugerido |
+|-------|-------------|
+| Ranking / maiores ganhos (**global**) | `P-WINS` |
+| Ticker full-bleed (**global**, só se for a única) | `P-TICKER` |
+| Card jackpot | `P-JACKPOT` |
+| Lista nested no jackpot (**contextual**) | `P-JACKPOT-WINNERS` |
+
+**Jackpot / painel:**
+
+- Jackpot: valor + (opcional) lista nested legível **sem** glow; polish > teatro; mobile sem muro ilegível.
+- Top winners / maiores ganhos (quando for a prova social global): thumbs 3:4, rank consistente.
+
+### 5.6 Admin / B2B dashboard — padrões e anti-padrões `[AS-IS Miguel 2026-09-22]`
+
+> Genérico (ex.: gateway admin, backoffice, fintech). Hex de marca = **produto**. Este § nomeia **forma**.  
+> IDs `GP-…` / `AP-…` são gosto transversal; o DS do produto mapeia para `P-…`.  
+> **Não** confundir com §5.5 (jackpot / prova social player).
+
+#### Viewport de QA
+
+- Desktop admin default: **~1300×800** (notebook), **mais** mobile. 1440 sozinho **esconde** crush de KPI/tabela (`GP-QA-NOTEBOOK`).
+
+#### Padrões bons (`GP-…`)
+
+| ID | Regra |
+|----|--------|
+| GP-AUTH-CARD | Auth: card denso, inputs h-10 radius ~8, nested surface, sem orbe/glow |
+| GP-CTA-PAIR | Primary + outline mesma altura/radius; um Primary por seção |
+| GP-FILTER-COLLAPSE | Filtros em card colapsável ok; header = título+chevron, **sem** faixa morta |
+| GP-PAGE-PERIOD-IN-HEADER | Período/contexto no **header**, não em faixa que come 10–20% da dobra |
+| GP-BADGE-ONE-SHAPE | **Um** radius/anatomia para status, delta e “conta ativa” |
+| GP-TABLE-CANON | Texto L · número/R$ R · status L · ações R; ID **não** Primary; `⋯` se muitas colunas; **Total** em lista financeira; paginação **no** card |
+| GP-FORM-LABEL-14 | Label ≥14/500, legível |
+| GP-FORM-DENSE-ROW | Em grid form 2+ cols: **toda célula da row preenchida** ou o campo **span full**; CTAs Primary+outline **agrupados** (`gap` 8–12), nunca espalhados nas bordas; meta (ID, badge) **topo-alinhada** ou **empilhada** sob o valor — nunca `items-end` criando poço em cima |
+| GP-SHEET-448 | Drawer create/edit ~448px |
+| GP-PAGINATION-NESTED | Contador + per page + nav dentro do bloco da tabela |
+| GP-GRAPH-OK | Chart com Primary + no máx. um accent de série (não no chrome) |
+
+#### Anti-padrões (`AP-…`) — FAIL em Apply
+
+| ID | Crime |
+|----|--------|
+| AP-NEON-PRIMARY | Primary hipersaturado/neon no navy (marca deve escolher chroma sóbrio) |
+| AP-DUAL-BRAND | Segunda cor de marca no wordmark competindo com Primary |
+| AP-CHROME-WASTE | Faixa só com subtítulo/filtro/breadcrumb inchado |
+| AP-KPI-VOID | Poço vazio em KPI/card (“equalizar” colunas) |
+| AP-BADGE-DRIFT | Vários shapes de badge na mesma UI |
+| AP-TABLE-RAINBOW | >2 tintas de marca/dados na grade além do badge de status |
+| AP-TABLE-ALIGN-CHAOS | Align L/C/R sem regra por tipo de coluna |
+| AP-TABLE-NO-OVERFLOW | Sem picker `⋯` com grade larga |
+| AP-TABLE-NO-TOTAL | Lista financeira sem rodapé de soma quando somável |
+| AP-LABEL-MICRO | Label de form &lt; 14px |
+| AP-FILTER-STRIP | Linha-título vazia (“Filtros”) |
+| AP-PAGINATION-ORPHAN | Paginação entre seções / fora do card |
+| AP-METRIC-CRUSH | 5–7 KPIs numa row rígida quebrando texto em ~1300 |
+| AP-ID-AS-PRIMARY | ID/TXN pintado de Primary |
+| AP-FORM-VOID | Stretch vazio em meia página form\|side (vão entre colunas de layout) |
+| AP-GRID-HOLE | **Buraco intra-card:** última row do form em grid 2-col com **só 1 campo** e célula vizinha vazia (parece campo faltando) |
+| AP-CTA-SPREAD | Par de CTAs com `justify-between` / um em cada borda — **deserto horizontal** entre Primary e outline |
+| AP-META-BASELINE | Valor alto + meta (ID) com `items-end` / baseline inferior — **poço acima** da meta |
+| AP-TWO-FONTS | Display/duas famílias dentro de célula de tabela |
+
+#### Checklist admin (PASS/FAIL)
+
+- [ ] Primary sóbrio (não neon) · um hue de ação  
+- [ ] Wordmark sem segunda marca competindo  
+- [ ] Sem faixa chrome morta; período no header  
+- [ ] KPI/cards sem poço; métricas wrap em 1300  
+- [ ] Um shape de badge  
+- [ ] Tabela: align, sem rainbow, `⋯`, total se financeiro, paginação nested  
+- [ ] Labels ≥14  
+- [ ] Forms: sem AP-GRID-HOLE / AP-CTA-SPREAD / AP-META-BASELINE (caçar **dentro** do card, não só entre seções)  
+- [ ] Scan feito em **1300** + mobile  
+- [ ] Prints/círculos do humano no chat → cada um PASS/FAIL com evidência (proibido “mitigado” sem reabrir a rota)  
 
 ---
 
@@ -377,9 +469,9 @@ Usar em toda entrega Lovable/PR visual SpaceBET ou hub bet. Marcar **PASS** ou *
 ### Layout / viewport
 - [ ] **PASS/FAIL** — **Uma** guia visual por viewport (1 Primary forte no chrome da dobra).
 - [ ] **PASS/FAIL** — Hero estático/legível; sem motion theater / layout quebrado.
-- [ ] **PASS/FAIL** — Uma superfície de prova social (ticker **ou** painel, não duplicata).
+- [ ] **PASS/FAIL** — Prova social **GLOBAL**: ticker **ou** painel (não os dois). Strip nested em componente (ex. jackpot) **não** conta como duplicata global se o DS nomeou o padrão.
 - [ ] **PASS/FAIL** — Sidebar presente no modelo desktop; mobile = drawer/sheet coerente.
-- [ ] **PASS/FAIL** — Jackpot / top winners legíveis (gosto Miguel), sem muro ilegível.
+- [ ] **PASS/FAIL** — Jackpot / top winners legíveis (gosto Miguel), sem muro ilegível; lista contextual no jackpot sem glow/teatro.
 
 ### Componentes
 - [ ] **PASS/FAIL** — Game cards densos; radius ~8; CTA Jogar não-pill; mobile tappable.
@@ -449,12 +541,7 @@ Itens abertos nos docs (`07-glossario`, `page_06`, inventário B1). Agente **nã
 
 ## Apêndice B — Frase de ordem para colar no Lovable/Cursor
 
-> Siga `docs/ui-gosto.md` (pack space-cursor-skills). Marca do produto manda no Primary. Dark surface neutra; brand só em CTA/ativo. Radius ~8 encaixado, sem pill/glow. Uma guia por viewport; Cadastro deslogado = Primary sólido. Hero estático. Cards densos com título forte. Par Entrar/Cadastrar alinhado idle+hover. Bordas/seleção consistentes (fina/subtom ou padrão do produto). Auth mobile = sheet. Providers com logo; footer estruturado. Linear = polish; Stripe ≠ home; Betão = segmento sem carpete. Checklist PASS/FAIL. Admin ≠ energia cassino.
-
----
-
-_Fim do guia 33._
-
+> Siga `docs/ui-gosto.md` (pack space-cursor-skills). Marca do produto manda no Primary (**sem neon**). Dark surface neutra; brand só em CTA/ativo. Wordmark sem segunda cor competindo. Radius ~8, sem pill/glow. Admin: §5.6 (tabela canônica, badge único, sem chrome waste / KPI void / **grid-hole / CTA-spread / meta-baseline** / pagination órfã). QA admin ~1300px. Cadastro deslogado = Primary. Checklist PASS/FAIL. Admin ≠ energia cassino.
 
 ---
 
@@ -483,3 +570,6 @@ Adaptado de [Taste Skill](https://github.com/Leonxlnx/taste-skill) (método). **
 | Versão | Data | Notas |
 |--------|------|-------|
 | 2.0.0 | 2026-09-21 | Guia 33 canônico + decisões Miguel (marca>gosto, admin≠cassino, borda contextual, Cadastro deslogado=Primary) + AI tells Taste |
+| 2.1.0 | 2026-09-22 | §5.6 admin GP/AP (tabela, badge, chrome waste, KPI void, QA 1300); anti-neon Primary; wordmark sem dual-brand; §5.5 permanece jackpot |
+| 2.1.1 | 2026-09-22 | Admin movido para §5.6 (evita colisão com jackpot §5.5); mapa README |
+| 2.2.0 | 2026-09-23 | §5.6: GP-FORM-DENSE-ROW; AP-GRID-HOLE / AP-CTA-SPREAD / AP-META-BASELINE; checklist caça **intra-card** + prints humanos |

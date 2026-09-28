@@ -154,7 +154,24 @@ flowchart TD
 - o paralelo que não pode quebrar
 - prova só em localhost / sem HML
 
-**O que não entra:** passo de implementação, “não esquecer de commitar”, meta de Scrum, path `.task/` do PO.
+### Só falha real — não “ensinar o que não existe”
+
+Cada linha da tabela = um modo de falha que o júnior **pode cometer nesta entrega**.
+
+| Entra no NÃO DEVE | Não entra |
+|-------------------|-----------|
+| Tentação **frequente** desta spec (ex.: hardcodar hex do mock quando a task é white-label/BO) | Nomear ferramenta/abordagem **fora do caminho** só porque a conversa rejeitou (“não criar Y”, “sem ferramenta Z”) |
+| Quebra de contrato, regressão, prova falsa (só localhost) | Negar o óbvio (“não esquecer de commitar”, “não inventar endpoint sem a task pedir”) se isso já está no escopo positivo |
+| Misturar módulo/rota/type parecido | Alternativa descartada na call / anedota / “não confundir com o outro cliente” |
+
+**Regra:** o **Objetivo / escopo** descreve o caminho oficial no afirmativo. O NÃO DEVE **não** é o lugar para listar tudo que o time não usa.  
+**Teste:** se a linha **apresenta** ao júnior uma ideia que ele não teria sozinho, apague — ou mova o caminho certo para Objetivo/escopo **sem** citar o desvio.
+
+Exemplo do bug: conversa “não usamos [stack X]; sobe Dockerfile no EasyPanel”.  
+- Errado no corpo: checklist “Sem stack X (não criar; não documentar…)”.  
+- Certo: “`Dockerfile` no EasyPanel; banco como serviço separado; vars no `.env.example`.”
+
+**O que não entra:** passo de implementação, “não esquecer de commitar”, meta de Scrum, path `.task/` do PO, ruído da conversa (ver **Filtro conversa → corpo** no `SKILL.md`).
 
 ### Destaque no ClickUp (módulo com fundo)
 

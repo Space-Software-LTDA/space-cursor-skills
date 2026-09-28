@@ -46,10 +46,15 @@ Se o output for longo: breakpoint limpo + `[PAUSED — X of Y]` — depois retom
 - [ ] Fase A feita (DS limpo) ou humano dispensou com ciência  
 - [ ] Marca Primary respeitada  
 - [ ] Checklist gosto §10 sem FAIL acionável  
+- [ ] Prova social: no máximo **1** superfície **global**; strip nested em componente (se houver) nomeado no DS — não remountar ticker chrome “só porque pediram lista”  
 - [ ] Sem AI tells acima no escopo  
-- [ ] Desktop + mobile do escopo revalidados  
+- [ ] Desktop + mobile do escopo revalidados **no browser desta sessão**  
+- [ ] Review humano (se existir): tabela × preview sem FAIL ALTA  
+- [ ] Affordance clicável validada (⋯/menus/CTAs) — presença no DOM ≠ PASS  
 - [ ] Patch/output completo (sem placeholders)  
 - [ ] Badge host anotado se visível (não “corrigido” como feature)  
 - [ ] Relatório `…-rN.md` gravado  
+- [ ] Se houve pedido pós-ALIGNED que mudou pattern: mini-A + OK (ou autorização explícita na mesma msg) registrados em EXTRACTION_NOTES  
+- [ ] OK humano explícito para ALIGNED **final** (senão só “candidato”)  
 
 Qualquer FAIL → não declarar ALIGNED.

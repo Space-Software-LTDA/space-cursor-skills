@@ -115,6 +115,18 @@ Entity, migration e trecho SQL da **mesma** task. TypeScript ≠ migration é AP
 
 **Sev:** P2; P1 se produção já está no nome errado e a task é de criar mais um serviço no mesmo padrão quebrado
 
+### AP-NAM-07 — App e banco no mesmo serviço / artefato de deploy
+
+**Cenário.** A task pede Dockerfile + README para o player. O júnior sobe Postgres (ou Redis) **dentro** do mesmo serviço do app no EasyPanel, ou embute o banco no artefato do app “para facilitar o up”. Em HML o banco some no redeploy; credenciais misturam com o app; outro serviço não consegue reusar o Postgres.
+
+**Por que dói.** No EasyPanel o **app** é um serviço (build do `Dockerfile` do repo). Banco, Redis e fila são **serviços separados**. O app só aponta por env. Empacotar junto quebra backup, scale e o inventário do painel.
+
+**Ouro.** Um serviço EasyPanel por app (`Dockerfile` do repo). Banco/cache = outros serviços. `.env.example` com host/porta do serviço externo. README descreve esse caminho. Ver [stacks-e-estrutura.md](stacks-e-estrutura.md#servidores-easypanel).
+
+**Erro comum.** Tratar “subir o projeto” como um único container que já traz o banco.
+
+**Sev:** P1 em entrega de Docker/README; P2 se só o README induz o erro
+
 ---
 
 ## B. Loops, retry, N+1

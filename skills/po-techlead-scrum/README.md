@@ -28,7 +28,7 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 | [playwright-capture.md](playwright-capture.md) | Scripts Playwright | ✅ |
 | [diagrams.md](diagrams.md) | mermaid.ink | ✅ |
 | [super-agente-clickup.md](super-agente-clickup.md) | Calibragem SuperAgente | ✅ |
-| [evidencias-dod.md](evidencias-dod.md) | REGRAS DE DDD + passo a passo Esteira (PBI) + Imediatas (sem PBI) + NÃO DEVE | ✅ |
+| [evidencias-dod.md](evidencias-dod.md) | REGRAS DE DDD + passo a passo Esteira (PBI) + Imediatas (sem PBI) + NÃO DEVE (só falha real; sem ruído de conversa) | ✅ |
 | [clickup-task-guide.md](clickup-task-guide.md) | Publicar task via API + onde editar/sync | ✅ |
 | [apidog.md](apidog.md) | Contrato de rotas: pipeline + import OpenAPI | ✅ |
 | [clickup.env.example](clickup.env.example) | Keys ClickUp (geradas no sync) | ✅ |

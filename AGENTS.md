@@ -56,8 +56,8 @@ npm run sync
 | `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) + contrato Apidog — lê `docs/README.md` como **PO** |
 | `skills/project-context-doc` | Doc de contexto + Docs ClickUp — lê `docs/README.md` como **contexto** (G-xxx apontam ouro/entry) |
 | `skills/qa-space` | QA front / Design System Space — lê `docs/README.md` como **QA** (audita o feito; DS inteiro) |
-| `skills/design-system-forge` | Forjar DS **do produto** sob `.docs/` (gates + Q1–Q10; para na aprovação) |
-| `skills/design-system-apply` | Limpar DS (ui-gosto) + aplicar no front até ALIGNED |
+| `skills/design-system-forge` | Forjar DS **do produto** sob `.docs/` (Q1–Q17 + GATE ACCEPT + anti-contradição; STOP com ressalvas; para na aprovação) |
+| `skills/design-system-apply` | A: limpa DS (ui-gosto) + OK; B: Scan URL + relatório + OK; C: Fix loop até ALIGNED; pós-ALIGNED = mini-A se mudar pattern |
 | `docs/` | Constituição (não é skill). Índice obrigatório: `docs/README.md` |
 
 Manutenção do pack: skill **`skill-update`** (não espalhar o fluxo só nas skills de produto).

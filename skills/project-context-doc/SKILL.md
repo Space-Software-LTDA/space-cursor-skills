@@ -46,8 +46,9 @@ Gera documento de contexto para devs: foco em **por que**, **para que** e **flux
 A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 
 1. Ler **[`../docs/README.md`](../docs/README.md)** — a seção `project-context-doc` diz *como* esta skill usa os arquivos (documentar o produto que existe; **não** gerar PBI; **não** auditar pixel).
-3. Se o recon achar fluxo / API / jobs: [`../docs/padrao-ouro.md`](../docs/padrao-ouro.md) e, para código de entrada de feature, [`../docs/entry-point.md`](../docs/entry-point.md). Guardrails G-xxx **apontam** GO-* / o padrão de entry; não copiam o catálogo inteiro. Se achar entities/migrations: [`../docs/nomenclatura.md`](../docs/nomenclatura.md) (tabela/coluna/user) — G pode citar GO-12 / AP-NAM-05.
-3. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
+2. Se o recon achar fluxo / API / jobs: [`../docs/padrao-ouro.md`](../docs/padrao-ouro.md) e, para código de entrada de feature, [`../docs/entry-point.md`](../docs/entry-point.md). Guardrails G-xxx **apontam** GO-* / o padrão de entry; não copiam o catálogo inteiro. Se achar entities/migrations: [`../docs/nomenclatura.md`](../docs/nomenclatura.md) (tabela/coluna/user) — G pode citar GO-12 / AP-NAM-05.
+3. Se achar **`Dockerfile`**, EasyPanel, README de deploy ou serviço de banco separado: [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md#servidores-easypanel) + AP-NAM-07 — documentar **o que o produto faz hoje** (app = serviço via Dockerfile; DB/cache = outro serviço; env). Não inventar stack Compose se o código/README não tiver.
+4. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
 
 ## Principio rector
 
@@ -72,6 +73,7 @@ Toda decisao de escopo vem do **recon do codigo**:
 | Webhooks inbound/outbound | WH-xxx |
 | Schedulers / workers / crons | CR-xxx |
 | Auth, tenant, ENV | Secoes correspondentes |
+| `Dockerfile` / deploy EasyPanel / DB como servico | Como o app sobe hoje (Dockerfile + servicos separados + env) — ver stacks § EasyPanel / AP-NAM-07 |
 | Nao achou | **Omite a secao** (sem dizer que nao existe) |
 
 ## Arquivos de referencia

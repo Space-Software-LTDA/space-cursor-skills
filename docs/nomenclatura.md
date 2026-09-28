@@ -2,7 +2,7 @@
 
 # Nomenclatura
 
-Isto **é** documento de padrão (manufatura do time), não apêndice de RH. GO-12 em [padrao-ouro.md](padrao-ouro.md). Violações: AP-NAM-04 (repo/branch/commit), AP-NAM-05 (banco), AP-NAM-06 (EasyPanel) em [anti-padroes.md](anti-padroes.md).
+Isto **é** documento de padrão (manufatura do time), não apêndice de RH. GO-12 em [padrao-ouro.md](padrao-ouro.md). Violações: AP-NAM-04 (repo/branch/commit), AP-NAM-05 (banco), AP-NAM-06 (EasyPanel), AP-NAM-07 (app≠banco no mesmo serviço) em [anti-padroes.md](anti-padroes.md).
 
 Nomes de **código** (arquivo que mente, `prepare`/`handle`) continuam em [entry-point.md](entry-point.md) §12 e AP-NAM-01…03.
 
@@ -79,6 +79,8 @@ Nome da **aplicação** (serviço):
 ```text
 [nome-do-servico]
 ```
+
+**Deploy do app:** cada aplicação sobe como **serviço** no EasyPanel a partir do **`Dockerfile`** do repositório. Banco, Redis e afins são **serviços separados** no mesmo painel; o app conecta por env. Detalhe operacional: [stacks-e-estrutura.md](stacks-e-estrutura.md#servidores-easypanel).
 
 ---
 

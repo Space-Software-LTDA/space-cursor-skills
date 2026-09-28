@@ -139,7 +139,7 @@ O que é **inviolável** até o PO escrever o contrário na task:
 | Repo GitHub | `cliente_projeto_tipo` em **minúsculas** + underscore. Zero CamelCase. |
 | Branch de feature | `PBI-{id}` a partir de `main`. |
 | Commit | `tipo: mensagem` |
-| EasyPanel | projeto `cliente_projeto`; app = nome do serviço |
+| EasyPanel | projeto `cliente_projeto`; app = nome do serviço; app sobe com **`Dockerfile`**; banco/cache = **outro serviço** (AP-NAM-07) |
 | Banco | **PostgreSQL**. Usuário `space_[cliente]`. Tabela `snake_case`. Coluna **camelCase**. `createdAt` e `updatedAt` em **toda** tabela. |
 
 Entity TypeORM / migration / SQL da task têm que contar a **mesma** história (AP-DB-04). Task que cria tabela sem esse grid está incompleta.
