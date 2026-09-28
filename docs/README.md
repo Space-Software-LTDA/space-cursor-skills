@@ -16,8 +16,8 @@ PO, QA e contexto de produto **não** são o mesmo leitor. O mesmo arquivo serve
 | --- | --- | --- |
 | `po-techlead-scrum` | Escrever a task (ClickUp) que o júnior vai implementar | A constituição vira **critério, proibição e exemplo na task**. O PO não audita pixel no browser. |
 | `qa-space` | Inspecionar o front **já feito** (browser + código) | A constituição vira **régua de auditoria**. O QA não publica ClickUp e não redesenha a arquitetura do back. |
-| `design-system-forge` | Compor o DS **do produto** a partir de fonte visual | Space DS = **método/gosto**, não tokens do produto. Laws of UX + gates; grava `.docs/DESIGN_SYSTEM.md`. |
-| `design-system-apply` | Validar/aplicar o DS **já aprovado** do produto | Régua = DS do produto + **[ui-gosto.md](ui-gosto.md)** (Fase A limpa DS; Fase B front). Space DS apoia gaps. Loop sob `.docs/`. |
+| `design-system-forge` | Criar a base visual **do produto**: manual da marca, DS escrito e componentes no canvas (essencial; ouro opcional) | Space DS = **método**, não tokens do produto. Laws of UX + gates; grava `.docs/DESIGN_SYSTEM.md`; **confronta com [ui-gosto.md](ui-gosto.md)** antes de entregar. |
+| `design-system-apply` | Aplicar o DS **já aprovado** nas telas (canvas por padrão; construtor ou código) | Régua = DS do produto + **[ui-gosto.md](ui-gosto.md)** (Fase A confronta DS; Fase B varre telas; Fase C corrige no canvas em loop). Space DS apoia gaps. Artefatos sob `.docs/`. |
 | `project-context-doc` | Documentar o produto que **já existe** no código | A constituição vira **guardrail G-xxx** quando o código de fluxo/contrato importa. Não gera PBI. |
 | `skill-update` | Manter o pack | Garante que o mapa deste README continue verdadeiro. Não usa a constituição para task nem para QA. |
 
@@ -65,7 +65,7 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 | Arquivo | Por quê | Como usar |
 | --- | --- | --- |
 | [frontend.md](frontend.md) | Stack e contrato HTTP do Front | A task manda usar o client do boilerplate, três estados, endpoint que existe. **Não** substituir o Design System: para tokens/tabela/shell, apontar [design-system.md](design-system.md) **sem resumir** as 19 seções. |
-| [design-system.md](design-system.md) | Constituição visual | PO **referencia** sem resumir as 19 seções. **Prioridade:** repo/tema BO → DS do produto (`P-…`) se a task for Apply → Space DS no buraco → mock só campos/ações. Player/Home: ordem **modais → Home**; prova social §5.5 se couber. Prints + “não copiar neon do Lovable”. PO **não** preenche matriz §19 — isso é `qa-space`. |
+| [design-system.md](design-system.md) | Constituição visual | PO **referencia** sem resumir as 19 seções. **Prioridade:** repo/tema BO → DS do produto (`P-…`) se a task for Apply → Space DS no buraco → mock só campos/ações. Player/Home: ordem **modais → Home**; prova social ui-gosto §11.1.5 se o produto for cassino. Prints + “não copiar neon do Lovable”. PO **não** preenche matriz §19 — isso é `qa-space`. |
 
 **Sempre (qualquer camada — entrega):**
 
@@ -105,9 +105,10 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | [frontend.md](frontend.md) | Stack Next, client HTTP, FDD | Conferir se o projeto é o boilerplate FDD (`AGENTS.md` local). Não aplicar FDD em repo que não é esse boilerplate. |
 | [padrao-ouro.md](padrao-ouro.md) — só **GO-11** | Contrato real, três estados | Apoio à Fase 4 (API). O restante dos GO-* é para task de Back, não para o REPORT visual. |
 | [tom-professor.md](tom-professor.md) | Só no texto “Como deveria ser” | Explicar o esperado citando § DS / `AP-FE-*`. **Não** copiar decomposição de task do PO. |
-| **DS do produto** (`.docs/DESIGN_SYSTEM.md` ou anexo da task) | Task / produto tem `P-…` forjados (Forge/Apply) | Auditar o feito contra esses `P-…` **além** do Space DS. Prioridade: repo/tema BO → `P-…` do produto → Space DS no buraco → mock só campos/ações. **Não** rodar o loop Apply (mini-A / Fix Lovable) — isso é `design-system-apply`. |
-| [ui-gosto.md](ui-gosto.md) §5.5 | Home/cassino/player com prova social, jackpot, ticker, “maiores ganhos” | Régua **global ≠ contextual**. FAIL se ticker **e** painel globais; PASS se nested no card (`P-JACKPOT-WINNERS` ou equivalente) + no máx. 1 global (`P-WINS` / `P-TICKER`). |
-| [ui-gosto.md](ui-gosto.md) §5.6 | Admin / dashboard / B2B (ex.: gateway admin) | Checklist `GP-…` / `AP-…`: tabela canônica, badge único, anti chrome-waste / KPI void / metric crush / **grid-hole / CTA-spread / meta-baseline** (caça **intra-card**); Scan default **~1300×800**. Hex = DS do produto. |
+| **DS do produto** (`.docs/DESIGN_SYSTEM.md` ou anexo da task) | Task / produto tem `P-…` forjados (Forge/Apply) | Auditar o feito contra esses `P-…` **além** do Space DS. Prioridade: repo/tema BO → `P-…` do produto → Space DS no buraco → mock só campos/ações. **Não** rodar o loop Apply (mini-A / Fix no canvas ou construtor) — isso é `design-system-apply`. |
+| [ui-gosto.md](ui-gosto.md) parte geral (§1–§10) | Toda tela | Checklist geral §10 como apoio visual (o Space DS continua a régua principal do QA). |
+| [ui-gosto.md](ui-gosto.md) §11.1.5 | Produto cassino: home/player com prova social, jackpot, ticker, “maiores ganhos” | Régua **global ≠ contextual**. FAIL se ticker **e** painel globais; PASS se nested no card (`P-JACKPOT-WINNERS` ou equivalente) + no máx. 1 global (`P-WINS` / `P-TICKER`). |
+| [ui-gosto.md](ui-gosto.md) §11.2 | Admin / dashboard / B2B (ex.: gateway admin) | Checklist `GP-…` / `AP-…`: tabela canônica, badge único, anti chrome-waste / KPI void / metric crush / **grid-hole / CTA-spread / meta-baseline** (caça **intra-card**); Scan default **~1300×800**. Hex = DS do produto. |
 
 **Esta skill não lê para:** montar PBI, critério de aceite de um fluxo novo de backend, publicar Doc ClickUp, **nem** limpar DS / patch Lovable (Forge/Apply). Depois do REPORT, o humano chama `po-techlead-scrum`.
 
@@ -115,40 +116,41 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 ---
 
-### `design-system-forge` — forjar DS do produto
+### `design-system-forge` — criar a base visual do produto
 
-**Objetivo com estas docs:** transformar fonte visual em **constituição do produto** (`.docs/DESIGN_SYSTEM.md` + tokens), com padrões `P-…` pretendidos — não inventário do mock. Barra = **mínimo big-tech** (GATE ACCEPT), não brief de marca.
+**Objetivo com estas docs:** criar (ou extrair de um projeto existente) a **constituição visual do produto**: manual da marca, `.docs/DESIGN_SYSTEM.md` + tokens e componentes no canvas, com padrões `P-…` pretendidos — não inventário do mock. Entrega o **essencial** e oferece o **ouro**. Barra = **mínimo big-tech** (GATE ACCEPT).
 
 **Sempre ler:**
 
 | Arquivo | Por quê | Como usar |
 | --- | --- | --- |
-| [design-system.md](design-system.md) | Método / gosto Space | Ler **inteiro** como referência de *como* decidir — **não** copiar primary/surfaces do Space para o produto. Tokens e `P-…` saem da fonte + Q1–Q17 + humano. ui-gosto §5.5 se houver prova social (Q16); §5.6 se for admin/B2B. |
+| [design-system.md](design-system.md) | Método Space | Ler **inteiro** como referência de *como* decidir — **não** copiar primary/surfaces do Space para o produto. Tokens e `P-…` saem da marca + fonte + Q1–Q19 + humano. |
+| [ui-gosto.md](ui-gosto.md) | Confronto antes do STOP | Parte geral **inteira** + seção do tipo do produto em §11 (cassino §11.1 · admin/B2B §11.2). Tipo sem seção = só geral; outros tipos “não se aplica” com motivo. |
 | Laws of UX (`lawsofux.com/llms.txt`) | Porquê psicológico | Abrir o arquivo; mapear ≥10 leis no §2 do template da skill. |
 
-**Artefatos:** só sob `.docs/` (ver skill). Gates: fonte insuficiente → parar; Q abertas → não gravar DS final; **GATE ACCEPT fail** ou **auto-contradição** → **REPROVADO**. STOP: **PASS** se Qs humanas fechadas (exceção nomeada confirmada = lei; código atrasado = **Dívida Apply**, não ressalva); **PASS COM RESSALVAS** só com decisão humana ainda aberta. Warning obrigatório (hue ≠ Primary). Breakpoints = produto ou Tailwind. Application A–D/F = lei pretendida mesmo sem admin na fonte.
+**Artefatos:** só sob `.docs/` (ver skill); peças visuais no canvas do produto. Gates: fonte insuficiente → parar; Q abertas → não gravar DS final; **GATE ACCEPT fail** ou **auto-contradição** → **REPROVADO**. STOP: **PASS** se Qs humanas fechadas (exceção nomeada confirmada = lei; código atrasado = **Dívida Apply**, não ressalva); **PASS COM RESSALVAS** só com decisão humana ainda aberta. Warning obrigatório (hue ≠ Primary). Breakpoints = produto ou Tailwind. Application A–D/F = lei pretendida mesmo sem admin na fonte.
 
-**Esta skill não lê para:** patch no produto, REPORT `.task/`, task ClickUp. Depois da aprovação humana → `design-system-apply`.
+**Esta skill não lê para:** corrigir telas do produto, REPORT `.task/`, task ClickUp. Depois da aprovação humana → `design-system-apply`.
 
 ---
 
-### `design-system-apply` — limpar DS + auditar front + corrigir
+### `design-system-apply` — confrontar DS + varrer telas + corrigir no canvas
 
-**Objetivo com estas docs:** (A) normalizar o DS do produto contra o gosto Miguel; (B) Scan completo na URL + relatório de gaps; (C) Fix até ALIGNED. **OK humano entre A→B e B→C.** Proibido pular B.
+**Objetivo com estas docs:** (A) confrontar o DS do produto com o gosto; (B) varredura completa das telas (site, construtor, canvas) + relatório de gaps + telas recriadas no canvas; (C) corrigir/redesenhar no canvas em loop até ALIGNED + lista de diferenças para devs. **OK humano entre A→B e B→C.** Proibido pular B.
 
 **Sempre ler:**
 
 | Arquivo | Por quê | Como usar |
 | --- | --- | --- |
 | **DS do produto** (`.docs/DESIGN_SYSTEM.md`) | CORE forjado | Sem `P-…` → Forge. Fase A **edita** este arquivo. |
-| [ui-gosto.md](ui-gosto.md) | DO / DON’T Miguel | **Inteiro**. Marca > gosto; Cadastro deslogado = Primary; admin ≠ cassino; prova social **global vs contextual** (§5.5); **admin/B2B** §5.6 (`GP-…`/`AP-…`, QA ~1300, voids **intra-card**). |
+| [ui-gosto.md](ui-gosto.md) | DO / DON’T Space | Parte geral **inteira** + seção do tipo em §11. Marca > gosto; Primary na ação real; tipos não se misturam; cassino §11.1 (prova social **global vs contextual** §11.1.5); **admin/B2B** §11.2 (`GP-…`/`AP-…`, QA ~1300, voids **intra-card**). |
 | [design-system.md](design-system.md) | Apoio metodológico | Escalas / §18 / tabelas admin; **não** sobrescrever marca do produto. |
 
 **Artefatos:** Fase A → DS + EXTRACTION_NOTES (**PARAR OK A**); Fase B → inventário **URLs + popups/overlays** + Scan + `QA_REPORTS/` (**PARAR OK B**); Fase C → Fix + re-Scan `…-rN` até ALIGNED. **Pós-ALIGNED** que muda pattern → mini-A + OK antes do Fix (método na skill).
 
-**Gates anti-ALIGNED-falso:** Scan **só** com browser nesta sessão; se existir review humano (`observacoes.md` / prints / chat), tabela PASS/FAIL obrigatória; affordance (⋯/menu) sem click = FAIL; ALIGNED final exige OK humano explícito (candidato ≠ final). Detalhe: `skills/design-system-apply/VISUAL_QA_METHOD.md` §1.1 / §3.2 / §5.0.
+**Gates anti-ALIGNED-falso:** Scan **só** com evidência desta sessão (browser no site; prints via MCP no canvas); se existir review humano (`observacoes.md` / prints / chat), tabela PASS/FAIL obrigatória; affordance (⋯/menu) sem click = FAIL; ALIGNED final exige OK humano explícito (candidato ≠ final). Detalhe: `skills/design-system-apply/VISUAL_QA_METHOD.md` §1.1 / §3.2 / §5.0.
 
-**Esta skill não lê para:** extrair DS do zero, REPORT `qa-space`, ClickUp, AP-FE no Lovable.
+**Esta skill não lê para:** criar DS do zero (Forge), REPORT `qa-space`, ClickUp, AP-FE no código.
 
 ---
 
@@ -206,7 +208,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-11 | Sim |
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* (cenário / por quê / ouro / exemplo / erro comum) + Front | Sim |
 | [design-system.md](design-system.md) | Space UI DS v1.0 | Sim — QA lê inteiro |
-| [ui-gosto.md](ui-gosto.md) | DO / DON’T visual (Miguel) p/ Apply refator | Sim — Apply lê; não resumir na skill |
+| [ui-gosto.md](ui-gosto.md) | DO / DON’T visual Space: parte geral + regras por tipo de produto (cassino, admin/B2B) | Sim — Forge e Apply leem; não resumir na skill |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding empresa (git, stack, Coder, Apidog, EasyPanel) | Sim |
 | [git-fluxo.md](git-fluxo.md) | PBI → dev / PR hml / PR main, hotfix; HML ≈ main (banco); evidência de pronto | Sim — sem contradizer “commit direto” vs merge em `dev` |
 | [backend.md](backend.md) | Bun + Elysia + TypeORM + boilerplate | Sim |

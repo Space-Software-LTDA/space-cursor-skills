@@ -81,8 +81,8 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 | `skill-update` | **Hub** do pack (`/skill-update`): sync, catálogo, nova/alterar skill, PC vs Coders |
 | `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor — pipeline Objetivo → regra → DB → Apidog → task |
 | `qa-space` | QA / Design System Space — constituição via `docs/README.md` (audita o feito; lê DS inteiro) |
-| `design-system-forge` | Forjar DS **do produto** (`.docs/`) — interpretar, Q1–Q10, parar na aprovação |
-| `design-system-apply` | Limpar DS pelo gosto Miguel + refator visual (`.docs/`) até ALIGNED |
+| `design-system-forge` | **Cria** o DS do produto: manual da marca + DS (`.docs/`) + componentes no canvas (Pencil padrão); essencial, com opção de evoluir para ouro |
+| `design-system-apply` | **Aplica** o DS nas telas: confronta com o gosto, varre, espelha e corrige no canvas até ALIGNED + lista de diferenças para os devs |
 | `project-context-doc` | Doc de contexto + sync Docs ClickUp — constituição via `docs/README.md` (G-xxx) |
 
 Constituição (não é skill): pasta [`docs/`](docs/). **Toda skill de produto lê [`docs/README.md`](docs/README.md) primeiro** — PO, QA e contexto não usam os arquivos do mesmo jeito.

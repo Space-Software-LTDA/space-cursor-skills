@@ -57,9 +57,9 @@ A constituição **não** está resumida neste `SKILL.md`.
 | [`../docs/frontend.md`](../docs/frontend.md) | Se o trabalho tocar stack/FDD — só aplicar FDD se o repo tiver o `AGENTS.md` do boilerplate |
 | [`../docs/tom-professor.md`](../docs/tom-professor.md) | Opcional: “Como deveria ser” no achado — citar § DS / AP-FE; **não** copiar decomposição de task |
 | **DS do produto** (`.docs/DESIGN_SYSTEM.md` / anexo da task) | Se existir `P-…`: auditar contra eles. **Não** editar o DS (isso é Apply/Forge) |
-| [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §5.5 | Se a tela tiver prova social / jackpot / ticker — global ≠ contextual |
+| [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §11.1.5 | Produto cassino: se a tela tiver prova social / jackpot / ticker — global ≠ contextual |
 
-**Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL. **Não** rodar mini-A / Fix Lovable — só REPORT.
+**Não** redesenhar entry point de backend. **Não** publicar ClickUp. **Não** validar visual só com memória ou com bullets deste SKILL. **Não** rodar mini-A / Fix (canvas ou construtor) — só REPORT.
 
 O stub [design-system.md](design-system.md) nesta pasta só redireciona. A fonte é `../docs/design-system.md`.
 
@@ -118,7 +118,7 @@ Inputs aceitos para task: **conteúdo colado OU link** (preferir colar quando po
 2. Ler **[`../docs/design-system.md`](../docs/design-system.md)** (§1–§19 + apêndices). **Inteiro.**
 3. Se o projeto tiver `docs/SPACE_DESIGN_SYSTEM.md`, ler também; usar a versão **mais recente**.
 4. Se o wizard apontou **DS do produto** (`.docs/DESIGN_SYSTEM.md` / anexo): ler os `P-…` relevantes à task — **sem** editar o arquivo.
-5. Se a Home/player tiver jackpot, ticker ou “maiores ganhos”: ler [`../docs/ui-gosto.md`](../docs/ui-gosto.md) **§5.5** (global ≠ contextual).
+5. Se a Home/player tiver jackpot, ticker ou “maiores ganhos”: ler [`../docs/ui-gosto.md`](../docs/ui-gosto.md) **§11.1.5** (cassino — global ≠ contextual).
 6. Montar mentalmente a **matriz de auditoria** (ver [reference.md](reference.md) § Auditoria DS + prova social).
 7. Anotar no REPORT: versão do Space DS + (se houver) versão/nome do DS do produto + Primary/Surface.
 
@@ -284,7 +284,7 @@ Documentar cada achado com: **esperado** vs **feito** + evidência (network ou t
 - **Não** reprovar o produto por manter o primary/chrome **já no repo** (nem hex do tenant/BO)
 - **Não** tratar fidelidade ao Lovable (cor/glow) como critério de aceite
 - **Não** editar `.docs/DESIGN_SYSTEM.md` nem rodar mini-A / Fix — QA só REPORT; Apply é outra skill
-- **Não** ignorar prova social duplicada (ticker global + painel) quando §5.5 / task `P-WINS` aplicam
+- **Não** ignorar prova social duplicada (ticker global + painel) quando ui-gosto §11.1.5 / task `P-WINS` aplicam
 
 ---
 

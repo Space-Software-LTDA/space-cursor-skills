@@ -373,7 +373,7 @@ Escrever no **afirmativo** (filtro conversa → corpo):
 |-------|----------------|
 | Ordem de entrega | Fundação de shells → **overlays/modais** (login, cadastro, depósito…) → **depois** Home/chrome |
 | Marca | Cores/logo/banners = **backoffice / tema do repo**; DS = patterns `P-…` |
-| Prova social | Se o DS tiver: no máx. 1 global (`P-WINS` / `P-TICKER`); nested no jackpot = `P-JACKPOT-WINNERS` ([ui-gosto](../docs/ui-gosto.md) §5.5) |
+| Prova social | Se o DS tiver: no máx. 1 global (`P-WINS` / `P-TICKER`); nested no jackpot = `P-JACKPOT-WINNERS` ([ui-gosto](../docs/ui-gosto.md) §11.1.5, produto cassino) |
 | Anexos | `DESIGN_SYSTEM.md` + tokens pelo **nome do arquivo** (sem path `.docs/`) |
 
 Não inverter: Home densa **antes** dos modais estáveis.

@@ -4,8 +4,9 @@
 > Cada regra: **Valor · Uso · Porquê psicológico · Fonte**.  
 > Não deixar seção vazia: marcar `TBD` / `N/A escopo` + por que falta.  
 > **Proibido** colapsar §6–8 em um único bullet.  
-> **Gravação:** sempre sob `.docs/`.  
-> Skill: GATE ACCEPT (mínimo big-tech) antes do STOP humano.
+> **Gravação:** sempre sob `.docs/`. Peças visuais no canvas do produto.  
+> Ordem dos fundamentos = capítulos 01–05 do deck de referência (ver `roteiro.md` passo 9).  
+> Skill: GATE ACCEPT (mínimo big-tech) + confronto com o gosto antes do STOP humano.
 
 ---
 
@@ -15,17 +16,24 @@
 |-------|-------|
 | Produto | |
 | Contexto (B2B / B2C / híbrido) | |
-| Fonte visual (URL / Lovable id) | |
-| DS de gosto/método | |
+| Tipo de produto (ui-gosto §11) | |
+| Modo (Extrair / Criar) | |
+| Fonte (site / construtor / canvas / código / manual / protótipo) | |
+| Manual da marca (oficial / provisório) | |
+| Arquivo de canvas | |
+| DS de gosto/método | ui-gosto (geral + tipo) · Space DS |
+| Nível entregue (essencial / ouro) | |
 | Versão | 0.1.0-draft |
+| Estado do documento | fechado até o momento (canvas e telas podem reabrir com nova versão) |
 | Tokens DTCG path | `.docs/tokens.dtcg.json` |
 
 ### Prioridade de verdade
 
 1. Decisões humanas / escopo  
-2. Código/tokens do produto  
-3. DS de referência (método)  
-4. Mock (hierarquia/campos — não ruído como lei)
+2. Marca do produto (manual)  
+3. Código/tokens do produto  
+4. Gosto + DS de referência (método)  
+5. Fonte visual (hierarquia/campos — não ruído como lei)
 
 ---
 
@@ -89,7 +97,18 @@
 | success | | |
 | warning | | |
 | destructive | | |
-| live (se produto) | | |
+| info | | |
+| live (se o produto tiver) | | |
+
+### Contraste
+> 4,5:1 texto normal · 3:1 texto grande (≥ 24 px ou 18,5 px negrito), bordas de campo, ícones de uso e anel de foco. Medir em **cada tema** com valores definidos.
+
+| Combinação (frente / fundo) | Razão | Regra | PASS/FAIL |
+|-----------------------------|-------|-------|-----------|
+| | | | |
+
+### Dois temas
+Mesmos papéis, valores dark e claro. No claro, cor de texto e ícone numa versão mais escura da mesma cor.
 
 ### Do / Don’t · regra de aninhamento
 
@@ -99,17 +118,17 @@
 
 Família(s) · máx pesos · proibições
 
-| Papel | Size | Weight | Line-height | Tracking | Uso | Porquê |
-|-------|------|--------|-------------|----------|-----|--------|
-| Display | | | | | | |
-| H1 | | | | | | |
-| H2 | | | | | | |
-| H3 | | | | | | |
-| Body | | | | | | |
-| Label | | | | | | |
-| Caption | | | | | | |
-| Ribbon | | | | | | |
-| Money (se B2C) | | | | | tabular-nums | |
+| Papel | Size computador | Size celular | Weight | Line-height | Tracking | Uso | Porquê |
+|-------|-----------------|--------------|--------|-------------|----------|-----|--------|
+| Display | | | | | | | |
+| H1 | | | | | | | |
+| H2 | | | | | | | |
+| H3 | | | | | | | |
+| Body | | | | | | | |
+| Label | | | | | | | |
+| Caption | | | | | | | |
+| Ribbon / overline | | | | | | | |
+| Número / valor (se o produto mostrar) | | | | | tabular-nums | | |
 
 ---
 
@@ -160,10 +179,25 @@ Proibições:
 | xl | 1280 | |
 | 2xl | 1536 | |
 
+### Grid e margens por ponto de quebra
+> Computador **e** celular, nunca só um. Conferido na primeira tela-prova (Apply).
+
+| Ponto de quebra | Tela de referência | Largura do conteúdo | Margem lateral | Colunas por tipo de conteúdo | Espaço entre colunas | Respiro de seção |
+|-----------------|--------------------|---------------------|----------------|------------------------------|----------------------|------------------|
+| Celular | | | | | | |
+| Computador | | | | | | |
+
+### Medidas fixas nomeadas
+| Nome | px | Uso |
+|------|-----|-----|
+| Altura de botão | | |
+| Área de toque | 44 | |
+| Janela fixa (popup, modal) | | |
+
 ### Proporções de domínio
 | Elemento | Ratio / split | Uso |
 |----------|---------------|-----|
-| Tile / card mídia | | |
+| Card do item principal / mídia | | |
 | Hero / promo | | |
 | Auth split | | |
 | Outros | | |
@@ -210,15 +244,34 @@ Valor · onde · proibições
 
 ## 9. Componentes
 
-Para **cada** um: anatomia · variants · **states** (default / hover / focus / active / disabled / loading) · specs · a11y · do/don’t · porquê
+### 9.1 Lista fechada por faixa
+> Base: `catalogo-componentes.md` da skill. Faixa 1 entra inteira (13 grupos); Faixa 2 só com “sim + tela”; Faixa 3 só com tela que exija; Faixa D com eco → confirma.
+
+| Componente | Faixa (1 / 2 / 3 / D) | Variações | Tela onde aparece | Prancha no canvas |
+|------------|-----------------------|-----------|-------------------|-------------------|
+| | | | | |
+
+**Proibidos por enquanto:** (lista)
+
+### 9.2 Matriz de estados
+> Definida **antes** de desenhar. Nenhuma célula em branco (“não se aplica” vale).
+
+| Componente | Normal | Passar o mouse | Foco | Pressionado | Desabilitado | Carregando | Erro |
+|------------|--------|----------------|------|-------------|--------------|------------|------|
+| | | | | | | | |
+
+**Estados de tela:** vazio · carregando (esqueleto no formato do conteúdo) · erro · falha parcial · sem permissão / sem saldo · sem resultado — por superfície crítica.
+
+### 9.3 Especificação por componente
+Para **cada** um: anatomia · variants · **states** (da matriz) · specs · a11y · do/don’t · porquê
 
 - [ ] Button
 - [ ] Input / Select
-- [ ] Badge / Ribbon
-- [ ] Card / Tile de domínio
+- [ ] Badge / Chip
+- [ ] Card de conteúdo / Card de domínio
 - [ ] Dialog / Sheet / Drawer
 - [ ] Header / Nav / Sidebar / BottomNav / Footer
-- [ ] Outros do inventário
+- [ ] Outros da lista 9.1
 
 *(Tabela de uma linha sem states = incompleto / GATE ACCEPT fail.)*
 
@@ -278,19 +331,15 @@ DELETE → MODAL confirm
 | P-SURF-SHEET | | |
 | P-SURF-SPLIT | | |
 
-### 10.5 Domínio / player (E)
+### 10.5 Domínio (E)
 
-Preencher só o que o produto tiver. Quando houver **prova social**, preferir IDs estáveis (global ≠ contextual — [ui-gosto.md](../../docs/ui-gosto.md) §5.5):
+Preencher só o que o produto tiver: telas próprias, card do item principal, peças da Faixa D, chrome, auth, pagamento. Nome só depois de eco → confirma.
 
-| ID | Spec | Anti-padrão |
-|----|------|-------------|
-| P-WINS | Prova social **global**: painel “maiores ganhos” / ranking (uma superfície) | Segunda faixa global competindo; ticker **e** painel |
-| P-TICKER | (Opcional) Ticker global — **só** se for a única superfície global escolhida | Remountar após Align que removeu duplicata |
-| P-JACKPOT | Card/bloco jackpot (valor + hierarquia) | Glow/teatro; valor ilegível no mobile |
-| P-JACKPOT-WINNERS | Lista nested **dentro** do jackpot (prova social **contextual**) | Tratar como 2ª global; remountar ticker no chrome |
-| P-… | (outros do domínio) | |
+| ID | Spec | Anti-padrão | Fonte |
+|----|------|-------------|-------|
+| P-… | | | |
 
-> `P-WINS` / `P-JACKPOT-WINNERS` são **convenção sugerida** quando o domínio tiver esses papéis — não inventar os dois se o produto não tiver jackpot/ranking.
+> Se o **tipo de produto** tiver seção no `ui-gosto.md` §11 (ex.: cassino §11.1, admin §11.2), usar os IDs sugeridos ali. Não inventar IDs de um tipo em produto de outro tipo.
 
 ### 10.6 Operação (F)
 
@@ -317,7 +366,7 @@ Listar rotas/fluxos referenciando IDs.
 
 ## 11. Mobile
 
-Touch ≥ 44 · sheet vs dialog · densidades · breakpoints que afetam shell
+Touch ≥ 44 · sheet vs dialog · densidades · margem e grade do celular (§6) · breakpoints que afetam shell
 
 ---
 
@@ -329,7 +378,7 @@ Loading · Empty · Error · Disabled — por superfície crítica
 
 ## 13. Acessibilidade
 
-Contraste AA · focus ring · labels · `prefers-reduced-motion` · não só cor para status
+Contraste 4,5:1 texto normal e 3:1 texto grande / bordas de campo / ícones de uso / foco (§3) · focus ring · labels · `prefers-reduced-motion` · não só cor para status
 
 ---
 
@@ -343,7 +392,28 @@ Contraste AA · focus ring · labels · `prefers-reduced-motion` · não só cor
 
 ## 15. Checklist de aceite
 
-Espelhar GATE ACCEPT (F1–F8 · componentes · P-… · a11y). Itens binários.
+Espelhar GATE ACCEPT (F1–F8 · lista fechada + matriz · P-… · a11y · canvas · confronto com o gosto). Itens binários.
+
+---
+
+## 16. Canvas — Oficial × Rascunho
+
+| Prancha | Tema | Status (oficial / rascunho) | Observação |
+|---------|------|-----------------------------|------------|
+| Manual da marca | — | | |
+| Fundamentos | tema principal | | |
+| Componentes | tema principal | | |
+| Fundamentos / Componentes (segundo tema — ouro) | | | |
+
+Regras: variáveis em todas as peças oficiais · oficial não depende de rascunho · nada apagado.
+
+## 17. Confronto com o gosto
+
+| Checklist (ui-gosto §10 + §11 do tipo) | Resultado | Exceção nomeada / motivo |
+|-----------------------------------------|-----------|--------------------------|
+| | | |
+
+Seções de outros tipos: “não se aplica” + motivo.
 
 ---
 
@@ -358,5 +428,7 @@ Link para `.docs/tokens.dtcg.json` — deve incluir: `color` · `typography` · 
 
 ## Versionamento
 
-| Versão | Data | Notas |
-|--------|------|-------|
+> Documento **fechado até o momento**: cada mudança vinda do canvas ou das telas entra aqui com versão e motivo.
+
+| Versão | Data | Notas (o que mudou e por quê) |
+|--------|------|-------------------------------|

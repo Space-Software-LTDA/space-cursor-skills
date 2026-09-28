@@ -10,9 +10,9 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | `skill-update` | `/skill-update` | Hub: sync, manutenção, catálogo, regras transversais | N/A (só docs da skill) | Não |
 | `po-techlead-scrum` | anexar / PO-task | Tasks ClickUp + contrato Apidog (Objetivo → regra → DB → rotas → task) | `.task/` | Sim (`clickup.env` + `apidog.env`) |
 | `project-context-doc` | anexar / contexto produto | Doc de contexto + Docs ClickUp | `.docs/` (+ multipágina se aplicável) | Sim |
-| `qa-space` | `/qa-space` | QA front + Space DS + DS produto/`P-…` se houver + ui-gosto §5.5 (prova social) + REPORT | `.task/` | Não |
-| `design-system-forge` | `/design-system-forge` | Forjar DS (Q1–Q17 · GATE ACCEPT · prova social §5.5 · anti-contradição · `.docs/`) | `.docs/` | Não |
-| `design-system-apply` | `/design-system-apply` | A→OK; B inventário URLs+Scan→OK; C Fix loop ALIGNED; pós-ALIGNED = mini-A se mudar pattern; prova social global≠contextual | `.docs/` | Não |
+| `qa-space` | `/qa-space` | QA front + Space DS + DS produto/`P-…` se houver + ui-gosto (geral + tipo §11) + REPORT | `.task/` | Não |
+| `design-system-forge` | `/design-system-forge` | Cria: diagnóstico · manual da marca (prancha) · DS doc + tokens · Fundamentos + componentes no canvas (Pencil padrão). Modos Extrair/Criar · Q1–Q19 · GATE ACCEPT · confronto com gosto · essencial → pergunta ouro | `.docs/` + canvas | Não |
+| `design-system-apply` | `/design-system-apply` | Aplica: diagnóstico das telas · A DS×gosto→OK · B varredura + espelho no canvas→OK · C correção/redesenho no canvas em loop até ALIGNED + `DIFERENCAS_PARA_DEVS.md`. Construtor = secundário; código nunca | `.docs/` + canvas | Não |
 
 Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **genérico** (qualquer produto); dado de cliente só na conversa ou em `exemplos/`.
 
@@ -23,8 +23,8 @@ Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **g
 po-techlead-scrum      → Objetivo → regra → DB → Apidog → task ClickUp
 qa-space               → grava .task/; NÃO publica ClickUp (passa pro PO)
 project-context-doc    → grava .docs/; publica Doc ClickUp após aprovação
-design-system-forge    → compõe DS sob .docs/ (Q1–Q17 · GATE ACCEPT · PASS/RESSALVAS); PARA na aprovação
-design-system-apply    → A (DS×gosto)+OK → B (Scan+relatório)+OK → C (Fix loop ALIGNED)
+design-system-forge    → diagnóstico → manual → DS + canvas (essencial) → confronto gosto → STOP; pergunta ouro
+design-system-apply    → diagnóstico → A (DS×gosto)+OK → B (varredura + espelho canvas)+OK → C (loop no canvas) → ALIGNED + DIFERENCAS_PARA_DEVS
 ```
 
 ## Docs do repo (não são skills)

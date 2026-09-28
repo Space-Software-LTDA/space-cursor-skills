@@ -4,13 +4,13 @@ Checklists, **matriz de auditoria do Design System** (seção a seção), anti-p
 
 **Design System completo:** [`../docs/design-system.md`](../docs/design-system.md) — ler **depois** de [`../docs/README.md`](../docs/README.md) (seção QA) e **antes** de usar esta referência. O arquivo `design-system.md` nesta pasta é só um ponteiro.
 
-Se a task/produto tiver DS forjado: auditar também os `P-…`. Prova social: [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §5.5.
+Se a task/produto tiver DS forjado: auditar também os `P-…`. Prova social (produto cassino): [`../docs/ui-gosto.md`](../docs/ui-gosto.md) §11.1.5.
 
 ---
 
 ## Prova social / jackpot (quando a tela tiver)
 
-Régua: ui-gosto §5.5. IDs sugeridos no DS do produto: `P-WINS` (global), `P-TICKER` (global opcional), `P-JACKPOT`, `P-JACKPOT-WINNERS` (contextual nested).
+Régua: ui-gosto §11.1.5 (cassino). IDs sugeridos no DS do produto: `P-WINS` (global), `P-TICKER` (global opcional), `P-JACKPOT`, `P-JACKPOT-WINNERS` (contextual nested).
 
 | Check | Pass? | Notas |
 |-------|-------|-------|
