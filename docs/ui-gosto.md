@@ -224,6 +224,13 @@ Botão Google/Apple: tipografia alinhada ao sistema (mesma família e tamanhos d
 - Não misturar borda “clara demais”, “sumida”, ou glow no lugar de borda.
 - Nested: ver §3.3.
 
+### 6.6 Ícone e selo na linha do título `[AS-IS 2026-09-28]` (dor = linha desperdiçada)
+- Ícone de card, pilar, feature ou item: **na mesma linha do título**, à esquerda, centralizado na altura do texto (gap ~8–12).
+- **Proibido** ícone sozinho numa linha acima do título — é uma linha inteira gasta com um ícone.
+- Mesma regra para selo/badge/status (“Oficial”, “Novo”, “Pendente”): na linha do título (à direita, `space_between`) — nunca uma linha só dele acima ou abaixo do título.
+- Vale para telas, componentes **e pranchas do canvas** (inclusive o manual da marca).
+- Exceção só com nome no DS (ex.: estado vazio com ilustração grande centralizada — o ícone **é** o conteúdo).
+
 ---
 
 ## 7. Motion e feedback
@@ -312,6 +319,7 @@ Usar em toda entrega visual (canvas, construtor ou código). Marcar **PASS** ou 
 - [ ] **PASS/FAIL** — Logos de terceiros **com logo**.
 - [ ] **PASS/FAIL** — Rodapé estruturado.
 - [ ] **PASS/FAIL** — Chrome com borda token correta.
+- [ ] **PASS/FAIL** — Ícone e selo na linha do título; nenhum ícone/selo sozinho numa linha (§6.6).
 
 ### Radius / seleção / motion
 - [ ] **PASS/FAIL** — Controles ~8 (ou escala da marca); pill só status; sem look IA.
@@ -553,6 +561,7 @@ Adaptado de [Taste Skill](https://github.com/Leonxlnx/taste-skill) (método). **
 | Multi-accent / carnaval | Color consistency lock — 1 Primary |
 | Glow / neon / pulse / glass no chrome | Encaixe + border + delta de surface |
 | 3 feature cards idênticos (marketing) | Ritmo assimétrico ou rows do produto |
+| Ícone empilhado numa linha só em cima do título | Ícone na linha do título (§6.6) |
 | Cards dentro de cards / fill igual empilhado | surface-2 + border |
 | Fake UI de divs como “screenshot” | Arte real ou omitir |
 | Pill em CTA de form | Radius ~8 |
@@ -578,3 +587,4 @@ Adaptado de [Taste Skill](https://github.com/Leonxlnx/taste-skill) (método). **
 | 2.1.1 | 2026-09-22 | Admin separado da prova social; mapa README |
 | 2.2.0 | 2026-09-23 | Admin: GP-FORM-DENSE-ROW; AP-GRID-HOLE / AP-CTA-SPREAD / AP-META-BASELINE; caça **intra-card** + prints humanos |
 | 3.0.0 | 2026-09-28 | **Generalizado:** parte geral (G1–G8, §3–§10, §12) vale para todo produto; regras de cassino → §11.1 (prova social = §11.1.5); admin/B2B → §11.2; §11.3 para novos tipos. Usado por **Forge** (confronto antes do STOP) e **Apply** (Fase A + Scan). |
+| 3.1.0 | 2026-09-28 | §6.6 ícone e selo na linha do título (proibido ícone/selo sozinho numa linha); vale também para pranchas do canvas e manual da marca. Checklist §10 + anti-slop §12. |

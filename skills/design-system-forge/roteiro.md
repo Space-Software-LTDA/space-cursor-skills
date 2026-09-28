@@ -90,7 +90,7 @@ Regra de ouro: **marca manda na cor e na fonte; o DS manda na tela; a tela revel
 - **Saída (essencial):** prancha “Manual da marca” no canvas. Se já existe PDF oficial, a prancha espelha o PDF (mesmo conteúdo, sem inventar).
 - **Saída (ouro):** PDF do manual v1.0 gerado a partir da prancha.
 - **Gate:** cliente declara “oficial”. Enquanto não for oficial, o DS avança marcado como **provisório**. Manual existente mas ainda não oficial ≠ manual inexistente: o primeiro deixa o DS avançar como provisório; o segundo bloqueia (passo 8).
-- **Nota:** a prancha do manual é página de apresentação. Ela **não** segue as regras de tela do DS (tamanhos, cantos, variáveis) e não passa por auditoria de tela.
+- **Nota:** a prancha do manual é página de apresentação. Ela **não** segue as regras de tela do DS (tamanhos, cantos, variáveis) e não passa por auditoria de tela. **Mas segue a composição do gosto geral** (`ui-gosto` parte geral — ex.: §6.6 ícone e selo na linha do título, nada de linha desperdiçada). Antes de entregar a prancha: olhar cada bloco procurando ícone/selo sozinho numa linha.
 
 ---
 
