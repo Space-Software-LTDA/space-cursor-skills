@@ -202,6 +202,8 @@ Proibições:
 | Auth split | | |
 | Outros | | |
 
+Mídia (banner, capa, arte): **uma proporção por família**, em `aspect-ratio` com a largura do container (nunca largura fixa) · conferida nos **arquivos originais** · área segura (~80% do meio) · tamanho de exportação da arte · onde cada lugar usa a família (largura × altura) · arquivos fora do padrão com tamanho de reexportação. Mídias irmãs (ex.: arte de overlays irmãos) = mesma proporção e mesmo tamanho.
+
 ---
 
 ## 7. Bordas / elevation / motion (F6 + F7)
@@ -396,16 +398,19 @@ Espelhar GATE ACCEPT (F1–F8 · lista fechada + matriz · P-… · a11y · canv
 
 ---
 
-## 16. Canvas — Oficial × Rascunho
+## 16. Canvas — Oficial × Draft × Rascunho
 
-| Prancha | Tema | Status (oficial / rascunho) | Observação |
-|---------|------|-----------------------------|------------|
+| Prancha | Tema | Status (oficial / draft / rascunho) | Observação |
+|---------|------|-------------------------------------|------------|
 | Manual da marca | — | | |
 | Fundamentos | tema principal | | |
-| Componentes | tema principal | | |
+| Componentes essenciais (genéricos → domínio) | tema principal | | |
+| Draft (lista fechada ainda não validada/usada) | tema principal | | |
+| Rascunho (explorações, opções, versões antigas) | | | |
+| Telas (fileiras por fluxo, rótulo “Seção · …”) | | | |
 | Fundamentos / Componentes (segundo tema — ouro) | | | |
 
-Regras: variáveis em todas as peças oficiais · oficial não depende de rascunho · nada apagado.
+Regras: variáveis em todas as peças oficiais · oficial não depende de Draft nem de Rascunho · peça sai do Draft quando o humano valida (movida para a seção existente, com a matriz) · zero componente com nome repetido · nada apagado.
 
 ## 17. Confronto com o gosto
 

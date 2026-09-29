@@ -100,6 +100,8 @@ Não assumir “a URL do chat”. **Descobrir e listar** o que o produto expõe:
 - Overlay **desligado de propósito** (ex. auto-open off) → inventariar; tentar abrir por gatilho alternativo ou Não coberto justificado.  
 - Abrir **e fechar** cada um marcado scaneado (Escape/X/drag).  
 - Desktop **e** mobile quando o tipo mudar (dialog ↔ sheet).
+- **Rota aberta direto ≠ overlay aberto pela tela.** A mesma URL (ex.: `/login`) pode virar página cheia quando aberta direto e modal/gaveta quando aberta a partir da Home. Inventariar os dois; o espelho e a tela oficial copiam **o que o usuário vê** (normalmente o overlay sobre a tela).
+- **Medidas do overlay saem do código**, não do print: largura, divisão de colunas, altura máxima, canto, véu e desfoque (ex.: classes utilitárias no bundle JS/CSS). O print só confirma.
 
 ### 3.1 Checklist do passeio
 
@@ -177,6 +179,11 @@ Para **cada** card de form / side panel scaneado:
 | Corte / sobra | Problemas de layout reportados pela ferramenta (ex.: “clipped”) + print |
 | Contraste | 4,5:1 texto normal; 3:1 texto grande, bordas de campo, ícones de uso, foco |
 | Conferência cruzada | Mesma medida para a mesma coisa entre telas do mesmo tipo |
+| Lado a lado com a fonte | Cada tela do canvas comparada com a captura da tela real no mesmo tamanho (uma imagem combinada: real × canvas), nesta sessão |
+| Telas irmãs | Overlays irmãos (ex.: abas Entrar / Cadastrar do mesmo modal) com a **mesma altura** e a mesma proporção de mídia — o botão principal não pula ao trocar de aba |
+| Mídia como amostra | Toda posição de banner/capa/arte nas telas do canvas é instância da amostra de proporção com a medida do lugar |
+| Mídia sem recorte duplo | Instância da mídia no tamanho exato da coluna; arquivo fora da proporção do DS → achado com tamanho de reexportação |
+| Sem duplicata | Zero componente com nome repetido e zero instância quebrada depois de cada rodada de Fix |
 
 ---
 

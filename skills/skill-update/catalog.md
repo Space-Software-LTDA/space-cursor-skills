@@ -11,7 +11,7 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | `po-techlead-scrum` | anexar / PO-task | Tasks ClickUp + contrato Apidog (Objetivo → regra → DB → rotas → task) | `.task/` | Sim (`clickup.env` + `apidog.env`) |
 | `project-context-doc` | anexar / contexto produto | Doc de contexto + Docs ClickUp | `.docs/` (+ multipágina se aplicável) | Sim |
 | `qa-space` | `/qa-space` | QA front + Space DS + DS produto/`P-…` se houver + ui-gosto (geral + tipo §11) + REPORT | `.task/` | Não |
-| `design-system-forge` | `/design-system-forge` | Cria: diagnóstico · manual da marca (prancha) · DS doc + tokens · Fundamentos + componentes no canvas (Pencil padrão). Modos Extrair/Criar · Q1–Q19 · GATE ACCEPT · confronto com gosto · essencial → pergunta ouro | `.docs/` + canvas | Não |
+| `design-system-forge` | `/design-system-forge` | Cria: diagnóstico · manual da marca (prancha) · DS doc + tokens · Fundamentos + componentes no canvas (Pencil padrão; fonte aprovada → importar peças reais; um exemplar por componente, nada duplicado; Essenciais × Draft × Rascunho; proporções de mídia por amostras). Modos Extrair/Criar · Q1–Q19 · GATE ACCEPT · confronto com gosto · essencial → pergunta ouro | `.docs/` + canvas | Não |
 | `design-system-apply` | `/design-system-apply` | Aplica: diagnóstico das telas · A DS×gosto→OK · B varredura + espelho no canvas→OK · C correção/redesenho no canvas em loop até ALIGNED + `DIFERENCAS_PARA_DEVS.md`. Construtor = secundário; código nunca | `.docs/` + canvas | Não |
 
 Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **genérico** (qualquer produto); dado de cliente só na conversa ou em `exemplos/`.

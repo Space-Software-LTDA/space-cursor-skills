@@ -78,6 +78,8 @@ Proibido: DS/notes na raiz, em `.task/` como verdade, ou fora de `.docs/`.
 
 Forge = **interpretar intenção + questionar + definir o padrão pretendido**. Fora-do-padrão → Apêndice (rejeitado / dívida), **não** catálogo.
 
+**Exceção — fonte aprovada pelo humano:** se o humano declara que o site/app já foi aprovado, ele vira a **referência dos componentes** (decisão humana = prioridade 1): importar as peças reais e tokenizar, em vez de desenhar a partir do documento. Continua valendo o gosto e o contraste: o que reprovar vira dívida registrada, não lei nova.
+
 ### #2 — Em dúvida: investigar + perguntar
 
 1. Buscar evidência (manual, CSS, componentes, ≥3 repetições, Space DS método).  
@@ -105,7 +107,7 @@ O gate do documento vale como lei **agora**, não é escrito em pedra. Canvas e 
 
 ### #5 — Nada é apagado
 
-Opções não escolhidas, rodadas de logo, versões antigas → área **Rascunho** do canvas. Oficial não depende de Rascunho.
+Opções não escolhidas, rodadas de logo, versões antigas → área **Rascunho** do canvas. Componentes da lista fechada ainda não validados pelo humano → prancha **Draft**, com estados (sobem para os essenciais quando validados). Oficial não depende de Draft nem de Rascunho.
 
 ---
 
@@ -297,7 +299,10 @@ Leis (detalhe no roteiro):
 6. **Peça central do domínio por variações** lado a lado; cliente escolhe; opções vão para o Rascunho.  
 7. **Varredura das telas** do protótipo → componentes faltantes listados **antes** de implementar.  
 8. **Auditoria contra as leis** — só variáveis, 3 pesos, escala, cantos, contraste, um Primary por bloco, sem brilho.  
-9. **Oficial × Rascunho** — topo só oficial; nada apagado.
+9. **Oficial × Draft × Rascunho** — topo só oficial (Componentes essenciais: genéricos → domínio); Draft = lista fechada ainda não validada; Rascunho = explorações; nada apagado. Promover do Draft = mover para a seção existente com a matriz.  
+10. **Fonte aprovada → importar** as peças reais e tokenizar (Princípio #1).  
+11. **Um exemplar por componente + estados; nada duplicado** — montagens (linhas, grades, carrosséis) são tela; peça genérica mora na prancha genérica e o domínio usa instância; imagem em componente é exemplo.  
+12. **Proporções de mídia por amostras** — uma proporção por família em `aspect-ratio`, conferida nos arquivos originais; no canvas, amostras de proporção montando a composição real, não galeria; nas telas do canvas, toda posição de mídia é instância da amostra com a medida do lugar (roteiro, passo 18.1).
 
 Cada decisão do canvas entra no documento com nova versão.
 
@@ -406,7 +411,8 @@ Cada `P-…`: **spec canônica · anti-padrão · fonte** (`extraído` | `inferi
 - [ ] Variáveis com valor dark e claro; nenhuma peça oficial com cor digitada  
 - [ ] Prancha Fundamentos (tema principal) com margem e grade computador e celular  
 - [ ] Prancha Componentes (tema principal) = lista fechada, com estados  
-- [ ] Oficial × Rascunho separados; nada apagado  
+- [ ] Oficial × Draft × Rascunho separados; nada apagado  
+- [ ] Zero componente com nome repetido; zero instância quebrada; nenhuma peça solta igual a componente  
 - [ ] Documento ↔ canvas sem contradição (Princípio #3)  
 
 ### Regra de ouro
@@ -494,6 +500,9 @@ Só depois do STOP do essencial e do **sim** do humano. Itens e critérios em [n
 - A IA desenhar logo final  
 - Desenhar componente fora da lista fechada; cor digitada em peça oficial  
 - Apagar opção, rodada ou versão (vai para o Rascunho)  
+- Duplicar peça: genérico redesenhado no domínio, esqueleto separado do componente, montagem de tela (linha, grade, carrossel) como componente  
+- Desenhar componentes “do documento” quando o humano já aprovou um site/app real  
+- Explicar tamanho de mídia com galeria de imagens ou largura fixa (usar proporção + amostras)  
 - Corrigir só no canvas sem versionar o documento  
 - Entregar sem confronto com o gosto; puxar regra de um tipo de produto para outro  
 - Fazer o nível ouro sem o humano pedir  

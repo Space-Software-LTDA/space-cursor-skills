@@ -176,6 +176,8 @@ Método: [VISUAL_QA_METHOD.md](VISUAL_QA_METHOD.md). Template: [report-template.
 4. Roteiro completo (dobra → scroll footer → **cada overlay** → shell → estados → CDP no site). **Clicar** affordances no site — presença no DOM ≠ PASS.  
 5. Caçar: vazio, quebrado, cortado, hit morto — **e voids intra-card** (VISUAL_QA_METHOD §3.3).  
 6. **Espelho no canvas** (projeto de código ou construtor): **toda** tela do inventário que não existe no canvas é recriada numa área **“Rascunho · espelho do site”**, copiando estrutura e conteúdo como estão (evidência do “antes”). Marcar onde não há peça oficial equivalente. O espelho **não** é tela oficial e **não** é apagado depois.  
+   - Overlay: copiar o que o usuário vê a partir da tela (modal/gaveta), não a rota aberta direto; medidas do código, não do print (VISUAL_QA_METHOD §3.0b).  
+   - Cada tela espelhada ou montada vai para o relatório como imagem combinada **real × canvas**.  
 7. Relatório **inteiro** (diagnóstico + review humano × tela + prints/círculos do chat + inventário de alvos + inventário de overlays + telas espelhadas + P0/P1/P2 + não coberto).  
 8. **PARAR.** Path do relatório + resumo. Pedir **OK B**.  
 9. Sem OK B → **não** iniciar C.
@@ -197,9 +199,14 @@ Método: [VISUAL_QA_METHOD.md](VISUAL_QA_METHOD.md). Template: [report-template.
 ### Como corrigir
 
 - **Canvas (padrão):** ajustar a tela oficial; **redesenhar** quando a estrutura não tiver conserto (espelho fica no Rascunho). Só instâncias de componentes oficiais e variáveis — nada de cor digitada, peça solta ou componente novo sem lei.  
+- **Peça que já existe no Draft:** promover (mover para a seção existente dos essenciais, com a matriz), nunca recriar — roteiro do Forge, passo 23.  
+- **Trocar o componente de uma instância:** substituir o nó por instância do outro componente, mesmo tamanho; peça antiga só sai depois de zero instância apontando para ela.  
+- **Mídia nas telas:** posição de banner, capa ou arte = instância da amostra de proporção com a medida do lugar, não imagem de exemplo (roteiro do Forge, passo 18.1).  
+- **Telas irmãs:** mesma medida para a mesma coisa (overlays irmãos com a mesma altura e a mesma proporção de mídia).  
+- **Organização:** telas oficiais em fileiras por fluxo com rótulo “Seção · …”; referências do site (navegador, capturas) separadas e removidas depois da validação humana.  
 - **Peça faltando / regra faltando:** **mini-A** — acrescentar no DS (lista fechada + matriz de estados + versão) **e** criar o componente no canvas seguindo o roteiro do Forge (passos 12, 13 e 18) → **PARAR OK** → continuar. Nunca “remendo só na tela”.  
 - **Construtor (secundário):** edição completa pelo construtor; sem `// ...` / “resto igual”.  
-- **Código:** não editar. Cada diferença entre a tela em código e a tela alinhada no canvas vai para `DIFERENCAS_PARA_DEVS.md`.
+- **Código:** não editar. Cada diferença entre a tela em código e a tela alinhada no canvas vai para `DIFERENCAS_PARA_DEVS.md` — inclusive melhorias que o canvas trouxe e o código ainda não tem (ex.: marca oficial de terceiro no botão social, overlays irmãos com a mesma altura, arte a reexportar em outra proporção).
 
 ### Ciclo do loop
 

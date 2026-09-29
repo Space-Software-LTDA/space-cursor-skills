@@ -16,8 +16,9 @@
 | Padrões de tela `P-…` | Documento | Telas do produto + A–D/F |
 | Variáveis | Canvas | Valor dark **e** claro; nenhuma peça oficial com cor digitada |
 | Prancha Fundamentos (tema principal) | Canvas | Capítulos 01–05; margem e grade computador e celular |
-| Prancha Componentes (tema principal) | Canvas | Só a lista fechada, com estados |
-| Oficial × Rascunho | Canvas | Separados; nada apagado |
+| Prancha Componentes essenciais (tema principal) | Canvas | Só a lista fechada, com estados; um exemplar por componente; zero duplicata |
+| Proporções de mídia | Documento + canvas | Uma proporção por família em `aspect-ratio`, conferida nos arquivos; amostras de proporção no canvas (roteiro, passo 18.1) — se o produto tiver banner/capa/arte |
+| Oficial × Draft × Rascunho | Canvas | Separados; nada apagado |
 | Confronto com o gosto | `EXTRACTION_NOTES` | Geral + tipo; PASS/FAIL; exceções com OK |
 
 ## Ouro (opcional)

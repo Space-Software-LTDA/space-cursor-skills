@@ -59,7 +59,7 @@ Comum em muitos produtos, mas fora do deck de referência. Cada item precisa de 
 | Grupo | Componente | O que é | Quando costuma entrar |
 |-------|------------|---------|-----------------------|
 | Ações | Botão de ícone | Botão só com ícone (fechar, mais opções) | Barras de ferramenta, cards, janelas |
-| Ações | Botão social | Entrar com Google, Apple etc. | Login |
+| Ações | Botão social | Entrar com Google, Apple etc. — mesmo envelope do botão secundário do produto + **marca oficial** do terceiro (nunca letra provisória) | Login |
 | Formulário | Controle segmentado | 2 a 4 opções lado a lado, uma ativa | Troca de modo ou de visão |
 | Formulário | Campo de código | Caixinhas para código de verificação | Login por SMS ou e-mail, recuperar senha |
 | Formulário | Upload de arquivo | Enviar arquivo ou foto | Perfil, documentos |
@@ -109,6 +109,7 @@ Se nenhuma tela pedir, fica na lista de proibidos.
 | Seletor de fontes | Escolher de onde vêm os dados | Lojas, contas conectadas, integrações |
 | Painel de detalhe | Informação extra que abre ao clicar | Explicação da nota, histórico do item |
 | Logos de terceiros | Marcas de parceiros exibidas no produto | Lojas, bancos, meios de pagamento |
+| Mídia de campanha | Banner, capa ou arte com imagem trocável; uma proporção por família (roteiro, passo 18.1) | Banner de promoção, arte de login, capa de curso |
 
 ## Por superfície (entram junto com a faixa correspondente)
 

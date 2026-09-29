@@ -205,6 +205,28 @@ Conectar a ferramenta antes: [canvas-ferramentas.md](canvas-ferramentas.md).
 - **O que fazer:** uma prancha “Componentes (tema principal)”, um grupo por assunto (marca, ações, formulário, sinais, conteúdo, camadas e avisos, estrutura), nomes com prefixo (ex.: `DS / Botão / Primário`). Só entram os componentes da lista do passo 12, cada um com os estados da matriz do passo 13.
 - **Matriz no canvas:** um bloco que mostra, para cada componente, os estados lado a lado, espelhando a tabela do passo 13.
 - **Lei:** tema principal primeiro (dark por padrão). O outro tema só depois do primeiro aprovado (passo 24, ouro).
+- **Modo Extrair com fonte aprovada pelo humano** (site ou app já validado): os componentes são **importados da fonte real** e tokenizados, não desenhados a partir do documento ([canvas-ferramentas.md](canvas-ferramentas.md), armadilhas do Pencil). Estados que a fonte só mostra na interação (passar o mouse, foco, selecionado) saem das regras de estilo da própria fonte. Peças que tinham sido desenhadas antes e repetem as reais vão para o Rascunho.
+- **Um exemplar por componente, com os estados.** Linhas, grades, trilhos, carrosséis montados e “todos os itens” são **construção de tela**, não DS. Imagem dentro de componente (banner, capa, arte) é **exemplo**, não regra: no DS o que vale é tamanho e proporção.
+- **Nada duplicado:**
+  - peça genérica (botão, badge, campo, fechar, acordeão) mora na prancha genérica; a peça de domínio usa **instância** dela;
+  - “carregando” é estado do componente, não um esqueleto separado;
+  - uma fileira de chips é construção de tela, não componente novo;
+  - retângulo solto com imagem, onde já existe componente, vira instância.
+- **Quando algo vira componente:** quando se repete em mais de um lugar **ou** é peça genérica. Bloco que aparece uma vez só, dentro de um componente maior, continua camada dele (com nome pelo conteúdo).
+- **Nome das camadas:** pelo conteúdo (“Saldo total”, “Coluna de resumo”, “Linha · Total do pedido”); nada de “div”, “span”, “frame 12” vindos de importação.
+
+### Passo 18.1 — Proporções de mídia (banners, capas, artes)
+
+- **Regra no documento:** uma proporção por família de mídia (ex.: todos os banners horizontais numa só), escrita como `aspect-ratio` com a largura do container, **nunca** largura fixa. Mesma proporção em todos os lugares da família = qualquer arte serve em qualquer lugar.
+- **Conferir pelos arquivos originais** (baixar e medir), não pelo recorte que aparece na tela.
+- **Área segura:** texto, logo e personagem nos ~80% do meio, para aguentar o recorte.
+- **No canvas, explicar com amostras de proporção, não com galeria de imagens:**
+  - componente `DS / Amostra de proporção`: caixa com fundo da cor principal suave, borda de 1 px da cor principal, canto padrão; no centro, a razão em destaque (ex.: “8:3”, cor principal, peso forte, maior quando a caixa é alta) e embaixo “Lugar · L × A” em texto secundário; legenda fora da caixa (nome + explicação curta);
+  - as amostras montam a **composição real da tela** e mostram que a soma fecha (ex.: principal + 2 laterais empilhadas: lateral + espaço + lateral = altura do principal; principal + espaço + lateral = largura da coluna);
+  - cada amostra é **instância** desse componente (tamanho e textos sobrescritos);
+  - o componente da mídia de verdade (imagem trocável + estado carregando) fica separado, no começo da seção.
+- **Nas telas do canvas (tela-prova e demais), mídia = amostra:** toda posição de banner, capa ou arte é **instância da amostra de proporção** com a razão e a medida daquele lugar (ex.: “8:3 · Principal · L × A”), não a imagem de exemplo. Setas, pontos do carrossel e selos continuam por cima. Vale também dentro de componentes que contêm mídia (ex.: modal com banner) e nos fundos de overlay que repetem a tela. O componente da mídia real continua no DS; no código, cada posição usa esse componente com `aspect-ratio`.
+- **Mídias irmãs** (ex.: arte dos modais de Entrar e Cadastrar): mesma proporção **e** mesmo tamanho. Fixar a mesma altura nos overlays irmãos e escolher a proporção que cabe o conteúdo maior sem mudá-lo; a instância da mídia entra no tamanho exato da coluna (recorte uma vez só). Arquivos fora do padrão → registrar o tamanho de reexportação.
 
 ### Passo 19 — Auditoria visual peça por peça
 
@@ -229,15 +251,19 @@ Conectar a ferramenta antes: [canvas-ferramentas.md](canvas-ferramentas.md).
 ### Passo 22 — Auditoria contra as leis do DS
 
 - **O que fazer:** varrer todos os componentes oficiais: só variáveis, só 3 pesos, só tamanhos da escala, espaçamento da escala, cantos da tabela, contraste (4,5 para 1 em texto normal; 3 para 1 em texto grande, bordas de campo, ícones de uso e foco), um botão principal por bloco, sem brilho.
+- **Anti-duplicata (conferir no arquivo, não de olho):** zero componente com nome repetido; zero instância apontando para componente removido; nenhuma peça solta igual a um componente; altura de cada instância = altura do componente (salvo estado que muda de tamanho de propósito).
 - **Critério:** zero exceção sem nome no documento.
 
-### Passo 23 — Organização Oficial × Rascunho
+### Passo 23 — Organização Oficial × Draft × Rascunho
 
 - **O que fazer:**
-  - no topo, só o oficial: Manual da marca, Fundamentos, Componentes (e o segundo tema, se houver);
-  - todo o resto numa área “Rascunho” (nomes “Rascunho · …”);
-  - o oficial não pode depender de nenhuma peça do rascunho;
+  - no topo, só o oficial: Manual da marca, Fundamentos, **Componentes essenciais** (e o segundo tema, se houver). Dentro dos essenciais: primeiro as peças genéricas, depois as de domínio;
+  - **Draft:** componentes da lista fechada que ainda não foram validados pelo humano nem usados por uma tela, guardados **com seus estados**. Depois que as telas-prova existem (Apply), a contagem de instâncias nelas — incluindo as de dentro de outros componentes — separa usados × não usados;
+  - **Rascunho:** explorações, opções não escolhidas, versões antigas, peças inventadas substituídas pelas reais (nomes “Rascunho · …”);
+  - o oficial não pode depender de nenhuma peça do Draft nem do Rascunho;
   - nada é apagado.
+- **Promover do Draft:** quando o humano valida, a peça entra na seção **que já existe** nos essenciais (botão com botões, select com campos…), com a sua linha da matriz de estados; grupo sem seção vira seção nova no fim das genéricas. Nunca recriar: mover. A casca vazia que sobra no Draft pode sair.
+- **Troca pedida pelo humano** (“prefiro esta, troca”): reapontar todas as instâncias da peça antiga para a nova **antes** de remover a antiga; conferir zero instância quebrada.
 
 ### Passo 24 — Segundo tema (ouro)
 
@@ -262,6 +288,11 @@ Conectar a ferramenta antes: [canvas-ferramentas.md](canvas-ferramentas.md).
 | Temas | Fazer dark e claro ao mesmo tempo | Tema principal aprovado primeiro, depois o outro (ouro) |
 | Rascunho | Misturado com o oficial | Separado desde o início |
 | Auditoria | Contar peças em vez de olhar | Olhar peça por peça, duas passagens |
+| Fonte aprovada | Desenhar componentes a partir do documento quando já existe site/app aprovado | Importar da fonte real e tokenizar (passo 18) |
+| Duplicata | Mesma peça genérica desenhada de novo dentro do domínio; esqueleto separado do componente | Genérico mora na prancha genérica; domínio usa instância; carregando = estado (passo 18) |
+| Montagem no DS | Linhas com todos os itens, grades, carrosséis montados na prancha de componentes | Um exemplar + estados; montagem é tela (passo 18) |
+| Tamanho de mídia | Largura fixa por lugar; galeria de imagens para explicar tamanho | Uma proporção por família em `aspect-ratio` + amostras de proporção (passo 18.1) |
+| Draft | Peça validada recriada nos essenciais, ou deixada no Draft em duplicata | Mover para a seção existente com a matriz (passo 23) |
 
 ## Por que esse caminho gera telas boas
 
