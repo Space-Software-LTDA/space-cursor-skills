@@ -84,8 +84,11 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 | `design-system-forge` | **Cria** o DS do produto: manual da marca + DS (`.docs/`) + componentes no canvas (Pencil padrão); essencial, com opção de evoluir para ouro |
 | `design-system-apply` | **Aplica** o DS nas telas: confronta com o gosto, varre, espelha e corrige no canvas até ALIGNED + lista de diferenças para os devs |
 | `project-context-doc` | Doc de contexto + sync Docs ClickUp — constituição via `docs/README.md` (G-xxx) |
+| `product-from-idea` | Cria produto da ideia à tarefa ClickUp: discovery, mercado, protótipo, MVP, contrato, setup, DS, telas, revisão, manual comercial, tarefas — Controlador + subagente por fase |
 
 Constituição (não é skill): pasta [`docs/`](docs/). **Toda skill de produto lê [`docs/README.md`](docs/README.md) primeiro** — PO, QA e contexto não usam os arquivos do mesmo jeito.
+
+Método de execução de **todas** as skills: [`docs/metodo-agentes.md`](docs/metodo-agentes.md) — Controlador + subagente por etapa, etapas com “Pronto quando” e exemplo real, revisor sem contexto, e toda correção registrada no `CORRECOES.md` da skill pelo `/skill-update`.
 
 ## O que NÃO entra no repo
 

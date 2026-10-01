@@ -1,0 +1,179 @@
+Product Resources Customers Pricing Now Contact Docs Open app Log in Sign up
+
+Product
+
+Resources
+
+Customers
+
+Pricing
+
+Now
+
+Contact
+
+Docs
+
+Open app
+
+Log in
+
+Sign up
+
+# The product development system for teams and agents The product development system for teams and agents The product development system for teams and agents
+
+Purpose-built for planning and building products. Designed for the AI era.
+
+### Faster app launch
+
+Render UI before vehicle_state sync when minimum required state is present, instead of blocking on full refresh during iOS startup.
+
+#### Activity
+
+Powering the companies building the future
+
+## A new species of product tool. Purpose-built for modern teams with AI workflows at its core, Linear sets a new standard for planning and building products.
+
+Linear is shaped by the practices and principles of world-class product teams.
+
+Designed for workflows shared by humans and agents. From drafting PRDs to pushing PRs.
+
+Reduces noise and restores momentum to help teams ship with high velocity and focus.
+
+Linear is shaped by the practices and principles of world-class product teams.
+
+Designed for workflows shared by humans and agents. From drafting PRDs to pushing PRs.
+
+Reduces noise and restores momentum to help teams ship with high velocity and focus.
+
+## Intake and integrations
+
+Automatically turn conversations and customer feedback into actionable issues that are instantly routed, labeled, and prioritized for the right team.
+
+## Planning and monitoring
+
+Plan and navigate from idea to launch. Align your team with product initiatives, strategic roadmaps, and clear, up-to-date PRDs.
+
+## AI and automations
+
+Build and deploy AI agents that work alongside you as teammates. Work on complex tasks together or delegate entire issues end-to-end.
+
+what are the three most important customer requests around permissions? add them to the Access Controls project
+
+Three issues ranked by customer impact:
+
+I’ve added them to Access Controls
+
+add retry handling for failed image uploads described in this issue
+
+Review today’s mobile triage and group the issues by what should happen next
+
+review this issue, draft complete offline mode requirements, and break the work into sub-issues
+
+Updated the issue with requirements, open product decisions, and acceptance criteria.
+
+## Build, review, and ship
+
+Streamline code reviews with clear diffs, better context, and fewer back-and-forth comments. Keep PRs moving without sacrificing quality.
+
+## Changelog
+
+You’ll probably build a better product, just because of the craft that using Linear infuses on your brain.
+
+Our speed is intense and Linear helps us be action biased.
+
+Linear is excellent, just excellent. It has the right opinions for fast moving teams.
+
+You’ll probably build a better product, just because of the craft that using Linear infuses on your brain.
+
+Our speed is intense and Linear helps us be action biased.
+
+Linear powers over 40,000 product teams. From ambitious startups to major enterprises.
+
+## Built for the future. Available today.
+
+### Product
+
+Intake
+
+Plan
+
+AI
+
+Build
+
+Pricing
+
+Security
+
+### Features
+
+Asks
+
+Agents
+
+Coding Sessions
+
+Customer Requests
+
+Insights
+
+Mobile
+
+Integrations
+
+Changelog
+
+### Company
+
+About
+
+Customers
+
+Careers
+
+Now
+
+Method
+
+Quality
+
+Brand
+
+### Resources
+
+Switch
+
+Download
+
+Documentation Docs
+
+Developers
+
+Status
+
+Enterprise
+
+Startups
+
+### Connect
+
+Contact us
+
+Community
+
+X (Twitter)
+
+GitHub
+
+YouTube
+
+### Legal
+
+Privacy
+
+Terms
+
+DPA
+
+AUP

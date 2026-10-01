@@ -19,18 +19,24 @@ PO, QA e contexto de produto **não** são o mesmo leitor. O mesmo arquivo serve
 | `design-system-forge` | Criar a base visual **do produto**: manual da marca, DS escrito e componentes no canvas (essencial; ouro opcional) | Space DS = **método**, não tokens do produto. Laws of UX + gates; grava `.docs/DESIGN_SYSTEM.md`; **confronta com [ui-gosto.md](ui-gosto.md)** antes de entregar. |
 | `design-system-apply` | Aplicar o DS **já aprovado** nas telas (canvas por padrão; construtor ou código) | Régua = DS do produto + **[ui-gosto.md](ui-gosto.md)** (Fase A confronta DS; Fase B varre telas; Fase C corrige no canvas em loop). Space DS apoia gaps. Artefatos sob `.docs/`. |
 | `project-context-doc` | Documentar o produto que **já existe** no código | A constituição vira **guardrail G-xxx** quando o código de fluxo/contrato importa. Não gera PBI. |
+| `product-from-idea` | Definir um produto novo da ideia à tarefa (12 fases) | A constituição entra só nas fases do time (Setup, DS, Telas, Tarefas), pelas skills que ela chama. Nas fases de produto (1–5) não se lê constituição. |
 | `skill-update` | Manter o pack | Garante que o mapa deste README continue verdadeiro. Não usa a constituição para task nem para QA. |
 
 **Proibido:** a skill de QA “completar” uma task de back com entry point. A skill de PO “aprovar visual” no lugar do QA. A skill de contexto inventar stack nova em vez de descrever o que o repo faz. Forge inventariar mock como lei. Apply inventar `P-…` ausente (voltar ao Forge).
 
 ---
 
+## Todas as skills — método de execução
+
+[metodo-agentes.md](metodo-agentes.md) vale para **todas** as skills, inclusive `skill-update`: Controlador + um subagente por etapa, etapas com “Pronto quando” e exemplo real, revisor sem contexto, e toda correção registrada na skill pelo `/skill-update`. Cada `SKILL.md` tem uma seção **“Método de execução”** com a tabela das próprias etapas — não copia o método.
+
 ## Ordem de leitura obrigatória
 
 ```text
 1. Este README          ← sempre, qualquer skill de produto
-2. Os arquivos da linha "Sempre ler" da sua skill (tabela abaixo)
-3. Os arquivos da linha "Se o trabalho tocar" — só se o escopo pedir
+2. metodo-agentes.md    ← sempre, qualquer skill
+3. Os arquivos da linha "Sempre ler" da sua skill (tabela abaixo)
+4. Os arquivos da linha "Se o trabalho tocar" — só se o escopo pedir
 ```
 
 Não pule o passo 1. Não leia o Design System “de memória” no lugar do arquivo. Não cole um resumo das 16 seções do entry point no `SKILL.md`.
@@ -182,6 +188,28 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 ---
 
+### `product-from-idea` — criar produto da ideia à tarefa
+
+**Objetivo com estas docs:** definir um produto novo até a tarefa pronta. A constituição entra nas fases que tocam o time: Setup (6), Design System (7, via Forge), Telas (8, via Apply) e Tarefas (11, via PO). Nas fases 1–5 a skill não lê a constituição — é conversa de produto com o cliente.
+
+**Sempre ler:**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [metodo-agentes.md](metodo-agentes.md) | Controlador + subagente por fase; revisor sem contexto; âncora | É a arquitetura da skill inteira; a âncora em workspace dedicado é regra sempre ativa |
+
+**Se o trabalho tocar:**
+
+| Arquivo | Quando | Como usar |
+| --- | --- | --- |
+| [nomenclatura.md](nomenclatura.md) · [stacks-e-estrutura.md](stacks-e-estrutura.md) · [git-fluxo.md](git-fluxo.md) | Fase 6 (Setup) | Nome dos repositórios, projetos-base, ambientes. Escrever no `setup.md` em português, sem colar o texto |
+| [design-system.md](design-system.md) · [ui-gosto.md](ui-gosto.md) | Fases 7 e 8 | Pelas skills Forge e Apply — a leitura é a delas |
+| [tom-professor.md](tom-professor.md) e o resto do mapa do PO | Fase 11 | Pela skill `po-techlead-scrum` |
+
+**Esta skill não lê para:** auditar código, escrever task fora da Fase 11, nem criar o DS sem o Forge.
+
+---
+
 ### `skill-update` — hub do pack
 
 **Objetivo com estas docs:** a constituição continuar **uma fonte**. Skills de produto só têm ponteiro.
@@ -203,6 +231,7 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 | Arquivo | Tema | Integral? |
 | --- | --- | --- |
+| [metodo-agentes.md](metodo-agentes.md) | Como toda skill executa: subagentes por etapa, “Pronto quando” + exemplo real, revisor sem contexto, registro de correções | Sim — todas as skills |
 | [tom-professor.md](tom-professor.md) | Didática para júnior (PO + Context; QA opcional) | Sim — princípios; moldes de artefato ficam nas skills |
 | [entry-point.md](entry-point.md) | Roteiro no topo do `index.ts`; 16 seções; proibido `prepare`/`handle` | Sim — não resumir |
 | [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-11 | Sim |

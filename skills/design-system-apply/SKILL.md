@@ -57,6 +57,25 @@ Nunca sobrescrever relatório — sempre `…-rN.md`.
 
 ---
 
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)). Exemplos: [`exemplos/README.md`](exemplos/README.md).
+
+**Âncora:** ao ser chamada, criar ou atualizar `.docs/design-system-apply/ANCORA.md` (modelo em `../docs/metodo-agentes.md` §5) — aponta para este `SKILL.md`, etapa atual e próximo passo; nunca copia as regras. Reler a âncora e este arquivo no começo de cada etapa. Não escrever no `AGENTS.md` do repositório.
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| 0 — Diagnóstico das telas | Sim | Tabela no chat e no relatório | Cada tela/estado com onde existe e se usa só peças oficiais; superfícies e tamanhos que o produto tem confirmados | — | Humano vê |
+| A — DS × gosto | Sim — **revisor sem contexto** | DS + `EXTRACTION_NOTES` atualizados | Parte geral + tipo do produto, uma linha por item | — | Humano (OK A) |
+| B — Varredura + espelho | Sim — um por tela ou grupo de telas (em paralelo) | `QA_REPORTS/…` + espelhos no Rascunho | Todo alvo do inventário aberto nesta sessão, com print; overlays clicados; não coberto listado | [`exemplos/relatorio-real-buscai-home-sem-login-r1.md`](exemplos/relatorio-real-buscai-home-sem-login-r1.md) | Humano (OK B) |
+| C — Correção no canvas | Sim — um por tela | Tela corrigida + relatório `…-rN` | Só peças oficiais + variáveis; cópia com data do canvas antes e depois; arquivo conferido no disco | [`exemplos/relatorio-real-buscai-home-sem-login-r2.md`](exemplos/relatorio-real-buscai-home-sem-login-r2.md) | Humano |
+| C2 — Re-conferência cega | Sim — **subagente novo, sem a lista de correções** | Novo relatório `…-rN` | Prints desta sessão de cada tela tocada; achados anteriores tratados como FAIL até prova | — | Controlador |
+| ALIGNED | Não — Controlador | `DIFERENCAS_PARA_DEVS.md` (se houver código) | Pré-flight + conferência cruzada + OK humano explícito | Falta exemplo real (`DIFERENCAS_PARA_DEVS`) | Humano |
+
+**Revisor sem contexto:** a Fase A e a re-conferência cega rodam em subagente novo que não viu a correção nem a conversa — recebe só o DS, o gosto, os prints e o relatório anterior **depois** de fazer a própria varredura (VISUAL_QA_METHOD: cego → cruzar).
+
+---
+
 ## Alvos de correção (Fase C)
 
 | Alvo | Quando | Como corrige | Saída extra |
@@ -131,7 +150,7 @@ Tabela no chat **e** no relatório da Fase B:
 |---------------|-------------------------------------------------|----------------------------------|------------|
 | | | | |
 
-Mais: tipo de produto (ui-gosto §11), alvo de correção (canvas | construtor), superfícies e tamanhos reais (computador, celular, popup…). Dúvida → perguntar.
+Mais: tipo de produto (ui-gosto §11), alvo de correção (canvas | construtor), superfícies e tamanhos reais **que o produto tem** (computador, celular, popup…). Superfície que o humano disse que não existe (ex.: “só computador por enquanto”) não entra. Dúvida → perguntar.
 
 ---
 
@@ -172,7 +191,7 @@ Método: [VISUAL_QA_METHOD.md](VISUAL_QA_METHOD.md). Template: [report-template.
    - **popups/overlays** (modal, sheet, drawer, dialog, toast bloqueante, welcome, confirm…) — descobrir por código + gatilhos de UI + pranchas  
    Listar tudo; scaneado vs Não coberto; dúvida → perguntar.  
 2. Abrir cada alvo **nesta sessão**: site/construtor no browser; canvas por **print via MCP** de cada tela. **Proibido** inventar Scan.  
-3. Computador + celular (por alvo principal). Admin/B2B: **~1300×800**. Canvas: tamanho real da superfície.  
+3. Cada superfície do diagnóstico (computador e celular quando o produto tiver as duas). Admin/B2B: **~1300×800**. Canvas: tamanho real da superfície.  
 4. Roteiro completo (dobra → scroll footer → **cada overlay** → shell → estados → CDP no site). **Clicar** affordances no site — presença no DOM ≠ PASS.  
 5. Caçar: vazio, quebrado, cortado, hit morto — **e voids intra-card** (VISUAL_QA_METHOD §3.3).  
 6. **Espelho no canvas** (projeto de código ou construtor): **toda** tela do inventário que não existe no canvas é recriada numa área **“Rascunho · espelho do site”**, copiando estrutura e conteúdo como estão (evidência do “antes”). Marcar onde não há peça oficial equivalente. O espelho **não** é tela oficial e **não** é apagado depois.  
@@ -192,7 +211,7 @@ Método: [VISUAL_QA_METHOD.md](VISUAL_QA_METHOD.md). Template: [report-template.
 
 ### Ordem das telas (validação com telas)
 
-1. **Tela-prova:** a tela mais importante (normalmente a Home) montada/ajustada **só** com componentes oficiais, no tema principal, computador **e** celular. Ela revela buracos do DS (margem real, ponto de quebra, peça que não existia).  
+1. **Tela-prova:** a tela mais importante (normalmente a Home) montada/ajustada **só** com componentes oficiais, no tema principal, em cada superfície do diagnóstico. Ela revela buracos do DS (margem real, ponto de quebra, peça que não existia).  
 2. **Demais telas e estados:** telas restantes, estados de tela (vazio, carregando, erro, falha parcial, sem permissão/saldo, sem resultado), janelas e cada superfície no tamanho real.  
 3. **Conferência cruzada:** comparar medidas entre telas do mesmo tipo e fechar um valor único no DS (mesma coisa, mesma medida).
 
@@ -205,6 +224,11 @@ Método: [VISUAL_QA_METHOD.md](VISUAL_QA_METHOD.md). Template: [report-template.
 - **Telas irmãs:** mesma medida para a mesma coisa (overlays irmãos com a mesma altura e a mesma proporção de mídia).  
 - **Organização:** telas oficiais em fileiras por fluxo com rótulo “Seção · …”; referências do site (navegador, capturas) separadas e removidas depois da validação humana.  
 - **Peça faltando / regra faltando:** **mini-A** — acrescentar no DS (lista fechada + matriz de estados + versão) **e** criar o componente no canvas seguindo o roteiro do Forge (passos 12, 13 e 18) → **PARAR OK** → continuar. Nunca “remendo só na tela”.  
+- **Arquivo do canvas protegido:** cópia com data numa pasta `copias/` ao lado do arquivo **antes e depois** de cada rodada; um só editor aberto com o arquivo (duas janelas podem gravar a versão antiga por cima); depois de cada edição, conferir que o arquivo mudou no disco — se não mudou, parar e avisar. Os prints “depois” de cada rodada são o que permite refazer uma tela aprovada.  
+- **Dados de exemplo são mockup:** produto, preço, nota, data e foto de exemplo não se conferem entre telas. Placeholder explícito (“X”, “Lorem”) é achado → valor fictício plausível, aprovado pelo humano uma vez e igual em todas as telas.  
+- **Texto de tela para o público:** o texto que o usuário lê passa no teste do leigo (palavra de especialista como “ranking” ou “match” é achado P1).  
+- **Perguntar só o necessário:** o que o DS já responde (peso, medida, variável, peça solta, contraste) se corrige e se informa no relatório; ao humano vai só decisão de produto ou de gosto sem regra, em bloco, com opções e recomendação.  
+- **Decisão de produto revelada pela tela** (bloco, estado ou dado novo aprovado pelo humano): registrar também na fonte de produto do projeto (protótipo, especificação), não só no relatório.  
 - **Construtor (secundário):** edição completa pelo construtor; sem `// ...` / “resto igual”.  
 - **Código:** não editar. Cada diferença entre a tela em código e a tela alinhada no canvas vai para `DIFERENCAS_PARA_DEVS.md` — inclusive melhorias que o canvas trouxe e o código ainda não tem (ex.: marca oficial de terceiro no botão social, overlays irmãos com a mesma altura, arte a reexportar em outra proporção).
 

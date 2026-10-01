@@ -69,6 +69,27 @@ Proibido: DS/notes na raiz, em `.task/` como verdade, ou fora de `.docs/`.
 
 ---
 
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)). Exemplos: [`exemplos/README.md`](exemplos/README.md).
+
+**Âncora:** ao ser chamada, criar ou atualizar `.docs/design-system-forge/ANCORA.md` (modelo em `../docs/metodo-agentes.md` §5) — aponta para este `SKILL.md`, etapa atual e próximo passo; nunca copia as regras. Reler a âncora e este arquivo no começo de cada etapa. Não escrever no `AGENTS.md` do repositório.
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| 0 — Diagnóstico | Sim | Tabela tem × falta no chat | Manual, documento, variáveis, Fundamentos e componentes marcados existe/falta; tipo de produto e canvas conectado conferidos | — | Humano vê |
+| 1 — Modo + GATE 0 | Não — Controlador | Modo Extrair ou Criar | GATE 0 do modo passou ou bloqueio registrado | — | Humano |
+| A — Manual da marca | Sim | Prancha do manual no canvas | Roteiro passos 1–7 cumpridos; contraste de cada combinação medido | [`exemplos/deck-referencia-estrutura.md`](exemplos/deck-referencia-estrutura.md) | Humano |
+| B — Documento | Sim | `.docs/DESIGN_SYSTEM.md` + tokens + `EXTRACTION_NOTES.md` | Roteiro passos 8–15; GATE Q sem pergunta aberta crítica; decisões de gosto (texto do botão principal, peso do rótulo) escolhidas por comparação | [`exemplos/ds-real-pixreals-DESIGN_SYSTEM.md`](exemplos/ds-real-pixreals-DESIGN_SYSTEM.md) · [`exemplos/ds-real-pixreals-EXTRACTION_NOTES.md`](exemplos/ds-real-pixreals-EXTRACTION_NOTES.md) | Humano |
+| C — Canvas | Sim — um por bloco (variáveis + Fundamentos · componentes por faixa · peças de domínio) | Pranchas Fundamentos e Componentes | Roteiro passos 16–23; todos os quadros abertos e conferidos (não amostra); cópia com data do arquivo antes e depois de cada bloco | [`exemplos/canvas-real-buscai-componentes-escuro.png`](exemplos/canvas-real-buscai-componentes-escuro.png) | Humano |
+| 5 — Confronto com o gosto | Sim — **revisor sem contexto** | Tabela PASS/FAIL contra `ui-gosto` | Parte geral + tipo do produto, uma linha por item, com evidência | — | Controlador |
+| GATE ACCEPT | Sim — **revisor sem contexto** | Camadas 0–5 marcadas | Cada camada com evidência; zero auto-contradição | — | Controlador |
+| STOP | Não — Controlador | Veredito no chat + pergunta do ouro | PASS / PASS COM RESSALVAS / REPROVADO com motivo | — | Humano |
+
+**Revisor sem contexto:** o confronto com o gosto e o GATE ACCEPT rodam num subagente novo que recebe só o `DESIGN_SYSTEM.md`, os prints das pranchas, o `ui-gosto.md` e esta skill — sem a conversa em que as decisões foram tomadas.
+
+---
+
 ## Princípios
 
 ### #1 — Padrões

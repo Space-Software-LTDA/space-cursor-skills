@@ -1,0 +1,257 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "color": {
+    "primary": {
+      "$type": "color",
+      "$value": "#CFA551",
+      "$description": "oklch(0.744 0.113 83) — único brand PixReals / CTA"
+    },
+    "primary-foreground": {
+      "$type": "color",
+      "$value": "#0C121A",
+      "$description": "oklch(0.18 0.02 260) — texto sobre primary"
+    },
+    "background": {
+      "$type": "color",
+      "$value": "#0C1015",
+      "$description": "oklch(0.17 0.012 260) — fundo da página"
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "#111419",
+      "$description": "oklch(0.19 0.012 260) — chrome intermediário / sidebar"
+    },
+    "card": {
+      "$type": "color",
+      "$value": "#15181F",
+      "$description": "oklch(0.21 0.014 260) — cards, overlays, ticker"
+    },
+    "surface-2": {
+      "$type": "color",
+      "$value": "#171B21",
+      "$description": "oklch(0.22 0.014 260) — nested fill, input, provider tile"
+    },
+    "surface-3": {
+      "$type": "color",
+      "$value": "#20242C",
+      "$description": "oklch(0.26 0.016 260) — hover de superfície"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "#1B1F26",
+      "$description": "oklch(0.24 0.014 260) — secondary/muted fill"
+    },
+    "modal": {
+      "$type": "color",
+      "$value": "#15181F",
+      "$description": "mesmo degrau de card; overlay = rgba(0,0,0,0.65)"
+    },
+    "foreground": {
+      "$type": "color",
+      "$value": "#F3F5F8",
+      "$description": "oklch(0.97 0.004 250) — texto principal"
+    },
+    "muted-foreground": {
+      "$type": "color",
+      "$value": "#999FA6",
+      "$description": "oklch(0.70 0.012 255) — texto auxiliar"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "#FFFFFF14",
+      "$description": "oklch(1 0 0 / 8%) — rgba(255,255,255,0.08)"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "#3FC168",
+      "$description": "oklch(0.72 0.17 150) — PIX, ganhos, depósito"
+    },
+    "success-foreground": {
+      "$type": "color",
+      "$value": "#001002",
+      "$description": "oklch(0.15 0.05 150)"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "#FF7F3B",
+      "$description": "oklch(0.74 0.18 45) — humano 2026-09-21; hue distinto do primary 83°; não é CTA"
+    },
+    "warning-foreground": {
+      "$type": "color",
+      "$value": "#0C1015",
+      "$description": "texto sobre warning"
+    },
+    "destructive": {
+      "$type": "color",
+      "$value": "#EE343B",
+      "$description": "oklch(0.62 0.22 25) — erro / perigo"
+    },
+    "live": {
+      "$type": "color",
+      "$value": "#EE343B",
+      "$description": "oklch(0.62 0.22 25) — Hot / Ao Vivo / +18; mesmo hex de destructive, uso distinto"
+    },
+    "ring": {
+      "$type": "color",
+      "$value": "#CFA551",
+      "$description": "focus ring = primary"
+    }
+  },
+  "typography": {
+    "family": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
+      }
+    },
+    "display": {
+      "fontSize": { "$type": "dimension", "$value": "32px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 700 },
+      "lineHeight": { "$type": "number", "$value": 1.2 }
+    },
+    "h1": {
+      "fontSize": { "$type": "dimension", "$value": "28px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 700 },
+      "lineHeight": { "$type": "number", "$value": 1.14 }
+    },
+    "h2": {
+      "fontSize": { "$type": "dimension", "$value": "20px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 700 },
+      "lineHeight": { "$type": "number", "$value": 1.2 }
+    },
+    "h3": {
+      "fontSize": { "$type": "dimension", "$value": "16px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 600 },
+      "lineHeight": { "$type": "number", "$value": 1.25 }
+    },
+    "body": {
+      "fontSize": { "$type": "dimension", "$value": "14px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 400 },
+      "lineHeight": { "$type": "number", "$value": 1.43 }
+    },
+    "label": {
+      "fontSize": { "$type": "dimension", "$value": "12px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 600 },
+      "lineHeight": { "$type": "number", "$value": 1.25 }
+    },
+    "caption": {
+      "fontSize": { "$type": "dimension", "$value": "12px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 400 },
+      "lineHeight": { "$type": "number", "$value": 1.33 }
+    },
+    "ribbon": {
+      "fontSize": { "$type": "dimension", "$value": "10px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 700 },
+      "lineHeight": { "$type": "number", "$value": 1.2 },
+      "letterSpacing": { "$type": "dimension", "$value": "0.04em" }
+    },
+    "money": {
+      "fontSize": { "$type": "dimension", "$value": "14px" },
+      "fontWeight": { "$type": "fontWeight", "$value": 700 },
+      "lineHeight": { "$type": "number", "$value": 1.2 },
+      "fontVariantNumeric": { "$value": "tabular-nums" }
+    }
+  },
+  "space": {
+    "4": { "$type": "dimension", "$value": "4px" },
+    "8": { "$type": "dimension", "$value": "8px" },
+    "12": { "$type": "dimension", "$value": "12px" },
+    "16": { "$type": "dimension", "$value": "16px" },
+    "24": { "$type": "dimension", "$value": "24px" },
+    "32": { "$type": "dimension", "$value": "32px" },
+    "48": { "$type": "dimension", "$value": "48px" },
+    "64": { "$type": "dimension", "$value": "64px" },
+    "page": { "$type": "dimension", "$value": "16px" },
+    "section": { "$type": "dimension", "$value": "24px" },
+    "card": { "$type": "dimension", "$value": "24px" },
+    "control": { "$type": "dimension", "$value": "16px" },
+    "chip": { "$type": "dimension", "$value": "8px" }
+  },
+  "space.exception": {
+    "control-height": {
+      "$type": "dimension",
+      "$value": "40px",
+      "$description": "h-10 botão/input padrão — Fitts desktop"
+    },
+    "touch": {
+      "$type": "dimension",
+      "$value": "44px",
+      "$description": "alvo touch mínimo mobile (h-11)"
+    },
+    "header-mobile": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$description": "h-14 header < sm"
+    }
+  },
+  "radius": {
+    "sm": { "$type": "dimension", "$value": "4px" },
+    "md": { "$type": "dimension", "$value": "8px" },
+    "lg": { "$type": "dimension", "$value": "12px" },
+    "xl": { "$type": "dimension", "$value": "16px" },
+    "full": { "$type": "dimension", "$value": "9999px" }
+  },
+  "breakpoint": {
+    "sm": { "$type": "dimension", "$value": "640px" },
+    "md": { "$type": "dimension", "$value": "768px" },
+    "lg": { "$type": "dimension", "$value": "1024px" },
+    "xl": { "$type": "dimension", "$value": "1280px" },
+    "2xl": { "$type": "dimension", "$value": "1536px" }
+  },
+  "icon": {
+    "size": {
+      "sm": { "$type": "dimension", "$value": "16px" },
+      "md": { "$type": "dimension", "$value": "20px" },
+      "lg": { "$type": "dimension", "$value": "24px" }
+    },
+    "stroke": { "$value": 2 }
+  },
+  "motion": {
+    "instant": {
+      "duration": { "$type": "duration", "$value": "0ms" }
+    },
+    "fast": {
+      "duration": { "$type": "duration", "$value": "150ms" },
+      "easing": { "$type": "cubicBezier", "$value": [0, 0, 0.2, 1] }
+    },
+    "base": {
+      "duration": { "$type": "duration", "$value": "200ms" },
+      "easing": { "$type": "cubicBezier", "$value": [0, 0, 0.2, 1] }
+    },
+    "slow": {
+      "duration": { "$type": "duration", "$value": "220ms" },
+      "easing": { "$type": "cubicBezier", "$value": [0, 0, 0.2, 1] }
+    },
+    "reduced": {
+      "$value": "prefers-reduced-motion: reduce → animation:none; game-badge-chip sem expand"
+    }
+  },
+  "elevation": {
+    "shadow-card": {
+      "$type": "shadow",
+      "$value": {
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "8px",
+        "spread": "-4px",
+        "color": "#00000059"
+      },
+      "$description": "0 2px 8px -4px oklch(0 0 0 / 0.35); glow proibido"
+    },
+    "shadow-overlay": {
+      "$type": "shadow",
+      "$value": {
+        "offsetX": "0px",
+        "offsetY": "24px",
+        "blur": "48px",
+        "spread": "-12px",
+        "color": "#00000080"
+      },
+      "$description": "shadow-2xl em Auth/Deposit — uma sombra neutra"
+    }
+  }
+}

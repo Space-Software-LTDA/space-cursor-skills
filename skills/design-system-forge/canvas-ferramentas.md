@@ -24,6 +24,7 @@
 ## Cuidados gerais no canvas
 
 - **Evidência:** print de cada prancha/tela depois de editar (a varredura do Apply usa esses prints).
+- **Arquivo protegido:** cópia com data numa pasta `copias/` ao lado do arquivo, antes e depois de cada rodada; **um só editor** aberto com o arquivo (duas janelas ou abas com o mesmo arquivo podem gravar a versão antiga por cima de tudo); depois de cada edição, conferir que a data do arquivo mudou no disco — edição que ficou só na memória do editor se perde. Se o projeto tem repositório git, versionar o arquivo nos fechamentos de etapa (commit só com OK do humano).
 - **Peças criadas que não aparecem no print:** trocar o nó por ele mesmo (substituir pelo próprio conteúdo, sem ids). **Não** copiar a prancha para “forçar o desenho”: em algumas ferramentas a cópia transforma instâncias em frames soltos e quebra o vínculo com o componente.
 - **Tamanho real:** telas no tamanho da superfície (ex.: 1440 computador, 375 celular, popup de extensão com largura fixa e altura máxima da plataforma).
 - **Sem conexão:** Parte C do Forge e Fase C do Apply ficam **bloqueadas** — reportar e pedir a conexão; não fingir edição.

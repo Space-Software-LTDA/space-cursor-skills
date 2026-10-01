@@ -278,7 +278,9 @@ OK B (humano autorizou Fix)
 - [ ] GATE SCAN desta sessão válido (browser nas rotas do inventário e/ou prints do canvas)  
 - [ ] Re-Scan: **T1 cego** feito antes do cruzamento T2 (VISUAL_QA_METHOD § Imparcialidade)  
 - [ ] Tabela “Review humano × tela” sem FAIL ALTA (ou humano dispensou por escrito)  
-- [ ] Telas oficiais do canvas só com peças oficiais e variáveis; tela-prova no computador e no celular  
+- [ ] Telas oficiais do canvas só com peças oficiais e variáveis; tela-prova em cada superfície do diagnóstico  
+- [ ] Cópia com data do canvas antes e depois da rodada; arquivo conferido no disco  
+- [ ] Nenhum placeholder (“X”, “Lorem”) nas telas; texto de tela no teste do leigo  
 - [ ] Conferência cruzada: mesma coisa, mesma medida  
 - [ ] `DIFERENCAS_PARA_DEVS.md` completo (projeto de código/construtor)  
 - [ ] **§3.3 intra-card** PASS nos forms scaneados (ou FAIL listado — nunca omitir)  

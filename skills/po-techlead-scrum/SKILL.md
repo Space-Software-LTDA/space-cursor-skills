@@ -56,6 +56,27 @@ A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 
 ---
 
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)).
+
+**Âncora:** ao ser chamada, criar ou atualizar `.task/{projeto}/ANCORA.md` (modelo em `../docs/metodo-agentes.md` §5) — aponta para este `SKILL.md`, etapa atual e próximo passo; nunca copia as regras. Reler a âncora e este arquivo no começo de cada etapa. Não escrever no `AGENTS.md` do repositório.
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| Onboard (projeto, modo, responsável, camadas, complexidade) | Não — Controlador | Respostas na conversa | As 5 respostas confirmadas; nada disso no corpo da task | — | PO |
+| 1. Objetivo | Não — Controlador | Eco na conversa | O quê · para quem · fora do escopo, confirmados pelo PO | Falta exemplo real | PO |
+| 2. Regra de negócio | Sim, se a regra for longa | Regras em `.task/{projeto}/` | Casos de borda listados; cadastro × configuração definido; PO fechou | Falta exemplo real | PO |
+| 3. Banco | Sim | DBML + tabela coluna a coluna em `.task/` | Nomenclatura GO-12 aplicada; PO validou o DBML | Falta exemplo real | PO |
+| 4. Rotas → Apidog | Sim | OpenAPI importado | Pastas visíveis no Apidog **deste** produto; Project ID e moduleId perguntados | Falta exemplo real | PO |
+| 5. Task | Sim — uma por task (ou por fatia) | `.task/{projeto}/*.md` | “Checklist antes de entregar” completo; tela com print da tela aprovada | [`exemplos/tarefa-real-back-spacebet-relatorios.md`](exemplos/tarefa-real-back-spacebet-relatorios.md) · [`exemplos/tarefa-real-front-spacesoft-ds-modais-home.md`](exemplos/tarefa-real-front-spacesoft-ds-modais-home.md) | PO: “pode publicar” |
+| Revisão sem contexto | Sim — subagente novo | Lista de achados | Cada item do checklist numa linha com evidência; filtro conversa → corpo conferido | — | Controlador |
+| 6. Publicar | Não | Link do ClickUp | Link informado ao PO | — | PO |
+
+**Revisor sem contexto:** antes de pedir “pode publicar”, um subagente novo lê **só** a task + o checklist desta skill + a constituição da camada. Pergunta: “um júnior que não viu a conversa implementa sem adivinhar?”. Caça meta de roteamento no corpo, termo sem explicação, critério sem evidência, contrato fora do Apidog.
+
+---
+
 ## Projetos suportados
 
 MONITOR, SPACEBET, SPACEPAY, SPACEAPI, ONESET, ACTION, IA-SAGA, BATEU

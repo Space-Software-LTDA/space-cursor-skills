@@ -13,6 +13,9 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | `qa-space` | `/qa-space` | QA front + Space DS + DS produto/`P-…` se houver + ui-gosto (geral + tipo §11) + REPORT | `.task/` | Não |
 | `design-system-forge` | `/design-system-forge` | Cria: diagnóstico · manual da marca (prancha) · DS doc + tokens · Fundamentos + componentes no canvas (Pencil padrão; fonte aprovada → importar peças reais; um exemplar por componente, nada duplicado; Essenciais × Draft × Rascunho; proporções de mídia por amostras). Modos Extrair/Criar · Q1–Q19 · GATE ACCEPT · confronto com gosto · essencial → pergunta ouro | `.docs/` + canvas | Não |
 | `design-system-apply` | `/design-system-apply` | Aplica: diagnóstico das telas · A DS×gosto→OK · B varredura + espelho no canvas→OK · C correção/redesenho no canvas em loop até ALIGNED + `DIFERENCAS_PARA_DEVS.md`. Construtor = secundário; código nunca | `.docs/` + canvas | Não |
+| `product-from-idea` | `/product-from-idea` | Cria produto da ideia à tarefa: 12 fases (discovery → mercado → protótipo → MVP → contrato → setup → DS → telas → revisão → manual comercial → tarefas), Controlador + subagente por fase, verdade em `.docs/`, não coda. Chama Forge (7), Apply (8) e PO (11) | `.docs/` + canvas + âncora no workspace (`AGENTS.md` + `.cursor/rules/`) | Não (o PO usa) |
+
+**Todas** as skills seguem [`docs/metodo-agentes.md`](../../docs/metodo-agentes.md) (Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · correções → `/skill-update`) e têm `CORRECOES.md` na pasta.
 
 Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **genérico** (qualquer produto); dado de cliente só na conversa ou em `exemplos/`.
 
@@ -24,6 +27,7 @@ po-techlead-scrum      → Objetivo → regra → DB → Apidog → task ClickUp
 qa-space               → grava .task/; NÃO publica ClickUp (passa pro PO)
 project-context-doc    → grava .docs/; publica Doc ClickUp após aprovação
 design-system-forge    → diagnóstico → manual → DS + canvas (essencial) → confronto gosto → STOP; pergunta ouro
+product-from-idea      → Controlador: fases 0–11; subagente por fase; chama forge (7) → apply (8) → po-techlead (11)
 design-system-apply    → diagnóstico → A (DS×gosto)+OK → B (varredura + espelho canvas)+OK → C (loop no canvas) → ALIGNED + DIFERENCAS_PARA_DEVS
 ```
 
@@ -31,7 +35,8 @@ design-system-apply    → diagnóstico → A (DS×gosto)+OK → B (varredura + 
 
 | Arquivo / pasta | Papel |
 |-----------------|--------|
-| `docs/` | **Constituição** (entry-point, ouro, anti-padrões, DS, git, stack). Mapa: `docs/README.md` — cada skill lê esse README primeiro |
+| `docs/` | **Constituição** (entry-point, ouro, anti-padrões, DS, git, stack, **método de execução** `metodo-agentes.md`). Mapa: `docs/README.md` — cada skill lê esse README primeiro |
+| `skills/*/CORRECOES.md` | Registro dos erros corrigidos de cada skill (fluxo F do `/skill-update`) |
 | `AGENTS.md` | Direcionamento do agente ao abrir o repo |
 | `.cursor/rules/space-cursor-skills.mdc` | Rule always-on no repo |
 | `README.md` | Setup humano + tabela `.env` |

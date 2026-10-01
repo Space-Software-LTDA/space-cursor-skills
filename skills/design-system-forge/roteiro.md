@@ -73,6 +73,8 @@ Regra de ouro: **marca manda na cor e na fonte; o DS manda na tela; a tela revel
   - medir contraste de cada combinação; se branco sobre a cor principal falhar, o texto sobre ela passa a ser o tom escuro da marca;
   - dizer o que é proibido (ex.: cores de outro produto da mesma empresa);
   - toda proibição diz **onde** vale. “Sem a cor X” é ambíguo: no produto inteiro, só no logo, só no fundo?
+  - **texto do botão principal decidido aqui, por comparação:** mostrar lado a lado, num botão real, texto claro × texto escuro sobre a cor principal, com o contraste de cada um. Se o humano preferir a opção que não passa, propor um tom mais escuro (ou claro) da cor principal só para o botão, com o contraste medido. Decidir isso só nas telas força mudar a cor da marca no meio do trabalho;
+  - a cor que marca o **melhor** (nota máxima, destaque positivo) é da família da marca; vermelho e alerta ficam para o que é ruim.
 - **Critério:** uma cor principal só; contraste de 4,5 para 1 em texto normal e de 3 para 1 em texto grande, bordas e ícones de uso.
 
 ### Passo 5 — Tipografia da marca
@@ -232,6 +234,7 @@ Conectar a ferramenta antes: [canvas-ferramentas.md](canvas-ferramentas.md).
 
 - **O que fazer:** abrir e **olhar** cada componente, não contar. Conferir contraste, estados faltando, tamanho de logo, botão de fechar, texto cortado.
 - **Armadilha comum:** auditoria rápida que conta peças em vez de olhar. Auditoria com pressa é refeita.
+- **Todos os quadros:** abrir cada prancha do arquivo (inclusive o segundo tema e as áreas de rascunho) antes de dizer quantas peças existem. Contar um quadro e generalizar já errou por mais da metade.
 
 ### Passo 20 — Peças do domínio por variações
 

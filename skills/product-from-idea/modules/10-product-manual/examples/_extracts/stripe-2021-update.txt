@@ -1,0 +1,317 @@
+
+--- Page 1 ---
+Dear Stripe community,
+
+It’s an odd time to sit down and write an update on Stripe’s business and our industry. As the 
+headlines switch abruptly from global pandemic to geopolitical tragedy, the machinations of the 
+internet economy seem less pressing by comparison. The past two years have taught us, 
+however, that we all have a job to do. Millions of internet businesses are now relying on Stripe to 
+sell to customers all over the world. So we’re sharing this update on what’s happening at Stripe, 
+what we’re seeing in the industry, and what we have planned. 
+
+Collectively, businesses on Stripe processed more than $640 billion in payments in 2021, up 
+60% from the prior year. (Since a lot of this came from one-time behavioral adjustments caused 
+by the pandemic, 2022 won’t match the same level of growth.) These payments came from a 
+rapidly growing group of businesses: 1,400 new companies (and 100 nonprofits) joined Stripe 
+each day last year. And, over the course of 2021, more than 100 businesses every day passed the 
+milestone of $1 million in lifetime sales on Stripe. We often say that the internet economy is in its 
+early days, which may sound trite, but everything we observe directly gives us confidence that 
+it’s true. Online spending was only . There’s a long way yet to go.
+
+Stripe’s mission is to grow the GDP of the internet. That means both helping existing economic 
+activity migrate to the internet and enabling completely new undertakings that couldn’t exist in 
+an offline world. We’re part of a larger ecosystem of other infrastructure companies, SaaS tools, 
+, bootstrappers, investors, open-source projects, engineers, marketers, 
+accountants, supportive partners, parents, and educators that are playing a part in this growth.
+
+We think we can help grow the internet economy in four primary ways
+Increasing the rate of new business creation by lowering the cost and complexity of 
+getting started
+Helping established enterprises adapt their business models to the internet
+Increasing cross-border commerce by simplifying and standardizing the complex 
+international payments landscape
+Lowering the costs of scaling by providing simple, reliable, secure, and developer-friendly 
+APIs and services.
+
+In this letter, we’ll describe how we’re progressing in those four categories and touch on two 
+interesting new trends we’re seeing: the creator economy and embedded finance.
+12% of global spend in 2021
+indie developers
+April 2022
+
+--- Page 2 ---
+Startups
+Our first customers were friends who were starting companies, and we still spend a lot of time with 
+startups. We try to better understand what they’re up to, what they need, and what could help 
+more get started. We want to support startups from the first lines of code through IPO and beyond. 
+60% of the  are Stripe customers. 
+
+Some of the new functionality and improvements we made last year include
+. We built this because it became clear that even the small amount of code 
+involved in setting up Stripe can be an impediment in the early days
+. We heard how much hassle is entailed in sales tax and VAT. We acquired TaxJar 
+(the leaders in sales tax filing) and , one of our fastest-growing products
+. Our Invoicing product has existed for a few years, but we’ve made big 
+strides in expanding its global coverage
+. Handling revenue recognition is always tricky at scale (and it’s 
+particularly nuanced for SaaS companies), so we launched Revenue Recognition to help 
+automate this. We also acquired Recko, a very cool company based in Bangalore, and have an 
+exciting roadmap in store for 2022. 
+One of the first products we launched to help more companies get started was . 
+After years of tireless iteration and improvement by the team, Atlas is now used for around one 
+in ten new C Corporations in Delaware, a milestone that we’re quite proud of.
+
+The biggest structural investment we’ve been making is in our fintech products. In Y 
+Combinator’s , they described that 13% of the winter 2022 batch is comprised 
+of consumer companies—but 24% are fintech companies. We’re making heavy investments in 
+ (easy money management, powering products like Shopify Balance) and 
+ (programmatic card issuance for companies like TripActions). We’ll talk about 
+this trend more later on.
+
+Lastly, when we talk with policymakers and regulators, we work hard to represent the aggregate 
+observations of the founders and early-stage businesses that we work with. (
+ and sluggish EIN issuance mechanisms, we’re looking at you.)
+technology companies that went public in 2021
+Payment Links
+Stripe Tax
+launched Stripe Tax
+Stripe Invoicing
+Revenue Recognition
+Stripe Atlas
+recent blog post
+Stripe Treasury
+Stripe Issuing
+Onerous financing 
+processes
+Enterprises
+When we started out, our startup focus was a drawback in the eyes of incumbent businesses. 
+(“We want an enterprise-oriented payment provider,” we heard.) Over the past decade, this 
+dynamic has inverted. Established businesses have realized that they need to match the 
+customer experience that the world’s most exciting startups invent, and that to be stuck on 
+legacy technology is a business liability.
+
+In practical terms, getting payments right in the enterprise means things like having a direct 
+relationship with your customer (rather than relying on various intermediaries), adopting
+
+--- Page 3 ---
+modern business models like subscriptions and marketplaces, being a truly global business by 
+properly supporting the growing panoply of global payment methods (plus Apple Pay, Google 
+Pay, and so forth), having real-time visibility into your supply chain, and being able to properly 
+integrate in-person and online commerce channels.
+
+To give some recent examples: Le Monde, France’s largest daily newspaper, 
+. Thanks to digital subscriptions, Le Monde has more than 
+doubled its subscriber base over the pandemic and recently launched  of its 
+newspaper to serve more readers around the world. In January, Ford signed a five-year 
+partnership with Stripe to build ecommerce experiences for their car, truck, and services 
+customers and dealers. Atlassian, which has built one of the world’s leading SaaS companies 
+with a , chose to re-engineer its subscription and revenue management atop 
+.
+
+Some of what we’ve been working on over the past year includes
+. We’re seeing enterprises move quickly to consolidate online and 
+offline payments since it makes the customer experience a lot better. As part of our efforts, 
+we recently acquired BBPOS, the world’s leading mobile point-of-sale hardware 
+manufacturer
+Expanding , our multi-party payments product used by everyone from Shopify 
+to Deliveroo to Mercedes-Benz Group. We’ve been working hard to enable platforms and 
+marketplaces to scale globally (with new countries supported), to easily manage evolving 
+compliance requirements, and to offer financial services to their customers. (This last part is 
+described in more detail below.
+Improving our payments performance. We’ve been honing our machine learning models that 
+optimize authorization rates, building out global coverage for real time expired card 
+updaters, rolling out Network Tokens, and adding direct connectivity to new networks
+Rapidly adding new rails to our Global Payments and Treasury Network (GPTN). We now support 
+more than 50 local payment methods around the world and support payouts to 72 countries.
+
+Of course, many of the above improvements benefit not only enterprises but Stripe customers 
+of every size.
+
+In all, we now work with more than 50 category leaders, which we define as businesses that 
+process more than $1 billion in payments on Stripe, and that set continues to expand rapidly.
+chose Stripe to help 
+grow its international readership
+the English version
+unique sales model
+Stripe Billing
+Investing in Stripe Terminal
+Stripe Connect
+International commerce
+It’s not widely known that the majority of new businesses joining Stripe last year came from 
+outside the United States. Back home, 85 European companies passed the milestone of a $1 billion 
+valuation in 2021, registering a  that’s more than twice that of the US. The 
+number of businesses on Stripe in Latin America and APAC grew 518% and 106%, respectively, 
+over the course of the pandemic. We expect that a very large fraction of the important tech 
+companies of the next decade will be built outside of the traditional US tech hubs.
+unicorn growth rate
+
+--- Page 4 ---
+We often observe that we have two kinds of customers: companies that operate globally and 
+companies that aspire to. This means that, unlike in the offline world, even a small internet 
+business operating out of West Virginia may benefit considerably from supporting iDEAL, the 
+most popular online payment method in the Netherlands. Between 2019 and 2021, cross-border 
+payment volumes have at least doubled in every region in which Stripe operates. We’re continually 
+looking to simplify global selling to drive cross-border trade up further. 
+
+On average, businesses from Austria, Belgium, Germany, the Netherlands, and Poland have 
+increased their sales from EU customers by over 40% after accepting popular European payment 
+methods (such as Sofort, iDEAL, and Bancontact) and reduced transaction costs by 40 basis 
+points. (That is, almost half a percent more of their topline revenue ends up in their bank 
+accounts.) On average, businesses that offer buy now, pay later methods (like Afterpay or Klarna) 
+have seen a 27% increase in sales. Wherever you’re based, more payment methods can make a 
+difference for your business.
+The foundations
+Stripe’s customers rely on us for secure and reliable payments: we’re well aware that if we don’t 
+deliver that, nothing else matters. We are investing hundreds of millions of dollars each year in 
+our security and reliability foundations.
+
+Cybersecurity attacks are becoming more frequent and sophisticated, while the effort required 
+to comply with the tapestry of personal data regulations (such as GDPR and CCPA) is 
+formidable. The stakes for getting any of this wrong are also getting higher. In 2021, reported 
+ransomware attacks were up 105%. Cyberinsurance premiums are growing 10% per year and 
+likely still not keeping up with risk. We avoid describing our security practices in detail to avoid 
+assisting adversaries, but we’re proud of the level of protection that our customers automatically 
+benefit from by virtue of building atop the Stripe platform.
+
+Reliability is one of the top concerns for companies selecting their infrastructure, and rightly so. 
+We now handle more than 500 million API requests every day with 99.999% uptime. At our peak 
+load during Black Friday and Cyber Monday last year, we handled 99.9998% of API requests 
+successfully. (That’s 1.2 seconds of unavailability over that entire week.) Many of our customers 
+saw large spikes in usage over the course of the pandemic, with companies like Instacart, Zoom, 
+and DoorDash rapidly scaling to new heights. Our infrastructure teams have built elastically-
+scalable infrastructure that can readily support these growth spurts. 
+
+We’ve been continuously evolving the Stripe innards in support of customer-facing performance 
+and reliability. Much of Stripe—15 million lines of code, in fact—is built on Ruby, for which we 
+built (and open-sourced) . Type-checking allows us to both move fast and eliminate 
+entire classes of bugs. Similarly, we recently migrated our largest frontend codebase to 
+TypeScript. This involved landing the biggest single code change in Stripe’s history: 3.5 million 
+lines changed in a single weekend. We’re also rebuilding the architecture (in a more service-
+oriented fashion) on which the core Stripe API calls run; our pilot customers running on that new 
+architecture are seeing 99th percentile latency improvements of over 50%. We’ll continue over 
+the course of this year to make Stripe more reliable and performant for you.
+typed Ruby
+
+--- Page 5 ---
+The world around us
+Access to opportunity facilitated by the internet is still underestimated: it’s as if several billion 
+people recently  to the world's most vibrant city and the system hasn’t yet 
+equilibrated. A bigger city  notable gains in economic productivity, creativity, and 
+innovation—and when that metropolis is the internet, this can take interesting new forms.
+
+We are delighted by the growth in the creator economy, a term that refers to directing payments 
+to those creating content or products on internet platforms: think developers on GitHub, 
+podcasters on Spotify, or the Twitterati on Twitter (with its ) all getting paid 
+directly for their creations. Creators take all forms, from Craig Mod who writes a 
+ to , the most followed and highest-
+earning creator on TikTok. Last year, we  by measuring the growth 
+of 50 popular platforms on Stripe.
+
+We’re bullish on the creator economy for two big reasons. First, because of the broadly 
+participatory cultural dynamism that it is enabling. Production decisions shouldn’t just be made 
+in centralized fashion by corporate managers; the growth of everything from  to 
+ shows that there are important topics, niches, and other forms of cultural creation 
+that have been left under-addressed. New entrepreneurs (“solopreneurs”) are capitalizing on 
+these opportunities and we’re building lots of functionality in  to help platforms 
+serve them.
+
+Second, we’re excited because it represents compelling economic opportunity for people in 
+emerging markets. Many creator-economy platforms are, by their nature, just as accessible to 
+people in Lima as they are to people in London, and the compensation offered by those 
+platforms looks relatively more favorable in places with lower GDP per capita.
+
+Another trend we’re watching with interest is the explosive growth in fintech (a label that didn’t 
+exist when Stripe started out) and especially in embedded finance. Small businesses around the 
+world are currently underserved for financial services or experience additional friction to access 
+them. Research shows that:
+ of small businesses say they have access to all of the financing they nee
+55% of businesses have to visit a local branch in-perso
+23% of businesses have to send a fax in order to open a bank account
+
+In short, the landscape still looks pretty antiquated.
+
+Increasingly, these small businesses are running on SaaS platforms with expansive visions for 
+helping SMBs. For example, retailers and restaurants might run on  while home 
+service professionals might use  or . ​ ​ These platforms combine tailored 
+software services, like scheduling and dispatching plumbers or electricians, with Stripe-
+powered building blocks for card payments, invoicing, and more.
+immigrated
+generates
+Ticketed Spaces
+paid newsletter 
+about walking the Japanese countryside Charli D’Amelio
+indexed the creator economy
+Substack
+Teachable
+Stripe Connect
+Only 48%
+Lightspeed
+Housecall Pro Jobber
+
+--- Page 6 ---
+Platforms are now integrating additional financial services directly into their products, such as 
+business expense cards, monetary accounts, and loan access. As just one example, Lightspeed 
+launched Lightspeed Capital . This tends to be a huge win 
+for both sides, offering SMBs financial services they may not otherwise have had access to and 
+creating new revenue streams for the platforms (they can increase their  by 
+offering those services). We're increasingly seeing platforms become a one-stop destination, 
+enabling customers to manage all aspects of their business in their SaaS .
+to give its customers access to loans
+revenue by 2-5x
+system of record
+Putting users first
+Stripe is now comprised of more than 7,000 people working across 23 countries. We have, of 
+necessity, expanded a great deal during the pandemic. We sometimes use the analogy of solid 
+rocket boosters: once lit, they can’t be extinguished. They remind us of our customer base. 
+We’re proud to work with the fastest-growing companies in the world, from Airtable to Zoom, but 
+it also means that we have to work hard to stay ahead of their needs.
+
+We look for people who aren’t put off by that intensity and rigor. Nobody enjoys postponing a 
+launch or redoing a page for the third time, but we try to find people who’d rather do that than 
+ship something subpar. And we try to find people who genuinely care about making those 
+around them better off and can face challenges with a good sense of humor.
+
+The Nebraskan philosopher Warren Buffett once referred to the “ABCs of corporate 
+senescence”: arrogance, bureaucracy, and complacency. We’re terrified of these failure modes. 
+We work hard to convey to new people joining Stripe that humility and curiosity are strict 
+prerequisites for improvement. We need to continually iterate on our corporate processes to 
+ensure that we strike the right balance between providing a structure and imposing a 
+straitjacket. And, fortunately, it’s hard to become complacent when there are customers with so 
+many needs that we are (painfully!) unable to yet serve today.
+
+Internally, our first Operating Principle is “Users First”. Some companies are technology-first: 
+they do some R&D, invent interesting tech, and figure out how to commercialize it. That’s a very 
+viable and successful approach for many companies. But Stripe is lucky enough to serve 
+millions of smart, discerning, and demanding businesses that aren’t shy about telling us what 
+they need. So everything we develop at Stripe tends to stem from a user need and works 
+backwards to find a good way to solve it.
+
+Users First is the foundation of both our strategy and our tactics. It’s our strategy because our 
+users are sophisticated and tend to understand exactly what’s holding their business back. We 
+therefore don’t need to dazzle them with products they’ve never thought of. Users First is the 
+foundation of our tactics because Stripe is mission-critical infrastructure for our customers. (An 
+hour-long outage isn’t a huge deal for many online services. For Stripe, however, many of our 
+customers would view that as cataclysmic.) The businesses running on Stripe use us to charge 
+their customers, calculate revenue, make payroll, file taxes, pay suppliers, and perform a variety 
+of other functions that have to be executed exceptionally reliably.
+
+--- Page 7 ---
+We’re well aware that there’s plenty about Stripe we need to improve; our goal in describing our 
+approach is to give you a sense of how we go about doing so. We’re delighted when Stripe users 
+share ideas for what they’d like to see improved or expanded—it’s likely that the leader of your 
+favorite Stripe product is reachable on Twitter, and we personally love receiving emails from 
+Stripe’s customers.
+
+The internet economy that you participate in is one of the bright spots of today’s global 
+economy: talented teams are building exciting products not previously possible, people around 
+the world have opportunities they wouldn’t otherwise have, and many important long-term 
+trends are still pointed in the right direction.
+
+If you, like us, nerd out on this stuff, come join us at Stripe Sessions! It’s our once-a-year 
+conference where we feature both what’s going on in the industry writ large and all the new stuff 
+we’re launching at Stripe. You can reserve your place at .
+
+Best,
+
+John and Patrick
+sessions.stripe.com

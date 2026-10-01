@@ -1,0 +1,590 @@
+--- página 1 ---
+UNICEF Design System
+Visual Guidelines
+v0.4.0
+Solutions Centre and Support
+New York
+
+
+--- página 2 ---
+Disclaimer
+This document is in DRAFT status and may be subject to changes.
+This document is mainly intended for internal use of UNICEF staff and partners.
+
+
+--- página 3 ---
+($black)
+#000000
+($default)
+#4A4A4A
+($lighter)
+#767676
+($muted)
+#9C9C9C
+($borders)
+#C9C9C9
+($background)
+#F4F4F4
+Grayscale
+#6A3674
+($unicef-purple)
+#961A49
+($unicef-dark-red)
+#F26A21
+($unicef-orange)
+#00833D
+($unicef-dark-green)
+($unicef-dark-blue)
+#374EA2
+($unicef-red)
+#E2231A
+($unicef-yellow)
+#FFC20E
+($unicef-green)
+#80BD41
+($unicef-blue)
+#1CABE2
+The following are deﬁned in UNICEF’s brand book:
+Brand
+Colors
+Links
+($unicef-link)
+#3344DD
+
+
+--- página 4 ---
+($white)
+#FFFFFF
+($background)
+#F4F4F4
+Page backgrounds
+Background colors
+(=mix(white, $warning, 88%)) 
+Mandatory ﬁelds
+(=mix(white, $danger, 96%)) 
+Fields with error
+Field backgrounds
+
+
+--- página 5 ---
+#C9C9C9
+($disabled = $borders)
+ #961A49
+($dark-danger = unicef-dark-red)
+#E2231A
+($danger = unicef-red)
+#FFC20E
+($warning = unicef-yellow)
+($success = $unicef-green)
+#80BD41
+These colors are used to represent status of an action or an element.
+Traﬃc light colors
+Colors
+Color shall not be used as the only visual means of conveying 
+information, indicating an action, prompting a response, or 
+distinguishing a visual element. 
+(= mix(white, $danger, 80%) 
+(=mix(white, $success, 80%)
+(= mix(white, $warning, 80%) 
+($background)
+Traﬃc light backgrounds
+
+
+--- página 6 ---
+UNICEF Logos
+
+
+--- página 7 ---
+For vertical ﬂow, we use by multiples of 0.5rem (8px). Each element total height shall
+be always a multiple of 8px or 0.5rem. 
+Vertical ﬂow
+12
+11
+1
+2
+16px
+We use a 12 column system with a gutter (space between two columns) of 16px.
+Grid system
+Columns
+We will asume that the grid works the same way it does in the Bootstrap framework.
+Columns are enclosed within containers. These are the containers for each breakpoints:
+sm: 540px,  md: 720px, lg: 960px, xl: 1140px.
+Generally, browsers set 1rem = 16px. Therefore, 0.5rem is equivalent to 8px.
+
+
+--- página 8 ---
+Small
+line-height: .67rem;  //16px   
+font-size: 0.75rem; //12px
+small text
+small strong
+Lighter text (muted)
+Common properties for small texts
+Semibold = Common properties + color black + semibold 
+Strong = Common properties + bold + color black
+Lighter text (muted) = Common properties + color lighter
+Default Text = Common + default color.
+line-height: 1.5rem; //24px   
+font-size: 1.0rem; //16px
+Common properties for default texts
+Texts
+Typography
+Labels and Placeholders
+Labels use $default color $lighter color. Placeholder too. Both need to be accesible.
+We use the native font stack.
+$font-family-sans-serif:
+  -apple-system,                           // Safari for OS X and iOS (San Francisco)
+  BlinkMacSystemFont,                     // Chrome < 56 for OS X (San Francisco)
+  "Segoe UI",                            // Windows
+  "Roboto",                             // Android
+  "Helvetica Neue", Arial, sans-serif, // Basic web fallback
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default; // Emoji fonts
+Placeholder
+ 
+Input with placeholder
+
+
+--- página 9 ---
+h3. Heading 3
+h3. Heading 4
+Font weight semibold, font size 1.25rem, line height 2.75 rem. Lorem 
+ipsum dolor sit amet, consectetur adipiscing elit. Etiam non ligula et erat 
+laoreet hendrerit quis vitae ante. Mauris tincidunt dapibus erat eget 
+tempus. Integer blandit, tellus sed dapibus rhoncus, dui tortor congue.
+Font weight semibold, font size 1rem,line heigth 2 rem. Lorem ipsum dolor 
+sit amet, consectetur adipiscing elit. Etiam non ligula et erat laoreet 
+hendrerit quis vitae ante.
+Font weight bold, font size 0.875rem, line-height 1.25 rem. Lorem ipsum 
+dolor sit amet, consectetur adipiscing elit. Etiam non ligula et erat laoreet 
+hendrerit quis vitae ante.
+h2. Heading 2
+Font weight bold, font size 1.5 rem and line height 3 rem. Lorem ipsum 
+dolor sit amet, consectetur adipiscing elit. Etiam non ligula et erat laoreet 
+hendrerit quis vitae ante. Mauris tincidunt dapibus erat eget tempus. 
+Integer blandit, tellus sed dapibus rhoncus, dui tortor congue urna.
+h1. Heading 1
+margin-top: 1.5rem; //24px
+margin-bottom: 0.5rem; //8px
+color: black;
+Common properties for headers:
+Headings
+
+
+--- página 10 ---
+This is an alert. Alerts can have a bold text. And even links. 
+×
+This is an alert that can be dismissed
+Clickable button
+padding: 0.75rem 1.25rem //12px 20px font-size: 1.5rem; //24px
+line-height: 1.5rem; font-family: Arial;
+:hover {
+  cursor: pointer;
+  color: $black;
+}
+This is a danger alert. Helps to provide the user some information that
+is important for him to know.
+This is a warning alert. Helps to provide the user some information that
+is important for him to know.
+This is a success alert. Helps to inform that there was some task that 
+was successfully completed.
+padding: 0.75rem 1.25rem; // 12px top/bottom and 20px left-right
+line-height: 1.5rem;  // Ends up with a min height of 24 + 12 + 12 = 48
+color: darker +
+Alerts appear as result of an action. Common properties for alerts:
+Alerts
+
+
+--- página 11 ---
+pointer: All clickable/actionable elements must have the hand cursor.
+default: It shall be the default cursor.
+text: Cursor for all active editable ﬁelds (input, textareas, etc..), as well as 
+selecteble text.
+Cursors
+Edit
+FontAwesome:
+http://www.fontawesome.com
+Humanitarian font:
+https://reliefweb.int/report/world/world-humanitarian-and-country-icons-2012
+https://github.com/lubar/Humanitarian-Icons-WebFont
+For general icons we use FontAwesome 5.x, for UN/Humanitarian representations we 
+use the Humanitarian font.
+All icons shall include a label as it is more accessible. Exceptionally, a :hover tooltip
+Icons
+Please, see the Designer Guidelines to know more about the 
+standarized use of icons.
+Note these cursos slightly vary depending on the operating system.
+
+
+--- página 12 ---
+Mobile
+DEFAULT 
+padding-top: 0.75rem; //
+padding-bottom: 0.75rem; //Total height 48px;
+PRIMARY
+ Mobile buttons have a slighly large height to allow user to tap on them.
+! PRINT
+.25rem
+1rem
+1rem
+1rem
+Buttons with Icons
+Default
+Default 
+Default
+Default
+Primary
+Primary
+Primary
+Primary
+normal
+Primary Button
+Danger Button
+Default Button
+:hover
+:active
+:disabled
+Danger 
+Danger
+Danger
+Danger
+min-width: 88px;
+border-radius: 2px;
+font-size: 0.875rem; //14px
+font-weight: 600; //Semibold
+text-transform: uppercase;
+ 
+padding-left: 1rem; //16px
+padding-right: 1rem;
+padding-top: 0.5rem;
+padding-bottom: 0.5rem;
+line-height: 1.5rem;   //Total height is 40px
+opacity: 50%
+Buttons and Links
+Buttons are used for performing actions on the interface. 
+Common properties for buttons
+
+
+--- página 13 ---
+:visited
+Disabled
+:active
+:hover
+normal
+Link
+Link 
+Link
+Link
+Link 
+Repeating links (e.g. in a list or a table) should not have an underline
+Amount (USD)
+Date
+Main Element
+$23.33
+Text is a link
+29-May-2018
+$1,223.00
+29-May-2018
+Text is left-aligned 
+$99.44
+12-Aug-2017
+This is another link. Vertically 
+align cells to the middle
+Links
+Focus
+BUTTON
+For accessibility all elements that have an action shall display by default the following
+style when the :focus status is active.
+Link 
+Item with action in dark bg
+Link variants
+Link within <small>
+Link within <strong>
+
+
+--- página 14 ---
+Dropdown menus
+Any item that is marked with the caret down symbol, has a dropdown.
+Menu Item 2
+Menu Item 2
+Menu Item - Long Title
+.5rem
+1.5 + 2* 0.5 (top and botton padding) 
+2.5 rem(40px)
+.25rem
+1rem
+1rem
+background: #FFFFFF;
+border: 1px solid #C9C9C9;
+box-shadow: 0 2px 10px 0 rgba(0,0,0,0.30);
+Link !
+DEFAULT !
+All dropdowns shall have the same look & feel. There may be exceptions as in <select>
+element.
+When dropdown is displayed the item with the caret shall have the active status.
+Link !
+
+
+--- página 15 ---
+Forms
+Selects
+Text
+ 
+Form element Disabled
+Text
+ 
+Read only ﬁeld
+Text
+*
+Mandatory ﬁeld with data
+Text
+ 
+Input with content
+Write something 
+*
+Mandatory ﬁeld
+Placeholder
+ 
+Input with placeholder
+Input
+!
+Select
+ 
+Select with placeholder
+Textarea
+While user is typing the counter 
+below decreases...
+*
+Label
+2,028 characters remaining
+2,028 characters remaining
+Type something
+*
+Mandatory textarea with placeholder
+1,958 characters remaining
+While user is typing the counter 
+below decreases...
+If user introduces a lot of text,this 
+box grows. 
+So, user can see all the 
+information on the textarea.
+*
+Label
+
+
+--- página 16 ---
+Forms
+!
+Select
+*
+Label
+This is an error that has more than
+one line
+!
+Selected element
+*
+Label
+This is an error
+Form with errors
+Search box
+Example: India
+ 
+Search box
+SEARCH
+Example: India
+ 
+Search box with other elements
+SEARCH
+BUTTON
+Link
+!
+Select
+If the ﬁeld has a hint it is always visible.
+ 
+Input with hint
+
+
+--- página 17 ---
+!
+" Item with icon
+Notiﬁcations
+4
+Libya!
+Application Name
+Hides UNICEF logo.
+Tablet <= 1024px
+!
+" Item with icon
+Notiﬁcations
+4
+Libya!
+Application Name
+Desktop >1024px
+App header
+
+
+--- página 18 ---
+!
+" Item with icon
+Notiﬁcations
+4
+Libya!
+Application Name
+Skip navigation
+!
+" Item with icon
+Notiﬁcations
+4
+Libya!
+Application Name
+Skip navigation
+For users that navigate with keyboard. Skip navigation link shall be provided. This link is only in a visible area when it has the focus.
+Accessiblity: Skip navigation link has :focus
+Accessiblity: Skip navigation link has :focus (ﬁxed header)
+
+
+--- página 19 ---
+Menu Item - Long Title
+Menu Item 2
+Menu Item 3
+Active dropdown !
+Dropdown !
+Disabled
+Selected
+Unselected
+hover
+!
+" Item with icon
+Notiﬁcations
+4
+Libya!
+Application Name
+App header with menu
+
+
+--- página 20 ---
+! Menu item with icon
+Menu item with submenu "
+Menu item with submenu expanded "
+Current selected item
+Second menu item
+Second menu item
+Application Name
+Menu "
+Application Name
+Menu "
+Mobile (Experimental TBD)
+
+
+--- página 21 ---
+Tab content has an internal padding of 16px
+Tab Heading
+Disabled
+Selected
+Normal
+hover
+Navigation - Tabs
+min-width: 100px;
+line-height: 1.5 rempx;
+padding: 12px 16px;
+
+
+--- página 22 ---
+Navigation - Trees
+! Level 1
+Level 2
+!
+Level 3 with a long 
+name
+!
+Level 3
+!
+Level 3 with no 
+children
+-
+Level 3 with no 
+children nor 
+-
+Selected node
+Node with hover
+Node without children
+Node no children disabled
+
+
+--- página 23 ---
+Tables
+Main Element
+Amount 
+(USD)
+Date
+Risk 
+23.33
+Text is left-aligned 
+29 May 2018
+Medium
+-99.44
+12 Aug 2017
+Low
+Generally vertically align cells
+to the middle
+1,223.00
+Numbers are right aligned
+29 May 2018
+High
+
+
+--- página 24 ---
+Cards
+Read more
+Lorem ipsum dolor sit amet, 
+consectetur adipiscing elit. Duis ut 
+diam ex. Suspendisse quis quam 
+volutpat, lobortis nisi non, mattis 
+mauris. Integer placerat, diam vitae 
+malesuada ultricies, lacus mi congue 
+lacus, eget congue turpis lacus sit 
+amet dolor. 
+Cards with navigation tabs inside.
+User can select each tab.
+Card with actions menu
+Actions !
+…
+Card without head block
+Lorem ipsum dolor sit 
+amet, consectetur 
+adipiscing elit. Duis ut 
+diam ex. Suspendisse 
+quis quam volutpat, 
+lobortis nisi non, mattis 
+mauris. Integer placerat, 
+diam vitae malesuada 
+ultricies. 
+Read more
+Lorem ipsum dolor sit 
+amet, consectetur 
+adipiscing elit. Duis ut 
+diam ex. Suspendisse 
+quis quam volutpat, 
+lobortis nisi non, mattis 
+mauris. Integer placerat, 
+diam vitae malesuada 
+ultricies, lacus mi congue 
+lacus.
+Card Head
+Selected
+Normal
+
+
+--- página 25 ---
+Fully empty (current _value <= 0)
+0%
+100%
+$0.00
+$125,000.00
+Partially ﬁlled
+Without numbers
+Progress bar
+Default width = 100% of container width.
+
+
+--- página 26 ---
+Annex - Exportable Resources

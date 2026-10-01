@@ -65,6 +65,27 @@ O stub [design-system.md](design-system.md) nesta pasta só redireciona. A fonte
 
 ---
 
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)).
+
+**Âncora:** ao ser chamada, criar ou atualizar `.task/{projeto}/ANCORA.md` (modelo em `../docs/metodo-agentes.md` §5) — aponta para este `SKILL.md`, etapa atual e próximo passo; nunca copia as regras. Reler a âncora e este arquivo no começo de cada etapa. Não escrever no `AGENTS.md` do repositório.
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| Fase 0 — Wizard | Não — Controlador | Respostas na conversa | As 12 perguntas do wizard respondidas ou marcadas “não existe” (URL, mock, task, paths, login, escopo, DS do produto, rigor, mobile, fonte da API, conflito mock × DS, Primary) | — | Humano |
+| Fase 0.5 — Carregar DS | Sim | Nota em `.task/` com a versão do DS usada | DS lido **inteiro** (Space ou do produto, o mais novo); prioridade de verdade registrada | — | Controlador |
+| Fase 1 — Preparar `.task/` | Não | Pasta e `REPORT.md` iniciado | Estrutura da pasta criada | — | — |
+| Fase 2 — Browser | Sim — um por tela ou rota (em paralelo se independentes) | Achados + prints desta sessão em `.task/` | Toda tela do escopo aberta; overlays clicados; cada achado com print | Falta exemplo real | Controlador |
+| Fase 3 — Código Front | Sim | Achados com trecho de código | Rotas do escopo lidas; anti-padrões AP-FE caçados com evidência | Falta exemplo real | Controlador |
+| Fase 4 — Contrato API | Sim | Achados de contrato | Network conferido contra o contrato; três estados testados | Falta exemplo real | Controlador |
+| Revisão sem contexto | Sim — subagente novo | Lista de achados sobre o REPORT | Cada achado com evidência (print ou trecho); veredito coerente com os P0; “Como deveria ser” entendível sem a conversa | — | Controlador |
+| Fase 5 — Fechar REPORT | Não — Controlador | `.task/.../REPORT.md` | Veredito + resumo + P0–P3 + tabela §19 + inputs e lacunas | Falta exemplo real | Humano |
+
+**Revisor sem contexto:** um subagente novo recebe só o `REPORT.md`, os prints e esta skill. Não vê a conversa nem o tour. Confere se cada achado se sustenta pela evidência e se o veredito bate com a severidade.
+
+---
+
 ## Regra de ouro
 
 > Documentar **durante** a inspeção, não só no final.  

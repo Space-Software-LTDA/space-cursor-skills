@@ -51,6 +51,27 @@ A constituição do time **não** está neste `SKILL.md`. Está em `../docs/`.
 4. Se achar **`Dockerfile`**, EasyPanel, README de deploy ou serviço de banco separado: [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md#servidores-easypanel) + AP-NAM-07 — documentar **o que o produto faz hoje** (app = serviço via Dockerfile; DB/cache = outro serviço; env). Não inventar stack Compose se o código/README não tiver.
 5. Práticas de git/onboarding da empresa só se o pedido for esse: [`../docs/git-fluxo.md`](../docs/git-fluxo.md), [`../docs/stacks-e-estrutura.md`](../docs/stacks-e-estrutura.md).
 
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)). Os gates de cada transição estão em “Gates entre fases” — esta tabela diz **quem** faz e **o que prova** que terminou.
+
+**Âncora:** ao ser chamada, criar ou atualizar `.docs/project-context-doc/ANCORA.md` (modelo em `../docs/metodo-agentes.md` §5) — aponta para este `SKILL.md`, etapa atual e próximo passo; nunca copia as regras. Reler a âncora e este arquivo no começo de cada etapa. Não escrever no `AGENTS.md` do repositório.
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| 0a — Reconhecimento | Sim | Recon no chat | Repos e pastas listados com o que cada um é | — | Humano vê |
+| 0b — Config | Não — Controlador | Respostas na conversa | Repos + aliases + Apidog (ou “sem apidog”) + nome do produto confirmados | — | Humano |
+| 1 — Descoberta | Sim — um por repositório ou domínio (em paralelo) | Notas internas | Cada domínio obrigatório mapeado (sem gravar `.docs/`) | — | Controlador |
+| 2 — Extração | Sim — um por domínio | Rascunho FL · RN · G + lista `[CONFIRMAR]` | Cada FL/RN/G com referência ao código; nada gravado em `.docs/` | Falta exemplo real | Controlador |
+| 3 — Entrevista | Não — Controlador | Respostas do humano | Blocos 1 e 2 respondidos | — | Humano |
+| 4 — Geração | Sim | `.docs/contexto-*.md` + `README.md` | “Checklist antes de entregar” completo | Falta exemplo real (guia de forma: `pedagogical-examples.md`) | Humano |
+| Revisão sem contexto | Sim — subagente novo | Lista de achados | Cada RN/FL/G crítico passou em “um júnior entende sem abrir o código?”, com evidência | — | Controlador |
+| 5 — Publicação ClickUp | Não | Doc ClickUp + link | Link informado | — | Humano |
+
+**Revisor sem contexto:** um subagente novo lê só o documento gerado + `pedagogical-examples.md` + `language-guide.md`. Não vê a entrevista nem o recon. O que ele não entender é o que o júnior também não vai entender.
+
+---
+
 ## Principio rector
 
 ```text

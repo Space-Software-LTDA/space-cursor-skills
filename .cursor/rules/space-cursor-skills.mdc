@@ -15,6 +15,7 @@ Este repo versiona as skills. O destino no Cursor é **cópia**, e o path **muda
 4. **OBRIGATÓRIO:** após mudanças, rodar `npm run sync` na raiz (máquina alvo) — sem Sync a cópia não atualiza
 5. Ao terminar edições na skill, lembrar o usuário de rodar Sync (ou rodar se estiver no ambiente certo)
 6. Manutenção do pack: skill **`skill-update`** (`/skill-update`) + [AGENTS.md](AGENTS.md)
+7. Toda skill segue `docs/metodo-agentes.md` (subagente por etapa · Pronto quando + exemplo real · revisor sem contexto) e tem `CORRECOES.md`; correção identificada → `/skill-update` fluxo F
 
 ## Nunca
 

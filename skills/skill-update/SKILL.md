@@ -49,7 +49,7 @@ Ao criar/alterar skill: se o texto só fizer sentido para um cliente, **generali
 
 ## Wizard (perguntar se não estiver claro)
 
-1. **Ação:** sync | alterar skill existente | criar skill nova | diagnosticar (cópia desatualizada / path errado) | explicar catálogo | **atualizar constituição** (`docs/` na raiz do repo)
+1. **Ação:** sync | alterar skill existente | criar skill nova | diagnosticar (cópia desatualizada / path errado) | explicar catálogo | **atualizar constituição** (`docs/` na raiz do repo) | **registrar correção** (lista de correções vinda de outra skill)
 2. **Skill alvo** (se alterar/criar): nome da pasta `skills/<nome>/`
 3. **Máquina alvo do Sync:** PC local | Coders | ambas (lembrar: cada uma tem seu `.env`)
 4. **Constituição** (se a ação for atualizar constituição): qual arquivo em `docs/` muda; **atualizar `docs/README.md` primeiro** (mapa skill → arquivo → por quê)
@@ -115,16 +115,43 @@ Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook
 
 Não commitar essas pastas sem o usuário pedir.
 
+**Exceção — workspace dedicado do `product-from-idea`:** ali `.docs/` **é o produto definido** e é versionado (não vai para o `.gitignore`). Commit/push continuam só quando o usuário pedir.
+
 ### Pipeline PO (task com API)
 
 Na skill `po-techlead-scrum`: **Objetivo → regra de negócio → DB → rotas no Apidog → task ClickUp**.  
 Project ID e moduleId: **perguntar sempre** (não ficam no `.env`). Detalhe: `skills/po-techlead-scrum/apidog.md`.
+
+### Método de execução (todas as skills)
+
+Fonte única: [`../docs/metodo-agentes.md`](../../docs/metodo-agentes.md). Toda skill tem no `SKILL.md` uma seção **“Método de execução”** com:
+
+- tabela de etapas: Etapa · Subagente · Entrega · **Pronto quando** · **Exemplo real** (ou “falta exemplo real”) · Quem aprova;
+- onde entra o **revisor sem contexto**;
+- a regra “toda correção → lista de correções → `/skill-update`”;
+- um `CORRECOES.md` na pasta da skill (registro dos erros corrigidos);
+- a **âncora** que a skill cria no projeto ao ser chamada (`docs/metodo-agentes.md` §5): regra + `AGENTS.md` curtos só em workspace dedicado; em repositório de código, só `ANCORA.md` na pasta de artefatos.
+
+Skill nova sem essa seção não está pronta. Ao alterar uma skill, manter a tabela de etapas verdadeira.
 
 ### Comunicação
 
 - Respostas das skills Space: **português**
 - Meta de manutenção de skill (sync, path, COPIA): falar **aqui** (`/skill-update`) ou apontar para esta skill
 - Skills de produto focam no domínio; leem **`../docs/README.md` primeiro** (PO ≠ QA ≠ contexto); banner COPIA + ponteiro `AGENTS.md` / esta hub
+
+## Método de execução (desta skill)
+
+Segue [`../docs/metodo-agentes.md`](../../docs/metodo-agentes.md). Registro: [`CORRECOES.md`](CORRECOES.md).
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+| Wizard | Não — Controlador | Ação + skill alvo + máquina | As perguntas do wizard respondidas | — | Humano |
+| Edição | Sim — um por skill quando a mudança toca várias | Arquivos editados no repo | Mudança no repo (não na cópia); texto genérico; tabela de etapas da skill verdadeira | Falta exemplo real | Controlador |
+| Revisão sem contexto | Sim — subagente novo | Lista de achados | Zero dado de cliente fora de `exemplos/`; links relativos resolvem; skill com “Método de execução” + `CORRECOES.md` | — | Controlador |
+| Sync | Não | Cópia no destino | `npm run sync` rodado; destino informado | — | — |
+
+---
 
 ## Fluxos rápidos
 
@@ -151,14 +178,30 @@ Seguir [playbook.md](playbook.md#criar-skill-nova). Checklist mínimo:
 - [ ] `SKILL.md` com frontmatter (`name`, `description`, trigger `/…`)
 - [ ] Banner **COPIA** + Sync obrigatório + ponteiro `AGENTS.md` / esta hub
 - [ ] Seção artefatos (`.task/` / `.docs/` / N/A) se gravar arquivos
+- [ ] Seção **“Método de execução”** (tabela de etapas com Pronto quando + exemplo real; revisor sem contexto; correções → `/skill-update`) + `CORRECOES.md` vazio no formato do playbook
+- [ ] Pasta `exemplos/` com caso real, ou “falta exemplo real” declarado na tabela
+- [ ] **Âncora** definida: onde a skill grava a âncora no projeto (workspace dedicado × repositório de código) e o modelo dela
 - [ ] Entrada em [catalog.md](catalog.md)
 - [ ] Linha em `AGENTS.md` + README do repo
 - [ ] Conteúdo **genérico** (sem IDs/URLs/defaults de um cliente)
+- [ ] **Revisão sem contexto** (subagente novo) antes do sync: genericidade, links, caminhos antigos, “como começar” claro
 - [ ] `npm run sync`
 
 ### D — Diagnosticar
 
 Sintomas comuns → [playbook.md](playbook.md#diagnóstico).
+
+### F — Registrar correção (vinda de qualquer skill)
+
+Gatilho: uma skill entregou a **lista de correções** (o humano corrigiu, o revisor achou falha, o agente viu erro próprio, ou o humano deu diretriz que vale além da tarefa). Método: [`../docs/metodo-agentes.md`](../../docs/metodo-agentes.md) §4.
+
+1. Receber a lista: o que estava errado · causa · correção no artefato · o que muda na skill.  
+2. **Filtrar:** dado de produto (preço, nome, ID, URL) e preferência pontual **não** entram; só o que vale para qualquer produto.  
+3. **Eco → confirma:** mostrar ao humano, em português claro, que regra nova ou ajuste entra em qual arquivo da skill (ou da constituição, se vale para várias skills). Esperar o OK.  
+4. Editar no **repo** (`skills/<nome>/` ou `docs/`), de forma genérica. Se a correção mexe na tabela de etapas, atualizar o “Pronto quando”.  
+5. Registrar no `skills/<nome>/CORRECOES.md` (formato em [playbook.md](playbook.md#registrar-correção)).  
+6. `npm run sync`. Commit/push só se o humano pedir.  
+7. Resumo: correção → regra → arquivo.
 
 ### E — Atualizar constituição
 
@@ -176,5 +219,7 @@ Sintomas comuns → [playbook.md](playbook.md#diagnóstico).
 - [ ] **`npm run sync`** rodado (ou instruído) na máquina alvo
 - [ ] Catálogo / AGENTS atualizados se skill nova ou removida
 - [ ] Nada específico de um produto nas regras globais (IDs/URLs/defaults de cliente)
+- [ ] Skill alterada ou nova com seção **“Método de execução”** verdadeira (etapas · Pronto quando · exemplo real · revisor sem contexto) e `CORRECOES.md`
+- [ ] Correção registrada no `CORRECOES.md` da skill (fluxo F)
 - [ ] `apidog.env` / `clickup.env` gerados no destino se os tokens existem no `.env` (nunca commitados)
 - [ ] Usuário avisado para reiniciar chat se skill já estava em uso

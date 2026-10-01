@@ -180,7 +180,7 @@ Proibições:
 | 2xl | 1536 | |
 
 ### Grid e margens por ponto de quebra
-> Computador **e** celular, nunca só um. Conferido na primeira tela-prova (Apply).
+> Cada superfície que o produto tem (computador **e** celular quando houver as duas; se o humano definiu só computador por enquanto, registrar isso aqui). Conferido na primeira tela-prova (Apply).
 
 | Ponto de quebra | Tela de referência | Largura do conteúdo | Margem lateral | Colunas por tipo de conteúdo | Espaço entre colunas | Respiro de seção |
 |-----------------|--------------------|---------------------|----------------|------------------------------|----------------------|------------------|

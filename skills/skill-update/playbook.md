@@ -55,8 +55,9 @@ disable-model-invocation: true
    - `README.md` (tabela Skills)
 6. Se a skill de produto usar a constituição: ponteiro para `../docs/README.md` (não copiar o texto)
 7. **Conteúdo genérico** — sem IDs/URLs/defaults de um cliente; casos reais só em `exemplos/`
-8. `npm run sync`
-9. Commit/push só se o usuário pedir
+8. **Revisão sem contexto:** subagente novo, que não viu a conversa, confere a skill (genericidade, links, caminhos de rascunho, “como começar”) — uma linha por critério
+9. `npm run sync`
+10. Commit/push só se o usuário pedir
 
 ## Alterar skill existente
 
@@ -76,6 +77,38 @@ disable-model-invocation: true
 6. Avisar restart do chat
 
 **Proibido:** duplicar GO/AP/DS dentro de `po-techlead-scrum` ou `qa-space`. Uma fonte em `docs/`.
+
+## Registrar correção
+
+Fluxo F do `SKILL.md`. Formato do `skills/<nome>/CORRECOES.md` (uma linha por correção, mais recente em cima):
+
+```markdown
+# Correções — <nome-da-skill>
+
+> Erros corrigidos que viraram regra. Registrado pelo `/skill-update` (fluxo F).
+> Sem dado de cliente: descrever o padrão, não o produto.
+
+| Data | O que estava errado | Causa | Regra nova / ajuste | Onde na skill |
+|------|--------------------|-------|---------------------|---------------|
+```
+
+- **O que estava errado:** o sintoma, em uma frase (ex.: “tela levada para aprovação com placeholder no valor”).  
+- **Causa:** por que aconteceu (regra ausente, regra ambígua, contexto longo, template induzindo o erro…).  
+- **Onde na skill:** arquivo e seção que mudaram.  
+- Se a regra nova vale para várias skills → vai para `docs/` (constituição) e cada `CORRECOES.md` afetado aponta para lá.
+
+## Seção “Método de execução” (modelo para o `SKILL.md`)
+
+```markdown
+## Método de execução
+
+Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + subagente por etapa · Pronto quando + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update` (registro em [`CORRECOES.md`](CORRECOES.md)).
+
+| Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
+|-------|-----------|---------|---------------|--------------|-------------|
+
+**Revisor sem contexto:** {em que momento e o que ele confere}.
+```
 
 ## Diagnóstico
 

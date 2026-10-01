@@ -1,0 +1,1671 @@
+EXTRACT: Table of Contents (if present in pages) + Introduction + first chapters from shape-up.pdf
+
+--- Page 1 ---
+Shape Up
+Stop Running in Circles and
+Ship Work that Matters
+Ryan Singer
+
+--- Page 2 ---
+Contents
+Foreword by Jason Fried   8
+Acknowledgements   10
+Introduction   11
+Growing pains 11
+Six-week cycles 14
+Shaping the work 14
+Making teams responsible 15
+Targeting risk 15
+How this book is organized 16
+Part 1: Shaping
+Principles of Shaping   20
+Wireframes are too concrete 20
+Words are too abstract 21
+Case study: The Dot Grid Calendar 21
+Property 1: It’s rough 24
+Property 2: It’s solved 25
+Property 3: It’s bounded 25
+Who shapes 25
+Two tracks 26
+Steps to shaping 27
+Set Boundaries   28
+Setting the appetite 28
+Fixed time, variable scope 29
+“Good” is relative 30
+
+--- Page 3 ---
+Responding to raw ideas 31
+Narrow down the problem 31
+Case study: Defining “calendar” 32
+Watch out for grab-bags 33
+Boundaries in place 34
+Find the Elements   35
+Move at the right speed 35
+Breadboarding 36
+Fat marker sketches 41
+Elements are the output 44
+Room for designers 46
+Not deliverable yet 46
+No conveyor belt 47
+Risks and Rabbit Holes   48
+Different categories of risk 49
+Look for rabbit holes 50
+Case study: Patching a hole 51
+Declare out of bounds 53
+Cut back 54
+Present to technical experts 54
+De-risked and ready to write up 56
+Write the Pitch   57
+Ingredient 1. Problem 58
+Ingredient 2. Appetite 59
+Ingredient 3. Solution 60
+Help them see it 60
+Embedded Sketches 61
+Annotated fat marker sketches 62
+Ingredient 4. Rabbit holes 64
+
+--- Page 4 ---
+Ingredient 5. No Gos 64
+Examples 64
+Ready to present 67
+How we do it in Basecamp 67
+Part 2: Betting
+Bets, Not Backlogs   72
+No backlogs 72
+A few potential bets 73
+Decentralized lists 73
+Important ideas come back 74
+The Betting Table   75
+Six-week cycles 75
+Cool-down 76
+Team and project sizes 77
+The betting table 77
+The meaning of a bet 78
+Uninterrupted time 79
+The circuit breaker 80
+What about bugs? 81
+Keep the slate clean 83
+Place Your Bets   84
+Look where you are 84
+Existing products 84
+New products 84
+R&D mode 85
+Production mode 86
+Cleanup mode 87
+Examples 88
+
+--- Page 5 ---
+Questions to ask 90
+Does the problem matter? 90
+Is the appetite right? 90
+Is the solution attractive? 91
+Is this the right time? 92
+Are the right people available? 92
+Post the kick-off message 93
+Part 3: Building
+Hand Over Responsibility   96
+Assign projects, not tasks 96
+Done means deployed 97
+Kick-off 98
+Getting oriented 100
+Imagined vs discovered tasks 101
+Get One Piece Done   103
+Integrate one slice 103
+Case study: Clients in projects 105
+Programmers don’t need to wait 107
+Affordances before pixel-perfect screens 107
+Program just enough for the next step 110
+Start in the middle 111
+Map The Scopes   113
+Organize by structure, not by person 113
+The scope map 114
+The language of the project 117
+Case study: Message drafts 117
+Discovering scopes 122
+
+--- Page 6 ---
+How to know if the scopes are right 123
+Layer cakes 124
+Icebergs 125
+Chowder 126
+Mark nice-to-haves with ~ 126
+Show Progress   127
+The tasks that aren’t there 127
+Estimates don’t show uncertainty 129
+Work is like a hill 129
+Scopes on the hill 133
+Status without asking 134
+Nobody says “I don’t know” 136
+Prompts to refactor the scopes 137
+Build your way uphill 139
+Solve in the right sequence 139
+Decide When to Stop   142
+Compare to baseline 143
+Limits motivate trade-offs 144
+Scope grows like grass 144
+Cutting scope isn’t lowering quality 145
+Scope hammering 145
+QA is for the edges 147
+When to extend a project 148
+Move On   150
+Let the storm pass 150
+Stay debt-free 150
+Feedback needs to be shaped 151
+
+--- Page 7 ---
+Conclusion   152
+Key concepts 152
+Get in touch 153
+Appendices
+How to Implement Shape Up in Basecamp   156
+A Basecamp Team for shaping 156
+Basecamp Projects for the cycle projects 158
+To-Do Lists for scopes 160
+Track scopes on the Hill Chart 161
+Adjust to Your Size   165
+Basic truths vs. specific practices 165
+Small enough to wing it 166
+Big enough to specialize 167
+How to Begin to Shape Up   169
+Option A: One six-week experiment 169
+Option B: Start with shaping 170
+Option C: Start with cycles 170
+Fix shipping first 170
+Focus on the end result 171
+Glossary   172
+About the Author   176
+
+--- Page 8 ---
+8
+The way a team works has an enormous influence on what it can do. 
+The process, the methods, the practices, the approach, the disci-
+pline, the trust, the communication style, the pace. The way—the 
+how—is foundational and fundamental.
+You’ll often hear people say “execution is everything,” but that’s 
+not quite right. In fact, it’s often quite wrong.
+When it comes to project work, and specifically software devel-
+opment, executing something the wrong way can destroy morale, 
+grind teams down, erode trust, crunch gears, and wreck the ma-
+chinery of long-term progress. So yeah, it’s “done,” but at what 
+cost? By doing, what have we done to ourselves? Do we really have 
+to do that again, over and over month after month, year after year?
+How many projects have you been a part of that you’d want to do 
+over? How many projects have gone long, piled up at the end, and 
+burned people out? How many projects were essentially collections 
+of unreasonable expectations? How many projects turned teams 
+against each other, frustrated everyone from builder to stakeholder, 
+and ultimately would have been better off dying than delivering?
+Sometimes execution is everything—everything that’s wrong. So 
+what does executing right look like?
+Over the last few years, there’s been a heightened curiosity about 
+how we work at Basecamp. People often ask us how we get so much 
+done so quickly at such a high level of quality with such a small 
+team. And how we keep our teams together for years and years.
+For one, we’re not into waterfall or agile or scrum. For two, we don’t 
+Foreword by Jason Fried
+
+--- Page 9 ---
+9CHAPTER 1 -   
+line walls with Post-it notes. For three, we don’t do daily stand ups, 
+design sprints, development sprints, or anything remotely tied to 
+a metaphor that includes being tired and worn out at the end. No 
+backlogs, no Kanban, no velocity tracking, none of that.
+We have an entirely different approach. One developed in isolation 
+over nearly 15 years of constant trial and error, taking note, iterat-
+ing, honing in, and polishing up. We’ve shaped our own way.
+Blog posts, workshops, and occasional conference talks have pro-
+vided glimpses of our own unique process, but we’ve never laid it 
+bare for all to see. This book does just that.
+Now that our process is fully formed, documented, and ready to 
+go, we’re here to share it with all those curious enough to listen to a 
+new way of doing things. Explorers, pioneers, those who don’t care 
+what everyone else is doing. Those who want to work better than 
+the rest.
+Don’t think of this as a book. Think of it as a flashlight. You and your 
+team have fumbled around in the dark long enough. Now you’ve got 
+something bright and powerful to help you find a new way.
+We hope you find it interesting, enlightening, and, most of  
+all, helpful.
+Thanks for reading.
+
+--- Page 10 ---
+10
+Jason Fried and David Heinemeier Hansson, Basecamp’s found-
+ers, planted many of the seeds for this book. It is informed by 
+their values, Basecamp’s culture, and fifteen years of collaborative 
+trial-and-error.
+Bob Moesta and Chris Spiek made pivotal contributions. This book 
+wouldn’t have come together without their help.
+Yaneer Bar-Yam’s lectures at the New England Complex Systems 
+Institute helped me structure the method.
+The expert designers and programmers at Basecamp tried, tested, 
+and improved these techniques over the years to ship real projects. 
+Their efforts make this a book of practice, not theory.
+Acknowledgements
+
+--- Page 11 ---
+11CHAPTER 1 - INTRODUCTION
+This book is a guide to how we do product development at Base-
+camp. It’s also a toolbox full of techniques that you can apply in 
+your own way to your own process.
+Whether you’re a founder, CTO, product manager, designer, or de-
+veloper, you’re probably here because of some common challenges 
+that all software companies have to face.
+Growing pains
+As software teams start to grow, some common struggles appear:
+• Team members feel like projects go on 
+and on, with no end in sight.
+• Product managers can’t find time to think 
+strategically about the product.
+• Founders ask themselves: “Why can’t we get features 
+out the door like we used to in the early days?”
+We saw these challenges first-hand at Basecamp as we grew from 
+four people to over fifty.
+Basecamp started off in 2003 as a tool we built for ourselves. At the 
+time we were a consultancy designing websites for clients. Infor-
+mation would get lost in the game of telephone between the client, 
+the designer, and the person managing the project. We wanted 
+Basecamp to be a centralized place where all parties could see 
+the work, discuss it, and know what to do next. It turned out lots 
+of companies had this “information slipping through the cracks” 
+problem. Today millions of people across all kinds of industries rely 
+Introduction
+
+--- Page 12 ---
+12
+on Basecamp as their shared source of truth.
+Three of us built the first version. Jason Fried, Basecamp’s founder, 
+led the design. His co-founder, David Heinemeier Hansson, pro-
+grammed it (and created the well-known web framework Ruby on 
+Rails as a by-product). At the time I was a web designer with a focus 
+on usability and user interfaces. I executed Jason’s design direc-
+tion for key features of the app and collaborated with him to fill in 
+details of the concept.
+From the first prototypes in July 2003 to launch in February 2004, 
+David only worked ten hours a week. We knew we wouldn’t get any-
+where with those ten hours of programming unless we used them 
+very deliberately. Our intense focus on “hammering” the scope to 
+fit within a given time budget was born under these constraints.
+As the business grew, I started widening my skills. Working with 
+David and Ruby on Rails made the world of programming accessi-
+ble to me. I learned the techniques programmers use to tame com-
+plexity: things like factoring, levels of abstraction, and separation 
+of concerns. With one foot in the design world and one foot in the 
+programming world, I wondered if we could apply these software 
+development principles to the way we designed and managed  
+the product.
+The first test of this idea came in 2009. By then we had hired a few 
+more programmers and offered four separate software-as-a-service 
+products. We wanted to bundle the products together into a seam-
+less suite with single-sign-on and unified billing. It was a massive 
+technical undertaking with treacherous user-facing flows. Besides 
+getting the underlying architecture right, we had to interrupt cus-
+tomers on their way in to the product and make them change their 
+
+--- Page 13 ---
+13CHAPTER 1 - INTRODUCTION
+username and password for reasons that weren’t easy to explain. 
+I wore the designer and product manager hats on the project and 
+prototyped the breadboarding and scope mapping techniques 
+described in this book to manage the complexity.
+We had such good results that we decided to apply the same tech-
+niques again in 2012, when we redesigned Basecamp from scratch 
+for version 2.0. Again there was a lot of surface area to manage and 
+again the process was surprisingly smooth.
+By 2015, we had a core team that had lived through these expe-
+riences and hit an impressive stride. But we found it hard to ar-
+ticulate what we were doing to new hires. Our product team had 
+quadrupled and everyone worked remotely. That made it hard to 
+pass on our intuitions. We needed language to describe what we 
+were doing and more structure to keep doing it at our new scale.
+To manage this new capacity, we switched from ad-hoc project 
+lengths to repeating cycles. (It took some experimentation to find 
+the right cycle length: six weeks. More on that later.) We formalized 
+our pitching and betting processes. My role shifted again, from 
+design and product management to product strategy. I needed new 
+language, like the word “shaping”, to describe the up-front design 
+work we did to set boundaries and reduce risks on projects before 
+we committed them to teams.
+Just as we were getting better at articulating the way we work to 
+ourselves, more and more of our friends and peers started coming 
+to us to ask how we do it. Finally Jason pulled me aside one day 
+and said, I think you should write a book about this.
+This is the result. You can think of this as two books in one. First, 
+it’s a book of basic truths. I want it to give you better language to 
+
+--- Page 14 ---
+14
+describe and deal with the risks, uncertainties, and challenges that 
+come up whenever you do product development. Second, the book 
+outlines the specific processes we’re using to make meaningful 
+progress on our products at our current scale.
+Here’s a short overview of the main ideas in the book.
+Six-week cycles
+First, we work in six-week cycles. Six weeks is long enough to 
+build something meaningful start-to-finish and short enough that 
+everyone can feel the deadline looming from the start, so they use 
+the time wisely. The majority of our new features are built and 
+released in one six-week cycle.
+Our decisions are based on moving the product forward in the 
+next six weeks, not micromanaging time. We don’t count hours or 
+question how individual days are spent. We don’t have daily meet-
+ings. We don’t rethink our roadmap every two weeks. Our focus is 
+at a higher level. We say to ourselves: “If this project ships after six 
+weeks, we’ll be really happy. We’ll feel our time was well spent.” 
+Then we commit the six weeks and leave the team alone to get  
+it done.
+Shaping the work
+Second, we shape the work before giving it to a team. A small 
+senior group works in parallel to the cycle teams. They define the 
+key elements of a solution before we consider a project ready to bet 
+on. Projects are defined at the right level of abstraction: concrete 
+enough that the teams know what to do, yet abstract enough that 
+they have room to work out the interesting details themselves.
+When shaping, we focus less on estimates and more on our 
+
+--- Page 15 ---
+15CHAPTER 1 - INTRODUCTION
+appetite. Instead of asking how much time it will take to do some 
+work, we ask: How much time do we want to spend? How much is 
+this idea worth? This is the task of shaping: narrowing down the 
+problem and designing the outline of a solution that fits within the 
+constraints of our appetite.
+Making teams responsible
+Third, we give full responsibility to a small integrated team of 
+designers and programmers. They define their own tasks, make 
+adjustments to the scope, and work together to build vertical slices 
+of the product one at a time. This is completely different from other 
+methodologies, where managers chop up the work and program-
+mers act like ticket-takers.
+Together, these concepts form a virtuous circle. When teams are 
+more autonomous, senior people can spend less time managing 
+them. With less time spent on management, senior people can 
+shape up better projects. When projects are better shaped, teams 
+have clearer boundaries and so can work more autonomously.
+Targeting risk
+At every step of the process we target a specific risk: the risk of not 
+shipping on time. This book isn’t about the risk of building the 
+wrong thing. Other books can help you with that (we recommend 
+Competing Against Luck). Improving your discovery process should 
+come after regaining your ability to ship. You can have the best 
+strategy in the world, but if you can’t act on it, what good does  
+it do?
+This book is about the risk of getting stuck, the risk of getting 
+bogged down with last quarter’s work, wasting time on unexpected 
+
+--- Page 16 ---
+16
+problems, and not being free to do what you want to do tomorrow.
+We reduce risk in the shaping process by solving open questions 
+before we commit the project to a time box. We don’t give a project 
+to a team that still has rabbit holes or tangled interdependencies.
+We reduce risk in the planning process by capping our bets to six 
+weeks. If a project runs over, by default it doesn’t get an extension. 
+This “circuit breaker” ensures that we don’t invest multiples of the 
+original appetite on a concept that needs rethinking first.
+And lastly we reduce risk in the building process by integrating 
+design and programming early. Instead of building lots of discon-
+nected parts and hoping they’ll fit together in the 11th hour, we 
+build one meaningful piece of the work end-to-end early on and 
+then repeat. The team sequences the work from the most unknown 
+to the least worrisome pieces and learns what works and what 
+doesn’t by integrating as soon as possible.
+How this book is organized
+Part One is all about Shaping — the pre-work we do on projects 
+before we consider them ready to schedule. Each chapter explains 
+a specific step of the process, from setting the appetite on a raw 
+idea, to sketching out a solution, to writing a pitch that presents 
+the potential project. Along the way you’ll learn specific techniques 
+— like breadboarding and fat-marker sketching — to keep the design 
+at the right level of abstraction.
+Part Two is about Betting — how we choose among the pitched 
+projects and decide what to do six weeks at a time.
+Part Three is about Building — the expectations we place on the 
+teams and the special practices they use to discover what to do. 
+
+--- Page 17 ---
+17CHAPTER 1 - INTRODUCTION
+We’ll look at how the teams figure out what to do, how they in-
+tegrate design and programming, how they track what’s known 
+versus unknown, and finally how they make the hard calls to finish 
+the project on time.
+Lastly the Appendix gives you some help for when it’s time to make 
+changes at your company. There’s some advice on how to try your 
+first six-week experiment, tips on adjusting the methods to your 
+company’s size, and specific guidance for how to implement Shape 
+Up using Basecamp.
+
+--- Page 18 ---
+
+
+--- Page 19 ---
+Shaping
+PART ONE
+
+--- Page 20 ---
+20
+When we shape the work, we need to do it at the right level of 
+abstraction: not too vague and not too concrete. Product managers 
+often err on one of these two extremes.
+Wireframes are too concrete
+When design leaders go straight to wireframes or high-fidelity 
+mockups, they define too much detail too early. This leaves design-
+ers no room for creativity. One friend put it this way:
+I’ll give a wireframe to my designer, and then I’m saying to her: 
+“I know you’re looking at this, but that’s not what I want you to 
+design. I want you to re-think it!” It’s hard to do that when you’re 
+giving them this concrete thing.
+Over-specifying the design also leads to estimation errors. Counter-
+intuitive as it may seem, the more specific the work is, the harder it 
+can be to estimate. That’s because making the interface just so can 
+Principles of Shaping
+
+--- Page 21 ---
+21CHAPTER 2 - PRINCIPLES  OF  SHAPING
+require solving hidden complexities and implementation details 
+that weren’t visible in the mockup. When the scope isn’t variable, 
+the team can’t reconsider a design decision that is turning out to 
+cost more than it’s worth.
+Words are too abstract
+On the other end of the spectrum, projects that are too vague don’t 
+work either. When a project is defined in a few words, nobody 
+knows what it means. “Build a calendar view” or “add group 
+notifications” sound sensible, but what exactly do they entail? 
+Team members don’t have enough information to make trade-offs. 
+They don’t know what to include or leave out. A programmer who 
+worked in that situation said:
+You’re solving a problem with no context. You have to be a mind 
+reader. It’s like: “we’ll know it when we see it.”
+Concerning estimation, under-specified projects naturally grow out 
+of control because there’s no boundary to define what’s out of scope.
+Case study: The Dot Grid Calendar
+Let’s look at an example of how to shape a project at the right level 
+of detail.
+We launched version three of Basecamp without a calendar feature. 
+It had a “schedule” feature that just listed events one after the other 
+without any kind of monthly, weekly or daily grid.
+Soon after launch, customers started asking us to “add a calendar” 
+to Basecamp. We had built calendars before and we knew how 
+complex they are. It can easily take six months or more to build a 
+proper calendar.
+
+--- Page 22 ---
+22
+These are the kinds of things that make a calendar complicated:
+• Dragging and dropping events between cells to move them
+• Wrapping multi-day events around the edge of the screen
+• Different views for monthly, weekly, or daily time scales
+• Dragging the edge of an event to change its duration
+• Color coding events for different categories
+• Handling different expectations for 
+desktop vs. mobile interactions
+Past versions of Basecamp had calendars, and only about 10% of 
+customers used them. That’s why we didn’t have the appetite for 
+spending six months on a calendar. On the other hand, if we could 
+do something to satisfy those customers who were writing us in one 
+six week cycle, we were open to doing that.
+With only six weeks to work with, we could only build about a tenth 
+of what people think of when they say “calendar.” The question 
+became: which tenth?
+We did some research (discussed in the next chapter) and narrowed 
+down a use case that we wanted to solve. We eventually arrived at 
+a promising concept inspired by calendars on phones. We could 
+build a two-month, read-only grid view. Any day with an event 
+would have a dot for each event. A list of events would appear 
+below the calendar, and clicking a day with a dot would scroll the 
+events for that day into view. We called it the Dot Grid.
+The Dot Grid wasn’t a full-featured calendar. We weren’t going to 
+allow dragging events between days. We weren’t going to span 
+
+--- Page 23 ---
+23CHAPTER 2 - PRINCIPLES  OF  SHAPING
+multi-day events across the grid; we’d just repeat the dots. There’d 
+be no color coding or categories for events. We were comfortable 
+with all these trade-offs because of our understanding of the  
+use case.
+This is the level of fidelity we used to define the solution:
+Note how rough the sketch is and how many details are left out. 
+The designer had a lot of room to interpret how this should look 
+and feel.
+Rough sketch of the Dot Grid concept
+
+--- Page 24 ---
+24
+At the same time, note how specific the idea is. It’s very clear how it 
+works, what needs to be built, what’s in and what’s out.
+At the end of the project, the finished work that the designers and 
+programmers created looked like this:
+This small example highlights a few properties of shaped work.
+Property 1: It’s rough
+Work in the shaping stage is rough. Everyone can tell by looking 
+at it that it’s unfinished. They can see the open spaces where 
+their contributions will go. Work that’s too fine, too early commits 
+Screenshot of the Dot Grid when it launched
+
+--- Page 25 ---
+25CHAPTER 2 - PRINCIPLES  OF  SHAPING
+everyone to the wrong details. Designers and programmers need 
+room to apply their own judgement and expertise when they roll up 
+their sleeves and discover all the real trade-offs that emerge.
+Property 2: It’s solved
+Despite being rough and unfinished, shaped work has been 
+thought through. All the main elements of the solution are there at 
+the macro level and they connect together. The work isn’t specified 
+down to individual tasks, but the overall solution is spelled out. 
+While surprises might still happen and icebergs could still emerge, 
+there is clear direction showing what to do. Any open questions or 
+rabbit holes we could see up front have been removed to reduce the 
+project’s risk.
+Property 3: It’s bounded
+Lastly, shaped work indicates what not to do. It tells the team where 
+to stop. There’s a specific appetite—the amount of time the team 
+is allowed to spend on the project. Completing the project within 
+that fixed amount of time requires limiting the scope and leaving 
+specific things out.
+Taken together, the roughness leaves room for the team to resolve 
+all the details, while the solution and boundaries act like guard 
+rails. They reduce risk and channel the team’s efforts, making sure 
+they don’t build too much, wander around, or get stuck.
+Who shapes
+Shaping is creative and integrative. It requires combining interface 
+ideas with technical possibilities with business priorities. To do 
+that you’ll need to either embody these skills as a generalist or 
+collaborate with one or two other people.
+
+--- Page 26 ---
+26
+Shaping is primarily design work. The shaped concept is an interac-
+tion design viewed from the user’s perspective. It defines what the 
+feature does, how it works, and where it fits into existing flows.
+You don’t need to be a programmer to shape, but you need to be 
+technically literate. You should be able to judge what’s possible, 
+what’s easy and what’s hard. Knowledge about how the system 
+works will help you see opportunities or obstacles for implement-
+ing your idea.
+It’s also strategic work. Setting the appetite and coming up with a 
+solution requires you to be critical about the problem. What are we 
+trying to solve? Why does it matter? What counts as success? Which 
+customers are affected? What is the cost of doing this instead of 
+something else?
+Shaping is a closed-door, creative process. You might be alone 
+sketching on paper or in front of a whiteboard with a close col-
+laborator. There’ll be rough diagrams in front of you that nobody 
+outside the room would be able to interpret. When working with 
+a collaborator, you move fast, speak frankly and jump from one 
+promising position to another. It’s that kind of private, rough,  
+early work.
+Two tracks
+You can’t really schedule shaping work because, by its very nature, 
+unshaped work is risky and unknown. For that reason we have 
+two separate tracks: one for shaping, one for building. During any 
+six week cycle, the teams are building work that’s been previously 
+shaped and the shapers are working on what the teams might po-
+tentially build in a future cycle. Work on the shaping track is kept 
+private and not shared with the wider team until the commitment 
+
+--- Page 27 ---
+27CHAPTER 2 - PRINCIPLES  OF  SHAPING
+has been made to bet on it. That gives the shapers the option to put 
+work-in-progress on the shelf or drop it when it’s not working out.
+Steps to shaping
+Shaping has four main steps that we will cover in the next  
+four chapters.
+1. Set boundaries. First we figure out how much time 
+the raw idea is worth and how to define the problem. 
+This gives us the basic boundaries to shape into.
+2. Rough out the elements. Then comes the creative work 
+of sketching a solution. We do this at a higher level of 
+abstraction than wireframes in order to move fast and 
+explore a wide enough range of possibilities. The output 
+of this step is an idea that solves the problem within the 
+appetite but without all the fine details worked out.
+3. Address risks and rabbit holes. Once we think we have a 
+solution, we take a hard look at it to find holes or unanswered 
+questions that could trip up the team. We amend the solu-
+tion, cut things out of it, or specify details at certain tricky 
+spots to prevent the team from getting stuck or wasting time.
+4. Write the pitch. Once we think we’ve shaped it enough to 
+potentially bet on, we package it with a formal write-up called 
+a pitch. The pitch summarizes the problem, constraints, solu-
+tion, rabbit holes, and limitations. The pitch goes to the betting 
+table for consideration. If the project gets chosen, the pitch 
+can be re-used at kick-off to explain the project to the team.
+
+--- Page 28 ---
+28
+The first step of shaping is setting boundaries on what we’re trying 
+to do. The conversations we have are going to be entirely different if 
+people think we’re talking about a small improvement or a  
+major redesign.
+The conversation about building a feature always starts with a raw 
+idea, like “customers are asking for group notifications.” Before 
+we all go down the rabbit hole discussing ways we can solve it, we 
+should first set some broad terms on the discussion to make  
+it productive.
+Setting the appetite
+Sometimes an idea gets us excited right away. In that case we need 
+to temper the excitement by checking whether this is really some-
+thing we’re going to be able to invest time in or not. If we don’t stop 
+to think about how valuable the idea is, we can all jump too quickly 
+to either committing resources or having long discussions about 
+potential solutions that go nowhere.
+Set Boundaries
+
+--- Page 29 ---
+29CHAPTER 3 - SET  BOUNDARIES
+Other ideas are less exciting and feel more like a challenge we 
+didn’t ask for. The customer wants a calendar; we don’t particularly 
+want to build one, but we do feel we need to do something about  
+the request.
+Whether we’re chomping at the bit or reluctant to dive in, it helps 
+to explicitly define how much of our time and attention the subject 
+deserves. Is this something worth a quick fix if we can manage? 
+Is it a big idea worth an entire cycle? Would we redesign what we 
+already have to accommodate it? Will we only consider it if we can 
+implement it as a minor tweak?
+We call this the appetite. You can think of the appetite as a time 
+budget for a standard team size. We usually set the appetite in  
+two sizes:
+• Small Batch: This is a project that a team of one designer and 
+one or two programmers can build in one or two weeks. We 
+batch these together into a six week cycle (more on that later).
+• Big Batch: This project takes the same-size team a full six-weeks.
+In rare cases where the scope is so big that a six-week project isn’t 
+conceivable, we’ll try to hammer it down by narrowing the problem 
+definition. If we still can’t shrink the scope, we’ll break off a mean-
+ingful part of the project that we can shape to a six-week appetite.
+Fixed time, variable scope
+An appetite is completely different from an estimate. Estimates 
+start with a design and end with a number. Appetites start with a 
+number and end with a design. We use the appetite as a creative 
+constraint on the design process.
+
+--- Page 30 ---
+30
+This principle, called “fixed time, variable scope,” is key to success-
+fully defining and shipping projects. Take this book for an example. 
+It’s hard to ship a book when you can always add more, explain 
+more, or improve what’s already there. When you have a dead-
+line, all of a sudden you have to make decisions. With one week 
+left, I can choose between fixing typos or adding a new section to 
+a chapter. That’s the tension between time, quality, and scope. I 
+don’t want to release a book with embarrassing typos, so I’ll choose 
+to reduce the scope by leaving out the extra section. Without the 
+pressure of the fixed deadline, I wouldn’t make the trade-off. If the 
+scope wasn’t variable, I’d have to include the extra section. Then 
+there’d be no time to fix the quality issues.
+We apply this principle at each stage of the process, from shaping 
+potential projects to building and shipping them. First, the appetite 
+constrains what kind of a solution we design during the shaping 
+process. Later, when we hand the work to a team, the fixed time box 
+pushes them to make decisions about what is core to the project 
+and what is peripheral or unnecessary.
+“Good” is relative
+There’s no absolute definition of “the best” solution. The best is 
+relative to your constraints. Without a time limit, there’s always a 
+better version. The ultimate meal might be a ten course dinner. But 
+when you’re hungry and in a hurry, a hot dog is perfect.
+The amount of time we set for our appetite is going to lead us to dif-
+ferent solutions. We could model a whole set of database columns 
+in the fancy version, or just provide a flat textarea in the simple 
+version. We could redesign the main landing page to accommo-
+date a new feature, or we could push it back to a screen with fewer 
+
+--- Page 31 ---
+31CHAPTER 3 - SET  BOUNDARIES
+design constraints. We can only judge what is a “good” solution in 
+the context of how much time we want to spend and how important 
+it is.
+Responding to raw ideas
+Our default response to any idea that comes up should be: “In-
+teresting. Maybe some day.” In other words, a very soft “no” that 
+leaves all our options open. We don’t put it in a backlog. We give 
+it space so we can learn whether it’s really important and what it 
+might entail.
+It’s too early to say “yes” or “no” on first contact. Even if we’re 
+excited about it, we shouldn’t make a commitment that we don’t 
+yet understand. We need to do work on the idea before it’s shaped 
+enough to bet resources on. If we always say “yes” to incoming 
+requests we’ll end up with a giant pile of work that only grows.
+It’s important to keep a cool manner and a bit of a poker face. We 
+don’t want to shut down an idea that we don’t understand. New in-
+formation might come in tomorrow that makes us see it differently. 
+On the other hand, showing too much enthusiasm right away can 
+set expectations that this thing is going to happen. We may not be 
+able to commit to it once we’ve put it into context with everything 
+else we want to do.
+Narrow down the problem
+In addition to setting the appetite, we usually need to narrow down 
+our understanding of the problem.
+We once had a customer ask us for more complex permission 
+rules. It could easily have taken six weeks to build the change she 
+wanted. Instead of taking the request at face value, we dug deeper. 
+
+--- Page 32 ---
+32
+It turned out that someone had archived a file without knowing the 
+file would disappear for everyone else using the system. Instead of 
+creating a rule to prevent some people from archiving, we realized 
+we could put a warning on the archive action itself that explains 
+the impact. That’s a one-day change instead of a six-week project.
+Another example is the “calendar view” from the previous chapter. 
+Everyone knows what a calendar view is. But unpacking it revealed 
+tons of unknowns and decisions that would drastically affect the 
+scope. If we only want to spend six weeks instead of six months 
+building a huge calendar, how do we narrow it down?
+In that case we flip from asking “What could we build?” to “What’s 
+really going wrong?” Sure, a calendar sounds nice. But what is 
+driving the request? At what point specifically does someone’s 
+current workflow break down without this thing they’re asking for?
+Case study: Defining “calendar”
+In the case of the calendar request, we called a customer who asked 
+for this feature. Instead of asking her why she wants a calendar and 
+what it should look like, we asked her when she wanted a calendar. 
+What was she doing when the thought occurred to ask for it?
+She told us she worked in an office with a big calendar drawn on a 
+chalkboard wall. Her officemates marked when they were meeting 
+clients in the handful of meeting rooms on the calendar. One 
+day she was working from home. A client called and asked her to 
+schedule a meeting. She had to drive to the office to look at the wall 
+calendar. Traffic was terrible along the way, and in the end there 
+wasn’t a free space that worked for her client. She could have saved 
+an hour in traffic and a lot of frustration if she had been able to 
+check for open spots on the calendar from her computer at home.
+
+--- Page 33 ---
+33CHAPTER 3 - SET  BOUNDARIES
+The insight wasn’t “computerize the calendar”—that’s obvious. 
+What we learned was that “see free spaces” was the important 
+thing for this use case, not “do everything a calendar does.”
+This story, and others like it, gave us a specific baseline to design 
+against. Basecamp had an agenda view of events. It worked for 
+listing major deadlines and milestones but it wasn’t good for re-
+source scheduling because you couldn’t see empty spaces on it. We 
+narrowed down the need from “do everything a calendar does” to 
+“help me see free spaces so I can figure out when to  
+schedule something.”
+We didn’t have a solution yet. But now we felt like we had a 
+problem that was specific enough to spark an idea that could fit 
+within our appetite. This led us to the simpler “Dot Grid” concept 
+from the last chapter.
+What if we can’t figure out a specific pain point or use case? Our 
+appetite can also tell us how much research is worthwhile. If it’s 
+not critical now and we can’t get our hands around the problem, 
+we’ll walk away from it and work on something else. Maybe in the 
+future a new request or story will pop up that gives us better insight 
+into the problem.
+Watch out for grab-bags
+When it comes to unclear ideas, the worst offenders are “rede-
+signs” or “refactorings” that aren’t driven by a single problem or 
+use case. When someone proposes something like “redesign the 
+Files section,” that’s a grab-bag, not a project. It’s going to be very 
+hard to figure out what it means, where it starts, and where it ends. 
+Here’s a more productive starting point: “We need to rethink the 
+Files section because sharing multiple files takes too many steps.” 
+
+--- Page 34 ---
+34
+Now we can start asking: What’s not working? In what context are 
+there too many steps? What parts of the existing design can stay the 
+same and what parts need to change?
+A tell-tale sign of a grab-bag is the “2.0” label. We made the mistake 
+in the past of kicking off a “Files 2.0” project without really consid-
+ering what that meant. Our excitement about improving a huge part 
+of our app got the better of us. We know there were a lot of prob-
+lems with our Files feature, but we didn’t ask ourselves what spe-
+cifically we were going to do. The project turned out to be a mess 
+because we didn’t know what “done” looked like. We recovered by 
+splitting the project into smaller projects, like “Better file previews” 
+and “Custom folder colors.” We set appetites and clear expectations 
+on each project and shipped them successfully.
+Boundaries in place
+When we have all three things—a raw idea, an appetite, and a 
+narrow problem definition—we’re ready to move to the next step 
+and define the elements of a solution.
+
+--- Page 35 ---
+35CHAPTER 4 - FIND  THE  ELEMENTS
+Now that we have the constraints of an appetite and the problem 
+we’re solving, it’s time to get from an idea in words to the elements 
+of a software solution. There could be dozens of different ways to 
+approach the solution for a problem. So it’s important that we can 
+move fast and cover a lot of different ideas without getting  
+dragged down.
+Move at the right speed
+Two things enable us to move at the right speed at this stage.
+First, we need to have the right people—or nobody—in the room. 
+Either we’re working alone or with a trusted partner who can keep 
+pace with us. Someone we can speak with in shorthand, who has 
+the same background knowledge, and who we can be frank with as 
+we jump between ideas.
+Second, we need to avoid the wrong level of detail in the drawings 
+Find the Elements
+
+--- Page 36 ---
+36
+and sketches. If we start with wireframes or specific visual layouts, 
+we’ll get stuck on unnecessary details and we won’t be able to 
+explore as broadly as we need to.
+The challenge here is to be concrete enough to make progress on 
+a specific solution without getting dragged down into fine details. 
+The questions we’re trying to answer are:
+• Where in the current system does the new thing fit?
+• How do you get to it?
+• What are the key components or interactions?
+• Where does it take you?
+To stay on the right level of detail and capture our thoughts as 
+they come, we work by hand using a couple of prototyping tech-
+niques: breadboarding and fat marker sketches. These allow us to 
+quickly draw different versions of entire flows so we can debate the 
+pros and cons of each approach and stay aligned with what we’re 
+talking about as we go.
+Breadboarding
+We borrow a concept from electrical engineering to help us design 
+at the right level of abstraction. A breadboard is an electrical engi-
+neering prototype that has all the components and wiring of a real 
+device but no industrial design.
+
+--- Page 37 ---
+37CHAPTER 4 - FIND  THE  ELEMENTS
+Deciding to include an indicator light and a rotary knob is very dif-
+ferent from debating the chassis material, whether the knob should 
+go to the left of the light or the right, how sharp the corners should 
+be, and so on.
+Similarly, we can sketch and discuss the key components and con-
+nections of an interface idea without specifying a particular visual 
+design. To do that, we can use a simple shorthand. There are three 
+basic things we’ll draw:
+1. Places: These are things you can navigate to, like 
+screens, dialogs, or menus that pop up.
+2. Affordances: These are things the user can act on, like 
+buttons and fields. We consider interface copy to 
+be an affordance, too. Reading it is an act that gives 
+the user information for subsequent actions.
+3. Connection lines: These show how the affor-
+dances take the user from place to place.
+We’ll use words for everything instead of pictures. The important 
+things are the components we’re identifying and their connections. 
+They allow us to play out an idea and judge if the sequence of 
+actions serves the use case we’re trying to solve.
+Example
+Suppose our product is an invoicing tool. We’re considering adding 
+a new “ Autopay” feature to enable our customers’ customers to pay 
+future invoices automatically.
+How do you turn Autopay on? What’s involved? We can pick a start-
+ing point and say that the customer landed on an invoice. That’s
+
+--- Page 38 ---
+38
+ our first place. We draw it by writing the name of the place and 
+underlining it.
+On the invoice, we’re thinking we could add a new button to “Turn 
+on Autopay.” That’s an affordance. Affordances go below the line to 
+indicate they can be found at that place.
+Where does that button go? Some place for setting up the Autopay. 
+We don’t have to specify whether it’s a separate screen or a pop up 
+modal or what. From a what’s-connected-to-what standpoint (the 
+topology) it’s all the same. Let’s draw a connection line from the 
+button to the Setup Autopay screen.
+Now we can talk about what belongs on that screen. Do we ask for 
+a credit card here? Is there a card on file already? What about ACH 
+or other payment methods?
+Just figuring out what to write under the bar starts to provoke 
+
+--- Page 39 ---
+39CHAPTER 4 - FIND  THE  ELEMENTS
+debates and discussions about what to build.
+As we think it through, we decide we should ask for credit card 
+details here and show the logo of the financial institution (an 
+aspect of the domain in this specific product).
+Straightforward enough. But wait — did we actually pay the origi-
+nal invoice or not? Hm. Now we have both functional and interface 
+questions. What does enabling Autopay actually do? Does it apply 
+only for the future or does paying with Autopay the first time also 
+pay the current invoice? And where do we explain this behavior? 
+We’re starting to have deeper questions and discussions prompted 
+by just a few words and arrows in the breadboard.
+Since we’re using such a lightweight notation, and we aren’t 
+bogged down with wireframes, we can quickly jump around and 
+entertain different possibilities.
+We could add an option to the Setup screen…
+
+--- Page 40 ---
+40
+But now we’re complicating the responsibilities of the confirma-
+tion screen. We’re going to need to show a receipt if you pay your 
+balance now. Should the confirmation have a condition to some-
+times show a receipt of the amount just paid?
+How about an entirely different approach. Instead of starting on 
+an Invoice, we make Autopay an option when making a payment. 
+This way there’s no ambiguity about whether the current amount is 
+being paid. We could add an extra “ Autopay was enabled” callout 
+to the existing payment confirmation page.
+Sketching this out reminded us that the current payment form sup-
+ports ACH in addition to credit card. We discuss and confirm that 
+we can use ACH too.
+What about after Autopay is enabled? How does the customer turn 
+it off? Up to this point, many customers in the system didn’t have 
+usernames or passwords. They followed tokenized links to pay the 
+invoices one by one. One might naturally assume that now that the 
+customer has something like Autopay, they need a username and 
+password and some landing place to go manage it.
+The team in this case decided that adding the username/password 
+
+--- Page 41 ---
+41CHAPTER 4 - FIND  THE  ELEMENTS
+flows was too much scope for their appetite at the time. Reflecting 
+strategically on what they knew about their customers, they thought 
+it would be quite alright if the invoicer’s customers had to reach out 
+to the invoicer and ask them to turn off the Autopay. In that case we 
+could add a single option to disable Autopay in the customer detail 
+page that we already offered to invoicers. We drew out the flow  
+like this:
+This example illustrates the level of thinking and the speed of 
+movement to aim for during the breadboarding phase. Writing out 
+the flows confronts us with questions we didn’t originally think of 
+and stimulates design ideas without distracting us with unimport-
+ant visual choices.
+Once we get to a place where we play through the use case and the 
+flow seems like a fit, we’ve got the elements we need to move on to 
+start defining the project more clearly. We’re getting more concrete 
+while still leaving out a huge amount of detail.
+Fat marker sketches
+Sometimes the idea we have in mind is a visual one. Breadboarding 
+would just miss the point because the 2D arrangement of elements 
+is the fundamental problem. In that case, we still don’t want to 
+
+--- Page 42 ---
+42
+waste time on wireframes or unnecessary fidelity. Instead we use 
+fat marker sketches.
+A fat marker sketch is a sketch made with such broad strokes that 
+adding detail is difficult or impossible. We originally did this with 
+larger tipped Sharpie markers on paper. Today we also do it on 
+iPads with the pen size set to a large diameter.
+Here’s an example. We found ourselves often creating fake to-dos 
+in our Basecamp to-do lists that acted as dividers. We’d create an 
+item like “––– Needs testing –––“ and put items below it. We had 
+the idea to make some kind of official divider feature in our to-do 
+tool to turn the workaround into a first class function of to-do lists.
+We had to work out what the implications of adding a divider were. 
+We came up with a rough idea that adding a divider separates the 
+list into “loose” to-dos above the divider and “grouped” to-dos 
+below. Adding subsequent dividers adds more groups below the 
+“loose” items at the top.
+
+--- Page 43 ---
+43CHAPTER 4 - FIND  THE  ELEMENTS
+We could add items via some affordance within each group, includ-
+ing the “loose” group on top.
+We were a little concerned the add buttons might break up the 
+gestalt of the list, and the groups might all separate too much from 
+the lists on the page. We talked about possibilities to place the 
+“add” affordance inside of a menu that we already had to the left of 
+each to-do item.
+
+--- Page 44 ---
+44
+This notation is much less constraining than breadboards, which 
+has downsides. We might sketch a sidebar and get attached to a 
+layout element like that even though it’s not a core element. But as 
+long as we keep an eye on that we’re still far better off than if we get 
+sucked into the weeds by creating wireframes too early.
+It may seem a little silly to call fat marker sketches a technique or 
+a tool. The reason for calling them out is we too easily skip ahead 
+to the wrong level of fidelity. Giving this rough early stage a name 
+and using a specific tool for it helps us to segment our own creative 
+process and make sure we aren’t jumping ahead to detail a specific 
+idea when we haven’t surveyed the field enough.
+Elements are the output
+In the case of the Autopay example, we ended up with some  
+clear elements:
+• A new “use this to Autopay?” checkbox on 
+the existing “Pay an invoice” screen
+• A “disable Autopay” option on the invoicer’s side
+For the To-Do Groups project, the elements were:
+• Loose to-dos above the first group belong directly to the parent
+• Grouped to-dos appear below the loose to-dos
+• We’d like to try an add affordance within each section, but 
+if that doesn’t work visually, we’re ok with relying on 
+the action menu for inserting to-dos into position.
+
+--- Page 45 ---
+45CHAPTER 4 - FIND  THE  ELEMENTS
+Similarly, when we sketched the simplified solution for rendering 
+events on a calendar grid, we used the fat marker approach.
+This enabled us to work out the main elements of the solution:
+• A 2-up monthly calendar grid
+• Dots for events, no spanned pills
+• Agenda-style list of events below that scrolls 
+an event into view when you tap a dot
+This list of elements is extremely narrow and specific compared 
+to “monthly calendar.” Exactly the kind of narrowing we hope to 
+accomplish through the shaping process.
+
+--- Page 46 ---
+46
+Room for designers
+Later, when it’s time to involve a designer, you don’t want to have to 
+say “I know I drew it like this but ignore that…”. Regardless of what 
+you say, any specific mockups are going to bias what other people 
+do after you—especially if you’re in a higher position than them. 
+They’ll take every detail in the initial mockups as direction even 
+though you didn’t intend it.
+Working at the right “level of abstraction” not only ensures we 
+move at the right speed, it also leaves this important room for cre-
+ativity in the later stages.
+By leaving details out, the breadboard and fat marker methods give 
+room to designers in subsequent phases of the project.
+This is a theme of the shaping process. We’re making the project 
+more specific and concrete, but still leaving lots of space for deci-
+sions and choices to be made later. This isn’t a spec. It’s more like 
+the boundaries and rules of a game. It could go in countless differ-
+ent ways once it’s time to play.
+Not deliverable yet
+This step of shaping is still very much in your private sphere. It’s 
+normal for the artifacts at this point — on the wall or in your note-
+book — to be more or less indecipherable to anybody who wasn’t 
+there with you.
+We’ve gone from a cloudy idea, like “autopay” or “to-do groups,” 
+to a specific approach and a handful of concrete elements. But the 
+form we have is still very rough and mostly in outline.
+What we’ve done is landed on an approach for how to solve the 
+
+--- Page 47 ---
+47CHAPTER 4 - FIND  THE  ELEMENTS
+problem. But there may be some significant unknowns or things we 
+need to address before we’d consider this safe to hand off to a team 
+to build successfully.
+The next step is to do some stress-testing and de-risking. We want 
+to check for holes and challenges that could hinder the project from 
+shipping within the fixed time appetite that we have in mind for it.
+After that we’ll see how to wrap up the shaped concept into a 
+write-up for pitching.
+No conveyor belt
+Also keep in mind that, at this stage, we could walk away from the 
+project. We haven’t bet on it. We haven’t made any commitments or 
+promises about it. What we’ve done is added value to the raw idea 
+by making it more actionable. We’ve gotten closer to a good option 
+that we can later lobby for when it’s time to allocate resources.
+
+--- Page 48 ---
+48
+Remember that we’re shaping work for a fixed time window. We 
+may trust from our experience that the elements we fleshed out in 
+the previous chapter are buildable within the appetite (six weeks). 
+But we need to look closer, because all it takes is one hole in the 
+concept to derail that. Suppose we bet on the project and a team 
+takes it on. If they run into an unanticipated problem that takes 
+two weeks to solve, they just burned a third of the budget!
+Even worse, sometimes you run into problems that don’t just delay 
+the project—they have no apparent solution. We once bet on a 
+project to redesign the way we present projects with clients on 
+Basecamp’s home screen. We assumed the designer would figure it 
+out; we didn’t do the work in the shaping phase to validate that a 
+viable approach existed. Once the project started, it turned out to 
+be a much harder problem than we expected. None of us were able 
+to find a suitable design solution within the six weeks we budgeted. 
+We ended up abandoning the project and rethinking it later.
+Risks and Rabbit Holes
+
+--- Page 49 ---
+49CHAPTER 5 - RISKS  AND  RABBIT  HOLES
+Of course there will always be unknowns. That’s why we apply the 
+many practices in Part Three so that teams tackle the right prob-
+lems in the right order, leaving room for the unexpected. But that 
+doesn’t mean we shouldn’t look for the pitfalls we can find up front 
+and eliminate them before betting on the project. Before we con-
+sider it safe to bet on, a shaped project should be as free of holes  
+as possible.
+Different categories of risk
+In terms of risk, well-shaped work looks like a thin-tailed probabil-
+ity distribution. There’s a slight chance it could take an extra week 
+but, beyond that, the elements of the solution are defined enough 
+and familiar enough that there’s no reason it should drag on longer  
+than that.
+However, if there are any rabbit holes in the shaping—technical un-
+knowns, unsolved design problems, or misunderstood interdepen-
+dencies—the project could take multiple times the original appetite 
+to complete. The right tail stretches out.
+
+--- Page 50 ---
+50
+We want to remove the unknowns and tricky problems from the 
+project so that our probability is as thin-tailed as possible. That 
+means a project with independent, well-understood parts that 
+assemble together in known ways.
+Look for rabbit holes
+Fleshing out the elements of the solution was a fast-moving, ex-
+ploratory process. It was more breadth than depth. In this step, we 
+slow down and look critically at what we came up with. Did we miss 
+anything? Are we making technical assumptions that aren’t fair?
+One way to analyze the solution is to walk through a use case in 
+slow motion. Given the solution we sketched, how exactly would 
+a user get from the starting point to the end? Slowing down and 
+playing it out can reveal gaps or missing pieces that we need  
+to design.
+Then we should also question the viability of each part we think we 
+solved. We ask ourselves questions like:
+• Does this require new technical work we’ve never done before?
+• Are we making assumptions about how the parts fit together?
+
+--- Page 51 ---
+51CHAPTER 5 - RISKS  AND  RABBIT  HOLES
+• Are we assuming a design solution exists that 
+we couldn’t come up with ourselves?
+• Is there a hard decision we should settle in 
+advance so it doesn’t trip up the team?
+Case study: Patching a hole
+For example, when we defined the To-Do Groups project, we intro-
+duced the idea of dividers in the to-do list:
+We liked the idea of the dividers, and the logic of loose versus 
+grouped to-dos made sense to us. But when we looked closer we 
+realized that we didn’t address how to display completed items. In 
+the pre-existing design, the latest few completed items displayed 
+below the list. Should we now render completed items at the 
+bottom of each group instead of the list? Or should we continue to 
+show completed items at the bottom, and repeat the same set of 
+dividers within the completed items section? Should we reconsider 
+how we handle completed items entirely?
+
+--- Page 52 ---
+52
+This was a hole in the concept. If we didn’t address it, we’d be 
+pushing a deep design problem down to the team and unreason-
+ably asking them to find a solution under deadline. It’s not respon-
+sible to give the team a tangled knot of interdependencies and then 
+ask them to untangle it within a short fixed time window.
+We knew from experience that changing the way completed to-dos 
+render has lots of complicated implications in user experience, navi-
+gation, and performance. To remove uncertainty in the project, we 
+decided to dictate a solution in the shaped concept. We would leave 
+the completed items exactly as they worked previously. Instead of 
+grouping or segmenting them, we would just append the name of 
+the group to each completed item. It would be a little messy, but we 
+justified the trade-off: it drastically simplified the problem, and we 
+could still show completed items from a group on the group’s  
+detail page.
+
+--- Page 53 ---
+53CHAPTER 5 - RISKS  AND  RABBIT  HOLES
+This is the kind of trade-off that’s difficult to make when you’re 
+working inside the cycle under pressure. There are lots of reasons 
+why a different design or a deeper reconsideration of completed 
+to-dos would be objectively better. Why not try rendering them 
+inside each group? A designer could reasonably think, “Maybe if I 
+experiment with the styling a little more I can make them blend in 
+better.” They could easily waste a few days of the very few weeks 
+they have going down a dead end.
+As shapers, we’re thinking less about the ultimate design and more 
+about basic quality and risk. With the compromised concept we 
+get to keep all the elements that made the project worth doing—the 
+groups of incomplete items—and we get to cut off a big tail of risk.
+Next, when we write the pitch for this project, we’ll point out this 
+specific “patch” as part of the concept. That way nobody down the 
+line will get tripped up on it.
+Declare out of bounds
+Since everyone on the team wants to do their best work, they will of 
+course look for all the use cases to cover and consider them neces-
+sary. As the team gets more comfortable with scope hammering (see 
+Decide When to Stop), this improves. But it’s still a good idea to call 
+out any cases you specifically aren’t supporting to keep the project 
+well within the appetite.
+For example, we worked on an idea for notifying groups of people 
+in Basecamp. Rather than checking off five programmers one by 
+one, you could just click “Programmers” and they’d be selected 
+for notification. As we looked at the product, we saw tons of places 
+where this kind of behavior might make sense. If we let you choose 
+a group when posting a message, why not when assigning a to-do, 
+
+--- Page 54 ---
+54
+or mentioning people in the chat room?
+We decided for the purpose of the project that the core value was 
+narrowing down who to notify about a message. We explicitly 
+marked off the other cases as “out of bounds” for the project and 
+focused on the win we wanted: a faster flow for posting messages.
+Cut back
+There may be parts of the solution we got excited about during the 
+sketching phase that aren’t really necessary. When we designed the 
+To-Do Groups feature, we thought it would be great to color-code 
+groups. No doubt the page would look more interesting with col-
+or-coded group labels, and the feature might be more useful too. 
+But we decided to flag this as unnecessary and cut it from the core 
+of the project. We could mention it to the team as a nice-to-have, 
+but everyone should start from the assumption that the feature is 
+valuable without it.
+Present to technical experts
+Up to this point shaping has been a closed-door activity. Before 
+you’re ready to write up the idea to share more widely, you might 
+need input on some parts of the concept you aren’t completely sure 
+about. There may be a technical assumption that you need to verify 
+with someone who understands the code better. Or perhaps you 
+want to make sure that usage data doesn’t contradict an assump-
+tion you’re making about current customer behavior.
+This is a good time to grab some technical experts and walk 
+them through the idea. Communicate that this is just an idea. It’s 
+something you’re shaping as a potential bet, not something that’s 
+coming down the pipe yet. The mood is friendly-conspiratorial: 
+
+--- Page 55 ---
+55CHAPTER 5 - RISKS  AND  RABBIT  HOLES
+“Here’s something I’m thinking about… but I’m not ready to show 
+anybody yet… what do you think?”
+Beware the simple question: “Is this possible?” In software, ev-
+erything is possible but nothing is free. We want to find out if it’s 
+possible within the appetite we’re shaping for. Instead of asking “is 
+it possible to do X?” ask “is X possible in 6-weeks?” That’s a very 
+different question.
+Talk through the constraints of how this is a good solution given 
+the appetite, so they’re partners in keeping the project at the size 
+you intend. And emphasize that you’re looking for risks that could 
+blow up the project. It’s not just a “what do you think” conversa-
+tion—we’re really hunting for time bombs that might blow up the 
+project once it’s committed to a team.
+Try to keep the clay wet. Rather than writing up a document or 
+creating a slideshow, invite them to a whiteboard and redraw the 
+elements as you worked them out earlier, building up the concept 
+from the beginning. Stick completely to the concept you already 
+worked out to get feedback on the work you’ve already done. Then 
+once you’ve covered the work you already did, open it up and invite 
+them to suggest revisions. Having seen this concept, do they have 
+any insights about how to drastically simplify or approach the 
+problem differently?
+Depending on how the conversation goes, you may either have val-
+idated your approach or discovered some problems that send you 
+back for another round of shaping.
+
+--- Page 56 ---
+56
+De-risked and ready to write up
+At the end of this stage, we have the elements of the solution, 
+patches for potential rabbit holes, and fences around areas we’ve 
+declared out of bounds. We’ve gone from a roughly formed solution 
+with potential risk in it to a solid idea that we now hope to bet on in 
+the future.
+That means we’re ready to make the transition from privately 
+shaping and getting feedback from an inner-circle to presenting the 
+idea at the betting table. To do that, we write it up in a form that 
+communicates the boundaries and spells out the solution so that 
+people with less context will be able to understand and evaluate it. 
+This “pitch” will be the document that we use to lobby for resources, 
+collect wider feedback if necessary, or simply capture the idea for 
+when the time is more ripe in the future.
+
+--- Page 57 ---
+57CHAPTER 6 - WRITE  THE  PITCH
+We’ve got the elements of a solution now, and we’ve de-risked our 
+concept to the point that we’re confident it’s a good option to give a 
+team. But the concept is still in our heads or in some hard-to-deci-
+pher drawings on the whiteboard or our notebook. Now we need to 
+put the concept into a form that other people will be able to under-
+stand, digest, and respond to.
+This is where we say “Okay, this is ready to write up as a pitch.” In 
+this chapter, we’ll walk through the ingredients of a pitch and show 
+some fully worked out examples from real projects at Basecamp.
+The purpose of the pitch is to present a good potential bet. It’s basi-
+cally a presentation. The ingredients are all the things that we need 
+to both capture the work done so far and present it in a form that 
+will enable the people who schedule projects to make an  
+informed bet.
+Write the Pitch
+
+--- Page 58 ---
+58
+There are five ingredients that we always want to include in a pitch:
+1. Problem — The raw idea, a use case, or something 
+we’ve seen that motivates us to work on this
+2. Appetite — How much time we want to spend 
+and how that constrains the solution
+3. Solution — The core elements we came up with, presented 
+in a form that’s easy for people to immediately understand
+4. Rabbit holes — Details about the solution 
+worth calling out to avoid problems
+5. No-gos — Anything specifically excluded from the concept: 
+functionality or use cases we intentionally aren’t cover-
+ing to fit the appetite or make the problem tractable
+Ingredient 1. Problem
+It’s critical to always present both a problem and a solution to-
+gether. It sounds like an obvious point but it’s surprising how often 
+teams, our own included, jump to a solution with the assumption 
+that it’s obvious why it’s a good idea to build this thing.
+Diving straight into “what to build”—the solution—is dangerous. 
+You don’t establish any basis for discussing whether this solution 
+is good or bad without a problem. “ Add tabs to the iPad app” might 
+be attractive to UI designers, but what’s to prevent the discussion 
+from devolving into a long debate about different UI approaches? 
+Without a specific problem, there’s no test of fitness to judge 
+whether one solution is better than the other.
+Establishing the problem also lets us have a clearer conversation 
+later when it’s time to pitch the idea or bet on it. The solution might 
+
+--- Page 59 ---
+59CHAPTER 6 - WRITE  THE  PITCH
+be perfect, but what if the problem only happens to customers who 
+are known to be a poor fit to the product? We could spend six weeks 
+on an ingenious solution that only benefits a small percentage of 
+customers known to have low retention. We want to be able to sep-
+arate out that discussion about the demand so we don’t spend time 
+on a good solution that doesn’t benefit the right people.
+How far you have to go to spell out the problem will depend on 
+how much context you share with the people reading the write-up. 
+The best problem definition consists of a single specific story that 
+shows why the status quo doesn’t work. This gives you a base-
+line to test fitness against. People will be able to weigh the solu-
+tion against this specific problem—or other solutions if a debate 
+ensues—and judge whether or not that story has a better outcome 
+with the new solution swapped in.
+Ingredient 2. Appetite
+You can think of the appetite as another part of the problem defini-
+tion. Not only do we want to solve this use case, we want to come 
+up with a way to do it in six weeks, not three months, or—in the 
+case of a small batch project—two weeks, not the whole six weeks.
+Stating the appetite in the pitch prevents unproductive conversa-
+tions. There’s always a better solution. The question is, if we only 
+care enough to spend two weeks on this now, how does this specific 
+solution look?
+Anybody can suggest expensive and complicated solutions. It takes 
+work and design insight to get to a simple idea that fits in a small 
+time box. Stating the appetite and embracing it as a constraint 
+turns everyone into a partner in that process.
+
+--- Page 60 ---
+60
+Ingredient 3. Solution
+Like solutions with no problems, sometimes companies bet on 
+problems with no solution. “We really need to make it easier to find 
+things on the messages section. Customers are complaining  
+about it.”
+That’s not ready to pitch or bet on. A problem without a solution is 
+unshaped work. Giving it to a team means pushing research and 
+exploration down to the wrong level, where the skillsets, time limit, 
+and risk profile (thin vs. heavy tailed) are all misaligned.
+If the solution isn’t there, someone should go back and do the 
+shaping work on the shaping track. It’s only ready to bet on when 
+problem, appetite, and solution come together. Then you can scru-
+tinize the fit between problem and solution and judge whether it’s a 
+good bet or not.
+Help them see it
+During the elements phase, it was critical to sketch ideas at the 
+right level of abstraction so we didn’t slow down or lose any of the 
+ideas appearing at the corners of our brains and tips of our tongues.
+We also need to draw at the right level of detail when we write the 
+pitch. Here the challenge is a little different. We have time to slow 
+down and prepare a proper presentation. We need to stay high level, 
+but add a little more concreteness than when we worked alone or 
+with a partner. People who read the pitch and look at the drawings 
+without much context need to “get” the idea.
+We need more concreteness, but we don’t want to over-specify the 
+design with wireframes or high-fidelity mocks. They’ll box in the 
+designers who do the work later. We also risk side-tracking the 
+
+--- Page 61 ---
+61CHAPTER 6 - WRITE  THE  PITCH
+discussion into topics like color, proportions, or layout that have 
+nothing to do with the actual shaping work we did.
+At the same time, hand-written breadboards have a “you had to be 
+there” quality to them. To people who didn’t watch the breadboard 
+unfold step by step, it can look like a soup of words and arrows.
+Therefore we need some techniques to help people see the idea 
+while still not going too far into irrelevant details.
+Embedded sketches
+Suppose your breadboard from the shaping session looked like this:
+People might have trouble visualizing where these new affordances 
+go on the Dashboard. We could sketch a new box on the Dashboard 
+to make it clearer:
+
+
+--- Page 62 ---
+62
+But we’re still asking people to imagine too much. It’s worth the 
+trade-off to go one step down into fat-marker detail here.
+This makes it easier to see what the elements are and evaluate how 
+clearly the feature presents itself on the dashboard. The downside 
+is we’ve gotten into some layout decisions that would have been 
+nice to avoid. Designers should feel free to find a different design 
+than the box divided with a vertical line. We’d add a disclaimer 
+here in the pitch that reminds designers of the latitude they  
+should take.
+This is an example of selectively getting into more visual detail 
+because we need it to sell the concept. Fortunately, we won’t need 
+to make as many visual decisions in other parts of the concept. This 
+was a “linchpin” part of the design that everybody had to see con-
+cretely in order to “get” it.
+Annotated fat marker sketches
+Sometimes ideas are inherently visual or a little too complicated to 
+express in a schematic breadboard. Fat marker sketches can be very 
+effective in a pitch; you just need to take more care to label  
+them cleanly.
+
+
+--- Page 63 ---
+63CHAPTER 6 - WRITE  THE  PITCH
+Redrawing the sketch on an iPad—still with a fat brush size—works 
+well. You can use different colors to separate the labels from the 
+material parts of the sketch.
+Or you might add some call-outs to enable discussion of  
+specific elements.
+
+
+--- Page 64 ---
+64
+Ingredient 4. Rabbit holes
+Sometimes addressing a rabbit hole just requires a few lines of 
+text. For example, in the Payment Form project above, the shapers 
+wanted to call out a specific solution for how to create URLs. The 
+URLs would never live on custom domains for v1 of the project. This 
+is the kind of thing that’s not central to the concept, but spelling it 
+out patches a potential rabbit hole.
+Ingredient 5. No Gos
+Lastly if there’s anything we’re not doing in this concept, it’s 
+good to mention it here. In the case of the Payment Form project, 
+the team decided up front that they wouldn’t allow any kind of 
+WYSIWYG editing of the form. Users would only be able to provide 
+a logo and customize the header text on a separate “customize” 
+page. WYSIWYG might be better in some peoples’ eyes, but given 
+the appetite it was important to mark this as a no-go.
+Examples
+Here are two examples of real pitches.
+
+--- Page 65 ---
+65CHAPTER 6 - WRITE  THE  PITCH
+This pitch for grouping to-dos together starts by showing a work-
+around people are using in the current design. Then it sketches out 
+all the main ideas for how to enable optional to-do groupings.
+Two screenshots demonstrate the problem. Fat marker sketches describe  
+the solution. Rabbit holes motivated some of the sketches. 
+See full size at basecamp.com/shapeup-todo-pitch.
+
+--- Page 66 ---
+66
+This pitch for changing how notifications work starts with two 
+videos to demonstrate the problem. The black boxes toward the end 
+are a visualization of user behavior data that supports a decision in 
+the pitch.
+Two videos show the problem. A fat marker sketch and a breadboard describe 
+the solution. The black boxes contain data visualizations that support trade-offs 
+in the solution. See full size at basecamp.com/shapeup-groups-pitch.
+
+--- Page 67 ---
+67CHAPTER 6 - WRITE  THE  PITCH
+Ready to present
+The next step will be to make the case that this pitch describes a bet 
+worth making. This can happen in a couple ways.
+We prefer asynchronous communication by default and escalate to 
+real-time only when necessary. This gives everyone the maximum 
+amount of time under their own control for doing real work. That 
+means the first step for presenting a pitch is posting the write-up 
+with all the ingredients above somewhere that stakeholders can 
+read it on their own time. This keeps the betting table short and 
+productive. In ideal conditions everyone has time to read the 
+pitches in advance. And if that isn’t possible in some cases, the 
+pitch is ready to pull up for a quick live sell.
+How we do it in Basecamp
+We post pitches as Messages in Basecamp. We created a Message 
+Category called Pitch so we can easily find them. Pitches are posted 
+to a Team called Product Strategy that can be accessed by people on 
+the betting table.
+Pitches on the Message Board of the Product Strategy team in Basecamp
+
+--- Page 68 ---
+68
+When we need to include a fat marker sketch in a pitch, we’ll draw 
+it on an iPad (with Notability) and take a screenshot. Basecamp’s 
+text editor makes it easy to insert images and caption them so they 
+make sense in the flow of the pitch.
+A pitch as a Message. Note the one-week appetite.  
+This was a Small Batch project.
+A sketch drawn on an iPad in the middle of a pitch
+
+--- Page 69 ---
+69CHAPTER 6 - WRITE  THE  PITCH
+People comment on the pitch asynchronously. Not to say yes or no 
+— that happens at the betting table — but to poke holes or contrib-
+ute missing information.
+In the next chapter we’ll look at the betting process in more detail 
+to see where pitches go and how we turn them into  
+scheduled projects.
+Our CTO responds with technical thoughts on the pitch.
+
+--- Page 70 ---
+
+
+--- Page 71 ---
+Betting
+PART TWO
+
+--- Page 72 ---
+72
+Now that we’ve written a pitch, where does it go? It doesn’t go onto  
+a backlog.
+No backlogs
+Backlogs are a big weight we don’t need to carry. Dozens and 
+eventually hundreds of tasks pile up that we all know we’ll never 
+have time for. The growing pile gives us a feeling like we’re always 
+behind even though we’re not. Just because somebody thought 
+some idea was important a quarter ago doesn’t mean we need to 
+keep looking at it again and again.
+Backlogs are big time wasters too. The time spent constantly 
+reviewing, grooming and organizing old ideas prevents everyone 
+from moving forward on the timely projects that really matter  
+right now.
+Bets, Not Backlogs
+
+--- Page 73 ---
+73CHAPTER 7 - BETS , NOT  B ACKLOGS
+A few potential bets
+So what do we do instead? Before each six-week cycle, we hold 
+a betting table where stakeholders decide what to do in the next 
+cycle. At the betting table, they look at pitches from the last six 
+weeks — or any pitches that somebody purposefully revived and 
+lobbied for again.
+Nothing else is on the table. There’s no giant list of ideas to review. 
+There’s no time spent grooming a backlog of old ideas. There are 
+just a few well-shaped, risk-reduced options to review. The pitches 
+are potential bets.
+With just a few options and a six-week long cycle, these meetings 
+are infrequent, short, and intensely productive.
+If we decide to bet on a pitch, it goes into the next cycle to build. If 
+we don’t, we let it go. There’s nothing we need to track or hold on to.
+What if the pitch was great, but the time just wasn’t right? Anyone 
+who wants to advocate for it again simply tracks it independently—
+their own way—and then lobbies for it six weeks later.
+Decentralized lists
+We don’t have to choose between a burdensome backlog and not re-
+membering anything from the past. Everyone can still track pitches, 
+bugs, requests, or things they want to do independently without a 
+central backlog.
+Support can keep a list of requests or issues that come up more 
+often than others. Product tracks ideas they hope to be able to 
+shape in a future cycle. Programmers maintain a list of bugs they’d 
+like to fix when they have some time. There’s no one backlog or 
+
+--- Page 74 ---
+74
+central list and none of these lists are direct inputs to the  
+betting process.
+Regular but infrequent one-on-ones between departments help 
+to cross-pollinate ideas for what to do next. For example, Support 
+can tell Product about top issues they are seeing, which Product 
+can then track independently as potential projects to shape. Maybe 
+Product picks off just one of those top issues to work on now. Then, 
+in a future one-on-one, Support can lobby again for something that 
+hasn’t yet gotten attention.
+This approach spreads out the responsibility for prioritizing and 
+tracking what to do and makes it manageable. People from different 
+departments can advocate for whatever they think is important and 
+use whatever method works for them to track those things—or not.
+This way the conversation is always fresh. Anything brought back 
+is brought back with a context, by a person, with a purpose. Every-
+thing is relevant, timely, and of the moment.
+Important ideas come back
+It’s easy to overvalue ideas. The truth is, ideas are cheap. They 
+come up all the time and accumulate into big piles.
+Really important ideas will come back to you. When’s the last time 
+you forgot a really great, inspiring idea? And if it’s not that inter-
+esting—maybe a bug that customers are running into from time to 
+time—it’ll come back to your attention when a customer complains 
+again or a new customer hits it. If you hear it once and never again, 
+maybe it wasn’t really a problem. And if you keep hearing about it, 
+you’ll be motivated to shape a solution and pitch betting time on it 
+in the next cycle.
+
+--- Page 75 ---
+75CHAPTER 8 - THE  BETTING  T ABLE
+Now that we have some good potential bets in the form of pitches, 
+it’s time to make decisions about which projects to schedule.
+Six-week cycles
+Committing time and people is difficult if we can’t easily determine 
+who’s available and for how long. When people are available at 
+different times due to overlapping projects, project planning turns 
+into a frustrating game of Calendar Tetris. Working in cycles dras-
+tically simplifies this problem. A cycle gives us a standard project 
+size both for shaping and scheduling.
+Some companies use two-week cycles (aka “sprints”). We learned 
+that two weeks is too short to get anything meaningful done. Worse 
+than that, two-week cycles are extremely costly due to the plan-
+ning overhead. The amount of work you get out of two weeks isn’t 
+worth the collective hours around the table to “sprint plan” or the 
+The Betting Table
+
+--- Page 76 ---
+76
+opportunity cost of breaking everyone’s momentum to re-group.
+This led us to try longer cycles. We wanted a cycle that would be 
+long enough to finish a whole project, start to end. At the same time, 
+cycles need to be short enough to see the end from the beginning. 
+People need to feel the deadline looming in order to make trade-
+offs. If the deadline is too distant and abstract at the start, teams 
+will naturally wander and use time inefficiently until the deadline 
+starts to get closer and feel real.
+After years of experimentation we arrived at six weeks. Six weeks is 
+long enough to finish something meaningful and still short enough 
+to see the end from the beginning.
+Cool-down
+If we were to run six-week cycles back to back, there wouldn’t be 
+any time to breathe and think about what’s next. The end of a cycle 
+is the worst time to meet and plan because everybody is too busy 
+finishing projects and making last-minute decisions in order to ship 
+on time.
+Therefore, after each six-week cycle, we schedule two weeks for 
+cool-down. This is a period with no scheduled work where we can 
+breathe, meet as needed, and consider what to do next.
+During cool-down, programmers and designers on project teams 
+are free to work on whatever they want. After working hard to ship 
+their six-week projects, they enjoy having time that’s under their 
+control. They use it to fix bugs, explore new ideas, or try out new  
+technical possibilities.
+
+--- Page 77 ---
+77CHAPTER 8 - THE  BETTING  T ABLE
+Team and project sizes
+In addition to standardizing the length of our cycles, we also 
+roughly standardize the types of projects and teams that we bet on.
+Our project teams consist of either one designer and two program-
+mers or one designer and one programmer. They’re joined by a QA 
+person who does integration testing later in the cycle.
+These teams will either spend the entire cycle working on one 
+project, or they’ll work on multiple smaller projects during the 
+cycle. We call the team that spends the c
+
+[... truncated at ~80KB ...]

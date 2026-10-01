@@ -1,0 +1,1213 @@
+Produtos
+
+Soluções
+
+Desenvolvedores
+
+Recursos
+
+Preços
+
+Produtos
+
+Soluções
+
+Desenvolvedores
+
+Recursos
+
+Preços
+
+# Pagamentos
+
+Payments Pagamentos online
+
+Pagamentos online
+
+Payment links Pagamentos sem código
+
+Pagamentos sem código
+
+Checkout UIs de pagamento pré-construídas
+
+UIs de pagamento pré-construídas
+
+Elements Componentes flexíveis de IU
+
+Componentes flexíveis de IU
+
+Formas de pagamento Acesso a mais de 125
+
+Acesso a mais de 125
+
+Authorization Boost Otimizações de aceitação
+
+Otimizações de aceitação
+
+Link Checkout acelerado
+
+Checkout acelerado
+
+# Receita​
+
+Billing Receita recorrente
+
+Receita recorrente
+
+Metronome Cobrança por uso
+
+Cobrança por uso
+
+Assinaturas​ ​Gerenciamento​ de​ assinaturas​
+
+​Gerenciamento​ de​ assinaturas​
+
+Invoicing Única ou recorrente
+
+Única ou recorrente
+
+Tax Automação de impostos
+
+Automação de impostos
+
+Revenue Recognition Automação contábil
+
+Automação contábil
+
+Stripe Sigma Relatórios personalizados
+
+Relatórios personalizados
+
+Data Pipeline Sincronização de dados
+
+Sincronização de dados
+
+# Gestão dos valores
+
+Global Payouts Repasses para terceiros
+
+Repasses para terceiros
+
+Crypto Carteira, emissão de stablecoin e infraestrutura de cartões
+
+Carteira, emissão de stablecoin e infraestrutura de cartões
+
+# Plataformas e marketplaces
+
+Connect Pagamentos para plataformas
+
+Pagamentos para plataformas
+
+# Mais
+
+Product roadmap Veja o que está chegando
+
+Veja o que está chegando
+
+Radar Prevenção de fraudes
+
+Prevenção de fraudes
+
+Atlas Incorporação de startups
+
+Incorporação de startups
+
+Climate Remoção de carbono
+
+Remoção de carbono
+
+Empresas
+
+Startups
+
+Comércio agêntico
+
+Criptomoedas
+
+E-commerce
+
+Finanças integradas
+
+Automação de finanças
+
+Empresas do mundo todo
+
+Pagamentos no aplicativo
+
+Marketplaces
+
+Gestão dos valores
+
+Plataformas
+
+SaaS
+
+Empresas de IA
+
+Economia de criadores
+
+Fintech
+
+Jogos
+
+Hospitalidade, viagens e lazer
+
+Seguros
+
+Mídia e entretenimento
+
+Organizações sem fins lucrativos
+
+Serviços profissionais
+
+Varejo
+
+Parceiros
+
+Stripe App Marketplace
+
+Documentação da Stripe
+
+Referência da API
+
+Bibliotecas e SDKs
+
+Stripe Apps
+
+Aceitar pagamentos online
+
+Implementar um checkout pré-construído
+
+Criar uma plataforma ou marketplace
+
+Gerenciar assinaturas
+
+Ofereça cobrança por uso
+
+Emita cartões respaldados por stablecoins
+
+Provisione e gerencie serviços com agentes
+
+Integrações de aplicativos
+
+Exemplos de códigos
+
+Blog de desenvolvedores
+
+Status da API
+
+Blog
+
+Histórias de clientes
+
+Guias
+
+Obter suporte
+
+Planos de suporte gerenciado
+
+Serviços profissionais
+
+Roadmap de produtos
+
+Conferência anual das sessões
+
+Carreiras
+
+Sala de imprensa
+
+Stripe Press
+
+Sobre
+
+Fale com a equipe de vendas
+
+Seja um parceiro
+
+# Pagamentos
+
+Payments Pagamentos online
+
+Pagamentos online
+
+Payment links Pagamentos sem código
+
+Pagamentos sem código
+
+Checkout UIs de pagamento pré-construídas
+
+UIs de pagamento pré-construídas
+
+Elements Componentes flexíveis de IU
+
+Componentes flexíveis de IU
+
+Formas de pagamento Acesso a mais de 125
+
+Acesso a mais de 125
+
+Authorization Boost Otimizações de aceitação
+
+Otimizações de aceitação
+
+Link Checkout acelerado
+
+Checkout acelerado
+
+# Receita​
+
+Billing Receita recorrente
+
+Receita recorrente
+
+Metronome Cobrança por uso
+
+Cobrança por uso
+
+Assinaturas​ ​Gerenciamento​ de​ assinaturas​
+
+​Gerenciamento​ de​ assinaturas​
+
+Invoicing Única ou recorrente
+
+Única ou recorrente
+
+Tax Automação de impostos
+
+Automação de impostos
+
+Revenue Recognition Automação contábil
+
+Automação contábil
+
+Stripe Sigma Relatórios personalizados
+
+Relatórios personalizados
+
+Data Pipeline Sincronização de dados
+
+Sincronização de dados
+
+# Gestão dos valores
+
+Global Payouts Repasses para terceiros
+
+Repasses para terceiros
+
+Crypto Carteira, emissão de stablecoin e infraestrutura de cartões
+
+Carteira, emissão de stablecoin e infraestrutura de cartões
+
+# Plataformas e marketplaces
+
+Connect Pagamentos para plataformas
+
+Pagamentos para plataformas
+
+# Mais
+
+Product roadmap Veja o que está chegando
+
+Veja o que está chegando
+
+Radar Prevenção de fraudes
+
+Prevenção de fraudes
+
+Atlas Incorporação de startups
+
+Incorporação de startups
+
+Climate Remoção de carbono
+
+Remoção de carbono
+
+Empresas
+
+Startups
+
+Comércio agêntico
+
+Criptomoedas
+
+E-commerce
+
+Finanças integradas
+
+Automação de finanças
+
+Empresas do mundo todo
+
+Pagamentos no aplicativo
+
+Marketplaces
+
+Gestão dos valores
+
+Plataformas
+
+SaaS
+
+Empresas de IA
+
+Economia de criadores
+
+Fintech
+
+Jogos
+
+Hospitalidade, viagens e lazer
+
+Seguros
+
+Mídia e entretenimento
+
+Organizações sem fins lucrativos
+
+Serviços profissionais
+
+Setor público
+
+Varejo
+
+Parceiros
+
+Stripe App Marketplace
+
+Documentação da Stripe
+
+Referência da API
+
+Bibliotecas e SDKs
+
+Stripe Apps
+
+Aceitar pagamentos online
+
+Implementar um checkout pré-construído
+
+Criar uma plataforma ou marketplace
+
+Gerenciar assinaturas
+
+Ofereça cobrança por uso
+
+Emita cartões respaldados por stablecoins
+
+Provisione e gerencie serviços com agentes
+
+Integrações de aplicativos
+
+Exemplos de códigos
+
+Blog de desenvolvedores
+
+Status da API
+
+Blog
+
+Histórias de clientes
+
+Guias
+
+Obter suporte
+
+Planos de suporte gerenciado
+
+Serviços profissionais
+
+Roadmap de produtos
+
+Conferência anual das sessões
+
+Carreiras
+
+Sala de imprensa
+
+Stripe Press
+
+Sobre
+
+Fale com a equipe de vendas
+
+Seja um parceiro
+
+# Payments
+
+Visão geral
+
+Recursos
+
+Formas de pagamento
+
+Autenticação
+
+Contestações
+
+IA
+
+Documentação
+
+# Multiplique sua receita com pagamentos globais unificados
+
+Aceite pagamentos online, presenciais e de qualquer lugar do mundo com uma solução flexível, feita para todos os tipos de negócios, de startups em crescimento a grandes multinacionais.
+
+# Converta mais clientes
+
+Melhore a conversão com otimizações integradas, acesso a mais de 100 formas de pagamento e checkout em um clique. Unifique pagamentos online e presenciais e crie uma experiência integrada para os clientes.
+
+# Alcance global, experiência local
+
+Alcance novos mercados rapidamente oferecendo formas de pagamento locais e exibindo valores nas moedas locais de cada região. Venda seus produtos e serviços em mais de 195 países sem os custos de gestão de multimoedas.
+
+# Menos fraudes, mais receita
+
+Diminua automaticamente as fraudes e melhore as taxas de autorização usando o Stripe Radar e o Authorization Boost, nossos produtos alimentados por IA treinada com bilhões de pontos de dados.
+
+# Cresça mais rápido e com menos custos
+
+Economize tempo e recursos técnicos, aumentando a produtividade de seus desenvolvedores. Evite indisponibilidade do serviço com sistemas confiáveis e reduza custos com redes e formas de pagamento alternativas.
+
+Pagamentos online
+
+Pagamentos globais
+
+Pagamentos presenciais
+
+Payments Intelligence Suite
+
+Plataforma unificada
+
+Comece agora
+
+## Pagamentos online
+
+# Otimize sua experiência de checkout
+
+O Pacote de Otimização de Checkout da Stripe oferece uma experiência sem atritos para o cliente. Aumente a receita e economize milhares de horas em programação com interfaces de pagamento pré-configuradas, fácil acesso a mais de 100 formas de pagamento e uso do Link, o checkout em um clique da Stripe.
+
+# 11,9%
+
+aumento médio de receita para empresas que usam as mais recentes otimizações de checkout da Stripe
+
+# Diversas formas de receber pagamentos online
+
+# Página de pagamento pré-integrada
+
+Faça lançamentos mais rápidos com um checkout de página completa, otimizado para conversões
+
+Incorpore o formulário ao seu site ou direcione os clientes para uma página de pagamentos hospedada pela Stripe
+
+Personalize com as cores e fontes da sua marca
+
+Aceite pagamentos recorrentes e use o Stripe Tax sem integrações adicionais
+
+# Links de pagamento compartilháveis
+
+A maneira mais rápida de aceitar pagamentos sem necessidade de programação
+
+Compartilhe links por e-mail, SMS ou outros canais
+
+Aceite pagamentos avulsos, recorrentes ou com valor indefinido
+
+Transforme seu link em um QR code ou botão de compra incorporável
+
+# Formulário integrado flexível
+
+Lance uma experiência de checkout incorporado personalizável
+
+Experiência de checkout completa em um único iframe
+
+IU dinâmica que se ajusta ao dispositivo
+
+Layouts de etapa única e de múltiplas etapas
+
+# Elementos personalizáveis
+
+Crie sua própria experiência de pagamentos otimizada
+
+Atenda às necessidades específicas do negócio com componentes de IU modulares
+
+Crie um checkout personalizado com a sua marca usando estilos em CSS
+
+Reduza atritos e simplifique a conformidade com uma lógica integrada
+
+# Apresente as formas de pagamento mais relevantes
+
+Ative as formas de pagamento mais populares pelo Stripe Dashboard e use os modelos de IA da Stripe para apresentar dinamicamente as opções mais relevantes aos clientes. Teste novas formas de pagamento, analise o impacto de cada uma delas com testes A/B e crie regras personalizadas sem necessidade de programação, deixando todas as questões de manutenção e requisitos de qualificação por conta da Stripe.
+
+Acesse mais de 100 formas de pagamento , incluindo opções "compre agora e pague depois". Você pode aumentar em até 14% a receita elegível de débito bancário, stablecoins e pagamentos em tempo real que reduzem os custos de transação.
+
+# Checkout em um clique com o Link
+
+Seus clientes podem finalizar o checkout em até seis segundos pelo Link, uma rede que integra milhões de novos clientes todo mês. Clientes frequentes podem usar o Link para pagar com uma conta bancária ou cartão de crédito dos EUA já salvos, melhorando suas taxas de conversão e a experiência do cliente.
+
+O desempenho do Link é evidente. O produto aumentou substancialmente a taxa de conversão e agilizou a experiência de checkout. Peter Welinder , vice-presidente de produtos e parcerias, OpenAI
+
+O desempenho do Link é evidente. O produto aumentou substancialmente a taxa de conversão e agilizou a experiência de checkout.
+
+A possibilidade de ativar rapidamente pagamentos regionais colaborou para nossa expansão global. A Stripe faz todo o trabalho nos bastidores, e as formas de pagamento locais já não são mais uma barreira para aumentarmos nossos investimentos em determinadas regiões. Jonny White , fundador e CEO da Ticket Tailor
+
+A possibilidade de ativar rapidamente pagamentos regionais colaborou para nossa expansão global. A Stripe faz todo o trabalho nos bastidores, e as formas de pagamento locais já não são mais uma barreira para aumentarmos nossos investimentos em determinadas regiões.
+
+A parceria com a Stripe e a implementação do Pacote de Otimização de Checkout ajudaram a BigCommerce a aumentar as receitas, o que nos deixa muito satisfeitos. Esse crescimento não é comum. E, depois de adicionar o Payment Element, o Link e formas de pagamento locais, alcançamos ótimos resultados não apenas para nossa empresa, mas também para os clientes. Alex Hoffman , vice-presidente sênior de pagamentos da BigCommerce
+
+A parceria com a Stripe e a implementação do Pacote de Otimização de Checkout ajudaram a BigCommerce a aumentar as receitas, o que nos deixa muito satisfeitos. Esse crescimento não é comum. E, depois de adicionar o Payment Element, o Link e formas de pagamento locais, alcançamos ótimos resultados não apenas para nossa empresa, mas também para os clientes.
+
+O Payment Element foi fundamental para atingirmos mercados e oferecer formas de pagamento em países onde o Zoom não podia fazer isso por conta própria. Deepti Padiyar , gerente de produto de pagamentos digitais da Zoom
+
+O Payment Element foi fundamental para atingirmos mercados e oferecer formas de pagamento em países onde o Zoom não podia fazer isso por conta própria.
+
+## Pagamentos globais
+
+# Acelere sua expansão para novos mercados
+
+Reduza a complexidade e os custos da gestão de diversas moedas, com opções internacionais flexíveis para 195 países em mais de 135 moedas. A Stripe oferece ampla cobertura de aquisição local em 46 mercados, com configuração bancária direta e conhecimento local.
+
+# Acesse mais de 100 formas de pagamento
+
+Adapte seus serviços às preferências dos clientes e ingresse em novos mercados apresentando as formas de pagamento usadas por compradores de todo o mundo.
+
+# Apresentação na moeda local
+
+Melhore a conversão apresentando os preços na moeda local do cliente pela taxa de câmbio mais recente com o Adaptive Pricing .
+
+# Gerencie fundos em várias moedas
+
+Reduza os custos de gerenciamento multimoedas liquidando e repassando fundos com liquidações multimoedas .
+
+## Pagamentos presenciais
+
+# Pagamentos presenciais e online unificados
+
+Crie uma experiência de comércio unificado em canais online e presenciais para personalizar as interações com o cliente, recompensar fidelidade e aumentar a receita. Os dispositivos pré-certificados do Stripe Terminal funcionam nos mais diversos casos de uso, seja no balcão de uma loja ou em uma feira ao ar livre. Em certas máquinas, você ainda pode personalizar a tela inicial, registrar dados do cliente ou executar seu próprio aplicativo de PDV diretamente.
+
+# Uma solução completa para o comércio
+
+Veja como os clientes da Stripe usam o Terminal para receber pagamentos presenciais e melhorar a experiência do cliente.
+
+# Dripos unifica as vendas com o Stripe Terminal e a Stripe Reader S700
+
+# Squire oferece Tap to Pay para que os barbeiros comecem a aceitar pagamentos presenciais em minutos
+
+# Dines implementa o Stripe Terminal e gera um aumento de 150% de receita por cliente
+
+# atVenu otimiza a venda de mercadorias em eventos presenciais com a Stripe
+
+## Payments Intelligence Suite
+
+# Otimizações avançadas e baseadas em IA para aumentar a receita e reduzir os custos
+
+Transforme pagamentos em lucros com o conjunto de otimizações de pagamento, prevenção a fraudes e produtos de inteligência de negócios com IA da Stripe, que equilibram de forma integrada autorização de pagamentos, fraude e custo. Em média, as empresas registram um aumento de 3,8% na receita e uma redução de 32% nas fraudes.
+
+# Otimize o desempenho dos pagamentos
+
+# Mais receitas e menos custos
+
+Maximize suas taxas de aceitação com o Authorization Boost
+
+Acesse recursos de novas tentativas em tempo real, além de mensagens e formatos otimizados
+
+Reduza a perda involuntária de clientes com o gerenciamento do ciclo de vida de cartões, incluindo a tokenização
+
+Reduza os custos de processamento de cartões com a prevenção de pagamentos recusados e prevenção de tentativas excessivas
+
+# Maximize a conversão e adapte-se às mudanças nos requisitos
+
+Solicite automaticamente isenções de SCA disponíveis e autentique os clientes somente quando necessário
+
+Adapte-se às mudanças nos requisitos de autenticação global
+
+Importe resultados de autenticação do 3D Secure de provedores externos para obter autorização ou faça a autenticação com a Stripe e autorize mais tarde
+
+# Combata fraudes com a força da rede da Stripe
+
+Detecte e ajude a bloquear automaticamente as fraudes com a IA do Radar, treinada com dados de milhões de empresas globais
+
+Obtenha insights para identificar padrões de fraudes e adaptar a proteção contra fraudes à sua empresa
+
+Sem necessidade de integração
+
+# Economize tempo e dinheiro em contestações
+
+Automatize o envio de comprovantes utilizando a tecnologia baseada em IA do Smart Disputes
+
+Resolva e previna contestações de forma proativa para reduzir sua taxa de contestação
+
+Unifique o gerenciamento de contestações com soluções automatizadas de ponta a ponta
+
+# Encontre caminhos práticos para fazer seu faturamento crescer
+
+Obtenha as informações necessárias para tomar decisões baseadas em dados que podem melhorar o desempenho dos pagamentos. Acesse análises detalhadas de todo o ciclo de vida dos pagamentos e recomendações mensuráveis para aumentar a receita.
+
+# Funções avançadas de pagamento
+
+Aquisição avançada de cartões, incluindo autenticação incremental, multicapturas e muito mais
+
+Aquisição local em mercados globais
+
+Acesso a redes de débito regionais
+
+Capacidade de passar dados de item de linha de produtos
+
+Suporte para configurações de multiprocessadores
+
+Gerencie todas as linhas de negócio ou subsidiárias em diversas contas Stripe pelo Dashboard com o Organizations
+
+O Slack aumentou a conversão em aproximadamente 3,5% e reduziu as fraudes em cerca de 53% com o Payments Intelligence Suite da Stripe, que inclui Adaptive Acceptance, tokens de rede, atualizador de cartões e Radar.
+
+O Slack aumentou a conversão em aproximadamente 3,5% e reduziu as fraudes em cerca de 53% com o Payments Intelligence Suite da Stripe, que inclui Adaptive Acceptance, tokens de rede, atualizador de cartões e Radar.
+
+Com a Stripe gerenciando pagamentos avulsos e assinaturas recorrentes, a CLEAR aumentou suas taxas de conversão. O atualizador de cartões e a tokenização de rede da Stripe ajudam a CLEAR a proteger sua receita, aumentar as taxas de autorização e reduzir a perda de clientes causada por alterações em cartões de crédito.
+
+Com a Stripe gerenciando pagamentos avulsos e assinaturas recorrentes, a CLEAR aumentou suas taxas de conversão. O atualizador de cartões e a tokenização de rede da Stripe ajudam a CLEAR a proteger sua receita, aumentar as taxas de autorização e reduzir a perda de clientes causada por alterações em cartões de crédito.
+
+A Twilio SendGrid aumentou a conversão em 2% e reduziu as fraudes em 90% com o Payments Intelligence Suite da Stripe, que inclui Adaptive Acceptance, tokens de rede, atualizador de cartões e Radar.
+
+A Twilio SendGrid aumentou a conversão em 2% e reduziu as fraudes em 90% com o Payments Intelligence Suite da Stripe, que inclui Adaptive Acceptance, tokens de rede, atualizador de cartões e Radar.
+
+O programa GitHub Sponsors registrou um aumento de 52% no total de contribuições para desenvolvedores com o Payments Intelligence Suite da Stripe, otimizando a autorização, o custo e a prevenção de fraudes para aumentar a confiança dos clientes e promover o crescimento. Kevin Crosby , Diretor sênior, Open Source Funding
+
+O programa GitHub Sponsors registrou um aumento de 52% no total de contribuições para desenvolvedores com o Payments Intelligence Suite da Stripe, otimizando a autorização, o custo e a prevenção de fraudes para aumentar a confiança dos clientes e promover o crescimento.
+
+## Plataforma unificada
+
+# Acelere seu crescimento com uma plataforma flexível e confiável
+
+A plataforma segura e unificada da Stripe foi desenvolvida para impulsionar o crescimento eficiente do seu negócio, de startups que precisam fazer lançamentos rápidos a grandes operações globais focadas em otimizar a gestão de pagamentos.
+
+# Confiabilidade que gera receita
+
+Evite perdas por indisponibilidade, mesmo em períodos de pico como a Black Friday. Com mais de 500 milhões de solicitações de API por dia e testes diários de capacidade, a Stripe é a única grande processadora de pagamentos que publica seu tempo de disponibilidade . Nossos servidores de API são superdimensionados, de forma que a expansão é fácil, com latência mínima.
+
+# Conformidade como valor central
+
+Conformidade simplificada com uma parceira líder no setor e certificada pelos melhores padrões de conformidade e excelência operacional. A Stripe é membro do Conselho do PCI e tem 100% de aprovação nas auditorias PCI, classificada como Prestadora de Serviços de Nível 1.
+
+# Proteja seus pagamentos
+
+Use uma plataforma feita para proteger seus dados com criptografia AES e infraestrutura isolada, que não compartilha nenhuma credencial com os serviços básicos da Stripe.
+
+# Infraestrutura isolada
+
+A infraestrutura da Stripe para armazenar, descriptografar e transmitir números de cartões é executada em um sistema de hospedagem à parte.
+
+# Criptografia AES
+
+Todos os números de cartão são criptografados em disco com AES-256. As chaves de descriptografia são armazenadas em outras máquinas.
+
+# A Stripe foi nomeada Líder no Forrester Wave para provedores de pagamento para comerciantes
+
+A Stripe foi nomeada Líder no The Forrester Wave™: Merchant Payment Providers, Q1 2026 , reconhecida por sua visão, inovação, facilidade de uso e rapidez na geração de valor para empresas de todos os portes.
+
+A Shopify trabalha com a Stripe há quase uma década. Confiamos no DNA da Stripe: fazer sempre o que é certo para os clientes. Se você domina a criação de software, acaba pensando em APIs, arquitetura, velocidade e resiliência. Essa é a maior competência da Stripe: eliminar a complexidade do dinheiro, ser resiliente, manter a disponibilidade e fazer belas APIs. Kaz Nejatian , vice-presidente de serviços para comerciantes da Shopify
+
+A Shopify trabalha com a Stripe há quase uma década. Confiamos no DNA da Stripe: fazer sempre o que é certo para os clientes. Se você domina a criação de software, acaba pensando em APIs, arquitetura, velocidade e resiliência. Essa é a maior competência da Stripe: eliminar a complexidade do dinheiro, ser resiliente, manter a disponibilidade e fazer belas APIs.
+
+Criar experiências de pagamento que combinem inovação, menor atrito e economia de custos é a base do nosso trabalho. Com o Link, podemos oferecer todos esses benefícios ao mesmo tempo que possibilitamos acesso a uma forma de pagamento cada vez mais popular, permitindo que os clientes paguem facilmente pelas suas contas bancárias. A Stripe compartilha nosso compromisso com a confiabilidade, o foco no cliente e a inovação contínua, e por isso é uma parceira fundamental. Karl Hébert , vice-presidente de pagamentos, risco e identidade da Uber
+
+Criar experiências de pagamento que combinem inovação, menor atrito e economia de custos é a base do nosso trabalho. Com o Link, podemos oferecer todos esses benefícios ao mesmo tempo que possibilitamos acesso a uma forma de pagamento cada vez mais popular, permitindo que os clientes paguem facilmente pelas suas contas bancárias. A Stripe compartilha nosso compromisso com a confiabilidade, o foco no cliente e a inovação contínua, e por isso é uma parceira fundamental.
+
+Em uma única integração, aumentamos as taxas de aceitação por meio da criação de metodologias personalizadas para cada mercado, oferecendo métodos de pagamento locais relevantes, otimizando os pagamentos e introduzindo o 3D Secure para os clientes de uma forma fácil de usar. Lauren Mirynowski , gerente de produtos da Matches Fashion
+
+Em uma única integração, aumentamos as taxas de aceitação por meio da criação de metodologias personalizadas para cada mercado, oferecendo métodos de pagamento locais relevantes, otimizando os pagamentos e introduzindo o 3D Secure para os clientes de uma forma fácil de usar.
+
+Empresas maiores do que a nossa geralmente usam vários processadores de pagamento, mas a Stripe não existia na época em que elas estavam crescendo. Nós não precisamos repetir essa mesma fórmula, porque agora temos essa alternativa a nosso favor. Estamos apostando na plataforma e na visão de longo prazo da parceria. Britt Jamison , gerente de produtos da Slack
+
+Empresas maiores do que a nossa geralmente usam vários processadores de pagamento, mas a Stripe não existia na época em que elas estavam crescendo. Nós não precisamos repetir essa mesma fórmula, porque agora temos essa alternativa a nosso favor. Estamos apostando na plataforma e na visão de longo prazo da parceria.
+
+## A melhor documentação do mercado
+
+# Projetada para desenvolvedores e para começar mais rápido
+
+Com uma única integração e documentação abrangente, o tempo de lançamento é mais rápido e há menos necessidade de manutenção de sistemas legados. Assim, você pode se concentrar na experiência do cliente e no seu produto.
+
+Amostra de código e exemplos
+
+CLI para desenvolvimento e testes
+
+Versionamento de API
+
+Webhooks
+
+Ambiente de teste
+
+Suporte a metadados
+
+# Bibliotecas abrangentes
+
+## Como funciona
+
+# Uma descrição detalhada da infraestrutura de pagamentos unificada da Stripe
+
+Conheça produtos e recursos específicos e as vantagens que eles oferecem para sua empresa. Se você ainda não sabe como funcionam os pagamentos, leia nossos guias para aprender o básico.
+
+## Preços
+
+# Preços para empresas de todos os tamanhos
+
+# Preços padrão
+
+Acesse uma solução completa de pagamentos com preços simples e conforme o uso, para começar a usar a Stripe em poucos minutos, sem taxas de abertura.
+
+para cartões internacionais
+
+# Preços personalizados
+
+Indicado para empresas com grandes volumes de pagamentos ou casos de uso específicos.
+
+Descontos por volume
+
+Taxas específicas por país
+
+Descontos ao adquirir vários produtos
+
+Modelo de preços Interchange Plus
+
+# Mais recursos
+
+### Aplique machine learning para identificar e reagir a quedas de desempenho em segmentos específicos das transações via Stripe
+
+### URBN consolida US$ 5 bilhões de receita online e de lojas físicas na Stripe
+
+### Teste o impacto na conversão de mais de 50 formas de pagamento utilizadas globalmente
+
+# Vamos começar?
+
+Crie uma conta e comece a aceitar pagamentos sem precisar de nenhum contrato nem fornecer dados bancários. Se preferir, fale conosco para elaborar um pacote personalizado para a sua empresa.
+
+# Pagamentos recorrentes
+
+Faça cobranças avulsas ou gerencie assinaturas e reduza o churn.
+
+# Pagamentos para plataformas
+
+Suporte facilitado para pagamentos e repasses internacionais com várias partes.
+
+Alemanha Deutsch English
+
+Deutsch
+
+English
+
+Austrália English
+
+English
+
+Áustria Deutsch English
+
+Deutsch
+
+English
+
+Bélgica Nederlands Français Deutsch English
+
+Nederlands
+
+Français
+
+Deutsch
+
+English
+
+Brasil Português English
+
+Português
+
+English
+
+Bulgária English
+
+English
+
+Canadá English Français
+
+English
+
+Français
+
+China continental 简体中文 English
+
+简体中文
+
+English
+
+Chipre English
+
+English
+
+Croácia English Italiano
+
+English
+
+Italiano
+
+Dinamarca English
+
+English
+
+Emirados Árabes Unidos English
+
+English
+
+Eslováquia English
+
+English
+
+Eslovênia English Italiano
+
+English
+
+Italiano
+
+Espanha Español English
+
+Español
+
+English
+
+Estados Unidos English Español 简体中文
+
+English
+
+Español
+
+简体中文
+
+Estônia English
+
+English
+
+Finlândia English Svenska
+
+English
+
+Svenska
+
+França Français English
+
+Français
+
+English
+
+Gibraltar English
+
+English
+
+Grécia English
+
+English
+
+Hungria English
+
+English
+
+Índia English
+
+English
+
+Irlanda English
+
+English
+
+Itália Italiano English
+
+Italiano
+
+English
+
+Japão 日本語 English
+
+日本語
+
+English
+
+Letônia English
+
+English
+
+Liechtenstein Deutsch English
+
+Deutsch
+
+English
+
+Lituânia English
+
+English
+
+Luxemburgo Français Deutsch English
+
+Français
+
+Deutsch
+
+English
+
+Malásia English 简体中文
+
+English
+
+简体中文
+
+Malta English
+
+English
+
+México Español English
+
+Español
+
+English
+
+Noruega English
+
+English
+
+Nova Zelândia English
+
+English
+
+Países Baixos Nederlands English
+
+Nederlands
+
+English
+
+Polônia English
+
+English
+
+Portugal Português English
+
+Português
+
+English
+
+RAE de Hong Kong, China English 简体中文
+
+English
+
+简体中文
+
+Reino Unido English
+
+English
+
+República Tcheca English
+
+English
+
+Romênia English
+
+English
+
+Singapura English 简体中文
+
+English
+
+简体中文
+
+Suécia Svenska English
+
+Svenska
+
+English
+
+Suíça Deutsch Français Italiano English
+
+Deutsch
+
+Français
+
+Italiano
+
+English
+
+Tailândia ไทย English
+
+ไทย
+
+English
+
+# Produtos e preços
+
+Preços
+
+Atlas
+
+Reforço de autorização
+
+Billing
+
+Capital
+
+Checkout
+
+Climate
+
+Connect
+
+Criptomoedas
+
+Data Pipeline
+
+Elements
+
+Financial Connections
+
+Identity
+
+Invoicing
+
+Issuing
+
+Link
+
+Managed Payments
+
+Links de pagamento
+
+Payments
+
+Payouts
+
+Radar
+
+Revenue Recognition
+
+Stripe Sigma
+
+Tax
+
+Terminal
+
+Treasury
+
+# Soluções
+
+Empresas
+
+Startups
+
+Comércio agêntico
+
+Criptomoedas
+
+E-commerce
+
+Finanças integradas
+
+Automação de finanças
+
+Empresas do mundo todo
+
+Pagamentos no aplicativo
+
+Marketplaces
+
+Gestão dos valores
+
+Plataformas
+
+SaaS
+
+Empresas de IA
+
+Economia de criadores
+
+Fintech
+
+Jogos
+
+Hospitalidade, viagens e lazer
+
+Seguros
+
+Mídia e entretenimento
+
+Organizações sem fins lucrativos
+
+Serviços profissionais
+
+Setor público
+
+Varejo
+
+# Integrações e soluções personalizadas
+
+Stripe App Marketplace
+
+Stripe Partner Ecosystem
+
+Serviços profissionais
+
+# Desenvolvedores
+
+Documentação
+
+Referência da API
+
+Status da API
+
+Changelog da API
+
+Bibliotecas e SDKs
+
+Stripe Projects
+
+Blog do desenvolvedor
+
+# Recursos
+
+Guias
+
+Histórias de clientes
+
+Blog
+
+Comunidade
+
+Conferência anual das sessões
+
+Privacidade e termos
+
+Atividades proibidas e restritas
+
+Licenças
+
+Mapa do site
+
+Configurações de cookies
+
+Mais recursos
+
+# Empresa
+
+Sobre
+
+Institucional
+
+Roadmap de produtos
+
+Carreiras
+
+Sala de imprensa
+
+Stripe Press
+
+Fale com a equipe de vendas
+
+# Suporte
+
+Obter suporte
+
+Planos de suporte gerenciado
+
+Stripe Brasil Soluções de Pagamento Ltda. - Instituição de Pagamento
+
+CNPJ 22.121.209/0001-46
+
+A Stripe Brasil Soluções de Pagamento Ltda - Instituição de Pagamento é uma instituição de pagamento que opera na modalidade de credenciadora.
+
+© 2026 Stripe, LLC
