@@ -501,6 +501,7 @@ Só depois do STOP do essencial e do **sim** do humano. Itens e critérios em [n
 - Desenhar componente fora da lista fechada; cor digitada em peça oficial  
 - Apagar opção, rodada ou versão (vai para o Rascunho)  
 - Duplicar peça: genérico redesenhado no domínio, esqueleto separado do componente, montagem de tela (linha, grade, carrossel) como componente  
+- Botão ou link **sem a parte 2** (o que aparece depois do toque não está desenhado: tela, estado ou toast) ou **inútil** (repete o que já está na tela, leva a algo que não serve naquele momento, botão sozinho numa linha só para ele) — desenhar a parte 2 junto ou tirar; exceção: comportamento nativo do navegador/sistema  
 - Desenhar componentes “do documento” quando o humano já aprovou um site/app real  
 - Explicar tamanho de mídia com galeria de imagens ou largura fixa (usar proporção + amostras)  
 - Corrigir só no canvas sem versionar o documento  
