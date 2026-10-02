@@ -48,7 +48,8 @@ Abrir [`examples/density-reference.md`](examples/density-reference.md) + ≥1 **
 ### 2) Ler todas as fases (síntese, não cola)
 
 Ordem: discovery → mercado → proto → MVP → contrato → setup → DS → revisao.  
-Extrair fatos **Confirmados**; Hipótese só se rotulada; Aberto/adiado → seção **Pendências** / **Riscos conhecidos** (português claro).
+Extrair fatos **Confirmados**; Hipótese só se rotulada; Aberto/adiado → seção **Pendências** / **Riscos conhecidos** (português claro).  
+A expansão futura (lista do `mvp.md` e telas do futuro) pode aparecer no manual, sempre separada: “no lançamento” × “no futuro”.
 
 ### 3) Escrever o manual (template)
 

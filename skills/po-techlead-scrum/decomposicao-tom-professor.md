@@ -73,7 +73,7 @@ Copiar **para cada** unidade mínima (tela, aba, KPI, endpoint crítico):
 
 **Para que serve (negócio):** [Quem usa, quando, por quê existe]
 
-**Print:** ![legenda didática](url-space-assets) *(se Front)*
+**Print:** ![legenda didática](assets/{task-slug}/01-tela.png) *(se Front)*
 
 **O que o júnior deve observar no print**
 - [bullets: campos, badges, contadores, empty state]
@@ -121,7 +121,7 @@ Copiar **para cada** unidade mínima (tela, aba, KPI, endpoint crítico):
 - [ ] Botões de ação — o que chamam, redirect, toast
 - [ ] Tooltips ⓘ — **texto completo** copiado ou definido
 - [ ] Empty states e contadores `(N)` nas tabs
-- [ ] Prints space-assets **com legenda** por bloco
+- [ ] Prints em `assets/{task-slug}/` da task (anexo no ClickUp) **com legenda** por bloco
 
 ---
 

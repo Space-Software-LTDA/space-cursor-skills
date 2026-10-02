@@ -17,17 +17,22 @@ Imagens (igual ao Estruturador de Tarefas):
   aparece cru na UI e ![]() nao vira bloco nativo de imagem.
   URLs externas (mermaid.ink, raw.githubusercontent) sao stripadas;
   anexe o PNG e reescreva para URL de attachment da propria task.
+  Imagem com caminho relativo ao .md (ex.: assets/{task-slug}/01.png) e
+  anexada direto, sem push em repositorio.
 
 Uso:
   python clickup_create_task.py --mode esteira --file task.md --project BATEU --dry-run
   python clickup_create_task.py --mode esteira --file task.md --project BATEU \\
       --attach task.md --attach diagram.png --attach print.png
-  python clickup_create_task.py --mode esteira --file task/cms-backend.md --project BATEU \\
-      --parent 86abc123 --layer back
-  python clickup_create_task.py --mode esteira --file task/cms-frontend.md --project BATEU \\
-      --parent 86abc123 --layer front
-  python clickup_create_task.py --mode imediatas --file x.md --assignee 72158089 \\
-      --attach x.md --checklist-name Execução --checklist-item "P-BACK-1"
+  # Esteira: subtarefa PODE (ex.: sprint = 1 MAIN + entregas como subtask)
+  python clickup_create_task.py --mode esteira --file sprint.md --project X --status detalhar
+  python clickup_create_task.py --mode esteira --file 01-entrega.md --project X \\
+      --status detalhar --parent 86abc123
+  # Imediatas: NUNCA subtarefa. Front+Back = 2 tasks separadas e vinculadas
+  python clickup_create_task.py --mode imediatas --file x-back.md --assignee 111 \\
+      --layer back --checklist-item "P-BACK-1"
+  python clickup_create_task.py --mode imediatas --file x-front.md --assignee 222 \\
+      --layer front --link <id da [BACKEND]> --checklist-item "P-FRONT-1"
   python clickup_create_task.py --update-description --task-id 86abc123 \\
       --file task.md
 
@@ -60,6 +65,7 @@ TRAILING_LAYER_RE = re.compile(
     re.IGNORECASE,
 )
 LAYER_PREFIX = {"back": "[BACK]", "front": "[FRONT]"}
+LAYER_PREFIX_IMEDIATAS = {"back": "[BACKEND]", "front": "[FRONTEND]"}
 # ![alt](url) — captura alt e url
 MD_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
 # <img src="url" ...>
@@ -140,11 +146,11 @@ def extract_title(markdown: str, override: str | None) -> str:
     return title
 
 
-def apply_layer_prefix(title: str, layer: str | None) -> str:
-    """[BACK] / [FRONT] no INICIO. Nao truncar. Nao repetir sufixo '— Backend'."""
+def apply_layer_prefix(title: str, layer: str | None, mode: str = "esteira") -> str:
+    """Esteira [BACK]/[FRONT]; Imediatas [BACKEND]/[FRONTEND]. No INICIO, sem truncar."""
     if not layer:
         return title
-    prefix = LAYER_PREFIX[layer]
+    prefix = (LAYER_PREFIX_IMEDIATAS if mode == "imediatas" else LAYER_PREFIX)[layer]
     cleaned = LEADING_LAYER_RE.sub("", title).strip()
     cleaned = TRAILING_LAYER_RE.sub("", cleaned).strip()
     return f"{prefix} {cleaned}"
@@ -399,14 +405,31 @@ def rewrite_images_to_attachments(
     return text
 
 
+def warn_missing_local_images(markdown: str, base_dir: Path, attach_paths: list[str]) -> None:
+    """Dry-run: lista imagens locais do .md que nao existem nem vieram por --attach."""
+    attached = {Path(p).name for p in attach_paths}
+    for _alt, url in collect_image_urls(markdown):
+        url = unwrap_autolinked_url(url)
+        if url.startswith(("http://", "https://")):
+            continue
+        local = Path(urllib.parse.unquote(url))
+        if not local.is_absolute():
+            local = base_dir / local
+        if not local.is_file() and local.name not in attached:
+            print(f"WARN imagem local nao encontrada: {local}", file=sys.stderr)
+
+
 def embed_images_after_attach(
     task_id: str,
     markdown: str,
     attached_by_name: dict[str, str],
+    base_dir: Path | None = None,
 ) -> str:
     """
     Garante que cada imagem do markdown vire URL de attachment ClickUp.
     Baixa URLs remotos se ainda nao anexadas; reusa attachment por nome de arquivo.
+    Caminho local relativo (ex.: assets/01-tela.png) resolve a partir de base_dir
+    (pasta do .md), entao o PNG nao precisa estar em repo publico.
     """
     url_map: dict[str, str] = {}
     temps: list[Path] = []
@@ -418,7 +441,7 @@ def embed_images_after_attach(
                 url_map[url] = url
                 continue
 
-            filename = Path(urllib.parse.urlparse(url).path).name
+            filename = Path(urllib.parse.unquote(urllib.parse.urlparse(url).path)).name
             if filename and filename in attached_by_name:
                 url_map[url] = attached_by_name[filename]
                 continue
@@ -436,14 +459,20 @@ def embed_images_after_attach(
                     url_map[url] = att_url
                     print(f"Image attached: {tmp.name} -> {att_url[:80]}...")
                 else:
-                    local = Path(url)
-                    if local.is_file():
+                    local = Path(urllib.parse.unquote(url))
+                    if not local.is_absolute() and base_dir is not None:
+                        local = base_dir / local
+                    if not local.is_file():
+                        print(f"WARN imagem local nao encontrada: {local}", file=sys.stderr)
+                    else:
                         att = attach_file(task_id, local)
                         att_url = attachment_url_from_meta(att) or attachment_public_url(att)
                         if att_url:
                             attached_by_name[local.name] = att_url
                             url_map[url] = att_url
                             print(f"Image attached: {local.name}")
+                        else:
+                            print(f"WARN attachment sem URL: {local.name}", file=sys.stderr)
             except Exception as exc:  # noqa: BLE001
                 print(f"WARN falha ao anexar imagem {url}: {exc}", file=sys.stderr)
 
@@ -464,6 +493,7 @@ def build_payload(
     assignee_ids: list[int],
     project_key: str | None,
     parent: str | None = None,
+    status: str | None = None,
 ) -> dict[str, Any]:
     payload: dict[str, Any] = {
         "name": title,
@@ -475,7 +505,7 @@ def build_payload(
 
     if mode == "esteira":
         # Tipo = Task padrao do ClickUp (NAO usar custom 3-PBI).
-        payload["status"] = env("CLICKUP_STATUS_ESTEIRA_PBI")
+        payload["status"] = status or env("CLICKUP_STATUS_ESTEIRA_PBI")
         if not project_key:
             raise SystemExit("--project e obrigatorio no modo esteira (ex.: BATEU).")
         option_uuid, orderindex = resolve_project_option(project_key)
@@ -486,6 +516,8 @@ def build_payload(
         ]
     elif mode == "imediatas":
         payload["custom_item_id"] = int(env("CLICKUP_CUSTOM_TYPE_IMEDIATA"))
+        if status:
+            payload["status"] = status
         if project_key:
             option_uuid, orderindex = resolve_project_option(project_key)
             value = orderindex if orderindex is not None else option_uuid
@@ -554,13 +586,26 @@ def main() -> None:
     parser.add_argument(
         "--parent",
         default=None,
-        help="Task ID pai: cria esta task como SUBTASK. Front+Back: MASTER sem --parent; Back/Front com --parent <id da MASTER>.",
+        help="Task ID pai: cria esta task como SUBTASK. So Esteira (Imediatas nunca tem subtarefa).",
     )
     parser.add_argument(
         "--layer",
         choices=["back", "front"],
         default=None,
-        help="Prefixa o titulo com [BACK] ou [FRONT]. Obrigatorio com --parent.",
+        help="Prefixa o titulo: Esteira [BACK]/[FRONT]; Imediatas [BACKEND]/[FRONTEND].",
+    )
+    parser.add_argument(
+        "--status",
+        default=None,
+        help="Status inicial (default Esteira = CLICKUP_STATUS_ESTEIRA_PBI). "
+        "Esteira que ja vai para a sprint: --status detalhar.",
+    )
+    parser.add_argument(
+        "--link",
+        action="append",
+        default=[],
+        help="Task ID para VINCULAR (linked task) depois de criar (pode repetir). "
+        "Imediatas Front+Back: [FRONTEND] com --link <id da [BACKEND]>.",
     )
     parser.add_argument(
         "--checklist-name",
@@ -649,6 +694,7 @@ def main() -> None:
             )
             nested = len(NESTED_P_IMG_RE.findall(preview))
             html_img = len(HTML_IMG_RE.findall(preview))
+            warn_missing_local_images(markdown, md_path.parent, attach_paths)
             print(f"\nDRY-RUN rewrite: nested_p_img={nested} leftover_html_img={html_img}")
             print("DRY-RUN — nada alterado no ClickUp.")
             return
@@ -669,7 +715,9 @@ def main() -> None:
             if att_url:
                 attached_by_name[p.name] = att_url
             print(f"Attached: {p.name} -> {att_url[:80] if att_url else 'ok'}")
-        final_md = embed_images_after_attach(args.task_id, markdown, attached_by_name)
+        final_md = embed_images_after_attach(
+            args.task_id, markdown, attached_by_name, base_dir=md_path.parent
+        )
         api_request(
             "PUT",
             f"/task/{args.task_id}",
@@ -700,11 +748,14 @@ def main() -> None:
     if not args.no_banner:
         markdown = apply_clickup_banners(markdown)
     title = extract_title(markdown, args.title)
-    if args.parent and not args.layer:
-        raise SystemExit("Subtask (--parent) exige --layer back|front ([BACK]/[FRONT] no inicio do titulo).")
-    if args.layer and not args.parent:
-        print("WARN: --layer sem --parent. MAIN normalmente nao leva [BACK]/[FRONT].", file=sys.stderr)
-    title = apply_layer_prefix(title, args.layer)
+    if args.mode == "imediatas" and args.parent:
+        raise SystemExit(
+            "Imediatas NUNCA tem subtarefa. Front+Back: duas tasks separadas "
+            "(--layer back e --layer front) vinculadas com --link."
+        )
+    if args.mode == "esteira" and args.layer and not args.parent:
+        print("WARN: --layer sem --parent na Esteira. MAIN normalmente nao leva [BACK]/[FRONT].", file=sys.stderr)
+    title = apply_layer_prefix(title, args.layer, args.mode)
     assignees = parse_assignees(args, args.mode)
     list_id = env(
         "CLICKUP_LIST_ESTEIRA" if args.mode == "esteira" else "CLICKUP_LIST_IMEDIATAS"
@@ -717,6 +768,7 @@ def main() -> None:
         assignee_ids=assignees,
         project_key=args.project,
         parent=args.parent,
+        status=args.status,
     )
 
     attach_paths = args.attach if args.attach else [str(md_path)]
@@ -727,6 +779,7 @@ def main() -> None:
         "assignees": assignees,
         "project": args.project,
         "parent": args.parent,
+        "links": args.link,
         "attachments": attach_paths,
         "images_in_md": [u for _, u in collect_image_urls(markdown)],
         "checklist_name": args.checklist_name if checklist_items else None,
@@ -740,12 +793,13 @@ def main() -> None:
     if args.mode == "imediatas" and not checklist_items:
         print(
             "WARN: Imediatas sem --checklist-item. "
-            "Checklist nativo e obrigatorio na tarefa principal de cada dev "
-            "(pai se uma camada; subtask Back/Front se as duas; MAIN sem checklist).",
+            "Checklist nativo e obrigatorio na task de cada dev "
+            "(uma camada: na task; Front+Back: na [BACKEND] e na [FRONTEND]).",
             file=sys.stderr,
         )
 
     if args.dry_run:
+        warn_missing_local_images(markdown, md_path.parent, attach_paths)
         print("\nDRY-RUN — nada criado no ClickUp.")
         return
 
@@ -767,7 +821,9 @@ def main() -> None:
             attached_by_name[p.name] = att_url
         print(f"Attached: {p.name} -> {att_url[:80] if att_url else att.get('id') or 'ok'}")
 
-    final_md = embed_images_after_attach(task_id, markdown, attached_by_name)
+    final_md = embed_images_after_attach(
+        task_id, markdown, attached_by_name, base_dir=md_path.parent
+    )
     api_request(
         "PUT",
         f"/task/{task_id}",
@@ -781,6 +837,10 @@ def main() -> None:
     if checklist_items:
         cid = add_native_checklist(task_id, args.checklist_name, checklist_items)
         print(f"Checklist nativo id={cid} itens={len(checklist_items)}")
+
+    for other in args.link:
+        api_request("POST", f"/task/{task_id}/link/{other}")
+        print(f"Linked: {task_id} <-> {other}")
 
     print(json.dumps({"id": task_id, "url": task_url}, ensure_ascii=False))
 

@@ -56,5 +56,6 @@ Online: [Slideworks TAM/SAM/SOM](https://slideworks.io/resources/market-sizing-s
 | TAM theater | Número bonito sem premissa |
 | Chute de download | Sem store/browser |
 | Só preço | Sem escala / modelo |
+| Falha sem voz do cliente | Falhas do concorrente tiradas só do site dele, sem reclamação pública nem fórum |
 | Copiar domínio do anexo | “Somos o Airbnb de X” no doc vivo |
 | Meta de chat / abreviação | `qtd.`, título de prompt, doc só pro Cursor |

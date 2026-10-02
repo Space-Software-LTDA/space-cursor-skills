@@ -17,21 +17,27 @@
 
 ## Sequence
 
+### 0) Sistema atual (só se o produto está sendo refeito)
+
+Perguntar e gravar na seção opcional “Sistema atual” do template: o que existe, o que é reaproveitado, o que vira só consulta, o que arquivar, segredos expostos encontrados (chave ou senha no código ou em arquivo público → anotar para trocar, sem copiar o valor).
+
 ### 1) Peças (do contrato)
 
 Listar superfícies do contrato. Sem peça inventada.
 
+Contrato com fornecedor externo (pagamento, provedores…) → perguntar se haverá camada de integração separada ([`reference-space-defaults.md`](reference-space-defaults.md) §5) antes de recomendar tudo num servidor só.
+
 ### 1b) Nomenclatura — aplicar lei Space
 
-Abrir [`reference-space-defaults.md`](reference-space-defaults.md) §1.
+Abrir [`reference-space-defaults.md`](reference-space-defaults.md) §1 e a constituição `../docs/nomenclatura.md`.
 
 ```text
-<cliente>-<produto>-<o-que-é>
+<cliente>_<produto>_<o-que-é>     (hífen se o cliente já usa hífen)
 ```
 
-`<o-que-é>` canônico: `backend` · `frontend` · `extension`.
+`<o-que-é>` = o que a peça é: `backend` · `frontend` · `extension` · outra peça descrita pelo que é (`integrations`, `backoffice`…).
 
-Eco → confirma cliente/produto slugs → grava nomes no `.docs/setup.md`.
+Perguntar o separador que o cliente já usa → eco → confirma slugs → grava nomes no `.docs/setup.md`.
 
 ### 2) Organização Git — gate
 
@@ -45,17 +51,20 @@ Gravar. Sem escolha → não fechar (ou adiado com risco).
 | backend | Link boilerplate-back-elysia + mapa [`examples/anexos/backend-STRUCTURE.md`](examples/anexos/backend-STRUCTURE.md) |
 | frontend | Link boilerplate-front-nextjs + mapa [`examples/anexos/frontend-STRUCTURE.md`](examples/anexos/frontend-STRUCTURE.md) |
 | extension | TS + webpack + Manifest V3; mapa [`examples/anexos/extension-STRUCTURE.md`](examples/anexos/extension-STRUCTURE.md) |
+| integrations | Referência Space ([`reference-space-defaults.md`](reference-space-defaults.md) §5) — ferramenta conferida no código da referência |
 
 **Quem cria o repo:** DEV ao iniciar. Setup só nomeia.  
 Pastas densas = clone do boilerplate / scaffold — não inventar árvore no setup além do mapa.
 
 ### 4) Ambientes
 
-Local · HML · Produção (sem provisionar).
+Local · HML · Produção (sem provisionar). `dev` só se houver ambiente de desenvolvimento compartilhado (`../docs/git-fluxo.md`) — perguntar.
 
 ### 5) Contas / ferramentas
 
 Checklist Git, Apidog, OAuth, store da extensão, EasyPanel, DB, ClickUp… MVP sim/não.
+
+Ferramenta pronta para uma superfície (portal de documentação, página de situação…) → anotar a consequência: na Fase 8 é conteúdo, ordem, logo e cores dentro do layout da ferramenta ([`reference-space-defaults.md`](reference-space-defaults.md) §6). Portal pelo Apidog publica o projeto inteiro → API pública com rotas internas = projeto separado no Apidog.
 
 ### 6) Mapa leve ao nascer
 

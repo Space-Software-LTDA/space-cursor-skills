@@ -4,7 +4,7 @@ Scripts reutilizáveis da skill para tirar **screenshots full-page** de protóti
 
 **Local dos scripts:** `scripts/playwright-capture/` (dentro desta skill).
 
-**Local das imagens durante o trabalho:** no **projeto cliente**, pasta `.playwright-capture/` (gitignored). Depois copiar para `space-assets`.
+**Local das imagens durante o trabalho:** no **projeto cliente**, pasta `.playwright-capture/` (gitignored). Depois copiar para `assets/{task-slug}/` da task (`.task/{projeto}/assets/{task-slug}/`) — sem push em repositório; sobe para o ClickUp como anexo.
 
 ---
 
@@ -128,7 +128,7 @@ Ver comentários no arquivo para parâmetros `--listSelector`, `--itemSelector`,
 | `05-profissao-palavras-chave.png` | Sub-telas / abas |
 | `12-usuario-ficha.png` | Detalhe / ficha |
 
-Numeração **sequencial** com **kebab-case** descritivo. Mesmos nomes ao copiar para `space-assets/{projeto}/{task-slug}/`.
+Numeração **sequencial** com **kebab-case** descritivo. Mesmos nomes ao copiar para `.task/{projeto}/assets/{task-slug}/`.
 
 ---
 
@@ -154,9 +154,8 @@ await page.screenshot({ path, fullPage: true });
 ## Depois da captura
 
 1. Revisar PNGs (legível, sem loading infinito).
-2. Copiar para `space-assets/{projeto}/{task-slug}/`.
-3. Commit + push em space-assets.
-4. Embutir URLs raw GitHub na seção **🖼️ Referência visual** da task em `{projeto-cliente}/.task/{projeto}/{task-slug}.md`.
+2. Copiar para `{projeto-cliente}/.task/{projeto}/assets/{task-slug}/`.
+3. Embutir com caminho relativo (`![…](assets/{task-slug}/01-….png)`) na seção **🖼️ Referência visual** da task. Na publicação, o script anexa no ClickUp.
 
 Ver [screenshots.md](screenshots.md).
 
@@ -175,6 +174,6 @@ Ver [screenshots.md](screenshots.md).
 
 ## O que NÃO fazer
 
-- Commitar `.playwright-capture/` no repo do cliente (só PNG final vai pro space-assets)
+- Commitar `.playwright-capture/` ou os PNGs em qualquer repo (o PNG final vai para `assets/{task-slug}/` da task e sobe como anexo no ClickUp)
 - Usar caminhos locais (`C:\...`) na task ClickUp
 - Substituir [lovable-vs-local.md](lovable-vs-local.md) — captura é só a parte visual; lacunas vêm da comparação com código

@@ -53,6 +53,12 @@ Copiar para `.docs/discovery.md` na primeira gravação (ou criar o arquivo já 
 2.  
 3.  
 
+## Mínimo obrigatório × diferencial
+
+| Mínimo obrigatório (todo concorrente entrega) | Diferencial (só nós entregamos) |
+|-----------------------------------------------|---------------------------------|
+| | |
+
 ## Entradas do usuário (MVP)
 
 -  

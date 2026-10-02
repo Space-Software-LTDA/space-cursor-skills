@@ -8,11 +8,11 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 2. **Pipeline de produto** (se houver API): Objetivo → regra de negócio → DB → **rotas no Apidog** — [apidog.md](apidog.md)
 3. **Onde gravar:** sempre `.task/` — fora de repo: criar `.task/`; dentro de repo: `.task/` + garantir no **`.gitignore`** (`.task/`, `.playwright-capture/`, `.skill/`)
 4. [lovable-vs-local.md](lovable-vs-local.md) — matriz lacunas (se protótipo ou UI)
-5. [playwright-capture.md](playwright-capture.md) — prints → space-assets (se Front)
+5. [playwright-capture.md](playwright-capture.md) — prints → `assets/{task-slug}/` da task, anexados no ClickUp (se Front)
 6. [decomposicao-tom-professor.md](decomposicao-tom-professor.md) — **1 bloco por unidade mínima** (GLOBAL)
 7. Salvar em `.task/{projeto}/{task-slug}.md`
 8. Checklist em [SKILL.md](SKILL.md) + DDD/passo a passo em [evidencias-dod.md](evidencias-dod.md)
-9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`; Front+Back = **1 MAIN + 2 subtasks**; Imediatas = checklist nativo na task de cada dev)
+9. Após PO aprovar → [clickup-task-guide.md](clickup-task-guide.md) (`clickup_create_task.py`; Esteira: subtarefa só se precisar, sprint = MAIN + entregas como subtask, `detalhar` se já vai para a sprint; Imediatas: **sem subtarefa**, Front+Back = `[BACKEND]` + `[FRONTEND]` vinculadas, checklist nativo em cada)
 
 **Manutenção:** editar em [space-cursor-skills](https://github.com/Space-Software-LTDA/space-cursor-skills) (`skills/po-techlead-scrum/`) → `git push` → `npm run sync`. ENV ClickUp e Apidog ficam no `.env` da raiz do repo.
 
@@ -24,7 +24,7 @@ Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professo
 | [decomposicao-tom-professor.md](decomposicao-tom-professor.md) | Tom professor GLOBAL (tela/aba/KPI/endpoint) | ✅ |
 | [templates.md](templates.md) | Template markdown da task | ✅ |
 | [lovable-vs-local.md](lovable-vs-local.md) | Protótipo × código local | ✅ |
-| [screenshots.md](screenshots.md) | space-assets, legendas, tema | ✅ |
+| [screenshots.md](screenshots.md) | Imagens como anexo direto no ClickUp, legendas, tema | ✅ |
 | [playwright-capture.md](playwright-capture.md) | Scripts Playwright | ✅ |
 | [diagrams.md](diagrams.md) | mermaid.ink | ✅ |
 | [super-agente-clickup.md](super-agente-clickup.md) | Calibragem SuperAgente | ✅ |

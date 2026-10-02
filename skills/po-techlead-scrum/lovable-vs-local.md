@@ -148,4 +148,4 @@ Por **cada linha** do mapa do protótipo:
 - [ ] Matriz ✅ / ⚠️ / ❌ / 🎭
 - [ ] Task em `.task/{projeto}/{task-slug}.md`
 - [ ] Decomposição GLOBAL aplicada
-- [ ] Prints space-assets + legenda (incl. tema se divergir)
+- [ ] Prints em `assets/{task-slug}/` da task (anexo no ClickUp) + legenda (incl. tema se divergir)

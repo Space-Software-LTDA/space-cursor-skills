@@ -24,11 +24,13 @@ Online: [GV Design Sprint](https://www.gv.com/sprint/)
 
 1. Dicionário  
 2. Fluxos / jornadas (numerados)  
-3. Telas com nome humano + campos/ações  
-4. Estados (loading / empty / error)  
-5. Hipótese de solução (resumo)  
-6. Fora deste proto  
-7. Confirmado · Hipótese · Aberto · Gate  
+3. Papéis e permissões (matriz papel × tela — fonte do “quem usa” e do estado “sem permissão” de cada tela)  
+4. Telas com nome humano + campos/ações  
+5. Regras decididas (limites e regras com canal + consequência ao violar)  
+6. Estados (loading / empty / error / sem permissão)  
+7. Hipótese de solução (resumo)  
+8. Fora deste proto  
+9. Confirmado · Hipótese · Aberto · Gate  
 
 ## Critérios de aceitação
 
@@ -53,3 +55,6 @@ Online: [GV Design Sprint](https://www.gv.com/sprint/)
 | Stack no proto | “vamos usar Redis” |
 | Status tagarela | Protocolo que o cliente não pediu |
 | Meta de chat / abreviação | `qtd.`, “não inventar”, título de prompt |
+| Regra sem canal | Limite decidido sem dizer se vale na integração, no painel ou nos dois, nem o que acontece ao violar |
+| Tela do sistema atual julgada pelo nome | Tela entra ou sai sem perguntar ao cliente para que serve |
+| Decisão como pergunta | Opções A/B/C e divergências resolvidas continuam no arquivo depois do cliente decidir |

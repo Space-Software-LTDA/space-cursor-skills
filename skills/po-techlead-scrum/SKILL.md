@@ -190,10 +190,13 @@ Fluxo (detalhes em [clickup-task-guide.md](clickup-task-guide.md)):
 1. Gerar markdown local em **`.task/{projeto}/{task-slug}.md`** (ver seção **Onde gravar artefatos**) — **um** arquivo, mesmo Front+Back
 2. PO aprova: **“pode publicar no ClickUp”**
 3. Confirmar lista (Esteira vs Imediatas) + responsável + campo Projeto
-4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Front+Back: o **agente** recorta 3 bodies e cria **1 MAIN + 2 subtasks** (MASTER primeiro; Backend `--parent --layer back`; Frontend `--parent --layer front`). Títulos das subtasks: `[BACK] …` / `[FRONT] …` no **início** (não truncar). Ver [clickup-task-guide.md](clickup-task-guide.md). **Não** parser no Python.
-5. **Imediatas:** criar **checklist nativo** do ClickUp (`--checklist-name` + `--checklist-item`) na **tarefa principal de cada dev** — não `- [ ]` no markdown. Uma camada → checklist na task pai. Front+Back → checklist na subtask Back **e** na subtask Front; **MAIN sem** checklist. Esteira: **não** criar esse checklist (o Ritter vira PBI).
-6. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs **e PNGs** de diagramas/prints). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints. O script reescreve `![](mermaid.ink|raw.githubusercontent)` para URL de **attachment** e dá PUT na descrição.
-7. Devolver os **links** (MAIN + 2 subtasks) ao PO
+4. Rodar `scripts/clickup_create_task.py` (preferir `--dry-run` na 1ª vez no projeto). O script é **1 arquivo → 1 task**. Estrutura por lista ([clickup-task-guide.md](clickup-task-guide.md#estrutura-no-clickup-regra-por-lista)):
+   - **Esteira — subtarefa PODE, só quando precisar.** Front+Back = **1 task** com a spec completa (Backend/Frontend já separados por seção e no passo a passo). Sprint com várias entregas = **1 MAIN da sprint** (visão geral) + cada entrega como **subtask** (`--parent`). Subtarefa dentro de uma entrega só se precisar. **Vai para a sprint já → `--status detalhar`** (MAIN e subtasks); senão `demanda`.
+   - **Imediatas — subtarefa JAMAIS.** Front+Back = **2 tasks separadas** `[BACKEND] …` / `[FRONTEND] …` (`--layer back|front`) **vinculadas** (`--link`). O script recusa `--parent` nas Imediatas.
+   - **Não duplicar descrição:** cada informação em um lugar só. MAIN da sprint não repete a spec das entregas; subtarefa não copia o corpo da pai. **Não** parser no Python.
+5. **Imediatas:** criar **checklist nativo** do ClickUp (`--checklist-name` + `--checklist-item`) na **task de cada dev** — não `- [ ]` no markdown. Uma camada → checklist na task. Front+Back → checklist na `[BACKEND]` **e** na `[FRONTEND]`. Esteira: **não** criar esse checklist (o Ritter vira PBI).
+6. **Anexar** o que o time precisa baixar (OpenAPI, DBML, specs **e PNGs** de diagramas/prints). MASTER: `.md` completo + contrato. Backend: OpenAPI/DBML. Frontend: prints. Imagens vão **direto da pasta local para a task** (sem push em repositório): o script anexa cada imagem do `.md` (caminho relativo `assets/{task-slug}/…`, `--attach` ou URL mermaid.ink), reescreve para URL de **attachment** e dá PUT na descrição. Depois, **baixar o publicado** e conferir zero `raw.githubusercontent` / `mermaid.ink` / caminho local nas imagens.
+7. Devolver os **links** ao PO (task, ou MAIN da sprint + entregas, ou o par `[BACKEND]`/`[FRONTEND]`)
 
 Se a task tem API: o import Apidog (passo 4 do pipeline) já aconteceu **antes** deste bloco. Ver [apidog.md](apidog.md).
 
@@ -203,13 +206,13 @@ No markdown **publicado** no ClickUp:
 
 - **Proibido** citar paths de workspace do PO (`.docs/`, `.task/`, `C:\...`, clone local)
 - Artefatos (OpenAPI, DBML, JSON, PDF…) → **anexar na task** e referenciar pelo **nome do arquivo** (“anexo `openapi-….yaml`”)
-- Prints/diagramas → **anexar PNG** + embutir URL de **attachment** no corpo (ver [screenshots.md](screenshots.md) / [diagrams.md](diagrams.md)); space-assets continua como backup no `.md` local
+- Prints/diagramas → **anexar PNG** + embutir URL de **attachment** no corpo (ver [screenshots.md](screenshots.md) / [diagrams.md](diagrams.md)). O PNG fica em `.task/{projeto}/assets/{task-slug}/` e sobe **só** como anexo — não precisa (nem deve depender de) push no space-assets
 - `.docs/` / `.task/` existem só na máquina do PO; o time lê **anexos + links**
 
 | Modo | Tipo custom | Status / extras |
 | --- | --- | --- |
-| Esteira | **Task padrão** (sem custom type) | Status `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`) + campo Projeto + assignee (Ricardo default) + anexa `.md` |
-| Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) + checklist nativo na tarefa de cada dev |
+| Esteira | **Task padrão** (sem custom type) | Status `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`) ou **`detalhar` se já vai para a sprint** + campo Projeto + assignee (Ricardo default) + anexa `.md`. Subtarefa pode, só se precisar |
+| Imediatas | `0- IMEDIATA` | Assignee obrigatório + anexa `.md` (+ Projeto se informado) + checklist nativo na task de cada dev. **Sem subtarefa**: Front+Back = `[BACKEND]` + `[FRONTEND]` vinculadas |
 
 Credenciais: `.env` do repo **space-cursor-skills** → `npm run sync` gera `clickup.env` nesta skill. Ver [clickup-task-guide.md](clickup-task-guide.md#onde-editar-esta-skill-obrigatório).
 
@@ -280,7 +283,7 @@ Tom **professor** (seção 🎓): tintim por tintim, para júnior não adivinhar
 8. **`## Passo a passo sugerido`** — **só Esteira.** Tabela = PBI, linha = Task (`1.1`) + Espera/Bloqueia. **Imediatas: omitir esta seção** (sem PBI, sem Dependência). Molde: [evidencias-dod.md](evidencias-dod.md)
 9. **`## REGRAS DE DDD`** — o que é obrigatório para chamar de pronto (prova em HML + paralelos). Tom **ordenante**. Prova na **camada que alterou código**; superfície Front sem alteração NENHUMA = prova Back. [evidencias-dod.md](evidencias-dod.md)
 10. **Observações** — riscos, edge cases, delays, env vars
-11. **Referência visual** (se Front) — prints (space-assets no `.md` local; **attachment** no corpo ClickUp) + link protótipo + legenda do que observar
+11. **Referência visual** (se Front) — prints (`assets/{task-slug}/…` relativo no `.md` local; **attachment** no corpo ClickUp) + link protótipo + legenda do que observar
 12. **`## ⛔ NÃO DEVE`** — **sempre o último `##`**. Anti-critérios + quotes (`>`) para o ClickUp pintar o bloco. [evidencias-dod.md](evidencias-dod.md)
 
 ### Cabeçalho em grid (obrigatório em toda task)
@@ -329,9 +332,10 @@ Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBM
 - Escrita como **instrução de execução imediata**
 - **Não** incluir `## Passo a passo sugerido` com PBI / Espera / Bloqueia / Dependência — o SuperAgente **não** passa nesta lista
 - A quebra do trabalho é **checklist nativo do ClickUp** (módulo Checklist da task), **não** `- [ ]` no markdown
-- Onde colar o checklist: **tarefa principal de cada dev**
-  - Uma task só (sem subtask Back/Front) → checklist na **pai**
-  - Front+Back → **um** checklist na subtask Backend e **um** na subtask Frontend; a MAIN **não** leva checklist
+- **Imediatas nunca têm subtarefa.** Front+Back = duas tasks **separadas** `[BACKEND] …` e `[FRONTEND] …`, **vinculadas** (linked task)
+- Onde colar o checklist: **task de cada dev**
+  - Uma camada → checklist na task
+  - Front+Back → **um** checklist na `[BACKEND]` e **um** na `[FRONTEND]`
 - Cada item do checklist = uma “tarefa” que o dev marca. Incluir implementação **e** as provas `P-*` daquela camada
 - Pode detalhar arquivos/módulos no **corpo** (tom professor); a ordem de execução que o dev tica é o checklist
 - **Não** enxugar explicações por ser “urgente”
@@ -361,7 +365,7 @@ Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBM
 ### Fluxo
 
 1. Gerar PNG via mermaid.ink (`scripts/render-mermaid.sh`)
-2. Salvar em **space-assets** + referenciar no `.md` local (`![alt](mermaid.ink/…)` ou raw.githubusercontent)
+2. Salvar em `assets/{task-slug}/` da task + referenciar no `.md` local (`![alt](assets/{task-slug}/diagram-….png)` ou a URL mermaid.ink)
 3. No passo a passo da **Esteira**, **também** o bloco fonte; no resto (e em Imediatas), **não**
 4. Na publicação ClickUp: o script **anexa** o PNG e reescreve para `![](attachment-url)` no campo **`markdown_content`** (igual ao Estruturador). **Proibido** `<img>` / gravar em `markdown_description`. Não deixar só mermaid.ink / raw.githubusercontent como única fonte no corpo publicado
 
@@ -401,7 +405,7 @@ Não inverter: Home densa **antes** dos modais estáveis.
 ### Regra resumida
 
 - **Front ou alteração de tela** → capturar prints (protótipo Lovable, staging ou prints que o PO enviar no chat)
-- **PO enviou print no chat** → copiar para `space-assets/{projeto}/{task-slug}/`, push
+- **PO enviou print no chat** → copiar para `.task/{projeto}/assets/{task-slug}/` (sem push)
 - **Existe URL de protótipo** → acessar (browser MCP), tirar screenshots das telas-chave
 - Incluir seção **🖼️ Referência visual** + link do protótipo
 - **Publicação ClickUp:** anexar PNGs; o script reescreve para URL de attachment
@@ -410,18 +414,14 @@ Não inverter: Home densa **antes** dos modais estáveis.
 
 | Onde | Papel |
 |---|---|
-| **space-assets** | Backup + markdown local (`raw.githubusercontent.com/…`) |
+| **`.task/{projeto}/assets/{task-slug}/`** | PNG local; `.md` usa caminho relativo `assets/{task-slug}/…` |
 | **Attachment da task ClickUp** | Inline no corpo publicado — padrão que o ClickUp renderiza |
 
-**Repo backup:** [Space-Software-LTDA/space-assets](https://github.com/Space-Software-LTDA/space-assets) (público). Clone local nesta máquina (não hardcodar path de um produto).
-
-```
-https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/{arquivo}.png
-```
+**Imagem de task ClickUp não vai para repositório:** anexa direto na task. [space-assets](https://github.com/Space-Software-LTDA/space-assets) é opcional, só quando a imagem precisa de URL pública fora do ClickUp.
 
 | Fallback | Quando |
 |---|---|
-| Arrastar PNG no ClickUp | Push/script falhou ou PO prefere manual |
+| Arrastar PNG no ClickUp | Script falhou ou PO prefere manual |
 | Link do protótipo | Sempre, além dos prints |
 
 Detalhes em [screenshots.md](screenshots.md).
@@ -464,7 +464,9 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] **Filtro conversa → corpo:** nada de ferramenta/abordagem fora do caminho “só para negar”; NÃO DEVE só com falha **real** desta entrega ([evidencias-dod.md](evidencias-dod.md))
 - [ ] Caminho oficial no **afirmativo** (o que fazer). Não citar o que não entra, salvo tentação real desta spec
 - [ ] **Esteira:** passo a passo se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte). **Imediatas:** **sem** essa seção; checklist nativo na task de cada dev
-- [ ] **Imediatas ao publicar:** `--checklist-name` + `--checklist-item` na pai (uma camada) **ou** nas subtasks Back e Front (não na MAIN)
+- [ ] **Imediatas ao publicar:** sem subtarefa; `--checklist-name` + `--checklist-item` na task (uma camada) **ou** na `[BACKEND]` e na `[FRONTEND]` vinculadas (`--link`)
+- [ ] **Esteira ao publicar:** subtarefa só se precisar; sprint = MAIN + entregas como subtask; status `detalhar` se já vai para a sprint
+- [ ] Nenhuma descrição duplicada entre MAIN, entregas e subtarefas
 - [ ] Payloads, endpoints, curls e fluxos documentados onde necessário
 - [ ] Edge cases e riscos em Observações
 - [ ] Aviso de IA no topo
@@ -472,7 +474,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Sem ambiguidade que force o agente ou o júnior a "adivinhar"
 - [ ] Diagramas: PNG (mermaid.ink → arquivo); no ClickUp via **attachment**. Fonte mermaid **somente** no passo a passo da **Esteira**
 - [ ] Imediatas: **sem** `- [ ]` no markdown fingindo de task; checklist é o nativo do ClickUp
-- [ ] Tarefa Front: seção 🖼️ Referência visual; PNGs em space-assets **e** anexados no ClickUp com inline
+- [ ] Tarefa Front: seção 🖼️ Referência visual; PNGs em `assets/{task-slug}/` da task, anexados no ClickUp com inline (sem push em repositório)
+- [ ] Publicado baixado e conferido: toda imagem é attachment (zero `raw.githubusercontent` / `mermaid.ink` / caminho local)
 - [ ] Link do protótipo incluído quando existir
 - [ ] **Não** enxugou conteúdo didático ao “limpar” a task
 - [ ] Markdown em `.task/{projeto}/{task-slug}.md` (não `task/` sem ponto; não solto na raiz)
@@ -489,7 +492,9 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não criar `P-FRONT` para tela em que o Front **não altera nada** — a prova é do Back
 - Não colocar tabela PBI / Espera / Bloqueia / Dependência em **Imediatas**
 - Não usar `- [ ]` no markdown no lugar do checklist **nativo** do ClickUp (Imediatas)
-- Não titular subtask Back/Front com sufixo `— Backend` / `— Frontend` no lugar do prefixo — use `[BACK]` / `[FRONT]` no **início** (`--layer`); não truncar o título
+- Não titular com sufixo `— Backend` / `— Frontend` no lugar do prefixo — use `[BACK]` / `[FRONT]` (Esteira) ou `[BACKEND]` / `[FRONTEND]` (par das Imediatas) no **início** (`--layer`); não truncar o título
+- Não criar subtarefa nas **Imediatas** — Front+Back = duas tasks separadas e vinculadas
+- Não criar subtarefas `[BACK]`/`[FRONT]` na Esteira que **copiam** seções da task pai (recorte duplicado) — a spec da pai já separa as camadas; subtarefa só se precisar, com corpo curto
 - Não entregar task sem `## ⛔ NÃO DEVE` no final (anti-critérios desta entrega)
 - Não colocar tabela do NÃO DEVE dentro de blockquote (quebra no ClickUp)
 - Não usar `:::danger` / `> [!CAUTION]` no lugar do `>` — a API não vira Banner
@@ -502,7 +507,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não mandar a task Front copiar cor, glow ou radius do Lovable, nem trocar o tema **já no repo/BO** “porque o DS / o mock é outro” — ordem: repo/BO → DS produto → Space DS (buraco) → mock (campos/ações)
 - Não entregar Home/player **antes** dos modais/overlays se a task for Apply de DS nessa ordem
 - Não resumir as 19 seções do Design System na task — apontar o arquivo
-- Não usar caminhos `C:\...` ou relativos locais — space-assets no `.md` local; **attachment URL** no corpo ClickUp
+- Não usar caminhos `C:\...` / absolutos no `.md` — relativo `assets/{task-slug}/…` no `.md` local (o script converte); **attachment URL** no corpo ClickUp
+- Não fazer push de imagem em repositório (space-assets ou repo do projeto) só para publicar task ClickUp — anexar direto na task
 - Não citar `.docs/` / `.task/` no corpo ClickUp — anexar o arquivo e referenciar pelo nome
 - Não publicar OpenAPI/DBML só “no disco do PO” sem anexar na task
 - Não deixar no corpo ClickUp só `mermaid.ink` / `raw.githubusercontent` como única fonte de imagem (stripa/quebra)

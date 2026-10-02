@@ -30,8 +30,8 @@ Feito até agora: {3 bullets}
 Aberto: {ou “nenhum”}
 Ler antes: {SKILL_DIR}/modules/{fase}/AGENT.md · playbook.md · target-model.md · examples/README.md · ../docs/metodo-agentes.md
 Pronto quando: {copiado da linha da fase na tabela “Método de execução” do SKILL.md}
-Leis: eco→confirma→grava · especialista→leigo · docs padronizados · Dicionário · um gate · não batizar · **abrir target-model.md + ≥1 anexo** · **docs-clarity.md** (teste do estranho + posicionamento do leigo) · **anti-rush.md** (ler o arquivo inteiro antes de gravar; não otimizar para fechar rápido)
-Propagação: decisão que mexe em fase anterior → replace no arquivo dono na mesma rodada (`reference/rules.md` → Propagação). Pergunte ao cliente só decisão de produto ou gosto sem regra.
+Leis: eco→confirma→grava (termo interno; com o cliente: “resumo do que entendi”) · especialista→leigo · docs padronizados · Dicionário · um gate · não batizar · **abrir target-model.md + ≥1 anexo** · **docs-clarity.md** (teste do estranho + posicionamento do leigo) · **anti-rush.md** (ler o arquivo inteiro antes de gravar; não otimizar para fechar rápido)
+Propagação: decisão que mexe em fase anterior → replace no arquivo dono na mesma rodada (`reference/rules.md` → Propagação). Pergunte ao cliente só decisão de produto ou gosto sem regra, sempre com o resumo e o contexto visíveis no chat antes da pergunta.
 Ao fechar: atualizar Gate no `.docs/`; devolver ao Controlador o path + status + o que foi propagado para outras fases (não continue para a próxima fase).
 ```
 

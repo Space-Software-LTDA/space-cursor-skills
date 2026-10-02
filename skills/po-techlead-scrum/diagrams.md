@@ -10,7 +10,7 @@ O caminho completo:
 
 1. Gerar via mermaid.ink
 2. Baixar o PNG
-3. Guardar cópia em **space-assets** (backup + markdown local)
+3. Guardar em `assets/{task-slug}/` da task (`.task/{projeto}/assets/{task-slug}/`) — **sem** push em repositório
 4. Na **publicação ClickUp**: anexar o PNG na task e embutir com URL do **attachment** (o script faz isso)
 
 ```markdown
@@ -29,13 +29,13 @@ O caminho completo:
 2. Codificar com **base64url** (não base64 padrão — evita 404 por `/` na URL)
 3. Montar URL: `https://mermaid.ink/img/{encoded}?type=png&bgColor=!white`
 4. Validar que a URL retorna imagem (HTTP 200)
-5. Baixar PNG (`render-mermaid.sh` ou `curl`) e push em `space-assets/{projeto}/{task-slug}/diagram-….png`
-6. No `.md` local: `![…](mermaid.ink/…)` ou `raw.githubusercontent.com/…`
+5. Baixar PNG (`render-mermaid.sh` ou `curl`) em `assets/{task-slug}/diagram-….png` da task
+6. No `.md` local: `![…](assets/{task-slug}/diagram-….png)` (ou a URL `mermaid.ink` — o script baixa e anexa)
 7. **Só no passo a passo da Esteira:** repetir o mesmo código sob o título `Código do diagrama (SuperAgente)`
 
 ### B — Publicar no ClickUp
 
-1. `clickup_create_task.py` **anexa** cada PNG (`--attach` ou baixa mermaid.ink/raw)
+1. `clickup_create_task.py` **anexa** cada PNG (caminho relativo ao `.md`, `--attach`, ou baixa a URL mermaid.ink)
 2. Substitui no corpo a URL da imagem por `![](attachment-url)` e grava em `markdown_content`
 3. `PUT` da descrição
 4. **Não** deixar só mermaid.ink / raw.githubusercontent como única fonte de imagem no corpo ClickUp
@@ -112,7 +112,7 @@ O código acima é o que se cola **somente** no passo a passo da Esteira (além 
 ## Checklist do diagrama
 
 - [ ] Imagem gerada via mermaid.ink (não só Mermaid no chat)
-- [ ] PNG baixado + push em space-assets (markdown local)
+- [ ] PNG baixado em `assets/{task-slug}/` da task (sem push em repositório)
 - [ ] No ClickUp: PNG **anexado** + URL de attachment no corpo (o script faz isso)
 - [ ] URL mermaid.ink validada (200 OK) na geração
 - [ ] `bgColor=!white` para legibilidade

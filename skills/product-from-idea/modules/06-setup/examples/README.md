@@ -21,6 +21,12 @@ Mapas mínimos de pasta, tirados dos projetos-base oficiais. **Não** substituem
 | [`anexos/frontend-STRUCTURE.md`](anexos/frontend-STRUCTURE.md) | Estrutura do projeto-base de site [boilerplate-front-nextjs](https://github.com/Space-Software-LTDA/boilerplate-front-nextjs) | Organização por funcionalidade; o que o dev ganha ao clonar |
 | [`anexos/extension-STRUCTURE.md`](anexos/extension-STRUCTURE.md) | Estrutura de extensão de navegador no padrão Space (espelho do site + TypeScript, webpack, Manifest V3) | Como a extensão se organiza quando não há projeto-base próprio |
 
+## Referência sem anexo (abrir no GitHub)
+
+| Referência | O que é | O que extrair |
+|------------|---------|----------------|
+| [space-bet-integrations](https://github.com/Space-Software-LTDA/space-bet-integrations) | Camada de integração com fornecedores externos da Space | Pasta por fornecedor com adaptadores, módulos normalizados, catálogo único de erros, fornecedor falso para simulação. Ferramenta (framework) conferida no código antes de citar |
+
 ## Proibido
 
 - Nome de produto concreto nestes arquivos.  

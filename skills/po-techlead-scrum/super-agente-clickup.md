@@ -66,7 +66,7 @@ Deixar explícito na spec Esteira: Backend, Frontend, CA, DDD, passo a passo. Se
 
 ## Front+Back no ClickUp (publicação)
 
-A spec no disco é **um** `.md`. Na publicação Front+Back o agente cria **1 MAIN + 2 subtasks** (ver [clickup-task-guide.md](clickup-task-guide.md)). O Ritter deve ler sobretudo a **MAIN** (spec completa + passo a passo inteiro). Backend e Frontend são **subtasks** com recorte para o dev da camada.
+A spec no disco é **um** `.md` por entrega. Na Esteira, Front+Back vira **uma** task com a spec completa e o passo a passo inteiro — é ela que o Ritter lê; as linhas BACK/FRONT do passo a passo viram as Tasks. Sprint com várias entregas: **1 MAIN da sprint** (visão geral) + cada entrega como subtask. Subtarefa só se precisar, sem copiar o corpo da pai (ver [clickup-task-guide.md](clickup-task-guide.md#estrutura-no-clickup-regra-por-lista)).
 
 ## Boilerplate Front
 

@@ -27,7 +27,7 @@ Esta skill é o **ponto único de verdade operacional** do pack de skills:
 - Destino por ambiente (`.env` / Coders)
 - Catálogo do que existe e para que serve
 - Como criar / alterar / deprecar uma skill
-- Regras transversais (`.task/`, `.docs/`, gitignore, idioma)
+- Regras transversais (`.task/`, `.docs/`, gitignore, idioma, imagens e estrutura de tasks no ClickUp)
 - Constituição do time (`docs/` na raiz — **não** é skill; mapa em `docs/README.md`)
 - **Skills 100% genéricas** — nenhum cliente/produto hardcoded (BATEU, SPACEBET, …)
 
@@ -116,6 +116,19 @@ Fluxo: editar `docs/` → conferir README → `npm run sync`. Detalhe: [playbook
 Não commitar essas pastas sem o usuário pedir.
 
 **Exceção — workspace dedicado do `product-from-idea`:** ali `.docs/` **é o produto definido** e é versionado (não vai para o `.gitignore`). Commit/push continuam só quando o usuário pedir.
+
+### Imagens para o ClickUp
+
+Imagem (print, diagrama) de task no ClickUp **anexa direto na task** — **não** precisa de push em repositório (space-assets ou repo do projeto). O PNG fica na pasta de artefatos (`.task/{projeto}/assets/{task-slug}/`), o `.md` usa caminho relativo e o script de publicação anexa e troca pela URL do attachment. Repo de imagens só quando a imagem precisa de URL pública **fora** do ClickUp. Depois de publicar, conferir que nenhuma imagem ficou com link externo ou caminho local. Detalhe: `skills/po-techlead-scrum/screenshots.md`.
+
+### Estrutura de tasks no ClickUp
+
+| Lista | Subtarefa | Front+Back | Status inicial |
+|-------|-----------|------------|----------------|
+| **Esteira** | **Pode**, só quando precisar | 1 task com a spec completa (camadas separadas por seção e no passo a passo). Sprint com várias entregas = **1 MAIN da sprint** + cada entrega como subtask | `demanda`; **vai para a sprint já → `detalhar`** |
+| **Imediatas** | **Jamais** | 2 tasks **separadas** `[BACKEND]` e `[FRONTEND]`, **vinculadas** (linked task), checklist nativo em cada | Padrão da lista |
+
+**Não duplicar descrição:** cada informação mora em um lugar só (MAIN da sprint não repete a spec das entregas; subtarefa não copia o corpo da pai). Para reorganizar tasks já publicadas, **mover** (trocar o pai), não recriar. Detalhe: `skills/po-techlead-scrum/clickup-task-guide.md`.
 
 ### Pipeline PO (task com API)
 

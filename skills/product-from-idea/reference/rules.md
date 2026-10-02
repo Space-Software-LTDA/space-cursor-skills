@@ -275,6 +275,7 @@ O Agent se sente como um **especialista sênior contratado** que acabou de entra
 - Pode propor hipóteses (“pode ser A ou B?”), mas **marca como hipótese** até o cliente confirmar.
 - Documenta respostas e premissas **no chat e em `.docs/`**; o que ficou aberto fica **aberto** (não some no meio do texto).
 - Atualiza o arquivo da fase **na mesma rodada** em que o cliente trouxe fato novo relevante.
+- **Produto que já existe (refazer):** pergunta primeiro qual é o produto principal e o que ainda **não existe**; só depois lê o sistema atual. Valor de mockup não é regra; defeito do sistema atual não é fato do produto (`modules/01-discovery/playbook.md` → Produto que já existe).
 
 ### Perguntar só o necessário (equilíbrio do mantra)
 
@@ -287,6 +288,8 @@ O Agent se sente como um **especialista sênior contratado** que acabou de entra
 | Gosto sem regra escrita (ex.: texto branco ou escuro no botão) | **Cliente** | Comparação visual lado a lado + recomendação |
 
 Perguntar o que a regra já responde = falha (o cliente pediu: “me pergunte só o que for necessário”). Decidir sozinho o que é produto = falha maior.
+
+**Pergunta autoexplicativa:** antes de qualquer pergunta — e sempre antes de abrir questionário (ferramenta de múltipla escolha) — o chat mostra o resumo e o contexto: o que está em jogo, as opções e a recomendação. Pergunta sobre algo que o cliente não está vendo (“O resumo está correto?” sem resumo na tela) = falha; o cliente cancela em vez de responder.
 
 ### Linguagem: especialista → leigo (obrigatória)
 
@@ -309,18 +312,22 @@ O cliente **não** é analista de mercado nem PM. O Agent é o especialista: **t
 - **Proxy** → “número de outro produto parecido que usamos como referência”
 - **Top-down / bottom-up** → “de cima (relatório grande → filtro)” / “de baixo (conta com usuários × % )”
 
-Formações F1–F10 e códigos de fase: ok **internamente**; no chat com o cliente, preferir o **nome da fase** (“pesquisa de mercado”, “decisão de gate”).
+Formações F1–F10 e códigos de fase: ok **internamente**; no chat com o cliente, preferir o **nome da fase** (“pesquisa de mercado”, “decisão de gate”).  
+Termos do método (“eco”, “camada”, “pacote do gate”, “handoff”) também são internos: com o cliente, “resumo do que entendi”, “próximo assunto”, “hora de decidir”.
 
 ### Antes de gravar no `.docs/` — eco + confirmação (obrigatória)
 
 Quando o cliente **despeja** feature, monetização, nome ou fluxo novo (voz, áudio, texto bagunçado):
 
-1. **Eco em português claro** (3–6 bullets do que entendeu).  
+1. **Eco em português claro** (3–6 bullets do que entendeu) — no chat, chamar de “resumo do que entendi”.  
 2. **Pergunta de confirmação** (“É isso?” / “O nome é X ou foi erro de áudio?”).  
 3. **Só então** `Write` / `StrReplace` no arquivo da fase.
 
+**Número citado numa regra** (“40%”, “R$ 1.000”, “3 dias”): perguntar se é **exemplo ou valor fixo**. Se for configurável: quem define e se existe valor inicial. Sem resposta, o número não entra como regra.
+
 **Proibido:** inventar **nome de produto/modo/marca** a partir de áudio/transcrição duvidosa (no piloto, um nome de modo foi inventado a partir de um erro de transcrição de áudio).  
-Enquanto o nome não estiver confirmado → usar descrição (“busca com inteligência artificial”), **nunca** batizar sozinho.
+Enquanto o nome não estiver confirmado → usar descrição (“busca com inteligência artificial”), **nunca** batizar sozinho.  
+**Nome próprio vindo de áudio** (concorrente, parceiro, empresa, pessoa): confirmar a **grafia** com o cliente antes de pesquisar ou gravar como fato — a transcrição troca por um nome parecido que existe, e a pesquisa checa a empresa errada.
 
 ### Um gate por vez
 
@@ -333,7 +340,7 @@ Se o cliente falar **quem paga / afiliado / crédito / preço** fora da Fase 4:
 ligar **F9**, pesquisar se pedir evidência, gravar no arquivo da fase certa (mercado e/ou MVP) — **não** inventar % sem fonte.
 
 ### O que isso proíbe
-- “Assumi que…” sem o cliente ter dito.
+- “Assumi que…” sem o cliente ter dito — inclusive quantidade (“o parceiro” quando podem ser vários) e piso ou teto de preço.
 - Fechar discovery / MVP / contrato / task com buraco crítico sem gate (“risco documentado” só se o **cliente** aceitar adiar).
 - Resposta longa de solução quando ainda faltam 3 perguntas básicas.
 - Deixar no **Aberto** algo que **define o produto** (matching, corte de job, entradas, canais, métrica) só com “entra na próxima fase” — isso é fuga. **Forçar F6** com opções até fechado ou adiado **explícito** pelo cliente.

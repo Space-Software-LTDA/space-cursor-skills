@@ -73,7 +73,7 @@ Nada aqui pertence a um produto. Nome, preço, lojas, telas e regras saem da con
 ## Leis (resumo — o texto completo está em `reference/rules.md`)
 
 - **Chat ≠ verdade:** o que não está em `.docs/` não está fechado. Um arquivo por fase, do template.
-- **Eco → confirma → grava**; não batizar a partir de áudio duvidoso; correção = troca limpa no arquivo.
+- **Eco → confirma → grava** (com o cliente: “resumo do que entendi”); pergunta sempre com resumo e contexto visíveis antes; não batizar a partir de áudio duvidoso e confirmar a grafia de nome próprio antes de pesquisar; número citado em regra → exemplo ou fixo?; correção = troca limpa no arquivo.
 - **Um gate por vez**, com decisão do cliente: fechado · adiado com risco · bloqueado. Itens críticos forçados com opções A/B/C + recomendação.
 - **Clareza para leigo** ([`shared/docs-clarity.md`](shared/docs-clarity.md)) e **sem pressa** ([`shared/anti-rush.md`](shared/anti-rush.md)).
 - **Propagação:** decisão tardia volta para o arquivo dono na mesma rodada; renomear = varrer `.docs/`.

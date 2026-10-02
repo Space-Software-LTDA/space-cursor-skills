@@ -8,19 +8,17 @@ Diagramas de fluxo continuam em [diagrams.md](diagrams.md) (mermaid.ink). **Prin
 
 ---
 
-## Repositório de hospedagem (padrão do agente)
+## Hospedagem: anexo direto na task (padrão)
 
-**Repo:** [Space-Software-LTDA/space-assets](https://github.com/Space-Software-LTDA/space-assets) (público)
+Imagem de task ClickUp **não vai para repositório** (nem space-assets, nem repo do projeto). O PNG fica **local**, na pasta de artefatos da task, e na publicação o script **anexa direto na task** e troca o link pela URL do attachment.
 
-**Clone:** clone local de [space-assets](https://github.com/Space-Software-LTDA/space-assets) nesta máquina (não amarrar a pasta de um produto).
+- **Local:** `.task/{projeto}/assets/{task-slug}/{arquivo}.png` (`.task/` já está no `.gitignore`)
+- **No `.md` local:** caminho **relativo** à pasta do `.md` — `![…](assets/{task-slug}/01-tela.png)` (abre no preview do Cursor)
+- **Na publicação:** `clickup_create_task.py` resolve o caminho relativo a partir da pasta do `.md`, anexa e grava `![](attachment-url)` em `markdown_content`
 
-**URL base para ClickUp:**
+**space-assets** ([Space-Software-LTDA/space-assets](https://github.com/Space-Software-LTDA/space-assets), público) é **opcional**: só quando a imagem precisa de URL pública **fora** do ClickUp (ex.: README, doc externa). Nunca é pré-requisito para publicar task.
 
-```
-https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/{arquivo}.png
-```
-
-O agente **salva, commita e dá push** neste repo — o markdown **local** (`.task/`) usa essas URLs. No **corpo ClickUp publicado**, o script reescreve para URL de **attachment**.
+> Erro que originou a regra: tasks com link `raw.githubusercontent` para uma pasta do space-assets que nunca recebeu push — imagens quebradas no ClickUp. Ver [CORRECOES.md](CORRECOES.md).
 
 ---
 
@@ -38,7 +36,7 @@ O agente **salva, commita e dá push** neste repo — o markdown **local** (`.ta
 
 ## Fontes de print (ordem de prioridade)
 
-1. **Prints enviados pelo usuário no chat** — copiar para `space-assets` e referenciar na task
+1. **Prints enviados pelo usuário no chat** — copiar para `assets/{task-slug}/` da task e referenciar na task
 2. **Protótipo via URL** — acessar com browser (MCP), capturar telas relevantes
 3. **App local/staging** — screenshot se URL acessível
 4. **Fallback** — link do protótipo + lista do que capturar; pedir prints ao PO se bloqueado (login, paywall)
@@ -47,26 +45,23 @@ O agente **salva, commita e dá push** neste repo — o markdown **local** (`.ta
 
 ## Onde salvar
 
-### 1. space-assets (obrigatório para tasks com UI)
-
 ```
-space-assets/
-└── {projeto}/                    # ex.: bateu, monitor, spacepay
-    └── {task-slug}/              # ex.: pixels-platform-affiliate
+.task/{projeto}/
+├── {task-slug}.md                # a task (ver "Onde gravar artefatos" no SKILL.md)
+└── assets/
+    └── {task-slug}/
         ├── 01-listagem.png
         ├── 02-formulario.png
         └── 03-combobox-afiliado.png
 ```
 
-**Convenção de nomes:** `{ordem}-{tela-ou-estado}.png` — ordem cronológica ou de fluxo.
+O caminho é relativo à pasta do `.md`: `assets/{task-slug}/01-listagem.png`. Se o `.md` estiver numa subpasta (ex.: entregas de uma sprint em `tasks/`), suba o nível: `../assets/{task-slug}/01-listagem.png`.
 
-### 2. task/assets no repo do projeto (opcional, cópia local)
-
-Espelhar em `task/assets/{task-slug}/` se a task `.md` ficar no repo do projeto — útil para revisão offline. **URLs no markdown usam sempre space-assets.**
+**Convenção de nomes:** `{ordem}-{tela-ou-estado}.png` — ordem cronológica ou de fluxo. Nome **único** dentro da task: o script casa anexo por nome de arquivo.
 
 ---
 
-## Markdown na task (URLs públicas)
+## Markdown na task
 
 ```markdown
 ## 🖼️ Referência visual
@@ -74,10 +69,10 @@ Espelhar em `task/assets/{task-slug}/` se a task `.md` ficar no repo do projeto 
 **Protótipo:** [URL do protótipo desta task](https://…)
 
 ### {tela 1}
-![{o que observar}](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/01-….png)
+![{o que observar}](assets/{task-slug}/01-….png)
 
 ### {tela 2}
-![{o que observar}](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/02-….png)
+![{o que observar}](assets/{task-slug}/02-….png)
 ```
 
 Sempre incluir **link do protótipo** como backup interativo.
@@ -86,19 +81,17 @@ Sempre incluir **link do protótipo** como backup interativo.
 
 ## Hospedagem para o ClickUp
 
-Dois papéis distintos:
-
 | Papel | Onde | Para quê |
 |---|---|---|
-| **Backup / markdown local** | space-assets (`raw.githubusercontent.com/…`) | `.task/*.md` no disco do PO; histórico no Git |
+| **Markdown local** | `assets/{task-slug}/` na pasta do `.md` (caminho relativo) | `.task/*.md` no disco do PO |
 | **Corpo da task ClickUp** | URL do **attachment** da própria task | ClickUp renderiza inline de forma confiável |
 
 ### Fluxo de publicação (obrigatório)
 
-1. Prints em space-assets (push) — markdown local usa essas URLs
-2. Ao criar/atualizar a task: **anexar** cada PNG na task via API
-3. Reescrever o corpo com `![](attachment-url)` e gravar em **`markdown_content`** (nunca `<img>`, nunca o campo `markdown_description`)
-4. O script `clickup_create_task.py` faz anexar + reescrever automaticamente
+1. PNGs em `assets/{task-slug}/` da task — markdown local com caminho relativo
+2. Ao criar/atualizar a task: o script **anexa** cada PNG referenciado (resolve o relativo pela pasta do `.md`; `--attach <png>` também funciona e casa pelo nome)
+3. Reescreve o corpo com `![](attachment-url)` e grava em **`markdown_content`** (nunca `<img>`, nunca o campo `markdown_description`)
+4. **Conferir o publicado:** baixar a descrição e garantir **zero** `raw.githubusercontent`, `mermaid.ink` ou caminho local nas imagens. O script só avisa (`WARN`) quando não acha o arquivo — não falha
 
 ```markdown
 ![Listagem](https://t9013….p.clickup-attachments.com/t9013…/uuid/01-listagem.png)
@@ -107,7 +100,7 @@ Dois papéis distintos:
 | Opção | Quem faz | Quando |
 |---|---|---|
 | **Attachment ClickUp + URL de attachment** | Agente (script) | **Padrão no corpo ClickUp** |
-| space-assets + push | Agente | Markdown local + backup |
+| space-assets + push | Agente | **Opcional** — só se precisar de URL pública fora do ClickUp |
 | Arrastar PNG no ClickUp | PO | Fallback manual |
 | Link do protótipo | Agente | Sempre, além dos prints |
 
@@ -116,8 +109,8 @@ Dois papéis distintos:
 | Abordagem | Funciona? |
 |---|---|
 | `![](C:\Users\...)` | Não |
-| `![](assets/foo.png)` relativo | Não |
-| Só `![](raw.githubusercontent.com/…)` | **Instável** — ClickUp costuma stripar/não renderizar |
+| `![](assets/foo.png)` relativo **sem passar pelo script** | Não (com o script vira attachment) |
+| Só `![](raw.githubusercontent.com/…)` | **Instável** — ClickUp costuma stripar/não renderizar; quebra se o push não aconteceu |
 | Só `![](mermaid.ink/…)` | **Instável** — mesma limitação (diagramas: ver [diagrams.md](diagrams.md)) |
 | `<img>` / `<p><img>` no corpo | **Não** — a UI mostra as tags como texto |
 | Gravar em `markdown_description` | **Não** — campo de leitura. Escrita = `markdown_content` |
@@ -132,11 +125,11 @@ Dois papéis distintos:
 ```
 1. Identificar projeto, URLs de protótipo / prints do usuário
 2. Se URL → browser: navegar, screenshot das telas-chave
-3. Se usuário enviou imagem → copiar para space-assets/{projeto}/{slug}/
-4. git add, commit, push em space-assets
-5. Escrever task.md com seção 🖼️ Referência visual (URLs space-assets no .md local)
-6. Legendar cada print (o que mostra, o que mudou vs código atual)
-7. Ao publicar: clickup_create_task.py anexa PNGs e grava `![](attachment-url)` em markdown_content
+3. Se usuário enviou imagem → copiar para .task/{projeto}/assets/{task-slug}/
+4. Escrever task.md com seção 🖼️ Referência visual (caminho relativo assets/{task-slug}/…)
+5. Legendar cada print (o que mostra, o que mudou vs código atual)
+6. Ao publicar: clickup_create_task.py anexa PNGs e grava `![](attachment-url)` em markdown_content
+7. Baixar o publicado e conferir que toda imagem virou attachment
 8. Manter link do protótipo
 ```
 
@@ -153,9 +146,8 @@ Dois papéis distintos:
 ## Prints enviados pelo usuário no chat
 
 1. Arquivos ficam em `assets/` do workspace do Cursor
-2. **Copiar** para `space-assets/{projeto}/{task-slug}/` com nome descritivo
-3. Push no space-assets
-4. Na publicação ClickUp, anexar o mesmo PNG e usar URL do attachment no corpo
+2. **Copiar** para `.task/{projeto}/assets/{task-slug}/` com nome descritivo
+3. Na publicação ClickUp, o script anexa o PNG e usa a URL do attachment no corpo
 
 ---
 
@@ -163,8 +155,8 @@ Dois papéis distintos:
 
 - [ ] Tarefa Front tem seção 🖼️ Referência visual
 - [ ] Cada print tem legenda (não só imagem solta)
-- [ ] PNGs em `space-assets/{projeto}/{slug}/` com push feito
-- [ ] Markdown **local** com URLs space-assets
-- [ ] Corpo **ClickUp** com URL de attachment (não depender só de raw.githubusercontent)
+- [ ] PNGs em `.task/{projeto}/assets/{task-slug}/` (sem push em repositório)
+- [ ] Markdown **local** com caminho relativo `assets/{task-slug}/…`
+- [ ] Corpo **ClickUp** conferido depois de publicar: toda imagem é URL de attachment (zero raw.githubusercontent / mermaid.ink / caminho local)
 - [ ] Link do protótipo incluído
 - [ ] Nenhum caminho absoluto do Windows no markdown

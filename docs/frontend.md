@@ -70,7 +70,7 @@ Greenfield / produto sem token: o passo 1 está vazio → o DS manda; o mock con
 
 ## Visual: o que este arquivo não substitui
 
-`qa-space` lê [design-system.md](design-system.md) **inteiro** e preenche a matriz. `po-techlead-scrum` **aponta** o DS na task Front **sem resumir** as 19 seções, declara a prioridade repo → DS → mock, e coloca prints no space-assets.
+`qa-space` lê [design-system.md](design-system.md) **inteiro** e preenche a matriz. `po-techlead-scrum` **aponta** o DS na task Front **sem resumir** as 19 seções, declara a prioridade repo → DS → mock, e anexa os prints direto na task ClickUp (sem push em repositório).
 
 Proibido de produto (lembrete, não substitui o DS):
 

@@ -32,6 +32,9 @@
 | Site | **computador**; celular só se o cliente pedir (registrado na lista de telas) |
 | Extensão de navegador | tamanho real da janela da extensão |
 | App | tamanho real do aparelho definido no setup |
+| Superfície publicada por ferramenta pronta (portal de documentação, página de situação…) | layout da ferramenta |
+
+**Ferramenta pronta (ver `setup.md`):** a superfície não é desenho livre. Na lista de telas e no ciclo, decide-se só conteúdo, ordem, logo e cores dentro do que a ferramenta permite; não montar layout próprio no canvas que a ferramenta não consegue reproduzir.
 
 ## Sequência (Controlador → subagente Telas)
 
@@ -87,6 +90,8 @@ Tela da vez (a primeira é a Home, no tema principal)
 ### 3) Depois das telas essenciais
 
 Estados de tela (vazio, carregando, erro, sem resultado…), janelas, segundo tema (se o Design System tiver) — cada um no **mesmo ciclo** do passo 2. Por último, conferência cruzada: a mesma coisa com a mesma medida em todas as telas.
+
+Telas da expansão futura (só se estão no protótipo): mesmo ciclo, depois das essenciais, com marca visível de futuro na tela; ficam separadas em `telas.md` e não contam para o gate.
 
 ### 4) Gate de fase (produto)
 

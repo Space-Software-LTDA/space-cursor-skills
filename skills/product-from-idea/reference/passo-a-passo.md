@@ -69,7 +69,7 @@ Base: academia (discovery → MVP → contract-first) + operação Space (Apidog
 
 ### Fase 0 — Posicionamento e mapa
 - Fixar papéis + linha de corte.
-- **Casa do produto:** o workspace é um repositório git **próprio** (não dentro de outro repositório). Se não for, o Controlador propõe criar (nome `<cliente>-<produto>`) e só cria com o OK do cliente; commit/push só quando o cliente pedir. No piloto a pasta estava dentro de um repositório alheio e o canvas existiu meses num arquivo só.
+- **Casa do produto:** o workspace é um repositório git **próprio** (não dentro de outro repositório). Se não for, o Controlador propõe criar (nome `<cliente>_<produto>`, ou com hífen se o cliente já usa — `../docs/nomenclatura.md`) e só cria com o OK do cliente; commit/push só quando o cliente pedir. No piloto a pasta estava dentro de um repositório alheio e o canvas existiu meses num arquivo só.
 - **Gate:** cliente aprova o mapa.
 
 ### Fase 1 — Discovery

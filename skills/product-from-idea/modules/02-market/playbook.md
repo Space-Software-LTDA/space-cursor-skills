@@ -76,6 +76,8 @@ SAM ≈ 15–25M (proxy Mosaico)     # sem fórmula
 Faixa `lo–hi` só vale se **as duas pontas** tiverem conta.  
 Métodos: top-down e/ou bottom-up. Triangular quando possível.
 
+**Lei do total:** todo percentual aplicado na conta traz uma linha dizendo **sobre qual total ele foi medido** na fonte (ex.: “fatia medida só sobre as transferências entre instituições diferentes”). Percentual de um recorte aplicado ao total inteiro = conta errada.
+
 ### 3) Segmentos e usuários
 - Segmento primário enriquecido: tamanho com **conta** (mesmo estimada), dor, disposição a pagar se houver indício
 - 1–2 segmentos adjacentes (só se evidência)
@@ -95,6 +97,8 @@ Para **cada** player relevante (mín. 5 incl. status quo), pesquisar e preencher
 | Fonte + data | Sim |
 
 **Como obter:** search → abrir site → pricing → store listing → “sobre” / imprensa. Browser quando necessário.
+
+**Dores reais (obrigatório):** abrir as reclamações públicas de cada concorrente — inclusive os de nicho e marca branca — no site de reclamações do país (no Brasil, Reclame Aqui) e em fóruns e comunidades (Reddit, grupos do setor). Levantar as dores que se repetem, cada uma com trecho curto + URL + data. Elas alimentam “Falhas vs nossa dor” e os gaps.
 
 Matriz de posicionamento (opcional mas recomendado): 3–5 dimensões que **importam ao cliente** (ex.: profundidade do job × cobertura de canais) — scores 1–5 com nota de evidência.
 
@@ -118,9 +122,10 @@ Matriz de posicionamento (opcional mas recomendado): 3–5 dimensões que **impo
 1. Ler `discovery.md`  
 2. Declarar Fase 2 + âncora  
 3. Search amplo → shortlist  
-4. **Para cada shortlist:** abrir páginas (browser) e extrair preço/usuários/proposta  
+4. **Para cada shortlist:** abrir páginas (browser) e extrair preço/usuários/proposta. **Salvar o trecho da fonte** (citação curta + URL + data) num rascunho fora do `.docs/` no momento da leitura — número que não tem trecho salvo não entra no arquivo. Proibido escrever número de memória depois que o contexto da conversa foi resumido  
+4.1. **Divergência ≠ erro:** quando duas fontes discordam, só chamar uma de errada depois de checar a fonte oficial (texto da norma, relatório original, página de preços)  
 5. Montar TAM/SAM/SOM com contas  
-6. Gravar `.docs/pesquisa-mercado.md` (usar template)  
+6. Gravar `.docs/pesquisa-mercado.md` (usar template) e **reconferir cada número** contra o trecho salvo antes de devolver  
 7. Comparar com [`target-model.md`](target-model.md) (+ [`examples/density-reference.md`](examples/density-reference.md); abrir PDF em [`examples/anexos/`](examples/anexos/) se faltar densidade)  
 8. Chat: destaques (tamanho, ameaça #1, gap, SOM) + path + Gate F6  
 
@@ -136,6 +141,7 @@ Só **fechado** se:
 - [ ] TAM/SAM/SOM com **conta explícita** em cada camada (ou “dado direto da fonte X”)  
 - [ ] ≥5 alternativas com preço/modelo **tentado** e falha vs nossa dor  
 - [ ] Pelo menos 1 player com dado de escala (downloads/usuários/tráfego) **ou** registro honesto de bloqueio  
+- [ ] Reclamações públicas e fóruns lidos para os concorrentes, com trecho + URL + data das dores que se repetem  
 - [ ] Gaps + implicação (seguir/pivotar/matar) claros  
 - [ ] Nenhum número órfão (“~faixa” / “parte do SAM”) sem fórmula  
 

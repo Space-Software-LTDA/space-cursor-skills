@@ -30,7 +30,7 @@ Uma **fatia** é uma entrega que o time consegue fazer, provar e mostrar sozinha
 
 1. Ler `mvp.md` (jornadas do dia 1), `telas.md` (telas aprovadas), `contrato.md` e `setup.md`.  
 2. Propor o **plano de fatias** em `.docs/tarefas.md` (template `templates/tarefas.md`): ordem, o que cada fatia entrega, jornadas e telas cobertas, camadas (back · front · extensão), dependências.  
-3. Conferir cobertura: **toda** jornada do dia 1 cai em alguma fatia.  
+3. Conferir cobertura: **toda** jornada do dia 1 cai em alguma fatia. Fatias só do MVP; telas e itens da expansão futura ficam numa lista separada em `tarefas.md`, sem tarefa.  
 4. **PARAR** → cliente aprova o plano (pode reordenar, juntar, cortar).
 
 ### 1) Uma fatia por vez — pipeline do PO
@@ -46,6 +46,8 @@ Para cada fatia, na ordem do plano, seguir `po-techlead-scrum` **sem pular passo
 | 5 | Tarefa — markdown professor em `.task/{projeto}/{fatia}.md` | Cliente: “pode publicar” |
 
 Fatia só de tela, sem rota nova → pula o passo 4 (anotar o motivo no plano).
+
+API pública publicada como portal pelo Apidog → rota pública no projeto separado definido no `setup.md` (o portal publica o projeto inteiro; rota interna ali vaza).
 
 ### 2) Referência visual das tarefas de tela
 

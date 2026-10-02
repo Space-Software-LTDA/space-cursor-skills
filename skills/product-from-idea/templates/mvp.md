@@ -25,6 +25,12 @@
 
 -  
 
+## Expansão futura (depois do MVP)
+
+> **Para o agente (não copiar):** o que o cliente planeja para depois. Não vira tarefa na Fase 11.
+
+-  
+
 ## Critérios de sucesso do MVP
 
 -  

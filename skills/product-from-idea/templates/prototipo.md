@@ -22,17 +22,37 @@
 
 1.  
 
+## Papéis e permissões
+
+| Tela | {Papel 1} | {Papel 2} | … |
+|------|-----------|-----------|---|
+| | | | |
+
 ## Telas / superfícies (campos, hierarquia, ações — sem hex)
 
 | Tela | Objetivo | Campos / ações |
 |------|----------|----------------|
 | | | |
 
+## Telas da expansão futura
+
+> **Para o agente (não copiar):** só se o cliente pediu. Cada tela com marca visível de futuro; não entram no MVP nem nas tarefas.
+
+| Tela | Objetivo | Quando entra |
+|------|----------|--------------|
+| | | |
+
+## Regras decididas
+
+| Regra | Onde vale | Ao violar |
+|-------|-----------|-----------|
+| | | |
+
 ## Estados
 
-| Fluxo | Loading | Empty | Error |
-|-------|---------|-------|-------|
-| | | | |
+| Fluxo | Loading | Empty | Error | Sem permissão |
+|-------|---------|-------|-------|---------------|
+| | | | | |
 
 ## Hipótese de solução (resumo)
 

@@ -27,7 +27,7 @@ Uma **decisão por mensagem**, A/B/C + recomendação:
 1. **Onde mora a verdade** depois de coletado (servidor vs só no aparelho)  
 2. **Fonte primária** dos dados externos (se houver coleta)  
 3. **Entrar na conta** (como)  
-4. **Regras de crédito/pagamento** se existirem (quando debita / devolve) — sem inventar preço  
+4. **Regras de crédito/pagamento** se existirem (quando debita / devolve) — sem inventar preço nem piso; parceiro ou fornecedor externo → perguntar “um ou vários?” antes de modelar  
 5. **O quê guardar** (lista do *quê*, não o *como* raspar)  
 6. **Fluxo de ida e volta** (quem manda o quê; evitar protocolo “tagarela”)  
 7. **Quem decide matching/ordem/IA** (cliente vs servidor)  

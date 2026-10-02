@@ -126,7 +126,7 @@ Usar `NEXT_PUBLIC_API_URL` (valor no grid).
 **Protótipo:** [Nome — URL](https://exemplo.lovable.app/rota)
 
 ### [Tela]
-![O que o júnior deve observar neste print](https://raw.githubusercontent.com/Space-Software-LTDA/space-assets/main/{projeto}/{task-slug}/01-tela.png)
+![O que o júnior deve observar neste print](assets/{task-slug}/01-tela.png)
 
 ---
 
@@ -228,7 +228,7 @@ Mesmo detalhe didático do template acima **exceto**:
 
 - **Sem** `## Passo a passo sugerido` (sem PBI, sem Espera/Bloqueia, sem Dependência)
 - **Sem** `## 🚀 Ordem de Execução` e **sem** `- [ ]` no markdown
-- A ordem que o dev tica é o **checklist nativo** do ClickUp na tarefa dele (pai se uma camada; subtask Back/Front se as duas)
+- A ordem que o dev tica é o **checklist nativo** do ClickUp na tarefa dele (a task, se uma camada; a `[BACKEND]` e a `[FRONTEND]` vinculadas, se as duas — Imediatas nunca têm subtarefa)
 
 ---
 
@@ -251,5 +251,5 @@ Mesmo template; omitir a seção da camada ausente e a linha do repo corresponde
 | DDD | Pronto + paralelos + prova HML | "Testar no final" |
 | Passo a passo | Esteira: tabela 5 colunas + Por quê + mermaid duplo. Imediatas: **omitir**; checklist nativo no ClickUp | "Ver ordem no chat" / `- [ ]` no markdown da Imediata |
 | Front | Campo + print com legenda; visual **repo → DS → mock** | "Ajustar a tela" / copiar neon do Lovable |
-| UI | Legenda + URL space-assets; chrome do produto | Caminho `C:\...`; hex do mock |
+| UI | Legenda + `assets/{task-slug}/…` relativo (vira anexo no ClickUp); chrome do produto | Caminho `C:\...`; hex do mock; push de imagem em repo |
 | Tamanho | Longo e claro | Curto e ambíguo |

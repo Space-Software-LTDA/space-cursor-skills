@@ -44,7 +44,7 @@ Workspace: `90131082033` (SPACE DEV).
 | Campo | Valor |
 | --- | --- |
 | **Tipo** | **Task padrão** (sem `custom_item_id` — **não** usar `3- PBI`) |
-| Status | `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`) — conferir na lista se o workspace renomear |
+| Status | `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`); **vai para a sprint já → `detalhar`** (`--status detalhar`) — conferir na lista se o workspace renomear |
 | Assignee | Ricardo Paes por default (`CLICKUP_ASSIGNEE_RICARDO`) — **ainda perguntar no onboard** |
 | Campo **Projeto** | Dropdown (`CLICKUP_CF_PROJETO`) — BATEU → `BateuBET \| Dashbaord` |
 | Anexo | `.md` da task + PNGs (diagramas/prints); o script reescreve imagens para attachment |
@@ -77,36 +77,41 @@ Após `npm run sync`, cada skill recebe `clickup.env` gerado (gitignored).
 | Aprovação | PO: **“pode publicar no ClickUp”** |
 | Confirmar lista | Esteira vs Imediatas |
 | Onboard | Responsável + Projeto |
-| Execução | Script **1 arquivo → 1 task**. Front+Back: **1 MAIN + 2 subtasks** (agente recorta 3 bodies; Back/Front com `--parent`) |
+| Execução | Script **1 arquivo → 1 task**. Estrutura conforme a lista (seção abaixo) |
 
-## Front+Back: 1 MAIN + 2 subtasks
+## Estrutura no ClickUp (regra por lista)
 
-O Python **não** fatia markdown. Quem recorta é o agente.
+| | **Esteira** | **Imediatas** |
+| --- | --- | --- |
+| Subtarefa | **PODE** — só quando precisar | **JAMAIS** |
+| Front+Back | **1 task** com a spec completa (Backend e Frontend já separados por seção e no passo a passo; o Ritter vira PBI/Task). Subtarefa `[BACK]`/`[FRONT]` só se precisar | **2 tasks separadas** `[BACKEND] …` e `[FRONTEND] …`, **vinculadas** (linked task, `--link`), cada uma com seu checklist nativo |
+| Várias entregas (sprint) | **1 MAIN da sprint** + cada entrega como **subtask** da MAIN (ver abaixo) | Uma task (ou par vinculado) por entrega, sem pai |
+| Status inicial | `demanda` (`CLICKUP_STATUS_ESTEIRA_PBI`). **Vai para a sprint já → `detalhar`** (`--status detalhar`) na MAIN **e** em todas as subtasks | Padrão da lista |
 
-**Não** criar 3 tasks irmãs na lista. Hierarquia:
+**Não duplicar descrição.** Cada informação mora em **um** lugar: a MAIN da sprint não repete a spec das entregas; uma subtarefa não copia o corpo da task pai. Se precisar de subtarefa, o corpo dela é curto (escopo em 1–3 linhas + “leia a task pai: seções Backend, CA Backend e DDD Backend”), sem colar as seções.
 
-1. Criar a **MAIN** (MASTER) — task normal da lista.
-2. Criar **Backend** com `--parent <id da MAIN> --layer back`.
-3. Criar **Frontend** com `--parent <id da MAIN> --layer front`.
+Títulos: prefixo de camada no **início** (`[BACK]`/`[FRONT]` na Esteira; `[BACKEND]`/`[FRONTEND]` no par vinculado das Imediatas). Não usar sufixo `— Backend` / `— Frontend`: na listagem o ClickUp corta o fim do título.
 
-`--parent` **exige** `--layer`. Não usar sufixo `— Backend` / `— Frontend` no lugar do prefixo: na listagem o ClickUp corta o fim do título; `[BACK]` / `[FRONT]` no começo é o que dá para ler ao abrir.
+### Esteira — sprint com várias entregas
 
-| Task | Tipo | Título | Corpo (Esteira) | Corpo (Imediatas) | Anexos |
-| --- | --- | --- | --- | --- | --- |
-| MAIN | Task (pai) | `{título}` — **sem** `[BACK]`/`[FRONT]` | Spec completa + **passo a passo inteiro** (PBI + mermaid imagem e fonte). Ritter lê **esta**. | Spec completa **sem** PBI/Espera/Bloqueia. **Sem** checklist nativo (os checklists vivem nas subtasks). | `.md` completo + OpenAPI/DBML + PNGs de diagramas |
-| Backend | **Subtask** | `[BACK] {título}` — prefixo no **início**, mesmo se o título ficar longo. `--layer back` | Grid + Back + CA Back + linhas BACK do passo a passo + DDD Back + NÃO DEVE | Idem **sem** linhas PBI. **Checklist nativo Back** (itens = o que o dev tica, incl. `P-BACK-*`) | OpenAPI/DBML |
-| Frontend | **Subtask** | `[FRONT] {título}` — prefixo no **início**, mesmo se o título ficar longo. `--layer front` | Grid + Front + CA Front + linhas FRONT + DDD Front + NÃO DEVE | Idem **sem** PBI. **Checklist nativo Front** (incl. `P-FRONT-*` só de tela que o Front **altera**) | prints (PNG anexados) |
+1. Criar a **MAIN da sprint** (task normal da lista): objetivo da sprint, escopo (entra / fora), tabela das entregas com ordem e dependências entre elas (+ diagrama), decisões e regras que valem para **todas** as entregas, links (protótipo, contrato, repositórios). **Não** repete regra que está dentro de uma entrega.
+2. Criar **cada entrega** com `--parent <id da MAIN>`: spec completa da entrega (grid, contexto, Backend, Frontend, CA, passo a passo com mermaid, DDD, NÃO DEVE). Sem `--layer`.
+3. Dentro de uma entrega, subtarefa **só se precisar** (o ClickUp aceita subtarefa de subtarefa) — e com corpo curto, sem duplicar.
+4. Mesma lista, campo Projeto e status em todas. Devolver o link da MAIN + a lista das entregas.
 
-Uma camada só → um create, spec inteira (sem subtask). Imediatas: o checklist nativo vai **nessa** task pai.
+Para transformar tasks já publicadas em subtasks de uma MAIN nova, **mover** (`PUT /task/{id}` com `parent`), não recriar — mantém ID, anexos e histórico.
 
-Mesma lista, modo e campo Projeto nas três. Assignee: o que o PO mandou (pode diferir Back vs Front). Devolver **o link da MAIN**.
+### Imediatas — Front+Back
 
-Esteira e Imediatas: o mesmo ritual de **1 MAIN + 2 subtasks**. Corpo e quebra **não** são iguais:
+1. Criar `[BACKEND] {título}`: `--mode imediatas --layer back` + checklist nativo do Back.
+2. Criar `[FRONTEND] {título}`: `--mode imediatas --layer front --link <id da [BACKEND]>` + checklist nativo do Front.
+3. Corpo de cada uma: grid + contexto + **a sua camada** + CA da camada + DDD da camada + NÃO DEVE. Contexto comum curto; o resto não se repete entre as duas.
+4. O script **recusa** `--parent` no modo Imediatas.
 
 | | Esteira | Imediatas |
 | --- | --- | --- |
 | Passo a passo PBI | Sim (Ritter) | **Não** |
-| Checklist nativo ClickUp | Não (Ritter vira Task) | **Sim** — na tarefa de cada dev |
+| Checklist nativo ClickUp | Não (Ritter vira Task) | **Sim** — na task de cada dev |
 | DDD | Provas; Imediatas nomeiam cada uma | Idem + prova só na camada que mudou código |
 
 ## Imediatas — checklist nativo do ClickUp
@@ -119,15 +124,15 @@ O SuperAgente **não** lê a lista Imediatas. Não existe PBI nem campo Dependê
 
 | Publicação | Onde criar o checklist |
 | --- | --- |
-| Uma task só (sem subtask Back/Front) | Na **pai** |
-| Front+Back (MAIN + 2 subtasks) | **Um** checklist na subtask Backend e **um** na subtask Frontend. A MAIN **não** leva checklist |
+| Uma camada | Na task |
+| Front+Back (par vinculado) | **Um** checklist na `[BACKEND]` e **um** na `[FRONTEND]` |
 
 **O que vai em cada item:** passo executável daquela camada (o que seria linha de PBI na Esteira) **e** as provas `P-*` daquela camada. Um item = uma coisa que o júnior marca.
 
 **Proibido:**
 
-- Checklist na MAIN quando há subtasks Back e Front
-- Duplicar o mesmo checklist nas três tasks
+- Subtarefa nas Imediatas (Front+Back = duas tasks separadas e vinculadas)
+- Duplicar o mesmo checklist nas duas tasks
 - Inventar `P-FRONT` para superfície com **zero** alteração de Front (prova é item `P-BACK` no checklist do Back)
 - Usar markdown `- [ ]` / `## 🚀 Ordem de Execução` numerada **no lugar** do checklist nativo
 
@@ -145,17 +150,26 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --mode esteira --file .task/proj/feature.md --project ONESET \
   --attach .task/proj/feature.md \
   --attach .task/proj/attachments/openapi.yaml \
-  --attach /path/to/space-assets/proj/feature/diagram-a.png \
-  --attach /path/to/space-assets/proj/feature/01-listagem.png
+  --attach .task/proj/assets/feature/diagram-a.png \
+  --attach .task/proj/assets/feature/01-listagem.png
 
+# Esteira, sprint indo já para a sprint: MAIN + entregas como subtask
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
-  --mode esteira --file task/cms-backend.md --project BATEU --parent 86abc123 --layer back
+  --mode esteira --file .task/proj/sprint.md --project {PROJETO} --status detalhar
+python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
+  --mode esteira --file .task/proj/tasks/01-entrega.md --project {PROJETO} \
+  --status detalhar --parent 86abc123
 
+# Imediatas Front+Back: duas tasks separadas e vinculadas (nunca subtarefa)
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
-  --mode imediatas --file task/hotfix.md --assignee 106175112 --project BATEU \
-  --checklist-name "Execução" \
+  --mode imediatas --file task/hotfix-back.md --assignee 106175112 --project {PROJETO} \
+  --layer back --checklist-name "Execução" \
   --checklist-item "Migration + endpoint" \
   --checklist-item "Anexar P-BACK-1"
+python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
+  --mode imediatas --file task/hotfix-front.md --assignee 106175113 --project {PROJETO} \
+  --layer front --link <id da [BACKEND]> --checklist-name "Execução" \
+  --checklist-item "Anexar P-FRONT-1"
 
 python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --checklist-only --task-id 86abc123 --checklist-name "Frontend" \
@@ -166,11 +180,11 @@ python ~/.cursor/skills/po-techlead-scrum/scripts/clickup_create_task.py \
   --update-description --task-id 86abc123 --file .task/proj/feature.md --no-banner
 ```
 
-Anexe **todos** os PNGs (diagramas + prints) junto com o `.md` / OpenAPI / DBML. O script:
+Imagens **não** precisam de push em repositório: o PNG fica em `.task/{projeto}/assets/{task-slug}/` e vai direto como anexo. Imagem referenciada no `.md` por caminho relativo (`assets/{task-slug}/01-listagem.png`) é resolvida a partir da pasta do `.md` e anexada sozinha; `--attach <png>` também funciona (casa pelo nome do arquivo). O script:
 
-1. Cria a task (`--parent` se for subtask)
+1. Cria a task (`--parent` se for subtask — só Esteira; `--status` se não for o padrão)
 2. Anexa os arquivos
-3. Reescreve `![](mermaid.ink|raw.githubusercontent)` para `![](attachment-url)` e grava em **`markdown_content`** (não `markdown_description`)
+3. Reescreve cada imagem (caminho local, `mermaid.ink` ou `raw.githubusercontent`) para `![](attachment-url)` e grava em **`markdown_content`** (não `markdown_description`). Imagem local não encontrada só gera `WARN` — conferir o publicado
 4. Atualiza a descrição (`PUT`)
 5. Imediatas: cria o checklist nativo se `--checklist-item` foi passado
 
@@ -192,7 +206,8 @@ Alinhado ao **Estruturador de Tarefas** ([estruturador-clickup.md](estruturador-
 
 | Fonte no `.md` local | No corpo ClickUp |
 | --- | --- |
-| `![](raw.githubusercontent.com/…/space-assets/…)` | **Reescrever** para attachment |
+| `![](assets/{task-slug}/01-tela.png)` (relativo ao `.md`) | **Padrão** — script anexa e reescreve |
+| `![](raw.githubusercontent.com/…/space-assets/…)` | Legado — reescreve se a URL existir; quebra se o push não aconteceu |
 | `![](mermaid.ink/…)` | Baixar PNG → anexar → attachment URL |
 | `![](https://….p.clickup-attachments.com/…)` | Já ok |
 
