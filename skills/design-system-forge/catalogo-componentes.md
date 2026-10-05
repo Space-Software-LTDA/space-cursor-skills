@@ -111,6 +111,14 @@ Se nenhuma tela pedir, fica na lista de proibidos.
 | Logos de terceiros | Marcas de parceiros exibidas no produto | Lojas, bancos, meios de pagamento |
 | Mídia de campanha | Banner, capa ou arte com imagem trocável; uma proporção por família (roteiro, passo 18.1) | Banner de promoção, arte de login, capa de curso |
 
+### Regras de domínio que se repetem (de correções reais)
+
+- **Situação nunca leva o tipo no nome.** Numa tela de saque, o selo diz “Processando”, não “Saque em processamento”. Em tabela que mistura tipos (movimentações, transações), o tipo vai numa **coluna própria com ícone + nome**; a situação fica só com a palavra da situação. O mesmo vale para avisos/eventos de integração: um evento “mudou de situação” com **tipo** e **situação** separados, não um nome composto por combinação.
+- **Meio de pagamento:** usar o ícone **oficial** do meio (biblioteca de ícones de marca, ex.: Simple Icons) numa cor só, como indicador — nunca redesenhar o logo do meio nem usá-lo como marca do produto.
+- **Indicadores sem espaço vazio:** cartões de indicador lado a lado com metade vazia (porque um vizinho é mais alto) são reprovados. Preferir **um cartão de resumo** com colunas separadas por fio, cada coluna com valor + 1 ou 2 linhas de apoio úteis.
+- **Tabela no celular:** se o produto tem celular, a decisão “tabela vira cartões” só está feita quando o **componente** existe (lista de cartões com cabeçalho, filtros, total e paginação de toque) — não basta escrever a regra.
+- **Renomear entidade** (ex.: trocar o nome de uma operação): conferir o **gênero** das situações que concordam com ela (paga/pago, cancelada/cancelado) e perguntar ao humano antes de trocar.
+
 ## Por superfície (entram junto com a faixa correspondente)
 
 | Superfície | Peças a mais |

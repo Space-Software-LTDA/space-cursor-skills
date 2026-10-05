@@ -43,6 +43,9 @@ Valem para o Pencil; em outra ferramenta, testar antes de assumir.
 | Imagem com carregamento tardio fora da tela | Vem vazia | Rolar até ela antes de importar, ou registrar como lacuna |
 | Largura/altura com variável | Não aceita | Número igual ao token (ex.: 40 = `control-h`) e anotar no documento |
 | Mudar a altura do componente depois de ter instâncias | Instâncias antigas ficam com a altura velha | Conferir: altura da instância = altura do componente (salvo estado que muda de tamanho de propósito) |
+| Ler uma cópia datada do `.pen` pela ferramenta com o arquivo original aberto | A leitura devolve o documento aberto, não a cópia | Para recuperar algo da cópia, abrir a cópia no editor (fechando o original) ou anotar o valor antigo (ex.: geometria) nas notas **antes** de mudar |
+| Desenho de símbolo que precisa escalar (ícone em vários tamanhos) | Caminho com tamanho fixo dentro da peça não acompanha a instância | Peça-mãe com layout e o caminho em “preencher o pai”; conferir em 2 tamanhos |
+| Dois editores (ex.: dois agentes em ferramentas diferentes) no mesmo arquivo | Alterações de um somem ou mudam IDs que o outro usa | Um editor por vez; antes de retomar, reler o estado (IDs podem ter mudado) |
 | Prancha acima de ~8.000 px de altura | Para de desenhar o conteúdo | Dividir em duas pranchas |
 | Frame novo | Nasce com layout horizontal | `layout: none` em telas com camadas sobrepostas (fundo + véu + modal) |
 | Frame montado peça a peça | Às vezes fica deslocado ~50 px ou desenha vazio | Montar a árvore numa inserção só; se já aconteceu, substituir o nó raiz pelo próprio conteúdo |

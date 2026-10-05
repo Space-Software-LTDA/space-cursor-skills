@@ -33,6 +33,7 @@
 3. **Paralelo** quando os itens são independentes (ex.: varrer várias telas, revisar vários arquivos). Decisões do humano continuam **uma por vez**.  
 4. **Quando não precisa:** pedido de uma etapa só e curto (ex.: um sync, uma pergunta). O chat resolve direto.  
 5. **Sem ferramenta de subagente:** um chat novo por etapa, colando o mesmo cartão.
+6. **Custo:** quando a ferramenta deixar escolher o modelo, o subagente roda num modelo **mais barato** que o do Controlador (revisão e texto: intermediário; buscas e trocas mecânicas: o mais leve). Correção pequena e mecânica o Controlador faz direto, sem abrir subagente — cada subagente relê tudo do zero.
 
 **Cartão de abertura (Controlador → subagente):**
 

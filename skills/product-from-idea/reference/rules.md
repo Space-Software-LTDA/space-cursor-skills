@@ -188,6 +188,8 @@ Causa nº 1 das correções da Revisão no piloto: decisões tomadas **depois** 
 1. Gravar no arquivo dono **e** no arquivo da fase atual (só a referência curta).  
 2. O gate da fase dona **não reabre**; o `.docs/README.md` ganha uma linha datada do que mudou.  
 3. Antes de fechar qualquer gate: “alguma decisão desta fase mexe em outra fase?” → propagar.
+4. **Renomear** (entidade, tela, situação): varrer **todo** o `.docs/` (e o canvas) atrás do nome antigo e conferir a **concordância** (gênero e número) das palavras que dependem dele — ex.: situações no feminino que passam a concordar com um nome masculino. Mudança de concordância é pergunta ao cliente, com a proposta pronta.
+5. **Canvas e documento andam juntos:** quando a mesma rodada mexe no canvas e no documento (por pessoas ou agentes diferentes), conferir no fim que os dois dizem a mesma coisa — inclusive a versão.
 
 ---
 

@@ -78,6 +78,12 @@ Detalhe de selos/scores de domínio → `P-…` de produto (não inventar nome s
 
 **Inspeção do canvas sem pressa:** ao listar ou auditar componentes, abrir **todos** os quadros (inclusive o segundo tema) e contar as peças; amostra de um quadro não vale como “olhei tudo”.
 
+### 3.1) Perguntas que evitam retrabalho (fazer cedo)
+
+- O logo escolhido é **final** ou haverá designer? (não assumir “conceito”).
+- O projeto terá **tema claro**? Em quais superfícies? (sem tema claro → claro só como reserva).
+- Situações e tipos do produto conferidos com o cliente antes de desenhar selos (ver Fase 3, 2.3).
+
 ### 4) Gate de fase (produto)
 
 No chat (Controlador):

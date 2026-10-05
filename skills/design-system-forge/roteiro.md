@@ -54,6 +54,7 @@ Regra de ouro: **marca manda na cor e na fonte; o DS manda na tela; a tela revel
 
 - **O que fazer:** escrever em poucas linhas o que a marca faz, 3 a 4 pilares, como deve parecer e como **não** deve parecer.
 - **Critério:** um leigo entende o produto só lendo essa seção.
+- **Contagem regressiva:** “não deve parecer cassino” proíbe contagem de **urgência para vender**; a contagem da **validade real** de um pagamento (ex.: código que vence) é informação e pode aparecer, discreta (sem piscar, sem cor de erro antes de vencer). Escrever essa distinção na Essência para não proibir o que é útil.
 
 ### Passo 3 — Logo
 
@@ -63,12 +64,15 @@ Regra de ouro: **marca manda na cor e na fonte; o DS manda na tela; a tela revel
   3. Versão para fundo escuro e para fundo claro.
   4. Versão simplificada para o menor tamanho (detalhe fino some em 16 px).
 - **Quem desenha:** designer ou ferramenta de desenho. A IA não desenha logo final com formas soltas. Sem logo → espaço reservado marcado + manual **provisório**.
+- **Perguntar cedo:** o logo escolhido nas rodadas é **final** ou haverá designer para a arte final? Não assumir “conceito até a arte final”: se o humano declarar final, o manual e o DS deixam de marcar o logo como provisório.
+- **Ícone de marca dentro de selo:** quando o mesmo símbolo aparece sozinho (círculo com borda) e dentro de um selo com texto (pílula com borda), é **um elemento só**: o símbolo dentro nunca tem borda própria — nada de borda dupla.
 - **Validação:** rodadas lado a lado num quadro de validação. Nunca apagar as rodadas; elas vão para o Rascunho.
 - **Critério:** legível no menor tamanho; funciona no escuro e no claro.
 
 ### Passo 4 — Cores da marca
 
 - **O que fazer:** poucas cores, cada uma com papel. Estrutura típica: um tom escuro de base, uma cor principal, um neutro claro e um fundo claro.
+- **Antes de montar a escada clara, perguntar se o projeto terá tema claro** (e em quais superfícies: checkout, e-mail, portal). Se não tiver, guardar o claro só como reserva, sem uso — não desenhar peças claras por suposição.
 - **Obrigatório:**
   - medir contraste de cada combinação; se branco sobre a cor principal falhar, o texto sobre ela passa a ser o tom escuro da marca;
   - dizer o que é proibido (ex.: cores de outro produto da mesma empresa);
@@ -173,6 +177,8 @@ Escrever no `DESIGN_SYSTEM.md`, na ordem dos capítulos 01 a 05, cada valor com 
 - **Estados de componente:** normal, passar o mouse, foco, pressionado, desabilitado, carregando, erro (marcar “não se aplica” onde não couber).
 - **Estados de tela:** vazio, carregando (esqueleto no formato do conteúdo), erro, falha parcial, sem permissão ou sem saldo, sem resultado.
 - **Critério:** nenhuma célula em branco.
+- **Foco em ação de desistir ou destrutiva:** o anel de foco da cor principal em volta de Cancelar ou de um botão vermelho comunica “confirmar” e briga com a cor do botão. Para botão neutro (Cancelar, Voltar, Fechar) e destrutivo, o foco usa a cor de erro (token próprio, ex.: `foco-erro`); o “passar o mouse” do Cancelar continua neutro.
+- **Pedido visual ambíguo** (“faltou a borda”, “mais destaque”, “tá ruim”): antes de mexer, dizer em uma linha o que entendeu (contorno do desenho? borda em volta? cor?) ou mostrar as duas leituras lado a lado. Mudar o desenho errado custa uma rodada e a confiança.
 
 ### Passo 14 — Padrões de tela
 
@@ -274,6 +280,10 @@ Conectar a ferramenta antes: [canvas-ferramentas.md](canvas-ferramentas.md).
 - **Documento:** cada decisão do canvas entra no `DESIGN_SYSTEM.md` com nova versão na tabela de versões e no parágrafo “Oficial × rascunho”.
 
 ---
+
+### Versão única (lei do canvas e do documento)
+
+O documento, os tokens, o cabeçalho de cada prancha e o nome das capturas usam **a mesma versão** (ex.: “DS v0.1.8” em tudo). Toda rodada que muda o canvas ou o documento sobe a versão nos quatro lugares no mesmo passo; a revisão reprova carimbo divergente.
 
 ## Erros comuns × ordem certa
 

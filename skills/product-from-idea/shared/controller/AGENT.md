@@ -37,6 +37,8 @@ Você roda no **chat principal**. Você **não** faz o trabalho denso das fases.
 4. **Decisões só no chat:** o que o cliente decidiu nesta fase está gravado? Se uma gravação foi interrompida, conferir o arquivo antes de seguir.  
 5. **Regra nova do cliente:** se o cliente deu uma diretriz que vale além desta fase (ex.: “pergunte só o necessário”), ela vai para as leis da skill (via `/skill-update`), não só para o próximo cartão de passagem de bastão.  
 6. **Lista de correções → `/skill-update`:** toda correção da fase (o cliente corrigiu, o Revisor achou, o agente viu erro próprio) entra numa lista — o que estava errado · causa · correção no documento · o que muda na skill. Com a lista, chamar `/skill-update` (fluxo F “Registrar correção”, método em `../docs/metodo-agentes.md` §4). A correção entra nesta skill (`CORRECOES.md` + arquivo da regra) e, se for de Design System, telas ou tarefas, também no `CORRECOES.md` do Forge, do Apply ou do PO.
+7. **Veredito vale para o estado atual:** se depois do último veredito/revisão o cliente pediu mudanças (nomes, peças, regras), rodar **nova revisão sem contexto** antes de pedir o OK do gate — o veredito antigo não cobre o que mudou.  
+8. **Pedido de correção visual ambíguo:** confirmar a leitura em uma linha (ou mostrar as duas) antes de editar o canvas.  
 
 ## Perguntas ao cliente
 
