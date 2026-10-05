@@ -75,6 +75,22 @@
 |------|----------------|----------------------------------|------------|
 | | | | |
 
+## Protótipo navegável (Fase 8.5)
+
+> Preenchida na Fase 8.5. O protótipo navegável é um site que roda no computador e mostra as telas aprovadas com os botões funcionando. Ele fica na pasta `prototipo/` do projeto (fora destes documentos).
+
+| Item | Valor |
+|------|-------|
+| Como abrir | Na pasta principal do projeto, rodar `npm run prototipo:start` (sobe o site no próprio computador) e abrir http://localhost:4173 |
+| Abre em | Manual da marca, com o botão “Iniciar protótipo” |
+| Telas no protótipo | {n} no computador · {n} no celular · {n} páginas da marca e do Design System (Manual da marca, Fundamentos, Componentes, Rascunho) |
+| Telas aprovadas que ficaram de fora | {tela — por quê} |
+| Botões que mostram só um aviso (não há tela desenhada para eles) | {botão — aviso; ex.: “Copiar código” — aparece “Código copiado”} |
+| Teste automático dos botões | {data} — nenhum botão leva a lugar errado e nenhuma tela ficou sem caminho |
+| Conferência visual | {data} — fotos da tela (prints) em: {onde} |
+| Versão do motor do protótipo (informação técnica) | {versão que aparece no rodapé da lista} |
+| Atualizado pela última vez | {data — o que mudou} |
+
 ## Confirmado
 
 -  

@@ -78,6 +78,7 @@ F2 + F6 (+ F4 no documento)
 - **Texto de tela para o público:** o texto que a pessoa lê na tela passa no teste do leigo (“ordem”, não “ranking”).  
 - **Canvas protegido:** um só editor aberto com o arquivo; cópia com data em `{pasta do canvas}/copias/` antes e depois de cada rodada; depois de cada edição, conferir que o arquivo mudou no disco — se não mudou, parar e avisar. Os prints “depois” e os relatórios são a garantia para refazer o aprovado.  
 - **Propagação:** tela que revela funcionalidade, dado ou estado novo (aprovado pelo cliente) → atualizar `prototipo.md`, `mvp.md` e `contrato.md` na mesma rodada, não só `telas.md`.  
+- **Protótipo navegável já existe (Fase 8.5 feita):** tela alterada, nova ou removida → atualizar o protótipo na mesma rodada (`modules/08b-prototipo-navegavel/playbook.md`, “Atualizar o protótipo”).  
 - **Perguntar só o necessário:** o que o Design System já responde (peso, medida, peça solta, contraste) o agente corrige e informa; pergunta ao cliente só decisão de produto ou de gosto sem regra.  
 - **Aprovação em lote** só se o cliente pedir explicitamente; cada tela do lote passa pelo ciclo completo com relatório próprio, e `telas.md` registra “aprovada em lote”.
 

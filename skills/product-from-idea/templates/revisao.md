@@ -191,6 +191,22 @@ Padrões buscados: `qtd.` · `TBD` · `n/d` · não inventar · só o que for re
 |------|------------------------|----------------------------------------|------|
 | | | | |
 
+
+### 8.5 Protótipo navegável
+
+| CA | Resultado | Evidência / ação |
+|----|-----------|------------------|
+| 8b.1 Motor igual ao da skill (conferência do playbook, passo 7) | | |
+| 8b.2 Protótipo fora do `.docs/`; `prototipo:start` na raiz | | |
+| 8b.3 Abre no Manual da marca com “Iniciar protótipo” | | |
+| 8b.4 Todas as telas aprovadas no protótipo | | |
+| 8b.5 Botões fazem o que o protótipo diz; aviso para ação sem tela; modal fecha para a tela de trás | | |
+| 8b.6 `prototipo:verificar` sem erro | | |
+| 8b.7 Conferência visual com prints | | |
+| 8b.8 Nenhuma tela remendada no HTML | | |
+| 8b.9 Registro em `telas.md` + gate | | |
+| **8b.CL** | | Passagem B |
+
 ### Brief produto.md
 
 | CA | Resultado | Evidência / ação |

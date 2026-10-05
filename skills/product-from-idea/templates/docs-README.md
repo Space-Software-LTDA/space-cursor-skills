@@ -16,6 +16,7 @@ Se não está nesta pasta, não está decidido. Cada fase tem um arquivo; este �
 | 6 | `setup.md` | Repositórios, projetos-base, ambientes e contas |
 | 7 | `DESIGN_SYSTEM.md` | Marca e linguagem visual do produto |
 | 8 | `telas.md` | Telas aprovadas pelo cliente, uma a uma |
+| 8.5 | `telas.md` (seção) + `prototipo/` | Protótipo navegável para apresentar (`npm run prototipo:start`) |
 | 9 | `revisao.md` | Conferência dos documentos contra os critérios |
 | 10 | `{slug}.md` | Manual comercial do produto |
 | 11 | `tarefas.md` | Plano de fatias e tarefas para os devs |

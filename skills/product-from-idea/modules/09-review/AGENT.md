@@ -31,7 +31,7 @@ F4 + F6 (+ formações da fase auditada, se preciso)
 
 ## Ordem
 
-discovery → mercado → protótipo → MVP → contrato → setup → Design System → **telas (abrir o print de cada tela essencial — R15)** → `produto.md` → **clareza (passagem B)** → consistência cruzada → **busca residual** → consolidar `revisao.md`
+discovery → mercado → protótipo → MVP → contrato → setup → Design System → **telas (abrir o print de cada tela essencial — R15; com o protótipo navegável da Fase 8.5, conferir também os caminhos entre telas em `npm run prototipo:start` e preencher o bloco 8b do `revisao.md`)** → `produto.md` → **clareza (passagem B)** → consistência cruzada → **busca residual** → consolidar `revisao.md`
 
 ## Regras fixas (Revisor)
 

@@ -45,7 +45,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 |--|--|
 | **Nome curto** | UI/UX |
 | **O que é** | Como o usuário *percebe e usa* o fluxo — hierarquia, campos, estados, usabilidade |
-| **Ativa forte** | Fases 3, 7, 8 |
+| **Ativa forte** | Fases 3, 7, 8, 8.5 |
 | **Ativa fraca** | 11 (prints das telas aprovadas + estados na task); **off** na Fase 1–2 |
 
 **Exige**

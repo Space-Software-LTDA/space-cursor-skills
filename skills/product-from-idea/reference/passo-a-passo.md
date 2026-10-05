@@ -12,7 +12,7 @@ Base: academia (discovery → MVP → contract-first) + operação Space (Apidog
 
 ## Metodologia (em uma frase)
 
-**Problema validado → pesquisa de alternativas → solução em papel → MVP → contrato → setup → Design System → telas aprovadas → revisão → manual comercial → tarefas → devs.**
+**Problema validado → pesquisa de alternativas → solução em papel → MVP → contrato → setup → Design System → telas aprovadas → protótipo navegável → revisão → manual comercial → tarefas → devs.**
 
 ---
 
@@ -28,6 +28,7 @@ Base: academia (discovery → MVP → contract-first) + operação Space (Apidog
 6.  Setup especificado                      → .docs/setup.md
 7.  Design System (marca + DS + canvas)     → .docs/DESIGN_SYSTEM.md
 8.  Telas (uma por vez, aprovadas)          → .docs/telas.md + canvas
+8.5 Protótipo navegável (para apresentar)  → prototipo/ (fora do .docs/) + seção em .docs/telas.md
 9.  Revisão (Revisor)                       → .docs/revisao.md
 10. Manual comercial                        → .docs/{slug}.md
 11. Tarefas por fatia                       → .docs/tarefas.md + .task/  ← FIM
@@ -148,10 +149,22 @@ Base: academia (discovery → MVP → contract-first) + operação Space (Apidog
 - Telas só com peças **ligadas** aos componentes oficiais do canvas + variáveis.
 - Peça ou regra faltando → nova versão do `DESIGN_SYSTEM.md` com motivo e OK (o gate da Fase 7 **não** reabre).
 - Telas prontas feitas fora do fluxo passam pela mesma sequência — tela pronta ≠ tela aprovada.
+- Tela mudada **depois** da Fase 8.5 → atualizar o protótipo navegável na mesma rodada.
 - Módulo: `modules/08-screens/` · **Persistir:** `.docs/telas.md` + canvas + relatórios
 - **ON:** F2 + F6
 - **Gate:** telas essenciais aprovadas uma a uma, cada uma com o Apply sem pendência; estados cobertos ou pendentes por escrito.
 - **Proibido:** telas em lote sem pedido explícito do cliente; pular a Home; pular o Apply; celular sem o cliente pedir; peça desenhada à parte; remendo só na tela; editar código; decisão de produto revelada pela tela sem propagar para protótipo, MVP e contrato.
+
+### Fase 8.5 — Protótipo navegável
+- **Objetivo:** as telas aprovadas viram um **site clicável** para apresentar (reunião, parceiro, investidor), antes de existir código. Abre no **Manual da marca** com o botão **“Iniciar protótipo”**; lista lateral com a documentação (Manual, Fundamentos, Componentes, Rascunho) e as telas agrupadas como no canvas; troca **Computador | Celular** na mesma tela; modal/gaveta fecha para a tela de trás.
+- **Molde pronto** em `modules/08b-prototipo-navegavel/molde/`: o motor (shell, navegação, servidor, scripts) é igual em todo produto; a fase preenche só `screens.js` (quais telas) e `rotas.js` (o que cada botão abre).
+- Sequência: copiar o molde para `prototipo/` (raiz do workspace, **fora** do `.docs/`) + scripts `prototipo:*` no `package.json` da raiz → inventário dos frames do canvas → `screens.js` → exportar cada frame como HTML + Tailwind → `npm run prototipo:preparar` → `rotas.js` (a partir do `--inventario` e do `prototipo.md`) → `npm run prototipo:verificar` sem erro → `npm run prototipo:start` + conferência visual com prints → cliente.
+- **Telas só exportadas:** defeito de tela volta para a Fase 8 (canvas) e é reexportado; nunca remendo no HTML. Melhoria do motor vai para a skill (`/skill-update`).
+- **Atualizar:** o protótipo acompanha o canvas — tela alterada, nova, removida ou mudança do Design System → reexportar + `preparar` + `verificar` na mesma rodada (tabela no playbook do módulo).
+- Módulo: `modules/08b-prototipo-navegavel/` · **Persistir:** `prototipo/` + seção “Protótipo navegável” em `.docs/telas.md`
+- **ON:** F2 (+ F6 no gate)
+- **Gate:** todas as telas aprovadas navegáveis; `verificar` sem destino inválido nem tela isolada; conferência visual ok; cliente aprovou.
+- **Proibido:** protótipo dentro de `.docs/`; editar tela no HTML; mexer no motor dentro do produto; botão para tela “parecida”; mostrar sem verificar.
 
 ### Fase 9 — Revisão (Revisor)
 - **Não** refazer o produto do zero.

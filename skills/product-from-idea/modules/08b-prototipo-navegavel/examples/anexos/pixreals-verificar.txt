@@ -1,0 +1,98 @@
+$ npm run prototipo:verificar -- --telas iZHKa,jT994,Z29qza,YecQi,QUh8V,lXaSI
+== iZHKa · Home · deslogado (63 áreas)
+  Botão de ícone Fechar[]→hide
+  Cassino[Cassino]→EJq8g
+  Ao Vivo[Ao Vivo]→EJq8g
+  Esportes[Esportes]→JDnM3
+  Promoções[Promoções]→r9uclq
+  Busca[Buscar jogos ou provedor]→EnCUk
+  Entrar[Entrar]→jT994
+  Cadastrar[Cadastrar]→Youjd
+  Item de navegação lateral[Populares]→EJq8g
+  Item de navegação lateral[Ao Vivo]→EJq8g
+  Item de navegação lateral[Slots]→EJq8g
+  Item de navegação lateral[Crash]→EJq8g
+  Item de navegação lateral[Cassino Ao Vivo]→EJq8g
+  Item de navegação lateral[Game Shows]→EJq8g
+  Item de navegação lateral[Cartas]→EJq8g
+  Item de navegação lateral[Esportes]→JDnM3
+  Tile de provedor[]→x5wRP2
+  Ver todos[Ver todos →]→EJq8g
+  Card · Bac Bo[371 R$ 25.081 Bac Bo Evo]→Z29qza
+  Card · Aviator Aposta Tudo 3[2.155 R$ 22.712 LANÇAMEN]→Z29qza
+  Card · Aviator[667 R$ 20.767 CASHBACK A]→Z29qza
+  Card · Fortune Rabbit[502 R$ 6.642 CASHBACK Fo]→Z29qza
+  Card · Roleta Brasileira[1.110 R$ 25.089 Roleta B]→Z29qza
+  Card · Immersive Roulette[560 R$ 4.012 Immersive R]→Z29qza
+  Card · Fortune Dragon[480 R$ 8.348 CASHBACK Fo]→Z29qza
+  Card · Bac Bo[371 R$ 25.081 HOT Bac Bo]→Z29qza
+  Card · Fortune Rabbit[502 R$ 6.642 CASHBACK HO]→Z29qza
+  Card · Fortune Tiger[509 R$ 6.074 CASHBACK Fo]→Z29qza
+  Card · Red Baron[1.164 R$ 10.660 TORNEIO ]→Z29qza
+  Card · Aviator[667 R$ 20.767 CASHBACK H]→Z29qza
+  Card · Roleta Brasileira[1.110 R$ 25.089 HOT Role]→Z29qza
+  Card · JetX[1.457 R$ 18.713 HOT JetX]→Z29qza
+  Card · Roleta Brasileira[628 R$ 6.163 Roleta Bras]→Z29qza
+  Card · Mines[104 R$ 16.997 Mines Spri]→Z29qza
+  Card · Roulette 3 - Macao[815 R$ 18.583 Roulette 3]→Z29qza
+  Card · Auto-Roulette 1[211 R$ 17.372 Auto-Roule]→Z29qza
+  Texto · Termos de uso[Termos de uso]→lqwBu
+  Texto · Slots[Slots]→EJq8g
+  Texto · Esportes[Esportes]→JDnM3
+== jT994 · Login (6 áreas)
+  Fundo escurecido[]→iZHKa
+  Semana[Cadastrar]→Youjd
+  Fechar[]→iZHKa
+  Esqueci minha senha[Esqueci minha senha]→PxSGV
+  Primário[Entrar]→RDzWG
+  Google[Continuar com Google]→RDzWG
+== YecQi · PIX pronto (6 áreas)
+  Fundo escurecido[]→iZHKa
+  Botão de ícone Fechar[]→iZHKa
+  Rótulo[O código expira em]→uSj00
+  Já paguei[Já paguei]→Oah4n
+  Voltar[Voltar e mudar o valor]→rlFMn
+  Botão Primário[Copiar código PIX]→toast
+== Z29qza · Popup do jogo (4 áreas)
+  Fundo escurecido[]→RDzWG
+  Fechar[]→RDzWG
+  Jogar[Jogar]→JVhZQ
+  Compartilhar[]→tivc0
+== QUh8V · Início (17 áreas)
+  Botão de ícone Fechar[]→hide
+  Botão de ícone Toque 44[]→h6ZE2E
+  Imagem[]→uN9wZ
+  Saldo[R$ 1.250,00 + R$ 150,00 ]→Jdxvg
+  Avatar + trocar[]→qTyWw
+  Sacar[Sacar]→r6kJb
+  Ver carteira[Ver carteira]→B4Rfu2
+  Dados do perfil[Dados do perfil Nome, CP]→Qaye9
+  Alterar senha[Alterar senha Última tro]→S2Afc
+  Verificação de identidade[Verificação de identidad]→c8Zvk
+  Carteira e histórico[Carteira e histórico Dep]→B4Rfu2
+  Indique e ganhe[Indique e ganhe Seu link]→j9hY1
+  Sair da conta[Sair da conta]→AP2FS
+  Coluna · Início[Início]→uN9wZ
+  Coluna · Cassino[Cassino]→Xoebf
+  Coluna · Depositar[Depositar]→s3QGVD
+  Coluna · Ao Vivo[Ao Vivo]→Xoebf
+== lXaSI · Listagem (14 áreas)
+  Botão de ícone Fechar[]→hide
+  Botão de ícone Toque 44[]→h6ZE2E
+  Imagem[]→uN9wZ
+  Saldo[R$ 1.250,00 + R$ 150,00 ]→Jdxvg
+  Torneios[Torneios]→kBwS2
+  Ações[Depositar e ganhar]→s3QGVD
+  Card · Cashback semanal de 10%[CASHBACK Cashback semana]→hVb0b
+  Card · Recarga de sexta: +25%[RECARGA Recarga de sexta]→hVb0b
+  Card · Torneio Aviator · R$ 10 mil[TORNEIOS Torneio Aviator]→kT0Bj
+  Coluna · Início[Início]→uN9wZ
+  Coluna · Cassino[Cassino]→Xoebf
+  Coluna · Depositar[Depositar]→s3QGVD
+  Coluna · Ao Vivo[Ao Vivo]→Xoebf
+  Coluna · Conta[Conta]→Jdxvg
+
+Telas: 73 (5 de documentação)
+✓ Toda tela do manifesto tem arquivo
+✓ Nenhum destino inválido
+✓ Toda tela é alcançável

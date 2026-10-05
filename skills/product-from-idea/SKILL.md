@@ -3,7 +3,7 @@ name: product-from-idea
 description: >-
   Leva um produto da ideia até as tarefas prontas no ClickUp, em 12 fases: discovery,
   pesquisa de mercado, protótipo, MVP, contrato, setup, Design System, telas aprovadas uma
-  a uma, revisão, manual comercial e tarefas por fatia. O agente é um especialista
+  a uma, protótipo navegável (Fase 8.5, para apresentar), revisão, manual comercial e tarefas por fatia. O agente é um especialista
   contratado que pergunta até ter clareza ("Eu preciso que você me fale"), grava tudo em
   `.docs/` e não escreve código (devs codam). Controlador no chat principal + um subagente
   por fase. Chama design-system-forge (Fase 7), design-system-apply (Fase 8) e
@@ -39,12 +39,14 @@ Nada aqui pertence a um produto. Nome, preço, lojas, telas e regras saem da con
 | Workspace dedicado ao produto (recomendado) | Criar `.docs/` na raiz; um arquivo por fase (tabela em [`reference/passo-a-passo.md`](reference/passo-a-passo.md)) |
 | Workspace é repositório git | `.docs/` é **versionado** neste fluxo (é o produto definido). Commit/push só quando o cliente pedir |
 | Canvas (Fases 7 e 8) | Arquivo do canvas numa pasta do workspace + `copias/` ao lado (cópia com data por rodada) |
+| Protótipo navegável (Fase 8.5) | `prototipo/` na raiz do workspace, **fora** do `.docs/`, a partir do [molde](modules/08b-prototipo-navegavel/molde/); `npm run prototipo:start` na raiz. Versionado com o produto (menos `node_modules/`) |
 | Tarefas (Fase 11) | `.task/` — regra do `po-techlead-scrum` |
 
 ## Pré-requisitos
 
 - Skills `design-system-forge` (Fase 7), `design-system-apply` (Fase 8) e `po-techlead-scrum` (Fase 11) instaladas, e a constituição em `../docs/` — todas vêm no mesmo `npm run sync`.  
-- Fases 7 e 8: editor de canvas conectado ao agente (Pencil por padrão; opções em `design-system-forge/canvas-ferramentas.md`). Sem conexão, essas fases ficam bloqueadas.  
+- Fases 7, 8 e 8.5: editor de canvas conectado ao agente (Pencil por padrão; opções em `design-system-forge/canvas-ferramentas.md`). Sem conexão, essas fases ficam bloqueadas.  
+- Fase 8.5: Node 18+ na máquina (servidor e scripts do protótipo).  
 - Fase 11: credenciais do ClickUp e do Apidog (regras do `po-techlead-scrum`).
 
 ## Como começar (primeira chamada)
@@ -86,12 +88,13 @@ Nada aqui pertence a um produto. Nome, preço, lojas, telas e regras saem da con
 ```text
 0 Mapa → 1 Discovery → 2 Pesquisa de mercado → 3 Protótipo → 4 MVP → 5 Contrato → 6 Setup
 → 7 Design System (design-system-forge) → 8 Telas (Home primeiro; por tela: OK → Apply → próxima)
+→ 8.5 Protótipo navegável (telas exportadas do canvas, clicáveis; abre no Manual da marca; npm run prototipo:start)
 → 9 Revisão (revisor sem contexto) → 10 Manual comercial ({slug}.md) → 11 Tarefas (po-techlead-scrum, por fatia)
 + .docs/produto.md = brief interno (não substitui o manual)
 + extra sob pedido: material comercial derivado do manual (fora das fases)
 ```
 
-Nunca pular Telas, Revisão nem Manual antes das Tarefas.
+Nunca pular Telas, Protótipo navegável, Revisão nem Manual antes das Tarefas.
 
 ## Método de execução
 
@@ -110,6 +113,7 @@ Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + su
 | 6 — Setup | Sim — [`modules/06-setup/`](modules/06-setup/) | `.docs/setup.md` | Peças → repositórios + projetos-base + ambientes + contas | `modules/06-setup/examples/` | Cliente |
 | 7 — Design System | Sim — [`modules/07-design-system/`](modules/07-design-system/) + `design-system-forge` | `.docs/DESIGN_SYSTEM.md` + tokens + notas + canvas | STOP do Forge; texto do botão principal decidido por comparação | `modules/07-design-system/examples/` | Cliente |
 | 8 — Telas | Sim — um por tela — [`modules/08-screens/`](modules/08-screens/) + `design-system-apply` | `.docs/telas.md` + canvas + relatórios | Cada tela essencial com OK do cliente + Apply sem pendência; propagação feita; cópias do canvas por rodada | `modules/08-screens/examples/` | Cliente (por tela) |
+| 8.5 — Protótipo navegável | Sim — [`modules/08b-prototipo-navegavel/`](modules/08b-prototipo-navegavel/) | `prototipo/` (fora do `.docs/`) + seção em `.docs/telas.md` | Todas as telas aprovadas navegáveis; abre no Manual da marca com “Iniciar”; `verificar` sem erro; conferência visual com prints; motor do molde intacto | `modules/08b-prototipo-navegavel/examples/` (manifesto, rotas e defeitos reais) | Cliente |
 | 9 — Revisão | Sim — **revisor sem contexto** — [`modules/09-review/`](modules/09-review/) | `.docs/revisao.md` | Uma linha por critério com evidência; busca residual anotada; telas conferidas por print | `modules/09-review/examples/` | Controlador + cliente |
 | 10 — Manual | Sim — [`modules/10-product-manual/`](modules/10-product-manual/) | `.docs/{slug}.md` | O manual sozinho explica o produto; teste do estranho estrito | `modules/10-product-manual/examples/` (Stripe, Notion, Linear, Apple, Airbnb, Shape Up) | Cliente |
 | 11 — Tarefas | Sim — um por fatia — [`modules/11-task/`](modules/11-task/) + `po-techlead-scrum` | `.docs/tarefas.md` + `.task/` | Plano de fatias aprovado; toda fatia com tarefa aprovada | `modules/11-task/examples/` (tarefas reais de front e back) | Cliente |

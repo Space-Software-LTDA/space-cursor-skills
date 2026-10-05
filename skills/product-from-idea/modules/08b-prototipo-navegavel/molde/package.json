@@ -1,0 +1,18 @@
+{
+  "name": "prototipo-navegavel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Protótipo navegável do produto — telas exportadas do canvas (molde da skill product-from-idea, Fase 8.5)",
+  "scripts": {
+    "start": "node server.js",
+    "prototipo:start": "node server.js",
+    "preparar": "node scripts/preparar.mjs",
+    "verificar": "node scripts/verificar.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3"
+  }
+}

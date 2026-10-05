@@ -192,6 +192,23 @@
 | 8.13 | Texto de tela no teste do leigo; sem placeholder “X”; valores fictícios aprovados e iguais em todas as telas | |
 | **8.CL** | **CL0–CL5** (`docs-clarity.md`) — sem jargão cru do Apply | |
 
+## CA — Fase 8.5 Protótipo navegável (`prototipo/` + seção em `.docs/telas.md`)
+
+> Canônico: `modules/08b-prototipo-navegavel/target-model.md` (P1–P9 + **P.CL**). Molde: `modules/08b-prototipo-navegavel/molde/`.
+
+| # | Critério | OK? |
+|---|----------|-----|
+| 8b.1 | Motor do molde intacto; no produto só `screens.js`, `rotas.js`, `telas/`, `images/` | |
+| 8b.2 | `prototipo/` na raiz do workspace (fora do `.docs/`); `prototipo:start` no `package.json` da raiz | |
+| 8b.3 | Abre no Manual da marca com “Iniciar protótipo”; documentação no topo da lista | |
+| 8b.4 | Toda tela aprovada em `telas.md` está no protótipo, no grupo da sua seção, nos dispositivos aprovados | |
+| 8b.5 | Cada botão faz o que `prototipo.md` diz; ação sem tela = aviso; modal/gaveta fecha para a tela de trás | |
+| 8b.6 | `prototipo:verificar` sem destino inválido e sem tela isolada (fora as listadas) | |
+| 8b.7 | Conferência visual com prints desta sessão (sem scroll horizontal, nada vazando, lista lateral, troca de dispositivo) | |
+| 8b.8 | Nenhuma tela editada à mão no HTML; defeito de tela corrigido no canvas e reexportado | |
+| 8b.9 | Seção “Protótipo navegável” em `telas.md` + status em `.docs/README.md` + gate | |
+| **8b.CL** | **CL0–CL5** (`docs-clarity.md`) — “aviso”, “tela de trás”, sem jargão do motor | |
+
 ## CA — Brief interno (`.docs/produto.md`)
 
 > Índice vago para o time. **Não** substitui o manual comercial.

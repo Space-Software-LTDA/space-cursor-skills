@@ -58,7 +58,7 @@ npm run sync
 | `skills/qa-space` | QA front / Design System Space — lê `docs/README.md` como **QA** (audita o feito; DS inteiro) |
 | `skills/design-system-forge` | **Cria** o DS do produto: diagnóstico, manual da marca (prancha), `.docs/DESIGN_SYSTEM.md` + tokens, Fundamentos + componentes no canvas (Pencil padrão). Modos Extrair/Criar; Q1–Q19; GATE ACCEPT; confronto com ui-gosto; entrega essencial e pergunta se evolui para ouro |
 | `skills/design-system-apply` | **Aplica** o DS nas telas: diagnóstico; A DS×ui-gosto + OK; B varredura + espelho no canvas + OK; C correção/redesenho no canvas em loop até ALIGNED + `DIFERENCAS_PARA_DEVS.md`. Construtor = secundário; nunca edita código |
-| `skills/product-from-idea` | **Cria produto** da ideia à tarefa em 12 fases (Controlador + subagente por fase; `.docs/` = verdade; não coda). Instala âncora no workspace dedicado. Chama Forge (7), Apply (8), PO (11) |
+| `skills/product-from-idea` | **Cria produto** da ideia à tarefa em 12 fases (Controlador + subagente por fase; `.docs/` = verdade; não coda). Instala âncora no workspace dedicado. Chama Forge (7), Apply (8), PO (11). Fase 8.5: protótipo navegável a partir de um molde (`prototipo/` fora do `.docs/`, `npm run prototipo:start`) |
 | `docs/` | Constituição (não é skill). Índice obrigatório: `docs/README.md` |
 
 Manutenção do pack: skill **`skill-update`** (não espalhar o fluxo só nas skills de produto).

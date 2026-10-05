@@ -19,6 +19,7 @@ Mapa completo: `{SKILL_DIR}/reference/passo-a-passo.md`. Fase aberta: `.docs/REA
 6 Setup → .docs/setup.md
 7 Design System → .docs/DESIGN_SYSTEM.md + canvas (design-system-forge)
 8 Telas → .docs/telas.md + canvas (Home primeiro; por tela: OK → Apply → próxima)
+8.5 Protótipo navegável → prototipo/ fora do .docs/ (molde da skill; npm run prototipo:start) + seção em .docs/telas.md
 9 Revisão → .docs/revisao.md (revisor sem contexto)
 10 Manual comercial → .docs/{slug}.md
 11 Tarefas → .docs/tarefas.md + .task/ (po-techlead-scrum, uma fatia por vez) ← FIM

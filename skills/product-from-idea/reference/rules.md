@@ -17,7 +17,7 @@
 Quem **codifica** são os **DEVS**.  
 Antes disso, o padrão é **definir tudo** — não entregar “ideia solta” disfarçada de PBI.
 
-**Objetivo-mestre (foco do processo):** Discovery → mercado → proto → MVP → contrato → setup → DS → **telas** → **revisão** → manual → task.  
+**Objetivo-mestre (foco do processo):** Discovery → mercado → proto → MVP → contrato → setup → DS → **telas** → **protótipo navegável** → **revisão** → manual → task.  
 Tudo que **não coopera** com o objetivo-mestre **e** com o objetivo da **etapa atual** → o Agent **ignora**.
 
 ---

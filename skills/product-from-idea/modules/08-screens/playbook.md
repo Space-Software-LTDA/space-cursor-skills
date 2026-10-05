@@ -68,6 +68,8 @@ Tela da vez (a primeira é a Home, no tema principal)
   e. Registrar em telas.md: data do OK do cliente + relatório do Apply sem pendência
      + propagar para prototipo.md / mvp.md / contrato.md o que a tela revelou de novo
   f. Próxima tela: cliente escolhe (sugestão: ordem de uso da pessoa no protótipo)
+  g. Se o protótipo navegável já existe (Fase 8.5), reexportar a tela e atualizar
+     (08b-prototipo-navegavel/playbook.md → “Atualizar o protótipo”)
 ```
 
 **Proteção do canvas (toda rodada):**
