@@ -74,7 +74,8 @@ Preencher `prototipo/screens.js` (o molde explica cada campo):
 - **`PR_CONFIG`**: nome do produto; `destaque` = cor principal do `DESIGN_SYSTEM.md` (e `textoNoDestaque`); `inicio` = id do Manual da marca; `home` por dispositivo `[deslogado, logado]` (sem login: o mesmo id duas vezes); `imagensDoCanvas` = pasta `images/` ao lado do arquivo do canvas, relativa a `prototipo/`; `semLinkChegando` = telas abertas só pela lista (ex.: 404).  
 - **`PR_GROUPS`**: um grupo por seção do canvas, na ordem do canvas. Cada tela: `[id, título, dispositivo, logado, tela de trás, gêmea, largura, altura]`.  
   - **Título** curto e humano, sem repetir o grupo nem o tamanho (“Login”, “Recuperar senha”, “Pagamento confirmado”). Tela que ainda não existe no produto → `" *"` no fim.  
-  - **Tela de trás**: modal, gaveta e menu sobre uma tela → id dessa tela (é para onde o X e o clique fora levam). Tela cheia → `null`. No canvas, a tela de trás costuma aparecer no próprio frame como “Fundo · marcador (…)”.  
+  - **Tela de trás**: modal, gaveta e menu sobre uma tela → id dessa tela (é para onde o X e o clique fora levam). Tela cheia → `null`. No canvas, a tela de trás costuma aparecer no próprio frame como “Fundo · marcador (…)”.
+  - **Janela solta** (o canvas tem a janela sozinha, sem a tela de trás nem o fundo escurecido desenhados — ex.: listas de modais por menu): um frame de topo só com a janela, a tela de trás preenchida (mesmo dispositivo) e a **largura da janela**, menor que a da tela de trás — é por isso que o shell sabe que é janela; com a mesma largura vira tela cheia. O shell monta a tela de trás escurecida com a janela por cima (clicar fora ou Esc volta). 9º campo opcional: `"centro"` (padrão), `"direita"` (gaveta, altura toda) ou `[x, y]` (menu suspenso colado num botão; medidas a partir do canto de cima à esquerda da tela de trás, como no canvas). **Menu ou filtro da barra do topo** (existe em toda tela): desenhar aberto uma vez só e usar `"*"` como tela de trás — abre sobre a tela em que a pessoa está e fecha voltando para ela.  
   - **Gêmea**: a mesma tela no outro dispositivo; sem gêmea → `null` (a troca leva à Home do outro dispositivo).  
   - **Largura/altura**: só se fugir do padrão (computador 1440, celular 390×844). Extensão/app: tamanho real da superfície, dispositivo `m`.
 
@@ -88,6 +89,7 @@ for (const id of [/* ids do screens.js */]) Export([id],"html-tailwind",out+id+"
 ```
 
 - Um arquivo por frame, com o **id do frame** como nome (`telas/<id>.html`).  
+- **Só frame de topo** (frame solto no canvas, não dentro de outro), a **pelo menos 200 px** dos vizinhos: exportar uma peça de dentro de outro frame, ou frames muito próximos (menos de ~100 px), gera um arquivo em que o motor não acha a tela, e ela fica sem nenhum botão (o `preparar` avisa). Janela que só existe dentro de uma lista → criar uma fileira no canvas com um frame solto por janela, cada um com uma cópia da janela da lista que continua ligada ao componente.  
 - `html-tailwind` gera HTML + Tailwind (CDN) com `data-pencil-name` em cada layer — é por esses nomes que o motor liga os botões.  
 - As imagens não vão junto: o HTML aponta para `images/…` e os arquivos ficam na pasta `images/` ao lado do arquivo do canvas (o `preparar` copia).
 
@@ -122,9 +124,10 @@ npm run prototipo:verificar -- --inventario {id},{id}
 npm run prototipo:verificar                    # resumo
 npm run prototipo:verificar -- --telas {id},{id}   # áreas clicáveis dessas telas
 npm run prototipo:verificar -- --todas         # todas
+npm run prototipo:verificar -- --soltos        # peças com cara de botão que não levam a lugar nenhum
 ```
 
-Pronto quando: **nenhum destino inválido**, **toda tela alcançável** (fora `semLinkChegando`) e a lista de áreas de cada tela bate com `prototipo.md` (conferir tela a tela: botão principal, voltar, fechar, menus, cards).
+Pronto quando: **nenhum destino inválido**, **toda tela alcançável** (fora `semLinkChegando`), **nenhum botão desenhado sem ligação** no `--soltos` — só pode sobrar peça que leva à própria tela, como a aba já aberta ou a página atual (o `--soltos` avisa, não reprova sozinho: conferir a lista) e a lista de áreas de cada tela bate com `prototipo.md` (conferir tela a tela: botão principal, voltar, fechar, menus, cards).
 
 Motor intacto (o produto não mexeu no motor):
 
@@ -148,7 +151,7 @@ Abrir no navegador (navegador automático do agente; se não houver, pedir ao hu
 - [ ] Nenhuma tela com **barra de rolagem horizontal** ou peça vazando da largura (botão cortado na borda)  
 - [ ] ☰ esconde e mostra a lista sem sumir com a tela  
 - [ ] Computador ⇄ Celular leva à mesma tela no outro tamanho  
-- [ ] Botão principal, voltar, fechar e clique fora de cada modal/gaveta  
+- [ ] Botão principal, voltar, fechar e clique fora de cada modal/gaveta; janela solta aparece **sobre** a tela de trás escurecida (nunca isolada)  
 - [ ] “Clicáveis” (H) realça só o que funciona; nada atrás do modal realçado  
 - [ ] Imagens carregam (fundo, capas, logo) e a fonte é a do Design System  
 - [ ] Páginas de documentação inteiras e legíveis (reduzidas para caber)
@@ -189,7 +192,9 @@ Depois de qualquer atualização: `verificar` sem erro + print das telas mexidas
 |-----------|---------|-------------|
 | Export com `box-sizing: content-box` | Bloco com padding fica maior que o desenhado: botão cortado na borda, rodapé mais largo e mais alto | O `preparar` troca por `box-border` (no canvas, largura e altura já incluem o padding) |
 | Barra de rolagem dentro da tela | Scroll horizontal no computador (a barra come ~15px dos 1440) | O motor esconde as barras e trava o eixo X; não mexer na largura do frame |
-| Imagens “sumidas” | Fundo/capa sem imagem | Conferir `imagensDoCanvas` e rodar `preparar` de novo (ele avisa a imagem que falta) |
+| Imagens “sumidas” | Fundo/capa sem imagem | Conferir `imagensDoCanvas` e rodar `preparar` de novo (ele avisa a imagem que falta). A pasta pode ter outro nome ao lado do canvas (`imagens/`): o `preparar` usa o nome do fim de `imagensDoCanvas` |
+| Janela abre isolada | Clicar num botão que abre modal mostra só a janela, sem a tela de trás | Canvas sem o fundo escurecido desenhado: preencher a tela de trás e a largura da janela no `screens.js` (janela solta); o shell monta a tela de trás por baixo |
+| Tela sem nenhum botão | `verificar -- --telas` mostra 0 áreas; `preparar` avisa “sem o frame na raiz” | Exportou um nó que não é de topo, ou frames próximos demais: reexportar o frame de topo, afastado 200 px |
 | Nome do layer ≠ texto | Regra por nome não pega o botão | Numa cópia de componente o nome é o do componente; usar a regra por **texto** |
 | Botão só-ícone | Não aparece no “Clicáveis” | Regra por **nome** (`--inventario` mostra o nome) |
 | Container engolindo botões | Rodapé com “Comprar” + ícone de favoritar: tudo vira “Comprar” | O motor já cede quando há destinos diferentes dentro; se ainda acontecer, regra por nome no botão menor |

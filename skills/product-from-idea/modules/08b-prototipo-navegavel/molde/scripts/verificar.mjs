@@ -4,6 +4,7 @@
 //   npm run verificar -- --todas          → lista as áreas clicáveis de todas as telas
 //   npm run verificar -- --inventario id  → nome de layer + texto curto da tela (base para escrever rotas.js)
 //   npm run verificar -- --motor {pasta do molde na skill} → confere se o motor é igual ao da skill
+//   npm run verificar -- --soltos         → lista, tela a tela, peças com cara de botão que não levam a lugar nenhum
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,6 +30,7 @@ function abrir(id) {
   return w;
 }
 const curto = (s, n = 24) => s.replace(/\s+/g, " ").trim().slice(0, n);
+const root = (d) => d.querySelector("body > [data-pencil-id]");
 
 // Motor intacto: compara os arquivos do motor com os do molde da skill
 const motor = arg("--motor");
@@ -47,6 +49,7 @@ const inv = arg("--inventario");
 if (inv !== null) {
   for (const id of lista(inv)) {
     const w = abrir(id), vistos = new Set();
+    if (!w.PR_SCREENS) { console.log(`== ${id} · ✗ sem o frame na raiz do HTML (exportar o frame de topo; ver preparar)`); continue; }
     console.log(`== ${id} · ${(w.PR_SCREENS[id] || {}).title || "?"}`);
     for (const el of w.document.querySelectorAll("[data-pencil-name]")) {
       const n = el.getAttribute("data-pencil-name"), t = curto(el.textContent, 40);
@@ -66,7 +69,12 @@ const ids = Object.keys(SC);
 const detalhar = arg("--todas") !== null || process.argv.includes("--todas") ? ids : lista(arg("--telas"));
 
 const chegam = new Set([CFG.inicio, ...Object.values(CFG.home || {}).flat()].filter(Boolean));
-const invalidos = [], semArquivo = [];
+const invalidos = [], semArquivo = [], soltos = {};
+// Peça com cara de botão (altura de botão + canto arredondado + largura do conteúdo + rótulo curto; campo de texto ocupa
+// a largura e fica de fora) ou ícone de ação, sem área clicável:
+// o verificar não acha link quebrado aqui — acha botão desenhado que ninguém ligou (o cliente clica e nada acontece)
+const ALTURA_BOTAO = /h-\[(32|36|40|44|48)px\]/;
+const ICONE_ACAO = /^(ellipsis|ellipsis-vertical|more-horizontal|more-vertical|copy|pencil|trash|trash-2|x|chevron-down|chevrons-up-down|list-filter|filter|download|share|share-2|log-out|bell|menu)$/;
 for (const id of ids) {
   if (!fs.existsSync(path.join(ROOT, "telas", id + ".html"))) { semArquivo.push(id); continue; }
   if (SC[id].device === "doc") continue;
@@ -80,6 +88,14 @@ for (const id of ids) {
     if (!SC[go]) invalidos.push(`${id}: ${el.getAttribute("data-pencil-name")} → ${go}`);
     chegam.add(go);
   }
+  for (const el of root(d) ? root(d).querySelectorAll("[data-pencil-name]") : []) {
+    if (el.closest("[data-hs]") || el.querySelector("[data-hs]")) continue;
+    const cls = el.getAttribute("class") || "", t = curto(el.textContent, 40);
+    const botao = ALTURA_BOTAO.test(cls) && /rounded/.test(cls) && /\bw-fit\b/.test(cls) && t && el.textContent.trim().length <= 32 && !el.querySelector(":scope [data-pencil-name] [data-pencil-name] [data-pencil-name]");
+    const icone = el.tagName.toLowerCase() === "svg" && ICONE_ACAO.test(el.getAttribute("data-icon-name") || "") && !el.parentElement.closest("[data-hs]") &&
+      !/^(Ícone|Icone|Icon|i)$/.test(el.parentElement.getAttribute("data-pencil-name") || ""); // ícone dentro de selo decorativo não é botão
+    if (botao || icone) (soltos[id] = soltos[id] || new Set()).add(`${el.getAttribute("data-pencil-name")}[${t}]`);
+  }
   if (detalhar.includes(id)) {
     const linhas = [...new Set(areas.map((el) => `${el.getAttribute("data-pencil-name")}[${curto(el.textContent)}]→${el.getAttribute("data-hs")}`))];
     console.log(`== ${id} · ${SC[id].title} (${areas.length} áreas${auto ? ` · avança sozinha → ${auto}` : ""})\n  ` + linhas.join("\n  "));
@@ -92,4 +108,7 @@ console.log(`\nTelas: ${ids.length} (${ids.filter((i) => SC[i].device === "doc")
 console.log(semArquivo.length ? `✗ Sem arquivo em telas/: ${semArquivo.join(", ")}` : "✓ Toda tela do manifesto tem arquivo");
 console.log(invalidos.length ? `✗ Destinos que não existem:\n  ${invalidos.join("\n  ")}` : "✓ Nenhum destino inválido");
 console.log(isoladas.length ? `✗ Telas que nenhum clique alcança (ligar em rotas.js ou listar em PR_CONFIG.semLinkChegando): ${isoladas.join(", ")}` : "✓ Toda tela é alcançável");
+const nSoltos = Object.values(soltos).reduce((a, s) => a + s.size, 0);
+console.log(nSoltos ? `! ${nSoltos} peças com cara de botão sem ligação em ${Object.keys(soltos).length} telas — conferir com --soltos (ligar em rotas.js ou dar aviso; peça que leva à própria tela é normal)` : "✓ Nenhum botão desenhado sem ligação");
+if (process.argv.includes("--soltos")) for (const [id, set] of Object.entries(soltos)) console.log(`== ${id} · ${SC[id].title}\n  ` + [...set].join("\n  "));
 process.exitCode = semArquivo.length || invalidos.length || isoladas.length ? 1 : 0;

@@ -17,7 +17,7 @@
 1. Abre no Manual da marca com “Iniciar protótipo”; documentação primeiro na lista.  
 2. Toda tela aprovada da Fase 8 navegável, nos dispositivos aprovados.  
 3. Cada botão faz o que o protótipo (`prototipo.md`) diz; ação sem tela = aviso.  
-4. Modal/gaveta fecha para a tela de trás; troca de dispositivo cai na mesma tela.  
+4. Modal/gaveta abre sobre a tela de trás (desenhada no canvas ou, na janela solta, montada pelo shell) e fecha para ela; troca de dispositivo cai na mesma tela.  
 5. Zero link quebrado, zero tela isolada (fora as listadas), zero defeito visual do export.  
 6. Sobe com um comando (`npm run prototipo:start`), sem passo manual.
 
@@ -39,7 +39,7 @@
 | P3 | Abertura | Manual da marca + “Iniciar protótipo”; documentação (Manual, Fundamentos, Componentes, Rascunho) no topo da lista |
 | P4 | Cobertura | Toda tela aprovada em `telas.md` está no manifesto, no grupo da sua seção, nos dispositivos aprovados |
 | P5 | Navegação certa | Lista de áreas de cada tela bate com `prototipo.md`; nenhuma ida para tela “parecida”; ação sem tela = aviso |
-| P6 | Verificar limpo | Nenhum destino inválido; toda tela alcançável (fora `semLinkChegando`) |
+| P6 | Verificar limpo | Nenhum destino inválido; toda tela alcançável (fora `semLinkChegando`); `--soltos` só com peça que leva à própria tela |
 | P7 | Conferência visual | Checklist do passo 9 com prints desta sessão |
 | P8 | Telas só exportadas | Nenhuma tela editada à mão no HTML; defeito de tela voltou para a Fase 8 |
 | P9 | Registro + gate | Seção em `telas.md` + status em `.docs/README.md` |
@@ -57,5 +57,6 @@
 | Motor customizado no produto | `nav.js`/`index.html` diferentes do molde sem passar pela skill |
 | Link “parecido” | Botão leva a uma tela que não é a dele porque a certa não existe |
 | Fundo clicável | Atrás do modal, header e cards ainda navegam |
+| Janela isolada | O modal abre sozinho, sem a tela de trás (janela solta sem tela de trás no `screens.js`) |
 | Sem Manual | Protótipo abre direto numa tela, sem a marca e sem “Iniciar” |
 | Mostrado sem verificar | Cliente acha link quebrado na apresentação |

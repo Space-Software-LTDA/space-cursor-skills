@@ -60,6 +60,9 @@
     .frame.desk { box-shadow: 0 0 0 1px var(--line), 0 20px 60px rgba(0,0,0,.5); border-radius: 6px; overflow: hidden; }
     .frame.phone { padding: 12px; background: #1A1F26; border-radius: 48px; box-shadow: 0 0 0 1px #2A313B, 0 24px 70px rgba(0,0,0,.6); }
     .frame.phone iframe { border-radius: 36px; }
+    /* Janela solta (frame menor que a tela de trás, sem fundo desenhado): tela de trás escurecida + janela por cima */
+    .ov { position: absolute; background: rgba(0,0,0,.55); overflow: hidden; }
+    .ov iframe { position: absolute; background: transparent !important; border-radius: 0 !important; box-shadow: 0 16px 48px rgba(0,0,0,.5); }
     .hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: var(--panel-2); border: 1px solid var(--line); color: var(--muted); font-size: 12px; padding: 6px 12px; border-radius: 999px; pointer-events: none; transition: opacity .4s; }
     @media (max-width: 760px) {
       .app { grid-template-columns: 1fr; }
@@ -91,7 +94,7 @@
       <a class="ib" id="bOpen" target="_blank" title="Abrir a tela sozinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></a>
     </header>
     <div class="stage" id="stage">
-      <div class="frame" id="frame"><iframe id="ifr" title="Tela do protótipo"></iframe></div>
+      <div class="frame" id="frame"><iframe id="ifr" title="Tela do protótipo"></iframe><div class="ov" id="ov" hidden><iframe id="ifr2" title="Janela do protótipo"></iframe></div></div>
       <button class="cta" id="cta" hidden>Iniciar protótipo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <div class="hint" id="hint">Clique nos botões da tela para navegar · H mostra as áreas clicáveis</div>
     </div>
@@ -108,7 +111,14 @@
     throw new Error("screens.js vazio");
   }
   const $ = (id) => document.getElementById(id);
-  const ifr = $("ifr"), frame = $("frame"), stage = $("stage");
+  const ifr = $("ifr"), frame = $("frame"), stage = $("stage"), ov = $("ov"), ifr2 = $("ifr2");
+  // Janela solta: tem tela de trás no mesmo dispositivo e é mais estreita que ela (o canvas não desenhou o fundo escurecido)
+  let fundo = null; // última tela cheia mostrada (fundo das janelas "sobre a tela atual")
+  const baseDe = (s) => (s && s.sobreAtual ? fundo : s && s.base);
+  const solta = (s) => { const b = baseDe(s); return !!(b && SC[b] && SC[b].device === s.device && s.width < SC[b].width); };
+  const fechar = () => { const j = SC[cur]; if (j.sobreAtual) goBack(); else show(j.base); };
+  // Janela "*" aberta direto (pela lista ou pelo endereço), sem histórico: fecha para a última tela cheia ou a Home
+  const semVolta = () => { const j = SC[cur]; return j && j.sobreAtual && !back.length; };
   const isDoc = (id) => SC[id].device === "doc";
   const DEVS = ["d", "m"].filter((d) => Object.values(SC).some((s) => s.device === d));
   const homeOf = (d) => ((CFG.home && CFG.home[d]) || [])[0] || Object.values(SC).find((s) => s.device === d).id;
@@ -140,7 +150,7 @@
 
   function layout() {
     if (!cur) return;
-    const s = SC[cur], pad = 40;
+    const s = solta(SC[cur]) ? SC[baseDe(SC[cur])] : SC[cur], pad = 40;
     const W = stage.clientWidth - pad, H = stage.clientHeight - pad;
     if (s.device === "m") {
       const fw = s.width + 24, fh = s.height + 24, k = Math.min(1, H / fh, W / fw);
@@ -159,7 +169,33 @@
       frame.style.width = w + "px";
       frame.style.marginRight = (w * k - w) + "px";
     }
+    posJanela();
   }
+
+  // Posição da janela solta sobre a tela de trás: "centro" (padrão) · "direita" (gaveta, altura toda) · [x, y]
+  function posJanela() {
+    const j = SC[cur];
+    if (!solta(j)) { ov.hidden = true; return; }
+    const phone = j.device === "m", off = phone ? 12 : 0;
+    const W0 = parseFloat(ifr.style.width), H0 = parseFloat(ifr.style.height);
+    Object.assign(ov.style, { left: off + "px", top: off + "px", width: W0 + "px", height: H0 + "px", borderRadius: phone ? "36px" : "0" });
+    ov.hidden = false;
+    let h = ifr2.__h || (j.device === "m" ? 0 : j.height) || 400; // altura medida do conteúdo primeiro
+    const w = j.width, pos = j.pos || "centro";
+    let x, y;
+    if (pos === "direita") { x = W0 - w; y = 0; h = H0; }
+    else if (Array.isArray(pos)) { x = pos[0]; y = pos[1]; }
+    else { x = (W0 - w) / 2; y = Math.max(24, Math.min(96, (H0 - h) / 2)); }
+    Object.assign(ifr2.style, { left: x + "px", top: y + "px", width: w + "px", height: h + "px" });
+  }
+  ifr2.addEventListener("load", () => {
+    try {
+      const d = ifr2.contentDocument, r = d && d.querySelector("body > [data-pencil-id]");
+      ifr2.__h = Math.ceil(r ? r.getBoundingClientRect().height : d.documentElement.scrollHeight);
+    } catch (e) { ifr2.__h = 0; }
+    posJanela();
+  });
+  ov.addEventListener("click", (e) => { if (e.target === ov) fechar(); });
 
   function subtitle(s) {
     if (s.device === "doc") return s.group;
@@ -176,7 +212,10 @@
     const s = SC[id], doc = isDoc(id);
     if (!doc) dev = s.device;
     if (location.hash !== "#/" + id) history.replaceState(null, "", "#/" + id);
-    ifr.src = "telas/" + id + ".html";
+    const tela = solta(s) ? baseDe(s) : id; // janela solta: a tela de trás fica no fundo
+    if (!solta(s) && !s.sobreAtual) fundo = id;
+    if (ifr.dataset.id !== tela) { ifr.src = "telas/" + tela + ".html"; ifr.dataset.id = tela; }
+    if (solta(s)) { ifr2.__h = 0; ifr2.src = "telas/" + id + ".html"; } else if (ifr2.getAttribute("src")) { ifr2.removeAttribute("src"); }
     $("tTitle").textContent = s.title;
     $("tSub").textContent = subtitle(s);
     $("bOpen").href = "telas/" + id + ".html";
@@ -189,8 +228,9 @@
     $("hint").hidden = doc;
     renderList();
     layout();
+    setHs(hs); // reaplica as áreas clicáveis (ao fechar uma janela a tela de trás não recarrega)
   }
-  function goBack() { if (back.length) { fwd.push(cur); const p = back.pop(); cur = null; show(p, true); } }
+  function goBack() { if (semVolta()) { const v = fundo && fundo !== cur ? fundo : homeOf(dev); cur = null; show(v, true); return; } if (back.length) { fwd.push(cur); const p = back.pop(); cur = null; show(p, true); } }
   function goFwd() { if (fwd.length) { back.push(cur); const n = fwd.pop(); cur = null; show(n, true); } }
   function switchDevice(d) {
     if (!DEVS.includes(d)) return;
@@ -207,13 +247,15 @@
   function setHs(on) {
     hs = on;
     $("bHs").classList.toggle("on", hs);
-    ifr.contentWindow && ifr.contentWindow.postMessage({ pr: "hotspots", on: hs }, "*");
+    const alvo = cur && solta(SC[cur]) ? ifr2 : ifr; // com janela aberta, só a janela mostra as áreas clicáveis
+    for (const f of [ifr, ifr2]) f.contentWindow && f.contentWindow.postMessage({ pr: "hotspots", on: hs && f === alvo }, "*");
   }
 
   window.addEventListener("message", (e) => {
     const d = e.data || {};
     if (d.pr === "go") show(d.id);
     if (d.pr === "ready") setHs(hs);
+    if (d.pr === "esc" && cur && solta(SC[cur])) fechar(); // Esc com o foco dentro da tela
   });
   window.addEventListener("hashchange", () => {
     const id = location.hash.replace(/^#\/?/, "");
@@ -223,6 +265,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.target.closest("input,textarea")) return;
     if (e.key === "h" || e.key === "H") setHs(!hs);
+    if (e.key === "Escape" && cur && solta(SC[cur])) fechar();
     if (e.key === "ArrowRight") step(1);
     if (e.key === "ArrowLeft") step(-1);
     if ((e.key === "d" || e.key === "D") && DEVS.length > 1) switchDevice(dev === "d" ? "m" : "d");

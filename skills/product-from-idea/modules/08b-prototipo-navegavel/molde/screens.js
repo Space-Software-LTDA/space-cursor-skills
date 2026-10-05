@@ -1,13 +1,17 @@
 // TELAS do produto — manifesto lido pelo shell (index.html), pelo motor (nav.js) e pelos scripts.
 // PREENCHER na Fase 8.5 (passo a passo: modules/08b-prototipo-navegavel/playbook.md da skill).
 //
-// Cada tela: [id do frame no canvas, título, dispositivo, logado, tela de trás, gêmea, largura, altura]
+// Cada tela: [id do frame no canvas, título, dispositivo, logado, tela de trás, gêmea, largura, altura, posição]
 //   id: o id do frame de topo no canvas (é também o nome do arquivo em telas/<id>.html)
 //   dispositivo: "d" computador · "m" celular/app/extensão · "doc" documentação (manual, DS, rascunho)
 //   logado: true/false (produto sem login: false em todas)
-//   tela de trás: para onde o modal/gaveta volta ao fechar (null = tela cheia)
+//   tela de trás: para onde o modal/gaveta volta ao fechar (null = tela cheia; "*" = janela solta que abre
+//     sobre a tela em que a pessoa está — ex.: menu ou filtro da barra do topo, presente em toda tela; fecha voltando)
 //   gêmea: a mesma tela no outro dispositivo (botão Computador ⇄ Celular); null se não existe
 //   largura/altura: só quando foge do padrão (computador 1440 · celular 390×844; documentação = largura do frame)
+//   posição (opcional): só para JANELA SOLTA — janela ou gaveta exportada sem a tela de trás desenhada
+//     (frame mais estreito que a tela de trás). O shell mostra a tela de trás escurecida e a janela por cima;
+//     clicar fora ou Esc volta. "centro" (padrão) · "direita" (gaveta, altura toda) · [x, y] (menu suspenso)
 //   Título com " *" = tela que ainda não existe no produto (aviso no rodapé da lista)
 window.PR_CONFIG = {
   produto: "{Nome do produto}",

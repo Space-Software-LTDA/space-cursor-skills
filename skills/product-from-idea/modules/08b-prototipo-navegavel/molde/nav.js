@@ -2,16 +2,18 @@
 // Injetado em cada tela exportada (por scripts/preparar.mjs), depois de screens.js e rotas.js.
 // Marca as áreas clicáveis e navega entre telas. Dentro do shell (index.html) conversa via
 // postMessage; aberta sozinha, navega direto para o arquivo da tela.
-window.PR_MOLDE_VERSAO = "1.0.0";
+window.PR_MOLDE_VERSAO = "1.2.0";
 
 // Índice id → tela, montado a partir de PR_GROUPS (screens.js). Também usado pelo shell.
 window.PR_INDEXAR = function () {
   const out = {};
   for (const g of window.PR_GROUPS || []) {
-    for (const [id, title, device, logged, base, twin, width, height] of g.screens) {
+    for (const [id, title, device, logged, base, twin, width, height, pos] of g.screens) {
+      const atual = base === "*"; // "*" = abre sobre a tela em que a pessoa está (menu da barra do topo, presente em toda tela)
       out[id] = {
-        id, title, group: g.name, device, logged: !!logged, base: base || null, twin: twin || null,
+        id, title, group: g.name, device, logged: !!logged, base: atual ? null : base || null, sobreAtual: atual, twin: twin || null,
         width: width || (device === "m" ? 390 : 1440), height: height || (device === "m" ? 844 : null),
+        pos: pos || null, // janela solta: "centro" · "direita" · [x, y] (ver screens.js)
       };
     }
   }
@@ -163,6 +165,8 @@ window.PR_INDEXAR = function () {
     if (e.data && e.data.pr === "hotspots") document.documentElement.classList.toggle("pr-hs", !!e.data.on);
   });
   if (inShell) window.parent.postMessage({ pr: "ready", id: S.id }, "*");
+  // Esc com o foco dentro da tela: o shell fecha a janela solta
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && inShell) window.parent.postMessage({ pr: "esc" }, "*"); });
 
   // Telas de transição (ex.: "gerando…") avançam sozinhas
   const auto = R.auto && R.auto[S.id];
