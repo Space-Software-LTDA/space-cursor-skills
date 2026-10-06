@@ -33,7 +33,7 @@
 
 ### 1) Copiar o molde
 
-1. Copiar a pasta [`molde/`](molde/) inteira para `prototipo/` na raiz do workspace (fora do `.docs/`).  
+1. Copiar a pasta [`molde/`](molde/) inteira para `prototipo/` na raiz do workspace (fora do `docs/`).  
 2. No `package.json` da raiz (criar um mínimo com `"private": true` se não existir), acrescentar:
 
 ```json
@@ -75,7 +75,8 @@ Preencher `prototipo/screens.js` (o molde explica cada campo):
 - **`PR_GROUPS`**: um grupo por seção do canvas, na ordem do canvas. Cada tela: `[id, título, dispositivo, logado, tela de trás, gêmea, largura, altura]`.  
   - **Título** curto e humano, sem repetir o grupo nem o tamanho (“Login”, “Recuperar senha”, “Pagamento confirmado”). Tela que ainda não existe no produto → `" *"` no fim.  
   - **Tela de trás**: modal, gaveta e menu sobre uma tela → id dessa tela (é para onde o X e o clique fora levam). Tela cheia → `null`. No canvas, a tela de trás costuma aparecer no próprio frame como “Fundo · marcador (…)”.
-  - **Janela solta** (o canvas tem a janela sozinha, sem a tela de trás nem o fundo escurecido desenhados — ex.: listas de modais por menu): um frame de topo só com a janela, a tela de trás preenchida (mesmo dispositivo) e a **largura da janela**, menor que a da tela de trás — é por isso que o shell sabe que é janela; com a mesma largura vira tela cheia. O shell monta a tela de trás escurecida com a janela por cima (clicar fora ou Esc volta). 9º campo opcional: `"centro"` (padrão), `"direita"` (gaveta, altura toda) ou `[x, y]` (menu suspenso colado num botão; medidas a partir do canto de cima à esquerda da tela de trás, como no canvas). **Menu ou filtro da barra do topo** (existe em toda tela): desenhar aberto uma vez só e usar `"*"` como tela de trás — abre sobre a tela em que a pessoa está e fecha voltando para ela.  
+  - **Janela solta** (o canvas tem a janela sozinha, sem a tela de trás nem o fundo escurecido desenhados — ex.: listas de modais por menu): um frame de topo só com a janela, a tela de trás preenchida (mesmo dispositivo) e a **largura da janela**, menor que a da tela de trás — é por isso que o shell sabe que é janela; com a mesma largura vira tela cheia. O shell monta a tela de trás escurecida com a janela por cima (clicar fora ou Esc volta). 9º campo opcional: `"centro"` (padrão), `"direita"` (gaveta, altura toda), `"baixo"` (gaveta de baixo do celular, presa na base e com a largura toda da tela — a única que pode ter a mesma largura da tela de trás) ou `[x, y]` (menu suspenso colado num botão; medidas a partir do canto de cima à esquerda da tela de trás, como no canvas). **Menu ou filtro da barra do topo** (existe em toda tela): desenhar aberto uma vez só e usar `"*"` como tela de trás — abre sobre a tela em que a pessoa está e fecha voltando para ela. Uma janela `"*"` aberta a partir de outra (ex.: gaveta do Menu → gaveta da busca) também fecha direto na tela de baixo — o X, o clique fora e o Esc levam ao destino `"fundo"`, que também pode ser usado em `rotas.js`.  
+  - **Rolagem no celular:** desenhar a tela com a altura do aparelho e o miolo entre as barras fixas com recorte (clip). No protótipo, o motor faz rolar todo bloco que recorta conteúdo maior que ele — não esticar a tela no canvas para “caber tudo”.
   - **Gêmea**: a mesma tela no outro dispositivo; sem gêmea → `null` (a troca leva à Home do outro dispositivo).  
   - **Largura/altura**: só se fugir do padrão (computador 1440, celular 390×844). Extensão/app: tamanho real da superfície, dispositivo `m`.
 
@@ -160,7 +161,7 @@ Defeito **na tela** → Fase 8 corrige no canvas → reexportar (passo 4) → pr
 
 ### 10) Gate
 
-Mostrar ao cliente rodando. Registrar em `.docs/telas.md` (seção “Protótipo navegável”): data, comando, telas cobertas, ações que viraram aviso (sem tela), pendências. Atualizar `.docs/README.md`.
+Mostrar ao cliente rodando. Registrar em `docs/telas.md` (seção “Protótipo navegável”): data, comando, telas cobertas, ações que viraram aviso (sem tela), pendências. Atualizar `docs/README.md`.
 
 | Resultado | Significado |
 |-----------|-------------|
@@ -211,7 +212,7 @@ O motor só precisa de: um HTML por frame, nomeado pelo id, com o nome de cada l
 
 - Editar `telas/*.html` à mão para “consertar” uma tela — conserto é no canvas  
 - Mexer no motor dentro do produto em vez de mandar a melhoria para a skill  
-- Pôr o protótipo dentro de `.docs/`  
+- Pôr o protótipo dentro de `docs/`  
 - Ligar botão para tela “parecida” quando a tela certa não existe (usar aviso)  
 - Mostrar ao cliente sem rodar o `verificar` e sem conferência visual  
 - Esquecer o Manual da marca e o botão Iniciar (o protótipo **abre** nele)  

@@ -25,7 +25,7 @@
 4. Alinhar com as lacunas do mercado (diferencial).  
 4.1. **Telas do futuro:** se a Discovery ou o mercado apontam uma expansão futura, perguntar se o cliente quer essas telas desenhadas já (para apresentação ou parcerias). Se sim, entram na seção **Telas da expansão futura**, marcadas como futuro — não viram MVP nem tarefa.  
 5. Pedido de funcionalidade do cliente → eco → confirma → grava. Decisão tomada vira **Regras decididas** (sem as opções A/B/C); divergência entre fontes já resolvida sai do arquivo.  
-6. Gate F6 → registrar em `.docs/prototipo.md`.
+6. Gate F6 → registrar em `docs/prototipo.md`.
 
 ## Fora agora
 

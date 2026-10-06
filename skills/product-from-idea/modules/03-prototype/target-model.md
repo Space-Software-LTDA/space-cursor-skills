@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 3 Protótipo
 
 > Derivado de Design Sprint / Product Sprint **reais**.  
-> Vivo: `.docs/prototipo.md`
+> Vivo: `docs/prototipo.md`
 
 ## Fontes reais (anexadas)
 

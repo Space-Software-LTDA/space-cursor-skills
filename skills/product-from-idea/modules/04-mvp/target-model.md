@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 4 MVP
 
 > Derivado de frameworks **reais** de priorização / PRD.  
-> Vivo: `.docs/mvp.md`
+> Vivo: `docs/mvp.md`
 
 ## Fontes reais (anexadas)
 

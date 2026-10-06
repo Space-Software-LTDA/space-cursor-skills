@@ -9,7 +9,7 @@ Não é brief. Não é cópia dos documentos de fase. É **um documento só** qu
 
 ## Saída
 
-`.docs/{slug}.md`  
+`docs/{slug}.md`  
 - `{slug}` = nome do produto em minúsculas, sem acento (ex.: “Meu Produto” → `meu-produto.md`)  
 - Template: `templates/manual-produto.md`
 
@@ -46,11 +46,11 @@ F1 + F2 + F7 (+ F6 no gate)
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro** (ou o trecho editado). Não otimizar para fechar o gate. CL0 em cada seção tocada. Jargão → Dicionário ou por extenso.
 
 ## Pronto quando
 
-1. `.docs/{slug}.md` existe, tem a densidade do template e passa no **teste do estranho** (`docs-clarity.md`)  
+1. `docs/{slug}.md` existe, tem a densidade do template e passa no **teste do estranho** (`docs-clarity.md`)  
 2. Decisão gravada em **Uso interno** (não no cabeçalho comercial)  
 3. Devolver ao Controlador — **não** abrir a Fase 11 (tarefas) nesta conversa

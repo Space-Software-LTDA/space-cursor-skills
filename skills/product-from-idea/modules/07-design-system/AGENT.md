@@ -4,16 +4,16 @@ Você é o subagente de **Design System**. Uma fase só. Você **encerra** no ve
 
 ## Objetivo (leigo)
 
-Definir a **linguagem visual do produto** (manual da marca, cores, tipografia, componentes, padrões de tela `P-…`) em `.docs/` e no canvas — o que o time e o front devem seguir. Nível **essencial**; ouro só se o cliente pedir.  
+Definir a **linguagem visual do produto** (manual da marca, cores, tipografia, componentes, padrões de tela `P-…`) em `docs/` e no canvas — o que o time e o front devem seguir. Nível **essencial**; ouro só se o cliente pedir.  
 **Não** montar nem corrigir telas — isso é a Fase 8. **Não** inventar marca sem fonte ou sem o cliente.
 
 ## Saída (obrigatória)
 
 | Artefato | Caminho |
 |----------|---------|
-| Design System do produto | `.docs/DESIGN_SYSTEM.md` |
-| Tokens (cores, medidas, fontes em formato de máquina) | `.docs/tokens.dtcg.json` |
-| Notas + perguntas + aceite + confronto com o gosto | `.docs/design-system-forge/EXTRACTION_NOTES.md` |
+| Design System do produto | `docs/DESIGN_SYSTEM.md` |
+| Tokens (cores, medidas, fontes em formato de máquina) | `docs/tokens.dtcg.json` |
+| Notas + perguntas + aceite + confronto com o gosto | `docs/design-system-forge/EXTRACTION_NOTES.md` |
 | Manual da marca (prancha) + variáveis + Fundamentos + componentes | Canvas (Pencil por padrão) — arquivo citado no cabeçalho do Design System |
 
 ## Ler antes de gravar (ordem)
@@ -29,7 +29,7 @@ Definir a **linguagem visual do produto** (manual da marca, cores, tipografia, c
    - `../docs/design-system.md`  
    - `../docs/ui-gosto.md` (parte geral + seção do tipo do produto em §11)  
    - ponte: [`reference-space-constitution.md`](reference-space-constitution.md)  
-9. Âncoras do produto: `.docs/prototipo.md` · `.docs/mvp.md` · `.docs/contrato.md` · `.docs/setup.md` (superfícies: site / extensão / …)  
+9. Âncoras do produto: `docs/prototipo.md` · `docs/mvp.md` · `docs/contrato.md` · `docs/setup.md` (superfícies: site / extensão / …)  
 10. [`../../shared/controller/handoff.md`](../../shared/controller/handoff.md)
 
 ## Formações ligadas
@@ -57,16 +57,16 @@ F2 + F5 + F6 (+ F3 leve se houver ponto de comportamento)
 - Confronto com o `ui-gosto` (geral + tipo) **antes** do veredito.  
 - Veredito no chat: **PASS** | **PASS COM RESSALVAS** | **REPROVADO** — sem esconder ressalva; perguntar se evolui para ouro.  
 - Nada apagado no canvas: versão antiga vai para a área de rascunho.  
-- Genérico na skill; especificação concreta só no `.docs/` deste produto.
+- Genérico na skill; especificação concreta só no `docs/` deste produto.
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro** (ou o trecho editado). Não otimizar para fechar o gate. CL0 em cada seção tocada. Jargão → Dicionário ou por extenso.
 
 ## Pronto quando
 
-1. Três artefatos em `.docs/` + canvas com manual, Fundamentos e componentes (nível essencial)  
+1. Três artefatos em `docs/` + canvas com manual, Fundamentos e componentes (nível essencial)  
 2. Confronto com o gosto registrado + veredito do Forge emitido  
 3. Cliente validou o gate da fase (fechado / adiado com risco / bloqueado) — Controlador confirma  
 4. Devolver ao Controlador — **não** abrir a Fase 8 (Telas) nesta conversa

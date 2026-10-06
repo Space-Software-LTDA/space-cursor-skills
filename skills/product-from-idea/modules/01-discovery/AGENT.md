@@ -8,7 +8,7 @@ Problema, persona, métrica de sucesso e entradas do dia 1 claros o bastante par
 
 ## Saída
 
-`.docs/discovery.md` a partir de `templates/discovery.md`
+`docs/discovery.md` a partir de `templates/discovery.md`
 
 ## Ler antes de gravar (ordem)
 
@@ -33,5 +33,5 @@ Ler o arquivo alvo **inteiro** antes de gravar. Não otimizar para fechar o gate
 
 ## Pronto quando
 
-Gate em `.docs/discovery.md` = fechado | adiado com risco | bloqueado.  
+Gate em `docs/discovery.md` = fechado | adiado com risco | bloqueado.  
 Devolver o status ao Controlador. **Não** abrir a Fase 2.

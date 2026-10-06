@@ -8,7 +8,7 @@ Análise de mercado real: tamanho com **conta explícita**, alternativas com pre
 
 ## Saída
 
-`.docs/pesquisa-mercado.md` a partir de `templates/pesquisa-mercado.md`
+`docs/pesquisa-mercado.md` a partir de `templates/pesquisa-mercado.md`
 
 ## Ler antes de gravar (ordem)
 
@@ -17,7 +17,7 @@ Análise de mercado real: tamanho com **conta explícita**, alternativas com pre
 3. [`target-model.md`](target-model.md)  
 4. Pelo menos um PDF real listado em [`examples/README.md`](examples/README.md) (Airbnb / Deliveroo)  
 5. Barra de densidade: [`examples/density-reference.md`](examples/density-reference.md)  
-6. Âncora: `.docs/discovery.md` (precisa estar fechado ou adiado com risco)
+6. Âncora: `docs/discovery.md` (precisa estar fechado ou adiado com risco)
 
 ## Formações ligadas
 
@@ -32,7 +32,7 @@ F10 + F1 (+ F6; F9 se monetização aparecer nos dados)
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro** (ou o trecho editado). Não otimizar para fechar o gate. CL0 em cada seção tocada. Jargão → Dicionário ou por extenso.
 
 ## Pronto quando

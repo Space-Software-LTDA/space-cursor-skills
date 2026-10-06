@@ -1,6 +1,6 @@
 # Modelo-alvo — Fase 6 Setup
 
-> Vivo: `.docs/setup.md`  
+> Vivo: `docs/setup.md`  
 > Leis genéricas: [`reference-space-defaults.md`](reference-space-defaults.md)  
 > Anexos reais: [`examples/README.md`](examples/README.md) (mapas de pasta dos projetos-base)
 

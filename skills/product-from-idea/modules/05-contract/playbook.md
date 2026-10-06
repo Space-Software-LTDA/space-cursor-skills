@@ -59,8 +59,8 @@ Cliente pode trazer lista de **outro agente** ou doc técnico.
 1. Ler o arquivo.  
 2. **Eco em português** (sem colar `CamelCase` / rotas).  
 3. Apontar **buracos** (ex.: 4 lojas no inventário vs 9 no MVP; falta dado de pessoa).  
-4. Confirmar → traduzir para `.docs/contrato.md`.  
-5. Inventário fora de `.docs/` **não** é verdade até migrar/resumir no contrato.
+4. Confirmar → traduzir para `docs/contrato.md`.  
+5. Inventário fora de `docs/` **não** é verdade até migrar/resumir no contrato.
 
 ### 3) Cliente “não entendi”
 

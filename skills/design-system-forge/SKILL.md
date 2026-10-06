@@ -17,6 +17,8 @@ disable-model-invocation: true
 
 # Design System Forge
 
+> **No fluxo `product-from-idea`:** onde esta skill cita `.docs/`, ler `docs/` (a pasta de documentos do workspace de produto é visível e versionada desde 2026-10-06). Em repositórios de código, `.docs/` continua valendo.
+
 > ⚠️ **COPIA:** destino = `SKILLS_DEST_PATH` do `.env` **desta maquina** (PC ≠ Coders).  
 > **Altere em** `space-cursor-skills/skills/design-system-forge/` → **obrigatorio rodar** `npm run sync` na raiz (maquina alvo). Sem Sync a copia nao atualiza.  
 > Ver `00-COPIA-LEIA-ME.md`. Hub pack: **`/skill-update`**. Fluxo repo: **`AGENTS.md`**.

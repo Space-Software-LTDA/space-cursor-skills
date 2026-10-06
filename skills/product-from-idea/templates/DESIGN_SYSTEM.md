@@ -2,7 +2,7 @@
 
 > **Fonte canônica do wireframe:** skill `design-system-forge` → `template-design-system.md`.  
 > Este arquivo no workspace existe para cumprir a lei “fase nasce do template”.  
-> **Não** preencher aqui — copiar o template da skill para `.docs/DESIGN_SYSTEM.md` e preencher lá.
+> **Não** preencher aqui — copiar o template da skill para `docs/DESIGN_SYSTEM.md` e preencher lá.
 
 ## Path canônico
 
@@ -16,9 +16,9 @@
 
 | Artefato | Path |
 |----------|------|
-| DS | `.docs/DESIGN_SYSTEM.md` |
-| Tokens | `.docs/tokens.dtcg.json` |
-| Notes | `.docs/design-system-forge/EXTRACTION_NOTES.md` |
+| DS | `docs/DESIGN_SYSTEM.md` |
+| Tokens | `docs/tokens.dtcg.json` |
+| Notes | `docs/design-system-forge/EXTRACTION_NOTES.md` |
 
 ## Barra de saída (densidade)
 

@@ -1,6 +1,6 @@
 # Exemplos — Fase 9 Revisão
 
-> Casos **reais**. Documento vivo do produto: `.docs/revisao.md` (não estes arquivos).  
+> Casos **reais**. Documento vivo do produto: `docs/revisao.md` (não estes arquivos).  
 > Barra (estrutura + critérios de aceite + anti-padrões): [`../target-model.md`](../target-model.md)
 
 ## Ler primeiro

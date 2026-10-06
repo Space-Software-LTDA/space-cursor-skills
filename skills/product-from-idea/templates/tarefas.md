@@ -3,7 +3,7 @@
 > Fase: 11 — Tarefas por fatia  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncoras: `.docs/mvp.md` · `.docs/telas.md` · `.docs/contrato.md` · `.docs/setup.md` · `.docs/{slug}.md`  
+> Âncoras: `docs/mvp.md` · `docs/telas.md` · `docs/contrato.md` · `docs/setup.md` · `docs/{slug}.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/11-task/target-model.md` + `examples/anexos/`
 ---
 

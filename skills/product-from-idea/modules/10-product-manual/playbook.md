@@ -1,6 +1,6 @@
 # Playbook — Fase 10 Manual comercial
 
-> Saída viva: `.docs/{slug}.md`  
+> Saída viva: `docs/{slug}.md`  
 > Bar: [`target-model.md`](target-model.md) · density: [`examples/density-reference.md`](examples/density-reference.md)
 
 **Agent:** [`AGENT.md`](AGENT.md)
@@ -11,7 +11,7 @@
 **Fase 10 — Manual comercial do produto**
 **Objetivo:** um doc completo que conta a história e reúne as fases — tom comercial
 **ON:** F1 + F2 + F7 (+ F6)
-**Arquivo:** .docs/{slug}.md  (slug = nome do produto)
+**Arquivo:** docs/{slug}.md  (slug = nome do produto)
 ```
 
 ## Pré-requisitos
@@ -27,7 +27,7 @@
 | Campo | Regra |
 |-------|--------|
 | Slug | minúsculas, sem acento (`Meu Produto` → `meu-produto`) |
-| Path | `.docs/{slug}.md` |
+| Path | `docs/{slug}.md` |
 | Público A | Quem **usa** (usuário final) |
 | Público B | Quem **decide / vende / investe** |
 
@@ -53,7 +53,7 @@ A expansão futura (lista do `mvp.md` e telas do futuro) pode aparecer no manual
 
 ### 3) Escrever o manual (template)
 
-Copiar `templates/manual-produto.md` → `.docs/{slug}.md` e preencher **inteiro**.  
+Copiar `templates/manual-produto.md` → `docs/{slug}.md` e preencher **inteiro**.  
 Cada parte: história contínua + tabelas quando ajudam.  
 **Obrigatório:** passar no teste do estranho (`shared/docs-clarity.md`) — zero meta de chat, zero `qtd.`/`TBD`, títulos humanos.
 
@@ -65,12 +65,12 @@ Cada parte: história contínua + tabelas quando ajudam.
 | **adiado com risco** | Pendências listadas no próprio manual + cliente assume |
 | **bloqueado** | Falta nome/slug ou fases críticas vazias |
 
-Gravar só na seção **Uso interno** — não no cabeçalho comercial. Atualizar `.docs/README.md`. Subagente **encerra**.
+Gravar só na seção **Uso interno** — não no cabeçalho comercial. Atualizar `docs/README.md`. Subagente **encerra**.
 
 ## Fora de escopo
 
 | Pedido | Para |
 |--------|------|
-| Brief interno curto | `.docs/produto.md` (já existe / vago) |
+| Brief interno curto | `docs/produto.md` (já existe / vago) |
 | Task ClickUp | Fase 11 · `po-techlead-scrum` |
 | Inventar preço/hex | Cliente / fase certa |

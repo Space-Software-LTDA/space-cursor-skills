@@ -84,7 +84,7 @@ for (const id of ids) {
   if (auto) chegam.add(auto);
   for (const el of areas) {
     const go = el.getAttribute("data-hs");
-    if (go === "back" || go === "hide" || go === "toast") continue;
+    if (go === "back" || go === "fundo" || go === "hide" || go === "toast") continue;
     if (!SC[go]) invalidos.push(`${id}: ${el.getAttribute("data-pencil-name")} → ${go}`);
     chegam.add(go);
   }

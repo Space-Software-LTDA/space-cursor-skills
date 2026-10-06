@@ -7,27 +7,27 @@
 | Papel | Faz |
 |-------|-----|
 | **Controlador** | Confirma fonte + superfícies; abre o Forge; valida o veredito + gate de fase; **não** escreve o DS |
-| **Subagente Fase 7** | Roda o loop Forge; grava `.docs/`; emite STOP; **encerra** |
+| **Subagente Fase 7** | Roda o loop Forge; grava `docs/`; emite STOP; **encerra** |
 | **Skill `design-system-forge`** | Barra (GATE 0, Q, ACCEPT, template, Laws of UX) |
 | **`design-system-apply`** | **Fase 8 (Telas)** — subagente novo, depois do gate da Fase 7; não roda dentro da Fase 7 |
 | **`qa-space`** | Audita front **feito** — não forja DS |
 
-## Artefatos (sempre sob `.docs/`)
+## Artefatos (sempre sob `docs/`)
 
 ```text
-.docs/DESIGN_SYSTEM.md
-.docs/tokens.dtcg.json
-.docs/design-system-forge/EXTRACTION_NOTES.md
+docs/DESIGN_SYSTEM.md
+docs/tokens.dtcg.json
+docs/design-system-forge/EXTRACTION_NOTES.md
 ```
 
 ## Entradas que o product-from-idea deve passar ao Forge
 
 | Entrada | De onde |
 |---------|---------|
-| Superfícies (frontend / extension / …) | `.docs/setup.md` |
-| Telas e fluxos com nome humano | `.docs/prototipo.md` |
-| Corte MVP (o que existe no dia 1) | `.docs/mvp.md` |
-| Tom / persona (contexto B2C etc.) | `.docs/discovery.md` / brief |
+| Superfícies (frontend / extension / …) | `docs/setup.md` |
+| Telas e fluxos com nome humano | `docs/prototipo.md` |
+| Corte MVP (o que existe no dia 1) | `docs/mvp.md` |
+| Tom / persona (contexto B2C etc.) | `docs/discovery.md` / brief |
 | Fonte visual | Cliente: URL, construtor (ex.: Lovable), prints, código, canvas, manual da marca |
 
 ## GATE 0 — checklist rápida (fase)

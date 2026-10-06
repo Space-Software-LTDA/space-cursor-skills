@@ -1,7 +1,7 @@
 # Lei — anti-pressa (ler direito)
 
 > Causa #1 de doc ruim e revisão fraca: o agente **otimiza para “fechar o gate”** em vez de **ler e aplicar**.  
-> Vale para **toda fase** que grava `.docs/` e, com barra máxima, para o **Revisor**.
+> Vale para **toda fase** que grava `docs/` e, com barra máxima, para o **Revisor**.
 
 ## Por que o agente erra (diagnóstico)
 
@@ -15,7 +15,7 @@
 | Busca residual de mentira | Diz “zero qtd.” sem procurar | Grep/busca **obrigatória** + listar hits ou “zero hits” |
 | “Pronto quando” fraco | “Seção Clareza preenchida” = verde | Preenchida **e** cada CA individual **e** residual limpo |
 
-## Diretiva (todos os agentes que escrevem `.docs/`)
+## Diretiva (todos os agentes que escrevem `docs/`)
 
 1. **Ler o arquivo inteiro** (ou o trecho que vai editar) **antes** do Write — não adivinhar pelo título.  
 2. **Não otimizar para velocidade.** Preferir uma correção certa a dez OKs rasos.  
@@ -29,7 +29,7 @@
 
 ### Protocolo de duas passagens (obrigatório)
 
-**Por cada** `.docs/{fase}.md`:
+**Por cada** `docs/{fase}.md`:
 
 | Passagem | O que fazer | Proibido |
 |----------|-------------|----------|

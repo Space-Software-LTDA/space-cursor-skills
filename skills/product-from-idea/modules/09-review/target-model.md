@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 9 Revisão
 
 > A revisão **usa** os modelos-alvo + CA de cada fase.  
-> Vivo: `.docs/revisao.md` · CA agregado: `../shared/acceptance-criteria.md`  
+> Vivo: `docs/revisao.md` · CA agregado: `../shared/acceptance-criteria.md`  
 > **Lei de clareza:** [`../shared/docs-clarity.md`](../../shared/docs-clarity.md)  
 > **Anti-pressa:** [`../shared/anti-rush.md`](../../shared/anti-rush.md)
 
@@ -32,7 +32,7 @@ Os anexos das **fases 1–8 e 10** também são fonte: o Revisor aplica a barra 
 | R1 | Fases 1–8 (+ produto.md) passaram checklist de **conteúdo** | Ou adiado explícito |
 | R2 | Alucinações removidas ou Hipótese | |
 | R3 | Contradições resolvidas ou listadas | |
-| R4 | `.docs/revisao.md` gravado | |
+| R4 | `docs/revisao.md` gravado | |
 | R5 | Gate = Fase 10 manual — **não** tasks | |
 | **R6** | Leu docs-clarity + **posicionamento do leigo** em todo arquivo / seção | “Ficaria confuso? Esclarece?” |
 | **R7** | Seção Clareza humana preenchida | Sem pular arquivo |

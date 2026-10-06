@@ -10,10 +10,10 @@
 ## Como o Revisor trabalha
 
 1. Ler `modules/README.md` + **`shared/docs-clarity.md`** + **`shared/anti-rush.md`** + target-model da fase sob auditoria.  
-2. Abrir `.docs/{fase}.md` **inteiro** e comparar com **CA do target-model** **e** com o bloco **CLAREZA (CL\*)** — **Passagem A** (uma linha por CA) depois **Passagem B** (clareza seção a seção).  
+2. Abrir `docs/{fase}.md` **inteiro** e comparar com **CA do target-model** **e** com o bloco **CLAREZA (CL\*)** — **Passagem A** (uma linha por CA) depois **Passagem B** (clareza seção a seção).  
 3. Marcar: **OK** · **Corrigir** · **Alucinação** · **Falta** · **Adiado com risco (cliente)** · **Falhou clareza**.  
 4. Corrigir com **replace limpo** (ou abrir o agente da fase só para o buraco).  
-5. Busca residual + gravação em `.docs/revisao.md` — **incluindo** Clareza humana + Busca residual.  
+5. Busca residual + gravação em `docs/revisao.md` — **incluindo** Clareza humana + Busca residual.  
 6. Só então liberar **Fase 10 — Manual comercial** (depois: Fase 11 tasks).
 
 **Temperatura / barra:** nas fases 1–3 priorizar clareza e corte; na 2 exigir evidência; na 5 exigir lista do *quê* sem código inventado; na revisão ser **rigoroso** com inconsistência **e** com documento que parece conversa com a IA.
@@ -26,7 +26,7 @@
 ## CLAREZA HUMANA — obrigatório em **toda** fase (CL\*)
 
 > Fonte: [`docs-clarity.md`](docs-clarity.md).  
-> O Revisor aplica **CL0–CL5 em cada** `.docs/` auditado (discovery → DS → brief → e, depois, no manual).  
+> O Revisor aplica **CL0–CL5 em cada** `docs/` auditado (discovery → DS → brief → e, depois, no manual).  
 > **Um CL vermelho = fase não OK** até corrigir (ou adiado com risco **explícito do cliente** só se for pendência de produto, nunca se for meta de chat).  
 > Protocolo: [`anti-rush.md`](anti-rush.md) — duas passagens · uma linha por CA.
 
@@ -66,13 +66,13 @@
 | Meta de agente no doc | “só o que for real nas fases”, Shape Up no título, caminhos de arquivo da skill no cabeçalho | Reescrever (**CL2**) |
 | Abreviação preguiçosa | `qtd.`, `TBD`, `HML` sem por extenso | Expandir (**CL3** / **CL4**) |
 | Thread/fase errada | Doc da fase N com assunto da fase N+2 | Cortar / mover |
-| Inventário órfão | `data.md` fora de `.docs/` como verdade | Espelhar no contrato |
+| Inventário órfão | `data.md` fora de `docs/` como verdade | Espelhar no contrato |
 | Over-spec precoce | Seletores/OpenAPI densos antes da hora | Parking / task |
 | Doc só pro Cursor | Passa CA de conteúdo mas falha no teste do estranho | **Reprovar clareza** — reescrever |
 
 ---
 
-## CA — Fase 1 Discovery (`.docs/discovery.md`)
+## CA — Fase 1 Discovery (`docs/discovery.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -86,7 +86,7 @@
 | 1.8 | Zero solução técnica densa no lugar do problema | |
 | **1.CL** | **CL0–CL5** (`docs-clarity.md`) — posicionamento do leigo | |
 
-## CA — Fase 2 Mercado (`.docs/pesquisa-mercado.md`)
+## CA — Fase 2 Mercado (`docs/pesquisa-mercado.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -101,7 +101,7 @@
 | 2.9 | Gate gravado | |
 | **2.CL** | **CL0–CL5** (`docs-clarity.md`) | |
 
-## CA — Fase 3 Protótipo (`.docs/prototipo.md`)
+## CA — Fase 3 Protótipo (`docs/prototipo.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -114,7 +114,7 @@
 | 3.7 | Gate gravado | |
 | **3.CL** | **CL0–CL5** (`docs-clarity.md`) | |
 
-## CA — Fase 4 MVP (`.docs/mvp.md`)
+## CA — Fase 4 MVP (`docs/mvp.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -126,7 +126,7 @@
 | 4.6 | Gate gravado | |
 | **4.CL** | **CL0–CL5** (`docs-clarity.md`) | |
 
-## CA — Fase 5 Contrato (`.docs/contrato.md`)
+## CA — Fase 5 Contrato (`docs/contrato.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -141,7 +141,7 @@
 | 5.9 | Gate gravado | |
 | **5.CL** | **CL0–CL5** (`docs-clarity.md`) | |
 
-## CA — Fase 6 Setup (`.docs/setup.md`)
+## CA — Fase 6 Setup (`docs/setup.md`)
 
 | # | Critério | OK? |
 |---|----------|-----|
@@ -171,7 +171,7 @@
 | 7.8 | Não redefine produto (só visual) | |
 | **7.CL** | **CL0–CL5** no `DESIGN_SYSTEM.md` (corpo legível; EXTRACTION_NOTES pode ser mais técnico ao time) | |
 
-## CA — Fase 8 Telas (`.docs/telas.md` + canvas)
+## CA — Fase 8 Telas (`docs/telas.md` + canvas)
 
 > Canônico: `modules/08-screens/target-model.md` (T1–T13 + **T.CL**). Método: skill `design-system-apply`.
 
@@ -192,24 +192,24 @@
 | 8.13 | Texto de tela no teste do leigo; sem placeholder “X”; valores fictícios aprovados e iguais em todas as telas | |
 | **8.CL** | **CL0–CL5** (`docs-clarity.md`) — sem jargão cru do Apply | |
 
-## CA — Fase 8.5 Protótipo navegável (`prototipo/` + seção em `.docs/telas.md`)
+## CA — Fase 8.5 Protótipo navegável (`prototipo/` + seção em `docs/telas.md`)
 
 > Canônico: `modules/08b-prototipo-navegavel/target-model.md` (P1–P9 + **P.CL**). Molde: `modules/08b-prototipo-navegavel/molde/`.
 
 | # | Critério | OK? |
 |---|----------|-----|
 | 8b.1 | Motor do molde intacto; no produto só `screens.js`, `rotas.js`, `telas/`, `images/` | |
-| 8b.2 | `prototipo/` na raiz do workspace (fora do `.docs/`); `prototipo:start` no `package.json` da raiz | |
+| 8b.2 | `prototipo/` na raiz do workspace (fora do `docs/`); `prototipo:start` no `package.json` da raiz | |
 | 8b.3 | Abre no Manual da marca com “Iniciar protótipo”; documentação no topo da lista | |
 | 8b.4 | Toda tela aprovada em `telas.md` está no protótipo, no grupo da sua seção, nos dispositivos aprovados | |
 | 8b.5 | Cada botão faz o que `prototipo.md` diz; ação sem tela = aviso; modal/gaveta fecha para a tela de trás | |
 | 8b.6 | `prototipo:verificar` sem destino inválido e sem tela isolada (fora as listadas) | |
 | 8b.7 | Conferência visual com prints desta sessão (sem scroll horizontal, nada vazando, lista lateral, troca de dispositivo) | |
 | 8b.8 | Nenhuma tela editada à mão no HTML; defeito de tela corrigido no canvas e reexportado | |
-| 8b.9 | Seção “Protótipo navegável” em `telas.md` + status em `.docs/README.md` + gate | |
+| 8b.9 | Seção “Protótipo navegável” em `telas.md` + status em `docs/README.md` + gate | |
 | **8b.CL** | **CL0–CL5** (`docs-clarity.md`) — “aviso”, “tela de trás”, sem jargão do motor | |
 
-## CA — Brief interno (`.docs/produto.md`)
+## CA — Brief interno (`docs/produto.md`)
 
 > Índice vago para o time. **Não** substitui o manual comercial.
 
@@ -220,7 +220,7 @@
 | P.3 | Não é passado como “produto completo” no lugar de `{slug}.md` | |
 | **P.CL** | **CL0–CL5** | |
 
-## CA — Fase 10 Manual comercial (`.docs/{slug}.md`)
+## CA — Fase 10 Manual comercial (`docs/{slug}.md`)
 
 > Canônico: `modules/10-product-manual/target-model.md` (**M1–M29**).  
 > **Barra máxima de clareza** — este arquivo vai para o mercado.
@@ -249,9 +249,9 @@
 | X.5 | Matching: discovery ↔ contrato | |
 | X.6 | Nada “fechado” com buraco que o cliente já avisou | |
 | X.7 | Telas ↔ protótipo ↔ DS ↔ contrato: mesmas telas e nomes; peças do DS; dado mostrado existe no contrato | |
-| X.8 | Decisões tardias propagadas: cada decisão datada no `.docs/README.md` aparece no arquivo dono (protótipo, MVP, contrato, DS) | |
+| X.8 | Decisões tardias propagadas: cada decisão datada no `docs/README.md` aparece no arquivo dono (protótipo, MVP, contrato, DS) | |
 | X.9 | Nome canônico renomeado sem sobra do nome antigo em nenhum arquivo; nenhum status vencido (versão “rascunho” já aprovada, próximo passo antigo) | |
-| **X.CL** | **Nenhum** `.docs/` da trilha com CL0–CL5 vermelho | |
+| **X.CL** | **Nenhum** `docs/` da trilha com CL0–CL5 vermelho | |
 
 ---
 
@@ -264,7 +264,7 @@
 | R1 | Todas as fases 1–8 (+ produto.md) passaram pelo checklist de conteúdo | |
 | R2 | Alucinações removidas ou viraram Hipótese | |
 | R3 | Contradições entre docs resolvidas ou listadas | |
-| R4 | `.docs/revisao.md` gravado | |
+| R4 | `docs/revisao.md` gravado | |
 | R5 | Gate libera ou bloqueia **Fase 10 (manual)** — **não** tasks | |
 | **R6** | Leu [`docs-clarity.md`](docs-clarity.md) e aplicou o **posicionamento do leigo** em todo arquivo | “Ficaria confuso? Isso esclarece?” |
 | **R7** | Seção **Clareza humana** preenchida em `revisao.md` (por arquivo) | |
@@ -279,7 +279,7 @@
 
 ---
 
-## CA — Fase 11 Tarefas (`.docs/tarefas.md` + `.task/`)
+## CA — Fase 11 Tarefas (`docs/tarefas.md` + `.task/`)
 
 > Canônico: `modules/11-task/target-model.md` (TK1–TK9 + **TK.CL**). Vem **depois** do Revisor: quem valida é o Controlador, com o cliente, fatia por fatia.
 
@@ -287,7 +287,7 @@
 
 ## Saída do Revisor
 
-Arquivo: `.docs/revisao.md` (template).  
+Arquivo: `docs/revisao.md` (template).  
 Por fase: **uma linha por CA** + **\*.CL** + evidência.  
 Seção obrigatória: **Clareza humana** + **Busca residual**.  
 Gate: liberar **Fase 10 — Manual** (não pular para tasks).  

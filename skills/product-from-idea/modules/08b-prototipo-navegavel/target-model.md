@@ -1,6 +1,6 @@
 # Modelo-alvo — Fase 8.5 Protótipo navegável
 
-> Vivo: `prototipo/` na raiz do workspace (fora do `.docs/`) + seção “Protótipo navegável” em `.docs/telas.md`  
+> Vivo: `prototipo/` na raiz do workspace (fora do `docs/`) + seção “Protótipo navegável” em `docs/telas.md`  
 > Molde: [`molde/`](molde/) · Sequência: [`playbook.md`](playbook.md)
 
 ## Fontes reais (anexadas)
@@ -21,7 +21,7 @@
 5. Zero link quebrado, zero tela isolada (fora as listadas), zero defeito visual do export.  
 6. Sobe com um comando (`npm run prototipo:start`), sem passo manual.
 
-## Nosso modelo-alvo (seção “Protótipo navegável” em `.docs/telas.md`)
+## Nosso modelo-alvo (seção “Protótipo navegável” em `docs/telas.md`)
 
 1. Onde está e como rodar (pasta, comando, porta)  
 2. Telas cobertas: quantas por dispositivo + páginas de documentação; telas aprovadas que ficaram de fora e por quê  
@@ -35,14 +35,14 @@
 | # | CA | Barra |
 |---|-----|--------|
 | P1 | Molde intacto | Só `screens.js`, `rotas.js`, `telas/`, `images/` (e `package-lock.json`) são do produto; `prototipo:verificar -- --motor …` sem diferença |
-| P2 | Fora do `.docs/` | `prototipo/` na raiz; scripts `prototipo:*` no `package.json` da raiz |
+| P2 | Fora do `docs/` | `prototipo/` na raiz; scripts `prototipo:*` no `package.json` da raiz |
 | P3 | Abertura | Manual da marca + “Iniciar protótipo”; documentação (Manual, Fundamentos, Componentes, Rascunho) no topo da lista |
 | P4 | Cobertura | Toda tela aprovada em `telas.md` está no manifesto, no grupo da sua seção, nos dispositivos aprovados |
 | P5 | Navegação certa | Lista de áreas de cada tela bate com `prototipo.md`; nenhuma ida para tela “parecida”; ação sem tela = aviso |
 | P6 | Verificar limpo | Nenhum destino inválido; toda tela alcançável (fora `semLinkChegando`); `--soltos` só com peça que leva à própria tela |
 | P7 | Conferência visual | Checklist do passo 9 com prints desta sessão |
 | P8 | Telas só exportadas | Nenhuma tela editada à mão no HTML; defeito de tela voltou para a Fase 8 |
-| P9 | Registro + gate | Seção em `telas.md` + status em `.docs/README.md` |
+| P9 | Registro + gate | Seção em `telas.md` + status em `docs/README.md` |
 | **P.CL** | **CL0–CL5** — `shared/docs-clarity.md` | Registro em português de leigo (“aviso”, não “toast”; “tela de trás”, não “base”) |
 
 ## Anti-padrões
@@ -52,7 +52,7 @@
 | Scroll horizontal | Barra de rolagem embaixo da tela do computador (print real: `pixreals-defeito-scroll-horizontal.png`) |
 | Peça vazando | Botão cortado na borda direita de uma barra (print real: `pixreals-defeito-botao-cortado.png`) — export com `content-box` sem `preparar` |
 | Lista que derruba a tela | ☰ esconde a lista e a tela some junto (print real: `pixreals-defeito-menu-lateral.png`) |
-| Protótipo em `.docs/` | Pasta do protótipo dentro dos documentos do produto |
+| Protótipo em `docs/` | Pasta do protótipo dentro dos documentos do produto |
 | HTML remendado | Tela consertada no arquivo exportado; o canvas continua errado e a próxima exportação desfaz |
 | Motor customizado no produto | `nav.js`/`index.html` diferentes do molde sem passar pela skill |
 | Link “parecido” | Botão leva a uma tela que não é a dele porque a certa não existe |

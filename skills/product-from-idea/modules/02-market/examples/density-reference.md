@@ -2,7 +2,7 @@
 
 > **Não é o documento vivo do produto.** Barra oficial: [`../target-model.md`](../target-model.md) (estrutura + critérios).  
 > Este arquivo = **quão denso** fica um estudo de mercado real, extraído dos PDFs abaixo.  
-> Saída viva: `.docs/pesquisa-mercado.md` (template: `templates/pesquisa-mercado.md`).
+> Saída viva: `docs/pesquisa-mercado.md` (template: `templates/pesquisa-mercado.md`).
 
 ## Fontes reais
 
@@ -11,13 +11,13 @@
 | [`anexos/airbnb-pitch-deck-2009.pdf`](anexos/airbnb-pitch-deck-2009.pdf) | Slides 4, 5, 7 e 9: validação **antes** do tamanho; mercado total → alcançável → capturável (TAM → SAM → SOM) com unidade; eixos |
 | [`anexos/deliveroo-prospectus-2021.pdf`](anexos/deliveroo-prospectus-2021.pdf) | Setor definido; valores em libras com fonte **OC&C**; história de captura |
 
-**Não** copiar números de Airbnb ou Deliveroo para o `.docs/` do cliente. Copiar só a **lógica**.
+**Não** copiar números de Airbnb ou Deliveroo para o `docs/` do cliente. Copiar só a **lógica**.
 
 ---
 
 ## O que os PDFs fazem (a nossa barra)
 
-| Bloco | Airbnb | Deliveroo | Obrigatório no nosso `.docs/` |
+| Bloco | Airbnb | Deliveroo | Obrigatório no nosso `docs/` |
 |-------|--------|-----------|-------------------------------|
 | Mercado definido | Problema + limites | Setor = alimentação fora de casa + mercado | § Definição |
 | Validação **antes** do tamanho | Couchsurfing 630 mil · Craigslist 17 mil | Penetração online × offline; OC&C | § Sinais (pelo menos 2 com nome) |
@@ -32,7 +32,7 @@
 
 ---
 
-## Bloco da conta (tem que aparecer no `.docs/`)
+## Bloco da conta (tem que aparecer no `docs/`)
 
 Texto simples, uma linha por camada — **“~15–25 mi” solto = inválido**:
 
@@ -49,7 +49,7 @@ Receita_ilustrativa = SOM × …   # se afiliado / visível nos concorrentes
 
 1. Abrir o PDF do Airbnb → lógica dos slides 4, 5, 7 e 9 (não os números de viagens para o cliente).  
 2. Abrir o PDF da Deliveroo → setor + valor com fonte nomeada + forma de captura.  
-3. Preencher `.docs/pesquisa-mercado.md` pelo **template** + critérios do **target-model**.  
+3. Preencher `docs/pesquisa-mercado.md` pelo **template** + critérios do **target-model**.  
 4. Conferir a densidade: toda linha de tamanho tem unidade + conta; pelo menos 2 sinais de demanda; pelo menos 5 concorrentes com preço/modelo + tentativa de porte.  
 5. Gate F6 só depois disso.
 

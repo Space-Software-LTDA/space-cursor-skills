@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 1 Discovery
 
 > Derivado de casos **reais** (não inventados).  
-> Arquivo vivo do produto: `.docs/discovery.md`  
+> Arquivo vivo do produto: `docs/discovery.md`  
 > Template: `templates/discovery.md`
 
 ## Fontes reais (anexadas)

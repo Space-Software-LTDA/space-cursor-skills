@@ -1,6 +1,6 @@
 # Exemplos — Fase 7 Design System
 
-> Casos **reais**. Documento vivo do produto: `.docs/DESIGN_SYSTEM.md` + canvas (não estes arquivos).  
+> Casos **reais**. Documento vivo do produto: `docs/DESIGN_SYSTEM.md` + canvas (não estes arquivos).  
 > **Barra de saída** = PixReals (documento) e buscaí (canvas). **Teoria** = grandes sistemas da internet.
 
 ## Ler primeiro
@@ -90,4 +90,4 @@ O que extrair:
 
 ## Product-workspace anexos
 
-URL / Lovable / prints do **produto atual** → GATE 0 em `.docs/` — não substituem A/B acima.
+URL / Lovable / prints do **produto atual** → GATE 0 em `docs/` — não substituem A/B acima.

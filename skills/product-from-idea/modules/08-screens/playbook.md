@@ -40,7 +40,7 @@
 
 ### 0) Lista de telas
 
-Gravar em `.docs/telas.md` todas as telas do protótipo — nome humano, superfície e tamanho, essencial (sim/não) e situação hoje:
+Gravar em `docs/telas.md` todas as telas do protótipo — nome humano, superfície e tamanho, essencial (sim/não) e situação hoje:
 
 | Situação | Ação |
 |----------|------|
@@ -105,7 +105,7 @@ No chat (Controlador):
 | **adiado com risco** | Cliente aceita seguir com telas ou estados pendentes listados em `telas.md` |
 | **bloqueado** | Tela essencial reprovada sem saída / DS sem peça crítica / canvas indisponível |
 
-Atualizar `.docs/README.md` status. Subagente **encerra**.
+Atualizar `docs/README.md` status. Subagente **encerra**.
 
 ### 5) O que NÃO fazer
 

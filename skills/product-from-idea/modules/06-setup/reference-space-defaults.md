@@ -1,7 +1,7 @@
 # Padrões Space — Fase 6 (genérico)
 
 > **100% genérico.** Sem nome de produto, cliente ou URL de um piloto.  
-> O agente da Fase 6 **aplica** estas leis e preenche `.docs/setup.md` do produto da vez.
+> O agente da Fase 6 **aplica** estas leis e preenche `docs/setup.md` do produto da vez.
 
 ---
 
@@ -67,7 +67,7 @@ Não há boilerplate Git público como o Next/Elysia, mas a **barra espelha o fr
 | Auth | Mesma conta / JWT do backend quando houver login compartilhado |
 | Quem cria o repo | **DEV**, ao iniciar a peça |
 
-No `.docs/setup.md`: uma linha (TS + webpack + V3 + proibido JS puro). Detalhe de seletores = Fase 11 (tarefas).
+No `docs/setup.md`: uma linha (TS + webpack + V3 + proibido JS puro). Detalhe de seletores = Fase 11 (tarefas).
 
 ---
 
@@ -121,5 +121,5 @@ Quando o setup escolhe ferramenta de terceiros para uma superfície (portal de d
 | OpenAPI / rotas no Apidog | Fase 11 (tarefas) — o setup só decide quantos projetos no Apidog (§6) |
 | Tokens / `P-…` | `design-system-forge` |
 | Auditoria do front feito | `qa-space` |
-| Nome concreto de um produto | `.docs/setup.md` **daquele** workspace |
+| Nome concreto de um produto | `docs/setup.md` **daquele** workspace |
 | Criar repo no GitHub | **DEV** na hora de iniciar — não o Agent de setup |

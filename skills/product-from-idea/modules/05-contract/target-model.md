@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 5 Contrato
 
 > Derivado de contrato de API **real** (OpenAPI Petstore).  
-> Vivo: `.docs/contrato.md`
+> Vivo: `docs/contrato.md`
 
 ## Fontes reais (anexadas)
 

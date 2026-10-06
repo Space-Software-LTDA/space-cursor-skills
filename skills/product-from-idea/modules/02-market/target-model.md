@@ -1,7 +1,7 @@
 # Modelo-alvo — Fase 2 Pesquisa de mercado
 
 > Derivado de casos **reais**.  
-> Vivo: `.docs/pesquisa-mercado.md` · Template: `templates/pesquisa-mercado.md`  
+> Vivo: `docs/pesquisa-mercado.md` · Template: `templates/pesquisa-mercado.md`  
 > Densidade (Airbnb/Deliveroo): [`examples/density-reference.md`](examples/density-reference.md)
 
 ## Fontes reais (anexadas)

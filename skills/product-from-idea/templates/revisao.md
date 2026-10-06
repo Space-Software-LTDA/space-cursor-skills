@@ -16,7 +16,7 @@
 | **Passagem A / B** | A = conteúdo linha a linha · B = clareza seção a seção (`anti-rush.md`) |
 | **Alucinação** | Conteúdo inventado sem fonte/cliente |
 | **Falhou clareza** | Conteúdo pode estar certo, mas confunde o leigo ou parece chat com a IA |
-| **Busca residual** | Grep/busca nos `.docs/` com hits anotados — não basta afirmar “limpo” |
+| **Busca residual** | Grep/busca nos `docs/` com hits anotados — não basta afirmar “limpo” |
 
 ---
 
@@ -197,7 +197,7 @@ Padrões buscados: `qtd.` · `TBD` · `n/d` · não inventar · só o que for re
 | CA | Resultado | Evidência / ação |
 |----|-----------|------------------|
 | 8b.1 Motor igual ao da skill (conferência do playbook, passo 7) | | |
-| 8b.2 Protótipo fora do `.docs/`; `prototipo:start` na raiz | | |
+| 8b.2 Protótipo fora do `docs/`; `prototipo:start` na raiz | | |
 | 8b.3 Abre no Manual da marca com “Iniciar protótipo” | | |
 | 8b.4 Todas as telas aprovadas no protótipo | | |
 | 8b.5 Botões fazem o que o protótipo diz; aviso para ação sem tela; modal fecha para a tela de trás | | |

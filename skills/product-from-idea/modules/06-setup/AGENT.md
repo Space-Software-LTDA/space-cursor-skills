@@ -9,7 +9,7 @@ Decidir o que o time vai criar no Git e nos ambientes — peças, nomes de repos
 
 ## Saída
 
-`.docs/setup.md` a partir de `templates/setup.md`
+`docs/setup.md` a partir de `templates/setup.md`
 
 ## Ler antes de gravar (ordem)
 
@@ -18,7 +18,7 @@ Decidir o que o time vai criar no Git e nos ambientes — peças, nomes de repos
 3. [`target-model.md`](target-model.md)  
 4. **[`reference-space-defaults.md`](reference-space-defaults.md)** — nomes e leis da extensão (**genérico**) + constituição `../docs/nomenclatura.md` e `../docs/git-fluxo.md`  
 5. Anexos reais listados em [`examples/README.md`](examples/README.md) (mapas de pasta dos projetos-base)  
-6. Âncoras: `.docs/contrato.md` · MVP · brief `produto.md`  
+6. Âncoras: `docs/contrato.md` · MVP · brief `produto.md`  
 7. [`../../shared/controller/handoff.md`](../../shared/controller/handoff.md)
 
 ## Formações ligadas
@@ -44,14 +44,14 @@ F5 + F6
 - Fornecedor externo no contrato → perguntar pela camada de integração (referência §5); ferramenta de uma referência só depois de conferida no código dela.  
 - Ferramenta pronta numa superfície → anotar o limite para a Fase 8 (referência §6).  
 - Extensão: **TypeScript + webpack**; **nunca** JavaScript puro.  
-- Nenhum padrão de produto específico dentro da skill — preencher a partir do `.docs/` **deste** produto.  
+- Nenhum padrão de produto específico dentro da skill — preencher a partir do `docs/` **deste** produto.  
 - Sem SQL, sem OpenAPI detalhado, sem `git init` aqui.
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro** (ou o trecho editado). Não otimizar para fechar o gate. CL0 em cada seção tocada. Jargão → Dicionário ou por extenso.
 
 ## Pronto quando
 
-Gate em `.docs/setup.md` gravado. Devolver ao Controlador. **Não** abrir a Fase 7 aqui.
+Gate em `docs/setup.md` gravado. Devolver ao Controlador. **Não** abrir a Fase 7 aqui.

@@ -3,7 +3,7 @@
 > **Genérico** — qualquer produto.  
 > **Target-model + CA:** [`target-model.md`](target-model.md)  
 > **Anexos reais:** [`examples/anexos/`](examples/anexos/) (PSU + interview toolkit)  
-> Persistência: `.docs/discovery.md` (template: `templates/discovery.md`).
+> Persistência: `docs/discovery.md` (template: `templates/discovery.md`).
 
 ## Cabeçalho de toda mensagem
 
@@ -25,7 +25,7 @@
 | 5.1 | Mínimo × diferencial | Duas perguntas separadas: o que **todo concorrente já entrega** (mínimo obrigatório) e o que **só nós** vamos entregar (diferencial) | As duas listas confirmadas; “o que mais pesa na escolha” não entra como diferencial |
 | 6 | Corte | O que o produto **não** resolve | Sim explícito do cliente |
 | 7 | Entrada / gatilho de uso | Como a pessoa começa no dia 1 | 1+ formas fechadas |
-| 8 | Escopo de canais / superfícies | Onde o MVP vive (e o que fica fora) | Tabela no `.docs/` |
+| 8 | Escopo de canais / superfícies | Onde o MVP vive (e o que fica fora) | Tabela no `docs/` |
 | 9 | Definições críticas do domínio | O que não pode ficar “Aberto” (matching, estados, regras…) | F6 com A/B/C |
 | 10 | Nome de trabalho | Codinome ou nome | Fechado ou adiado com risco |
 | 11 | Gate F6 | Virada de fase | Resultado **no arquivo** |
@@ -38,7 +38,7 @@ Quando o cliente quer refazer um produto que já tem código, mockup ou document
 
 1. **Perguntar antes de ler.** Primeira rodada com o cliente: qual é o produto principal, quem usa e o que ainda **não existe** no sistema atual. O código mostra o que foi construído, não o que o produto deve ser — deduzir o produto principal pelo que tem mais tela é falha.
 2. **Valor de mockup não é regra.** Preço, taxa, limite e prazo vistos em dados de exemplo ou telas de demonstração não viram hipótese de produto. Vão só na lista de divergências como “valor visto no sistema atual”. Preço e taxa vêm do cliente.
-3. **Produto ≠ defeito.** No eco e no `.docs/`, o que o produto é fica de um lado; defeitos do sistema atual ficam numa lista própria (“sinais de problema na versão atual”) e nunca aparecem como fato do produto.
+3. **Produto ≠ defeito.** No eco e no `docs/`, o que o produto é fica de um lado; defeitos do sistema atual ficam numa lista própria (“sinais de problema na versão atual”) e nunca aparecem como fato do produto.
 4. O que veio do sistema atual entra como **Hipótese** com a fonte em uma linha; vira Confirmado só com o cliente.
 
 ## Manobras (genéricas)
@@ -62,7 +62,7 @@ Quando o cliente quer refazer um produto que já tem código, mockup ou document
 → **Proibido** sem F6. Opções A/B/C + recomendação + fechado ou adiado **com risco explícito**.
 
 ### Correção no chat (sigla, lista, fato)
-→ **Replace** no `.docs/` com valor canônico.  
+→ **Replace** no `docs/` com valor canônico.  
 → Sem “(X = …)”, “cliente corrigiu”, histórico do mal-entendido.
 
 ### Cliente enrola
@@ -70,7 +70,7 @@ Quando o cliente quer refazer um produto que já tem código, mockup ou document
 
 ## Após cada resposta útil
 
-1. Atualizar `.docs/discovery.md` (Confirmado / Hipótese / Aberto).  
+1. Atualizar `docs/discovery.md` (Confirmado / Hipótese / Aberto).  
 2. Próxima pergunta (1 camada).  
 3. Gate → bloco F6 no arquivo.
 

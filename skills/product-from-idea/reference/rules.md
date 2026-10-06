@@ -42,7 +42,7 @@ Contexto sujo (thread longa, STT, remendos, fases misturadas) **degrada** o Agen
 - Se a thread passou de ~1 tela de ruído / o cliente reclamar de confusão / doc Frankenstein
 
 **Como limpar (padrão Cursor + comunidade):**
-1. Garantir `.docs/{fase}.md` atualizado (chat ≠ verdade).  
+1. Garantir `docs/{fase}.md` atualizado (chat ≠ verdade).  
 2. **Chat novo** (ou sessão nova do subagente da fase).  
 3. Abrir só: rules + arquivo da fase atual (+ âncora se precisar).  
 4. Colar **handoff curto** (template abaixo) — **não** colar transcript.  
@@ -51,7 +51,7 @@ Contexto sujo (thread longa, STT, remendos, fases misturadas) **degrada** o Agen
 **Handoff (copiar no chat novo):**
 ```text
 Fase N — {nome}. Objetivo: {1 linha}.
-Verdade: `.docs/{arquivo}.md` (status: …)
+Verdade: `docs/{arquivo}.md` (status: …)
 Feito: … | Aberto: … | Próximo: …
 Leis: eco→confirma→grava · especialista→leigo · docs padronizados · Dicionário · um gate · não batizar · **abrir target-model + ≥1 anexo** (`modules/`)
 ```
@@ -63,16 +63,16 @@ Leis: eco→confirma→grava · especialista→leigo · docs padronizados · Dic
 | Papel | Onde | Função |
 |-------|------|--------|
 | **Controlador** | **Chat principal** | Fase, gates, handoff, qualidade; **não** faz o trabalho denso da fase |
-| **Agente da fase** | **Subagente** (Task / multi-agent) | Uma fase; contexto limpo; escreve só `.docs/{fase}` |
+| **Agente da fase** | **Subagente** (Task / multi-agent) | Uma fase; contexto limpo; escreve só `docs/{fase}` |
 | **Skills Space** | Subagente ou skill | Forge (DS, Fase 7), Apply (telas, Fase 8), `po-techlead-scrum` (task, Fase 11) |
 
-**Ciclo:** Controlador abre subagente da fase → agente trabalha até o gate → Controlador valida `.docs/` + palavra do cliente → **subagente encerra (encerra)** → limpa → próximo subagente.
+**Ciclo:** Controlador abre subagente da fase → agente trabalha até o gate → Controlador valida `docs/` + palavra do cliente → **subagente encerra (encerra)** → limpa → próximo subagente.
 
-Ônibus da verdade = `.docs/` (+ cartão `shared/controller/handoff.md`), **nunca** a memória da thread do subagente encerrado.
+Ônibus da verdade = `docs/` (+ cartão `shared/controller/handoff.md`), **nunca** a memória da thread do subagente encerrado.
 
 **Método comum do pack:** esta arquitetura é a mesma de todas as skills Space — `../docs/metodo-agentes.md` (subagente por etapa · “Pronto quando” + exemplo real · revisor sem contexto · toda correção → lista de correções → `/skill-update`).
 
-**Revisor sem contexto:** a Fase 9 (e qualquer revisão no meio do caminho) é um subagente novo que recebe só `.docs/`, prints e critérios. Nunca o histórico do chat: quem viu a conversa entende o que o leitor de fora não entende.
+**Revisor sem contexto:** a Fase 9 (e qualquer revisão no meio do caminho) é um subagente novo que recebe só `docs/`, prints e critérios. Nunca o histórico do chat: quem viu a conversa entende o que o leitor de fora não entende.
 
 **Toda correção vira skill:** ao fechar cada gate, o Controlador monta a lista de correções da fase (o que estava errado · causa · correção no documento · o que muda na skill) e chama `/skill-update` (fluxo F). Destino: `CORRECOES.md` desta skill (e do Forge, Apply ou PO quando a correção for deles).
 
@@ -103,14 +103,14 @@ Isso é o modo multi-task/subagente do Cursor aplicado ao fluxo de produto.
 ## Documentação persistida (lei — chat ≠ verdade)
 
 ### Lei
-1. **Se não está em `.docs/`, não está fechado.** Chat é rascunho; arquivo é a memória do produto.
+1. **Se não está em `docs/`, não está fechado.** Chat é rascunho; arquivo é a memória do produto.
 2. **Um arquivo por etapa** (não misturar Discovery com Mercado no mesmo md).
 3. Após **cada bloco útil**: atualizar **só** o arquivo da fase atual.
 4. Em **todo gate F6**: gravar pacote + resultado **naquele** arquivo antes de avançar.
 5. **Tamanho:** fase ~150–200 linhas max (orientação); se crescer, cortar resíduo — não “acrescentar mais um parágrafo de chat”.
-6. **Brief interno:** `.docs/produto.md` — curto; **não** é o manual.  
-7. **Manual comercial (Fase 10):** `.docs/{slug}.md` — completo, tom comercial, reúne as fases; **obrigatório antes das tasks**.  
-8. Marcar nas fases: **Confirmado** · **Hipótese** · **Aberto**. Templates: `templates/`. Índice: `.docs/README.md`.
+6. **Brief interno:** `docs/produto.md` — curto; **não** é o manual.  
+7. **Manual comercial (Fase 10):** `docs/{slug}.md` — completo, tom comercial, reúne as fases; **obrigatório antes das tasks**.  
+8. Marcar nas fases: **Confirmado** · **Hipótese** · **Aberto**. Templates: `templates/`. Índice: `docs/README.md`.
 9. **Clareza humana (lei):** `shared/docs-clarity.md` — teste do estranho; posicionamento do leigo; **proibido** meta de chat / `qtd.` / `TBD`; manual = apresentável sem Cursor.  
 10. **Anti-pressa (lei):** `shared/anti-rush.md` — ler o arquivo inteiro antes de gravar; Revisor = duas passagens + uma linha por CA (colapso = inválido).
 
@@ -125,7 +125,7 @@ Cada fase crítica tem pasta em `modules/NN-name/`:
 | `examples/anexos/` | Casos **reais** baixados (PDF/HTML/YAML) — **não** inventados |
 | `target-model.md` | Estrutura mínima derivada do real + **CA** + **anti-padrões** no final |
 
-**Como o subagente trabalha:** abrir `AGENT.md` → ≥1 anexo → `target-model.md` → preencher `.docs/{fase}.md`.  
+**Como o subagente trabalha:** abrir `AGENT.md` → ≥1 anexo → `target-model.md` → preencher `docs/{fase}.md`.  
 **Proibido:** fabricar “exemplo ilustrativo”; copiar o domínio do anexo (Airbnb ≠ produto do cliente).  
 Índice: `modules/README.md` · Shared: `shared/`.
 
@@ -133,23 +133,23 @@ Cada fase crítica tem pasta em `modules/NN-name/`:
 
 | Fase | Arquivo |
 |------|---------|
-| 1 | `.docs/discovery.md` |
-| 2 | `.docs/pesquisa-mercado.md` |
-| 3 | `.docs/prototipo.md` |
-| 4 | `.docs/mvp.md` |
-| 5 | `.docs/contrato.md` |
-| 6 | `.docs/setup.md` |
-| 7 | `.docs/DESIGN_SYSTEM.md` (Forge; pode ser maior) |
-| 8 | `.docs/telas.md` (Apply; telas no canvas) |
-| 9 | `.docs/revisao.md` (Revisor + CA) |
-| 10 | `.docs/{slug}.md` (manual comercial completo) |
-| 11 | `.docs/tarefas.md` + `.task/…` |
-| Brief interno | `.docs/produto.md` (vago; não substitui 10) |
+| 1 | `docs/discovery.md` |
+| 2 | `docs/pesquisa-mercado.md` |
+| 3 | `docs/prototipo.md` |
+| 4 | `docs/mvp.md` |
+| 5 | `docs/contrato.md` |
+| 6 | `docs/setup.md` |
+| 7 | `docs/DESIGN_SYSTEM.md` (Forge; pode ser maior) |
+| 8 | `docs/telas.md` (Apply; telas no canvas) |
+| 9 | `docs/revisao.md` (Revisor + CA) |
+| 10 | `docs/{slug}.md` (manual comercial completo) |
+| 11 | `docs/tarefas.md` + `.task/…` |
+| Brief interno | `docs/produto.md` (vago; não substitui 10) |
 
 ### Proibido
-- Avançar de fase só no chat, sem atualizar `.docs/`.
+- Avançar de fase só no chat, sem atualizar `docs/`.
 - Gate “fechado” sem o arquivo da fase refletir o pacote.
-- Inventar conteúdo no `.docs/` que o cliente não confirmou (hipótese rotulada).
+- Inventar conteúdo no `docs/` que o cliente não confirmou (hipótese rotulada).
 - Gravar **resíduo de conversa** / correção / meta no arquivo.
 - **Monolito nas fases 1–9:** um único arquivo com todas as fases; ou fase inchada com histórico de chat.
 - Copiar `discovery.md` inteiro para dentro de `produto.md` (brief).
@@ -159,7 +159,7 @@ Cada fase crítica tem pasta em `modules/NN-name/`:
 - **Abreviação preguiçosa:** `qtd.`, `TBD`, sigla sem por extenso na 1ª menção.
 - Manual que **só** faz sentido no Cursor (falha no teste do estranho — `shared/docs-clarity.md`).
 
-### Filtro conversa → `.docs/` (lei — anti-resíduo)
+### Filtro conversa → `docs/` (lei — anti-resíduo)
 
 O arquivo diz a **verdade atual do produto**, no afirmativo. Não é log do chat.
 
@@ -186,9 +186,9 @@ Causa nº 1 das correções da Revisão no piloto: decisões tomadas **depois** 
 | Peça visual, regra de layout | `DESIGN_SYSTEM.md` (nova versão com motivo) |
 
 1. Gravar no arquivo dono **e** no arquivo da fase atual (só a referência curta).  
-2. O gate da fase dona **não reabre**; o `.docs/README.md` ganha uma linha datada do que mudou.  
+2. O gate da fase dona **não reabre**; o `docs/README.md` ganha uma linha datada do que mudou.  
 3. Antes de fechar qualquer gate: “alguma decisão desta fase mexe em outra fase?” → propagar.
-4. **Renomear** (entidade, tela, situação): varrer **todo** o `.docs/` (e o canvas) atrás do nome antigo e conferir a **concordância** (gênero e número) das palavras que dependem dele — ex.: situações no feminino que passam a concordar com um nome masculino. Mudança de concordância é pergunta ao cliente, com a proposta pronta.
+4. **Renomear** (entidade, tela, situação): varrer **todo** o `docs/` (e o canvas) atrás do nome antigo e conferir a **concordância** (gênero e número) das palavras que dependem dele — ex.: situações no feminino que passam a concordar com um nome masculino. Mudança de concordância é pergunta ao cliente, com a proposta pronta.
 5. **Canvas e documento andam juntos:** quando a mesma rodada mexe no canvas e no documento (por pessoas ou agentes diferentes), conferir no fim que os dois dizem a mesma coisa — inclusive a versão.
 
 ---
@@ -217,10 +217,10 @@ Causa nº 1 das correções da Revisão no piloto: decisões tomadas **depois** 
 
 1. **Dicionário no topo (obrigatório):** tabela `Termo | O que é em português claro` — termos da fase + siglas. Mínimo 3–5 linhas do produto se não houver termo novo.  
    **Exceção rara:** anexo técnico puro (OpenAPI cru) — dicionário fica no `contrato.md` que aponta o anexo.  
-2. **Mesmo fato = mesmo rótulo** em todo o `.docs/` e dentro do arquivo (ex.: sempre “quantidade vendida”, nunca “qtd. vendido” / “vendas” / “sold”).  
+2. **Mesmo fato = mesmo rótulo** em todo o `docs/` e dentro do arquivo (ex.: sempre “quantidade vendida”, nunca “qtd. vendido” / “vendas” / “sold”).  
 3. **Mesma entidade = mesma tabela** (mesmas colunas). Proibido ter “Momento A” com colunas X e “Momento B” com colunas Y para o mesmo tipo de campo — use **uma** lista + coluna “onde aparece”.  
 4. Seções de **resumo/família** só repetem os **rótulos canônicos** da lista — sem apelido (“desconto” se o canônico é “percentual de desconto”).  
-4.1. **Renomear = varrer:** nome canônico mudou (ex.: nome de tela) → busca em **todo** `.docs/` e troca na mesma rodada. Nome antigo sobrando em outro arquivo = falha de padronização.  
+4.1. **Renomear = varrer:** nome canônico mudou (ex.: nome de tela) → busca em **todo** `docs/` e troca na mesma rodada. Nome antigo sobrando em outro arquivo = falha de padronização.  
 4.2. **Status vencido:** ao fechar um gate, conferir rótulos de situação nos outros arquivos (versão “rascunho” já aprovada, “próximo passo” e datas antigas) e atualizar.  
 5. Português claro (lei especialista → leigo).  
 6. Listas e tabelas preferíveis a prosa; sem novela.
@@ -244,7 +244,7 @@ Antes de responder no chat, o Agent **passa o olho** no arquivo:
 - Dois padrões de tabela para o mesmo conceito.  
 - Ignorar o template “porque o chat foi mais rápido”.  
 - Arquivo de fase **sem Dicionário** no topo (salvo exceção de anexo técnico).  
-- Deixar inventário externo (`data.md`) como verdade **sem** espelhar padronizado no `.docs/`.
+- Deixar inventário externo (`data.md`) como verdade **sem** espelhar padronizado no `docs/`.
 
 ---
 
@@ -275,7 +275,7 @@ O Agent se sente como um **especialista sênior contratado** que acabou de entra
 - **Corrige** raciocínio fraco com respeito e firmeza (é pago para isso).
 - Enquanto **não estiver claro** → **continua a rodada de perguntas** (blocos curtos, uma camada por vez). Não avança de fase “para parecer produtivo”.
 - Pode propor hipóteses (“pode ser A ou B?”), mas **marca como hipótese** até o cliente confirmar.
-- Documenta respostas e premissas **no chat e em `.docs/`**; o que ficou aberto fica **aberto** (não some no meio do texto).
+- Documenta respostas e premissas **no chat e em `docs/`**; o que ficou aberto fica **aberto** (não some no meio do texto).
 - Atualiza o arquivo da fase **na mesma rodada** em que o cliente trouxe fato novo relevante.
 - **Produto que já existe (refazer):** pergunta primeiro qual é o produto principal e o que ainda **não existe**; só depois lê o sistema atual. Valor de mockup não é regra; defeito do sistema atual não é fato do produto (`modules/01-discovery/playbook.md` → Produto que já existe).
 
@@ -317,7 +317,7 @@ O cliente **não** é analista de mercado nem PM. O Agent é o especialista: **t
 Formações F1–F10 e códigos de fase: ok **internamente**; no chat com o cliente, preferir o **nome da fase** (“pesquisa de mercado”, “decisão de gate”).  
 Termos do método (“eco”, “camada”, “pacote do gate”, “handoff”) também são internos: com o cliente, “resumo do que entendi”, “próximo assunto”, “hora de decidir”.
 
-### Antes de gravar no `.docs/` — eco + confirmação (obrigatória)
+### Antes de gravar no `docs/` — eco + confirmação (obrigatória)
 
 Quando o cliente **despeja** feature, monetização, nome ou fluxo novo (voz, áudio, texto bagunçado):
 
@@ -348,7 +348,7 @@ ligar **F9**, pesquisar se pedir evidência, gravar no arquivo da fase certa (me
 - Deixar no **Aberto** algo que **define o produto** (matching, corte de job, entradas, canais, métrica) só com “entra na próxima fase” — isso é fuga. **Forçar F6** com opções até fechado ou adiado **explícito** pelo cliente.
 - Fazer o cliente **decifrar** o documento (sigla, jargão, código de tela) — se ele precisa “pensar pra entender”, a saída falhou.
 - **Batizar** feature/modo/produto sem o cliente ter dito o nome (especialmente após áudio/STT).
-- Gravar dump novo no `.docs/` **sem** eco + confirmação.
+- Gravar dump novo no `docs/` **sem** eco + confirmação.
 - Manter **dois gates de fase** abertos ao mesmo tempo.
 
 ---
@@ -371,7 +371,7 @@ Na Discovery, no mínimo:
 2. Recomendar uma (especialista) + por quê em 1 frase.  
 3. Pedir: **fechado nesta** / **outra** / **adiado com risco (você assume X)**.  
 4. Se o cliente enrolar: **insistir uma vez** com a mesma decisão, opções mais fechadas.  
-5. Só então gravar no `.docs/` — nunca “Aberto: decide depois na Fase 2” para item da lista crítica.
+5. Só então gravar no `docs/` — nunca “Aberto: decide depois na Fase 2” para item da lista crítica.
 
 ### O que **pode** ir pra fase seguinte (parking legítimo)
 - Cor, tokens, glow, stack detalhada, payloads OpenAPI, copy de marketing.  

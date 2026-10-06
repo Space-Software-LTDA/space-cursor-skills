@@ -3,7 +3,7 @@
 > Fase: 2 — Pesquisa de mercado  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncora: `.docs/discovery.md`  
+> Âncora: `docs/discovery.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/02-market/target-model.md` + `modules/02-market/examples/anexos/`
 > **Para o agente (não copiar para o arquivo final):** roteiro = `modules/02-market/playbook.md`
 ---

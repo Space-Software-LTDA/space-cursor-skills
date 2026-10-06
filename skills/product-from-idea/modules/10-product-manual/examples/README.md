@@ -1,6 +1,6 @@
 # Exemplos — Fase 10 Manual comercial
 
-> Anexos = **arquivos reais** (PDF / HTML baixados). Documento vivo do produto: `.docs/{slug}.md` (não estes arquivos).  
+> Anexos = **arquivos reais** (PDF / HTML baixados). Documento vivo do produto: `docs/{slug}.md` (não estes arquivos).  
 > Barra (estrutura + critérios de aceite + anti-padrões): [`../target-model.md`](../target-model.md)
 
 ## Ler primeiro

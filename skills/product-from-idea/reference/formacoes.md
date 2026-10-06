@@ -94,13 +94,13 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 **Exige**
 - Declarar fase + objetivo a cada bloco.
 - Foco por etapa (anti-poluição).
-- **Persistir em `.docs/`** o que foi confirmado / hipótese / aberto (chat ≠ verdade).
+- **Persistir em `docs/`** o que foi confirmado / hipótese / aberto (chat ≠ verdade).
 - **Filtro conversa → arquivo:** correção do cliente **substitui** o texto; zero resíduo (“ML = …”, “cliente corrigiu”, histórico do mal-entendido).
 - **Organização + padronização:** arquivo nasce do template; **Dicionário no topo**; mesmo fato = mesmo nome; mesma entidade = mesma tabela; após gravação, unificar se ficou remendado.
-- **Limpar contexto a cada passo:** gate fechado → **subagente novo** + handoff (`.docs/` = ônibus); proibido empilhar fases na mesma thread suja.
+- **Limpar contexto a cada passo:** gate fechado → **subagente novo** + handoff (`docs/` = ônibus); proibido empilhar fases na mesma thread suja.
 - **Controlador** no chat principal; **um subagente por fase**; subagente **encerra** ao fechar o gate (modo multi-task Cursor).
 - Gate F6 só depois do arquivo da fase atualizado **e** legível (não Frankenstein).
-- **Propagação:** decisão que mexe em fase anterior volta para o arquivo dono na mesma rodada; renomear = varrer `.docs/`; status vencido atualizado ao fechar gate.
+- **Propagação:** decisão que mexe em fase anterior volta para o arquivo dono na mesma rodada; renomear = varrer `docs/`; status vencido atualizado ao fechar gate.
 - Handoff limpo: o que sai da fase fica documentado; código = **devs**.
 - Skills Space (Forge, PO) = subagentes de etapa 7–8.
 
@@ -108,7 +108,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - Cerimônia Scrum por cerimônia.
 - Pular fase “pra ir mais rápido”.
 - Misturar discovery com escrita de task incompleta.
-- Avançar gate só no chat, sem `.docs/`.
+- Avançar gate só no chat, sem `docs/`.
 - Doc como ata de reunião / trilha de correções.
 - **Remendar** o md até ficar ilegível; dois formatos pro mesmo conceito.
 - Continuar thread infinita atravessando fases sem reset.
@@ -130,7 +130,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - Na Fase 5: seguir `modules/05-contract/playbook.md` + template.
 - Uma decisão por vez; eco → confirma → grava.
 - Distinguir **corte fechado** vs **lista completa** vs **depois (task/setup)**.
-- Inventário externo → eco em português → `.docs/contrato.md`.
+- Inventário externo → eco em português → `docs/contrato.md`.
 - Arquitetura mínima: entidades, limites, não-funcionais críticos.
 - Citar boilerplates Space na task — sem implementar.
 
@@ -142,7 +142,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - Codar no lugar do dev.
 
 **Onde grava**
-- `.docs/contrato.md` · anexos OpenAPI/DBML na hora da task
+- `docs/contrato.md` · anexos OpenAPI/DBML na hora da task
 
 ---
 
@@ -160,7 +160,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - Opções nomeadas (A/B/C) + critério (não “eu acho”) + **recomendação do especialista**.
 - Resultado: **fechado** | **adiado com risco documentado pelo cliente** | **bloqueado — falta dado**.
 - Dono da decisão = cliente; Agent **força o fechamento** (não espera passivo; não estaciona crítico em “Fase 2”).
-- **Gravar o resultado do gate no `.docs/` da fase** (sem isso o gate não vale).
+- **Gravar o resultado do gate no `docs/` da fase** (sem isso o gate não vale).
 - Itens críticos da fase (ver `reference/rules.md` → Forçar decisão) **resolvidos ou adiados com risco** antes do gate de *virada* de fase.
 
 **Proíbe**
@@ -263,7 +263,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - ≥5 alternativas incl. status quo; para cada uma: **preço/modelo tentado**, escala se pública, falha vs nossa dor.
 - **Browser** quando pricing/store/landing exigir (não chute de homepage).
 - Gaps + ameaças + seguir/pivotar/matar.
-- Gravar `.docs/pesquisa-mercado.md`.
+- Gravar `docs/pesquisa-mercado.md`.
 
 **Proíbe**
 - Pesquisa rasa (só URLs + 3 bullets de gap).
@@ -273,7 +273,7 @@ F1 → F8 → F10 (mercado) → F3 → F6 → F4 → F2 → F5 → F7
 - Pular browser “porque deu trabalho”.
 
 **Onde grava**
-- `.docs/pesquisa-mercado.md`  
+- `docs/pesquisa-mercado.md`  
 - Roteiro + exemplo: `modules/02-market/playbook.md`, `modules/`
 
 ---

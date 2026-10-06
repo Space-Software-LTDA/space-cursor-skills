@@ -5,7 +5,7 @@
 > Última atualização: YYYY-MM-DD
 
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/01-discovery/target-model.md` + examples/anexos/
-Copiar para `.docs/discovery.md` na primeira gravação (ou criar o arquivo já preenchendo).
+Copiar para `docs/discovery.md` na primeira gravação (ou criar o arquivo já preenchendo).
 
 ---
 

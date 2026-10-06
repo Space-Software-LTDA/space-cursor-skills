@@ -3,7 +3,7 @@
 > Fase: 4 — MVP  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncora: `.docs/prototipo.md`  
+> Âncora: `docs/prototipo.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/04-mvp/target-model.md` + examples/anexos/
 ---
 

@@ -57,7 +57,7 @@
 
 | Gap | Status | Ação |
 |-----|--------|------|
-| Zero write em `.docs/` | **Corrigido** | Write na rodada útil + gate |
+| Zero write em `docs/` | **Corrigido** | Write na rodada útil + gate |
 | Pesquisa rasa / número sem conta | **Corrigido** | Roteiro F10 + lei da conta |
 | Sopa de siglas | **Corrigido** | Especialista → leigo |
 | Inventou “AIDE” (STT) | **Corrigido** | Não batizar; eco antes |
@@ -67,7 +67,7 @@
 | Doc sem glossário / leigo perdido em sigla | **Corrigido na lei** | Dicionário no topo |
 | Exemplos inventados (“caso ilustrativo”) | **Corrigido na lei** | Só anexos reais + modelo-alvo |
 | Resposta ambígua (`2`) | **Corrigido** | Confirmar opção antes de gravar |
-| `data.md` fora de `.docs/` | **Resolvido** | Todos os campos traduzidos no contrato; o arquivo virou só referência técnica |
+| `data.md` fora de `docs/` | **Resolvido** | Todos os campos traduzidos no contrato; o arquivo virou só referência técnica |
 | Monetização sem preço no MVP | **OK com risco** | Mecanismo sim; R$ adiado explícito |
 | Documentos com contexto de chat, `qtd.`, siglas | **Corrigido na lei** | `docs-clarity.md` + `*.CL` em toda fase |
 | Revisor com pressa (CAs colapsados, residual só afirmado) | **Corrigido na lei** | `anti-rush.md` |
@@ -104,7 +104,7 @@
 
 ## Comportamentos a exigir no SKILL.md
 
-1. Write em `.docs/{fase}.md` na mesma rodada do fato.  
+1. Write em `docs/{fase}.md` na mesma rodada do fato.  
 2. Gate só com arquivo refletindo o pacote.  
 3. Eco → confirma → grava (dump / inventário / áudio).  
 4. Clareza leigo; um gate por vez.  
@@ -121,7 +121,7 @@
 15. Telas uma por vez, Home primeiro, OK do cliente por tela; lote só a pedido.  
 16. Tarefas por fatia, com plano aprovado antes da primeira.  
 17. **Propagar** decisão tardia para o arquivo dono na mesma rodada.  
-18. **Renomear = varrer** todo `.docs/`; atualizar status vencido ao fechar gate.  
+18. **Renomear = varrer** todo `docs/`; atualizar status vencido ao fechar gate.  
 19. **Perguntar só o necessário**: produto e gosto sem regra → cliente; o resto → resolver e informar.  
 20. **Canvas protegido**: um editor, cópia com data por rodada, conferir que o arquivo mudou no disco.  
 21. **Fases longas**: subagente novo por tela ou fatia.  
@@ -136,8 +136,8 @@
 - Protocolo tagarela / over-spec de status.  
 - Fechar contrato com lista que o cliente disse faltar.  
 - Copiar código/`POST /...` para o doc de produto sem traduzir.  
-- Tratar inventário externo como verdade sem eco + `.docs/`.  
-- Remendar `.docs/` até ficar despadronizado.  
+- Tratar inventário externo como verdade sem eco + `docs/`.  
+- Remendar `docs/` até ficar despadronizado.  
 - Decisão nova gravada só no arquivo da fase atual.  
 - Copiar a nota “para o agente” do template para o documento.  
 - Editar o canvas sem cópia, com o arquivo aberto em duas janelas.  

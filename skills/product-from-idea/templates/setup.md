@@ -3,7 +3,7 @@
 > Fase: 6 — Setup  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncora: `.docs/contrato.md`  
+> Âncora: `docs/contrato.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/06-setup/target-model.md`
 > **Para o agente (não copiar para o arquivo final):** leis Space = `modules/06-setup/reference-space-defaults.md`
 ---

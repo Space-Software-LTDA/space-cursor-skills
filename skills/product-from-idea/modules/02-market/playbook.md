@@ -15,7 +15,7 @@
 
 ## Pré-requisito
 
-- `.docs/discovery.md` fechado (ou adiado com risco) com problem statement, persona, fora de escopo.  
+- `docs/discovery.md` fechado (ou adiado com risco) com problem statement, persona, fora de escopo.  
 - Sem isso → **não** começa Fase 2.
 
 ## Cabeçalho
@@ -122,10 +122,10 @@ Matriz de posicionamento (opcional mas recomendado): 3–5 dimensões que **impo
 1. Ler `discovery.md`  
 2. Declarar Fase 2 + âncora  
 3. Search amplo → shortlist  
-4. **Para cada shortlist:** abrir páginas (browser) e extrair preço/usuários/proposta. **Salvar o trecho da fonte** (citação curta + URL + data) num rascunho fora do `.docs/` no momento da leitura — número que não tem trecho salvo não entra no arquivo. Proibido escrever número de memória depois que o contexto da conversa foi resumido  
+4. **Para cada shortlist:** abrir páginas (browser) e extrair preço/usuários/proposta. **Salvar o trecho da fonte** (citação curta + URL + data) num rascunho fora do `docs/` no momento da leitura — número que não tem trecho salvo não entra no arquivo. Proibido escrever número de memória depois que o contexto da conversa foi resumido  
 4.1. **Divergência ≠ erro:** quando duas fontes discordam, só chamar uma de errada depois de checar a fonte oficial (texto da norma, relatório original, página de preços)  
 5. Montar TAM/SAM/SOM com contas  
-6. Gravar `.docs/pesquisa-mercado.md` (usar template) e **reconferir cada número** contra o trecho salvo antes de devolver  
+6. Gravar `docs/pesquisa-mercado.md` (usar template) e **reconferir cada número** contra o trecho salvo antes de devolver  
 7. Comparar com [`target-model.md`](target-model.md) (+ [`examples/density-reference.md`](examples/density-reference.md); abrir PDF em [`examples/anexos/`](examples/anexos/) se faltar densidade)  
 8. Chat: destaques (tamanho, ameaça #1, gap, SOM) + path + Gate F6  
 

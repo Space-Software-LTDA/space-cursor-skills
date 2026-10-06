@@ -10,7 +10,7 @@
 
 ```text
 **Fase 7 — Design System**
-**Objetivo:** criar manual da marca + DS do produto (.docs/) + Fundamentos e componentes no canvas — nível essencial
+**Objetivo:** criar manual da marca + DS do produto (docs/) + Fundamentos e componentes no canvas — nível essencial
 **ON:** F2 + F5 + F6
 **Skill:** design-system-forge
 ```
@@ -30,7 +30,7 @@ O Forge lista o que existe e o que falta (manual da marca, DS, tokens, canvas, c
 | Modo | Quando | Fonte típica |
 |------|--------|--------------|
 | **Extrair** | Produto já tem telas (site, construtor, código, prints) | URL, código, prints, tokens existentes |
-| **Criar** | Produto novo, sem telas | Brief de intenção, proto (`.docs/prototipo.md`), manual da marca se houver |
+| **Criar** | Produto novo, sem telas | Brief de intenção, proto (`docs/prototipo.md`), manual da marca se houver |
 
 Mapear **superfícies do produto** a partir de setup + proto (site, extensão popup, overlays…).  
 GATE 0 bloqueado → **PARAR** (não inventar DS completo).
@@ -51,7 +51,7 @@ Diagnóstico → modo + GATE 0
 → canvas: variáveis → prancha Fundamentos → componentes (lista por faixa + matriz de estados)
 → GATE ACCEPT + anti-contradição
 → confronto com ui-gosto (geral + tipo do produto)
-→ gravar .docs/ + EXTRACTION_NOTES
+→ gravar docs/ + EXTRACTION_NOTES
 → STOP: PASS | PASS COM RESSALVAS | REPROVADO → pergunta se evolui para ouro
 ```
 
@@ -94,7 +94,7 @@ No chat (Controlador):
 | **adiado com risco** | Cliente assume buracos listados |
 | **bloqueado** | REPROVADO / fonte insuficiente / Qs abertas críticas |
 
-Atualizar `.docs/README.md` status. Subagente **encerra**.
+Atualizar `docs/README.md` status. Subagente **encerra**.
 
 ### 5) O que NÃO fazer depois do STOP
 

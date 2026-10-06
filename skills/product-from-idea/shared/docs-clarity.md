@@ -1,6 +1,6 @@
 # Lei — documentos legíveis por humano (cliente / mercado)
 
-> Vale para **todo** `.docs/`. Mais rígida no **manual comercial** (`.docs/{slug}.md`).
+> Vale para **todo** `docs/`. Mais rígida no **manual comercial** (`docs/{slug}.md`).
 
 ## Teste do estranho
 
@@ -12,7 +12,7 @@ Se parece conversa com a IA → **reescrever**.
 
 ## Posicionamento do leigo (obrigatório — especialmente no Revisor)
 
-Em **todo** trecho / tabela / seção de **todo** `.docs/`, o Revisor (e qualquer agente que grava) assume:
+Em **todo** trecho / tabela / seção de **todo** `docs/`, o Revisor (e qualquer agente que grava) assume:
 
 > **“Se eu fosse um leigo lendo esta informação, eu ficaria confuso? Isso esclarece?”**
 
@@ -80,7 +80,7 @@ A Revisão do piloto precisou acrescentar cerca de 70 termos nos Dicionários da
 
 ## Notas “para o agente” nos templates
 
-Linhas marcadas **“Para o agente (não copiar para o arquivo final)”** nos templates são instrução de trabalho. Nunca vão para o `.docs/`. No piloto, a linha “Qualidade: `…`” do template foi copiada para `telas.md` e a Revisão teve de apagar.
+Linhas marcadas **“Para o agente (não copiar para o arquivo final)”** nos templates são instrução de trabalho. Nunca vão para o `docs/`. No piloto, a linha “Qualidade: `…`” do template foi copiada para `telas.md` e a Revisão teve de apagar.
 
 ## Checklist rápido (todo Write)
 

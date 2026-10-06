@@ -1,7 +1,7 @@
 # Referência de densidade — Fase 7 Design System
 
 > **Não é o documento vivo do produto.** Barra oficial: [`../target-model.md`](../target-model.md).  
-> Saída viva: `.docs/DESIGN_SYSTEM.md` + `tokens.dtcg.json` + `EXTRACTION_NOTES` + canvas (pela skill **`design-system-forge`**).
+> Saída viva: `docs/DESIGN_SYSTEM.md` + `tokens.dtcg.json` + `EXTRACTION_NOTES` + canvas (pela skill **`design-system-forge`**).
 
 ## Dois tipos de exemplo real
 
@@ -36,7 +36,7 @@
 
 ### O que o PixReals faz (barra do documento)
 
-| Bloco | PixReals (abrir o arquivo) | Obrigatório no nosso `.docs/` |
+| Bloco | PixReals (abrir o arquivo) | Obrigatório no nosso `docs/` |
 |-------|----------------------------|-------------------------------|
 | Cabeçalho + ordem de verdade | §0 — humano > gosto > código > método Space > rascunho | Mesma ordem |
 | Filosofia + o que não parecer | §1 — uma cor principal, sem brilho, aninhado = superfície 2 | Deve / Não deve + princípios com porquê |
@@ -71,7 +71,7 @@
 
 ## Roteiro do agente
 
-1. Abrir o **DESIGN_SYSTEM do PixReals** → alvo de densidade do `.docs/DESIGN_SYSTEM.md` vivo.  
+1. Abrir o **DESIGN_SYSTEM do PixReals** → alvo de densidade do `docs/DESIGN_SYSTEM.md` vivo.  
 2. Abrir as **EXTRACTION_NOTES do PixReals** → formato do diagnóstico / perguntas / aceite / apêndice.  
 3. Abrir o **canvas do buscaí** → como ficam as pranchas de marca, Fundamentos e Componentes.  
 4. Se o produto tem extensão: abrir **Polaris** (várias superfícies).  

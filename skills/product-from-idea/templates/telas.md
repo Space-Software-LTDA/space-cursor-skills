@@ -3,7 +3,7 @@
 > Fase: 8 — Telas  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncoras: `.docs/prototipo.md` · `.docs/mvp.md` · `.docs/DESIGN_SYSTEM.md` · `.docs/contrato.md`  
+> Âncoras: `docs/prototipo.md` · `docs/mvp.md` · `docs/DESIGN_SYSTEM.md` · `docs/contrato.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/08-screens/target-model.md` + anexos reais listados em `08-screens/examples/README.md`
 ---
 
@@ -33,7 +33,7 @@
 | Arquivo de canvas | |
 | Área oficial | |
 | Área de rascunho | |
-| Relatórios de cada rodada | `.docs/design-system-forge/QA_REPORTS/` |
+| Relatórios de cada rodada | `docs/design-system-forge/QA_REPORTS/` |
 
 ## Conferência do Design System com o gosto
 
@@ -69,7 +69,7 @@
 
 ## Diferenças para os devs
 
-> Só quando já existe tela em código ou num construtor de app. Detalhe em `.docs/design-system-forge/DIFERENCAS_PARA_DEVS.md`.
+> Só quando já existe tela em código ou num construtor de app. Detalhe em `docs/design-system-forge/DIFERENCAS_PARA_DEVS.md`.
 
 | Tela | Como está hoje | Como deve ficar (tela do canvas) | Prioridade |
 |------|----------------|----------------------------------|------------|

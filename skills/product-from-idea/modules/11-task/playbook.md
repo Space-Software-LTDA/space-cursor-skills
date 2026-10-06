@@ -17,8 +17,8 @@
 ## Pré-requisitos
 
 - Revisão (Fase 9) liberou o caminho (fechado ou adiado com risco)  
-- Manual comercial `.docs/{slug}.md` (Fase 10) fechado ou adiado com risco  
-- Telas essenciais aprovadas em `.docs/telas.md` (Fase 8)  
+- Manual comercial `docs/{slug}.md` (Fase 10) fechado ou adiado com risco  
+- Telas essenciais aprovadas em `docs/telas.md` (Fase 8)  
 - `setup.md` (repos + boilerplates) · `contrato.md` (o que guardar, quem faz o quê) · `mvp.md` (corte do dia 1)  
 - Sem isso → voltar à fase que falta; não escrever tarefa sobre buraco
 
@@ -29,7 +29,7 @@
 Uma **fatia** é uma entrega que o time consegue fazer, provar e mostrar sozinha (ex.: “criar conta e ver saldo”, “buscar a partir da página do produto”). Não é “o back inteiro” nem “o front inteiro”.
 
 1. Ler `mvp.md` (jornadas do dia 1), `telas.md` (telas aprovadas), `contrato.md` e `setup.md`.  
-2. Propor o **plano de fatias** em `.docs/tarefas.md` (template `templates/tarefas.md`): ordem, o que cada fatia entrega, jornadas e telas cobertas, camadas (back · front · extensão), dependências.  
+2. Propor o **plano de fatias** em `docs/tarefas.md` (template `templates/tarefas.md`): ordem, o que cada fatia entrega, jornadas e telas cobertas, camadas (back · front · extensão), dependências.  
 3. Conferir cobertura: **toda** jornada do dia 1 cai em alguma fatia. Fatias só do MVP; telas e itens da expansão futura ficam numa lista separada em `tarefas.md`, sem tarefa.  
 4. **PARAR** → cliente aprova o plano (pode reordenar, juntar, cortar).
 
@@ -67,7 +67,7 @@ Aprovação local explícita → publicação pelo fluxo da skill (lista, respon
 | **adiado com risco** | Cliente aceita começar o desenvolvimento com fatias ainda em aberto, listadas |
 | **bloqueado** | Falta dado de contrato, banco ou Apidog para uma fatia crítica |
 
-Atualizar `.docs/README.md`. **Fim da linha** agente + cliente — daqui para frente é dos devs.
+Atualizar `docs/README.md`. **Fim da linha** agente + cliente — daqui para frente é dos devs.
 
 ## O que NÃO fazer
 

@@ -8,7 +8,7 @@ O que o sistema **guarda** e **quem faz o quê** — em linguagem de leigo, sem 
 
 ## Saída
 
-`.docs/contrato.md` a partir de `templates/contrato.md`
+`docs/contrato.md` a partir de `templates/contrato.md`
 
 ## Ler antes de gravar (ordem)
 
@@ -30,7 +30,7 @@ F5 (+ F6; F9 se houver créditos ou monetização)
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro** (ou o trecho editado). Não otimizar para fechar o gate. CL0 em cada seção tocada. Jargão → Dicionário ou por extenso.
 
 ## Pronto quando

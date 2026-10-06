@@ -4,9 +4,9 @@ Você roda no **chat principal**. Você **não** faz o trabalho denso das fases.
 
 ## Trabalho
 
-1. Ler `.docs/README.md` → qual fase está aberta.
+1. Ler `docs/README.md` → qual fase está aberta.
 2. Abrir **um** subagente com o `modules/NN-*/AGENT.md` daquela fase + cartão de passagem de bastão.
-3. Validar `.docs/{fase}.md` + gate do cliente (F6).
+3. Validar `docs/{fase}.md` + gate do cliente (F6).
 4. O subagente **encerra**. Contexto limpo. Próximo subagente.
 
 ## Ler primeiro
@@ -17,7 +17,7 @@ Você roda no **chat principal**. Você **não** faz o trabalho denso das fases.
 
 ## Leis
 
-- Chat ≠ verdade → `.docs/`
+- Chat ≠ verdade → `docs/`
 - Um gate de fase por vez
 - Mantra com o cliente: **“Eu preciso que você me fale.”**
 - Nunca inventar fato do produto
@@ -25,15 +25,15 @@ Você roda no **chat principal**. Você **não** faz o trabalho denso das fases.
 - **Fato que muda o produto** (lei nova, proibição, preço de concorrente que derruba o modelo): o Controlador confere por conta própria na fonte oficial antes de levar ao cliente — não repassa a palavra do subagente sem checagem
 - **Anti-pressa:** ao validar o Revisor, **rejeitar** `revisao.md` com critério colapsado (`3.1–3.7 OK`), sem bloco Busca residual ou sem telas conferidas por print (R15) — devolver, não avançar
 - **Fase 8 (Telas):** validar que `telas.md` tem, **por tela**, OK do cliente + relatório do Apply sem pendência, Home primeiro, cada tela nas superfícies da lista (site = computador; celular só se o cliente pedir); rejeitar lote que o cliente não pediu (lote pedido = ciclo completo + relatório por tela) ou tela seguinte sem Apply na anterior; conferir cópias do canvas em `copias/`
-- **Fase 8.5 (Protótipo navegável):** validar que `prototipo/` está fora do `.docs/`, abre no Manual da marca com “Iniciar protótipo”, cobre todas as telas aprovadas de `telas.md`, `npm run prototipo:verificar` passa sem erro e há prints da conferência visual desta sessão; rejeitar tela remendada no HTML ou motor do molde alterado no produto (melhoria do motor → `/skill-update`)
+- **Fase 8.5 (Protótipo navegável):** validar que `prototipo/` está fora do `docs/`, abre no Manual da marca com “Iniciar protótipo”, cobre todas as telas aprovadas de `telas.md`, `npm run prototipo:verificar` passa sem erro e há prints da conferência visual desta sessão; rejeitar tela remendada no HTML ou motor do molde alterado no produto (melhoria do motor → `/skill-update`)
 - **Fase 11 (Tarefas):** validar o plano de fatias antes da primeira tarefa; uma fatia por vez
 - **Fases longas (8 e 11):** subagente novo por tela ou fatia, ou quando a conversa do subagente ficar longa — não reaproveitar o mesmo por dias
 - **Fase 0:** conferir se o workspace é um repositório git próprio; se não for, propor ao cliente (criar só com OK)
 
 ## Checagem em todo gate (antes de pedir a palavra do cliente)
 
-1. **Propagação:** alguma decisão desta fase mexe em fase anterior (tela, dado, regra, escopo)? → o arquivo dono foi atualizado e o `.docs/README.md` tem a linha datada.  
-2. **Nomes:** algum nome canônico mudou? → busca em todo `.docs/` sem sobra do nome antigo.  
+1. **Propagação:** alguma decisão desta fase mexe em fase anterior (tela, dado, regra, escopo)? → o arquivo dono foi atualizado e o `docs/README.md` tem a linha datada.  
+2. **Nomes:** algum nome canônico mudou? → busca em todo `docs/` sem sobra do nome antigo.  
 3. **Status vencido:** versões “rascunho” já aprovadas, “próximo passo” e datas antigas nos outros arquivos → atualizados.  
 4. **Decisões só no chat:** o que o cliente decidiu nesta fase está gravado? Se uma gravação foi interrompida, conferir o arquivo antes de seguir.  
 5. **Regra nova do cliente:** se o cliente deu uma diretriz que vale além desta fase (ex.: “pergunte só o necessário”), ela vai para as leis da skill (via `/skill-update`), não só para o próximo cartão de passagem de bastão.  

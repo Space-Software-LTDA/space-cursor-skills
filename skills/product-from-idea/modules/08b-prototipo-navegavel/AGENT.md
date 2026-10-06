@@ -11,10 +11,10 @@ Transformar as telas aprovadas na Fase 8 num **site que dá para clicar**: abre 
 
 | Artefato | Caminho |
 |----------|---------|
-| Protótipo (motor do molde + telas exportadas) | `prototipo/` na **raiz do workspace** — **fora** do `.docs/` |
+| Protótipo (motor do molde + telas exportadas) | `prototipo/` na **raiz do workspace** — **fora** do `docs/` |
 | Comandos | `package.json` da raiz: `prototipo:start`, `prototipo:preparar`, `prototipo:verificar` |
-| Registro da fase (telas cobertas, como rodar, gate) | `.docs/telas.md`, seção “Protótipo navegável” (template: `templates/telas.md`) |
-| Status | `.docs/README.md` — linha da Fase 8.5 |
+| Registro da fase (telas cobertas, como rodar, gate) | `docs/telas.md`, seção “Protótipo navegável” (template: `templates/telas.md`) |
+| Status | `docs/README.md` — linha da Fase 8.5 |
 
 ## Ler antes de começar (ordem)
 
@@ -23,7 +23,7 @@ Transformar as telas aprovadas na Fase 8 num **site que dá para clicar**: abre 
 3. [`target-model.md`](target-model.md)  
 4. Anexo real: [`examples/README.md`](examples/README.md) — manifesto, rotas e saída do verificar de um protótipo real, e prints do que **não** pode aparecer  
 5. O molde: [`molde/`](molde/) — `LEIA-ME.md`, `screens.js` e `rotas.js` (o que você preenche); `nav.js` e `index.html` (motor, só ler)  
-6. Âncoras do produto: `.docs/telas.md` (lista de telas aprovadas e onde estão no canvas) · `.docs/prototipo.md` (o que cada botão faz, fluxos e estados) · `.docs/DESIGN_SYSTEM.md` (cor principal para o destaque do shell)  
+6. Âncoras do produto: `docs/telas.md` (lista de telas aprovadas e onde estão no canvas) · `docs/prototipo.md` (o que cada botão faz, fluxos e estados) · `docs/DESIGN_SYSTEM.md` (cor principal para o destaque do shell)  
 7. Canvas conectado (Pencil por padrão — `design-system-forge/canvas-ferramentas.md`)  
 8. [`../../shared/controller/handoff.md`](../../shared/controller/handoff.md)
 
@@ -45,10 +45,10 @@ F2 (+ F6 no gate)
 ## Regras fixas
 
 - **Só exporta, não redesenha.** O HTML vem do canvas pelo export; nunca editar `telas/*.html` à mão. Defeito na tela → corrigir no canvas (Fase 8) → reexportar.  
-- **Fora do `.docs/`.** O protótipo mora em `prototipo/` na raiz do workspace; `.docs/` só registra.  
+- **Fora do `docs/`.** O protótipo mora em `prototipo/` na raiz do workspace; `docs/` só registra.  
 - **Motor intocado.** No produto só se escrevem `prototipo/screens.js` e `prototipo/rotas.js`. Precisou mudar `index.html`, `nav.js`, `server.js` ou `scripts/` → lista de correções → `/skill-update`.  
 - **Abre no Manual da marca** com o botão “Iniciar protótipo”; documentação (Manual, Fundamentos, Componentes, Rascunho) primeiro na lista lateral.  
-- **Cada botão faz o que o protótipo diz** (`.docs/prototipo.md`). Ação sem tela desenhada → toast curto, nunca link para tela errada.  
+- **Cada botão faz o que o protótipo diz** (`docs/prototipo.md`). Ação sem tela desenhada → toast curto, nunca link para tela errada.  
 - **Modal e gaveta voltam para a tela de trás** (clique fora ou no X). Computador ⇄ Celular leva para a **mesma** tela no outro tamanho.  
 - **Verificar antes de mostrar:** `npm run prototipo:verificar` sem destino inválido e sem tela isolada (fora as listadas em `semLinkChegando`).  
 - **Conferência visual com prints** do protótipo rodando (sem navegador automático → pedir ao humano para abrir e mandar prints).  
@@ -60,5 +60,5 @@ F2 (+ F6 no gate)
 2. Todas as telas aprovadas da Fase 8 + Manual da marca, Fundamentos, Componentes e Rascunho no manifesto (`screens.js`), agrupadas como no canvas  
 3. `npm run prototipo:verificar` sem erro; lista de clicáveis revisada tela a tela contra `prototipo.md`  
 4. Conferência visual feita (checklist do playbook, passo 9) com prints desta sessão  
-5. `.docs/telas.md` com a seção “Protótipo navegável” e gate gravado (fechado · adiado com risco · bloqueado) — Controlador confirma  
+5. `docs/telas.md` com a seção “Protótipo navegável” e gate gravado (fechado · adiado com risco · bloqueado) — Controlador confirma  
 6. Devolver ao Controlador — **não** abrir a Fase 9 (Revisão) nesta conversa

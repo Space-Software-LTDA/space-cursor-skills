@@ -1,7 +1,7 @@
 # Handoff entre fases / subagentes (limpar contexto)
 
 > **Padrão canônico:** Controlador no chat principal · **um subagente por fase** · ao fechar o gate o subagente **encerra**.  
-> Ônibus da verdade = `.docs/` — **não** o transcript do subagente encerrado.
+> Ônibus da verdade = `docs/` — **não** o transcript do subagente encerrado.
 
 ---
 
@@ -9,7 +9,7 @@
 
 | Papel | Onde | Faz |
 |-------|------|-----|
-| **Controlador** | Chat principal | Declara a fase; abre o subagente; valida `.docs/` + gate do cliente; gera a passagem de bastão; **não** mistura as fases no próprio contexto |
+| **Controlador** | Chat principal | Declara a fase; abre o subagente; valida `docs/` + gate do cliente; gera a passagem de bastão; **não** mistura as fases no próprio contexto |
 | **Agente da fase** | Subagente (Task / multi-agent) | Só aquela etapa; eco→confirma→grava; contexto limpo |
 | **Forge / Apply / po-techlead** | Subagente ou skill | DS (7, Forge) · Telas (8, Apply) · Manual (10) · Tarefas (11, po-techlead) |
 
@@ -24,7 +24,7 @@ Fallback (sem Task): chat **novo** por fase + mesmo cartão abaixo.
 ```text
 Você é o agente da Fase N — {nome}.
 Objetivo: {1 linha}.
-Verdade: `.docs/{arquivo}.md` (criar do template se não existir)
+Verdade: `docs/{arquivo}.md` (criar do template se não existir)
 Âncora: {arquivos fechados relevantes}
 Feito até agora: {3 bullets}
 Aberto: {ou “nenhum”}
@@ -32,7 +32,7 @@ Ler antes: {SKILL_DIR}/modules/{fase}/AGENT.md · playbook.md · target-model.md
 Pronto quando: {copiado da linha da fase na tabela “Método de execução” do SKILL.md}
 Leis: eco→confirma→grava (termo interno; com o cliente: “resumo do que entendi”) · especialista→leigo · docs padronizados · Dicionário · um gate · não batizar · **abrir target-model.md + ≥1 anexo** · **docs-clarity.md** (teste do estranho + posicionamento do leigo) · **anti-rush.md** (ler o arquivo inteiro antes de gravar; não otimizar para fechar rápido)
 Propagação: decisão que mexe em fase anterior → replace no arquivo dono na mesma rodada (`reference/rules.md` → Propagação). Pergunte ao cliente só decisão de produto ou gosto sem regra, sempre com o resumo e o contexto visíveis no chat antes da pergunta.
-Ao fechar: atualizar Gate no `.docs/`; devolver ao Controlador o path + status + o que foi propagado para outras fases (não continue para a próxima fase).
+Ao fechar: atualizar Gate no `docs/`; devolver ao Controlador o path + status + o que foi propagado para outras fases (não continue para a próxima fase).
 ```
 
 Apontar também o subagente para: `modules/{fase}/AGENT.md` + `playbook.md` + `target-model.md` + `examples/README.md` + **`shared/docs-clarity.md`** + **`shared/anti-rush.md`**.
@@ -49,7 +49,7 @@ Apontar também o subagente para: `modules/{fase}/AGENT.md` + `playbook.md` + `t
 
 ```text
 Fase N — status: fechado | adiado com risco | bloqueado | em validação
-Arquivo: `.docs/{arquivo}.md`
+Arquivo: `docs/{arquivo}.md`
 Pendências do cliente: …
 Propagado para outras fases: {arquivo → o que mudou} | nada
 Pronto para encerrar / próximo handoff: sim|não

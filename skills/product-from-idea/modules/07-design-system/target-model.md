@@ -1,6 +1,6 @@
 # Modelo-alvo — Fase 7 Design System
 
-> Vivo: `.docs/DESIGN_SYSTEM.md` (+ tokens + EXTRACTION_NOTES) + canvas (manual da marca, Fundamentos, componentes)  
+> Vivo: `docs/DESIGN_SYSTEM.md` (+ tokens + EXTRACTION_NOTES) + canvas (manual da marca, Fundamentos, componentes)  
 > Barra da fase: **nível essencial** da skill **`design-system-forge`** (`nivel-ouro.md`) + aceite do Forge + confronto com o gosto. Ouro = opcional, a pedido do cliente.  
 > **Densidade do documento (anexo real):** [`examples/anexos/spacebet-pixreals-DESIGN_SYSTEM.md`](examples/anexos/spacebet-pixreals-DESIGN_SYSTEM.md)  
 > **Saída no canvas (anexo real, nível essencial):** [`examples/anexos/buscai-design-system.pen`](examples/anexos/buscai-design-system.pen) (manual da marca · Fundamentos escuro e claro · Componentes escuro e claro) + um PNG de cada prancha ao lado (`buscai-manual-da-marca.png`, `buscai-fundamentos-{escuro,claro}.png`, `buscai-componentes-{escuro,claro}.png`)  
@@ -18,7 +18,7 @@
 | `examples/anexos/bateubet-design-system-estrutura.md` (o PDF, 37 MB, fica fora do pacote — pedir ao humano se precisar das imagens) | **Formato de entrega visual** — ordem dos capítulos + cobertura de componentes (só estrutura; **não** colar cor nem fonte) |
 | `examples/anexos/{carbon,atlassian,polaris,…}` | Teoria (token, papel, superfície, escala) |
 | [`reference-space-constitution.md`](reference-space-constitution.md) | Caminhos do `design-system.md` e do `ui-gosto` da Space — **método**, não cor do produto |
-| `.docs/prototipo.md` + `mvp.md` + `setup.md` do produto | Superfícies e fluxos a cobrir |
+| `docs/prototipo.md` + `mvp.md` + `setup.md` do produto | Superfícies e fluxos a cobrir |
 | Fontes visuais (URL / construtor / prints / código / canvas) | Evidência do diagnóstico (modo Extrair) |
 
 **Proibido:** inventar “exemplo ilustrativo”; copiar cores do anexo de referência, de Carbon ou da Space como padrão do produto.
@@ -26,7 +26,7 @@
 ## Mínimos da fase
 
 1. Diagnóstico do Forge não bloqueado (ou rascunho parcial autorizado pelo cliente)  
-2. Três artefatos em `.docs/` + canvas com prancha da marca, variáveis, prancha de Fundamentos e componentes (nível essencial)  
+2. Três artefatos em `docs/` + canvas com prancha da marca, variáveis, prancha de Fundamentos e componentes (nível essencial)  
 3. Seções do template presentes (fundamentos não colapsados), incluindo lista de componentes por faixa + matriz de estados  
 4. Aceite do Forge aprovado **ou** REPROVADO honesto com a lista de buracos  
 5. Confronto com o gosto registrado + veredito no chat + pergunta sobre ouro  
@@ -39,8 +39,8 @@
 
 | # | CA | Barra | Inspirado em |
 |---|-----|-------|--------------|
-| DS1 | `.docs/DESIGN_SYSTEM.md` existe | Template completo, não um mural de referências | Primer |
-| DS2 | `.docs/tokens.dtcg.json` espelha os fundamentos | Elevação separada de movimento; cada token tem papel | Atlassian / Lightning |
+| DS1 | `docs/DESIGN_SYSTEM.md` existe | Template completo, não um mural de referências | Primer |
+| DS2 | `docs/tokens.dtcg.json` espelha os fundamentos | Elevação separada de movimento; cada token tem papel | Atlassian / Lightning |
 | DS3 | `EXTRACTION_NOTES` tem diagnóstico + perguntas + aceite | | Forge |
 | DS4 | Cor principal e superfícies com evidência ou OK do cliente | Nada inventado em silêncio | — |
 | DS5 | Fundamentos F1–F8 + componentes com **estados** | Aceite do Forge | Estados de interação do Carbon |

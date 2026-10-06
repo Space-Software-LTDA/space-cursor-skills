@@ -1,6 +1,6 @@
 # Exemplos — Fase 5 Contrato
 
-> Caso **real**. Documento vivo do produto: `.docs/contrato.md` (não estes arquivos).  
+> Caso **real**. Documento vivo do produto: `docs/contrato.md` (não estes arquivos).  
 > Barra (estrutura + critérios de aceite + anti-padrões): [`../target-model.md`](../target-model.md)
 
 ## Ler primeiro

@@ -21,4 +21,4 @@
 3. Priorizar com o raciocínio do método RICE (ver anexos) — sem copiar pontuação sem pensar.  
 4. Monetização: mecanismo claro; valores podem ser adiados com risco.  
 4.1. **Não presumir quantidade nem preço:** fornecedor, parceiro ou instituição → perguntar “um ou vários?”; preço → perguntar “existe piso ou teto?” antes de abrir esse assunto como regra. O que o cliente não pediu não vira item Aberto.  
-5. Gate → atualizar `.docs/mvp.md` + brief `.docs/produto.md`.
+5. Gate → atualizar `docs/mvp.md` + brief `docs/produto.md`.

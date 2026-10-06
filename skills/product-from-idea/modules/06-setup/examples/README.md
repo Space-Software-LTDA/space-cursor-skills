@@ -1,6 +1,6 @@
 # Exemplos — Fase 6 Setup
 
-> Fontes **reais** da Space (projetos-base oficiais). Documento vivo do produto: `.docs/setup.md` (não estes arquivos).  
+> Fontes **reais** da Space (projetos-base oficiais). Documento vivo do produto: `docs/setup.md` (não estes arquivos).  
 > Barra (estrutura + critérios de aceite + anti-padrões): [`../target-model.md`](../target-model.md)
 
 ## Ler primeiro

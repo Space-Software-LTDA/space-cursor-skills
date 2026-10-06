@@ -37,7 +37,7 @@ Abrir [`reference-space-defaults.md`](reference-space-defaults.md) §1 e a const
 
 `<o-que-é>` = o que a peça é: `backend` · `frontend` · `extension` · outra peça descrita pelo que é (`integrations`, `backoffice`…).
 
-Perguntar o separador que o cliente já usa → eco → confirma slugs → grava nomes no `.docs/setup.md`.
+Perguntar o separador que o cliente já usa → eco → confirma slugs → grava nomes no `docs/setup.md`.
 
 ### 2) Organização Git — gate
 

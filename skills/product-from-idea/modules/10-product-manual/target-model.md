@@ -2,7 +2,7 @@
 
 > Derivado de casos **reais** (PDF/HTML em `examples/anexos/`).  
 > Extrações de leitura: `examples/_extracts/` (só apoio — o anexo original é a lei).  
-> Vivo: `.docs/{slug}.md` · Template: `templates/manual-produto.md`  
+> Vivo: `docs/{slug}.md` · Template: `templates/manual-produto.md`  
 > Densidade: [`examples/density-reference.md`](examples/density-reference.md)
 
 ---
@@ -73,7 +73,7 @@
 
 ---
 
-## Nosso modelo-alvo (estrutura do `.docs/{slug}.md`)
+## Nosso modelo-alvo (estrutura do `docs/{slug}.md`)
 
 > Ordem fixa. Seções vazias = `N/A` + por quê — **não** sumir com o fato.
 
@@ -145,7 +145,7 @@ fechado \| adiado com risco \| bloqueado + data + riscos em português. **Não**
 
 | # | CA | Barra | Inspirado em |
 |---|-----|--------|--------------|
-| M1 | `.docs/{slug}.md` existe (nome do produto) | Não só `produto.md` | — |
+| M1 | `docs/{slug}.md` existe (nome do produto) | Não só `produto.md` | — |
 | M2 | Meta + Dicionário | Leigo | Linear Method “Aim for clarity” |
 | M3 | A1 Em uma frase | Repetível | Airbnb / Notion |
 | M4 | A3 Problema = história do status quo | Não abstrato | Shape Up Problem |
@@ -167,7 +167,7 @@ fechado \| adiado com risco \| bloqueado + data + riscos em português. **Não**
 | M20 | Tom comercial no corpo | Zero “GATE/CA/Confirmado/Shape Up” | Todos |
 | M21 | ≥1 PDF **ou** HTML denso aberto (agente) | Airbnb/Stripe/Shape Up/Apple… | Lei anexo |
 | M22 | Sem inventar métrica/preço/hex/feature | | — |
-| M23 | Sem dump cru dos `.docs/` | Síntese | Shape Up “see it” |
+| M23 | Sem dump cru dos `docs/` | Síntese | Shape Up “see it” |
 | M24 | Decisão gravada em **Uso interno** | | F6 |
 | M25 | Pronto para Fase 11 só após este arquivo | | Fluxo |
 | M26 | Passa no **teste do estranho** (`docs-clarity.md`) | Apresentável a cliente sem Cursor | Lei clareza |
@@ -219,7 +219,7 @@ fechado \| adiado com risco \| bloqueado + data + riscos em português. **Não**
 
 | Arquivo | Papel |
 |---------|--------|
-| `.docs/produto.md` | Brief **interno** vago — **não** substitui `{slug}.md` |
-| `.docs/{slug}.md` | **Este** modelo-alvo |
+| `docs/produto.md` | Brief **interno** vago — **não** substitui `{slug}.md` |
+| `docs/{slug}.md` | **Este** modelo-alvo |
 | Fases 1–8 | Fonte de fatos — nunca dump |
 | Fase 11 | Só depois do gate deste manual |

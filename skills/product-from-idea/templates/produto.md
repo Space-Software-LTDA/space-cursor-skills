@@ -1,11 +1,11 @@
 # Brief interno — template (documentação)
 
-> Arquivo: `.docs/produto.md`  
+> Arquivo: `docs/produto.md`  
 > Status: rascunho | em validação | **fechado**  
 > Última atualização: YYYY-MM-DD  
 
 **Regra:** este arquivo é o **índice interno vago** do time — resumo + links.  
-**Não** é o manual comercial. O manual completo = `.docs/{slug}.md` (Fase 10 · template `manual-produto.md`).
+**Não** é o manual comercial. O manual completo = `docs/{slug}.md` (Fase 10 · template `manual-produto.md`).
 
 Cada seção = poucas linhas. Detalhe fica no arquivo da fase (link).
 

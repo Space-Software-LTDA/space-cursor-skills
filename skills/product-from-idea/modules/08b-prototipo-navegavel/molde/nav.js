@@ -2,7 +2,7 @@
 // Injetado em cada tela exportada (por scripts/preparar.mjs), depois de screens.js e rotas.js.
 // Marca as áreas clicáveis e navega entre telas. Dentro do shell (index.html) conversa via
 // postMessage; aberta sozinha, navega direto para o arquivo da tela.
-window.PR_MOLDE_VERSAO = "1.2.0";
+window.PR_MOLDE_VERSAO = "1.5.0";
 
 // Índice id → tela, montado a partir de PR_GROUPS (screens.js). Também usado pelo shell.
 window.PR_INDEXAR = function () {
@@ -13,7 +13,7 @@ window.PR_INDEXAR = function () {
       out[id] = {
         id, title, group: g.name, device, logged: !!logged, base: atual ? null : base || null, sobreAtual: atual, twin: twin || null,
         width: width || (device === "m" ? 390 : 1440), height: height || (device === "m" ? 844 : null),
-        pos: pos || null, // janela solta: "centro" · "direita" · [x, y] (ver screens.js)
+        pos: pos || null, // janela solta: "centro" · "direita" · "baixo" · [x, y] (ver screens.js)
       };
     }
   }
@@ -35,6 +35,25 @@ window.PR_INDEXAR = function () {
   base.textContent = "html,body{overflow-x:hidden;scrollbar-width:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}";
   document.head.appendChild(base);
 
+  // Celular: no canvas, a tela tem a altura do aparelho e o miolo recorta (clip) o que passa.
+  // Esse recorte é a área que rola entre as barras fixas — no export vira overflow-hidden e trava.
+  // Todo bloco que recorta conteúdo maior que ele passa a rolar (o mais externo vence).
+  if (S.device === "m") {
+    const rola = document.createElement("style");
+    rola.textContent = ".pr-rola{overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:none}.pr-rola::-webkit-scrollbar{display:none}";
+    document.head.appendChild(rola);
+    const liberar = () => {
+      for (const el of [root, ...root.querySelectorAll("*")]) {
+        if (el.closest(".pr-rola") || el instanceof SVGElement) continue;
+        if (!el.children.length || el.scrollHeight <= el.clientHeight + 4) continue; // texto cortado com “…” não rola
+        if (!/hidden|clip/.test(getComputedStyle(el).overflowY)) continue;
+        el.classList.add("pr-rola");
+      }
+    };
+    liberar();
+    window.addEventListener("load", liberar);
+  }
+
   if (S.device === "doc") {
     if (inShell) window.parent.postMessage({ pr: "ready", id: S.id }, "*");
     return;
@@ -47,7 +66,7 @@ window.PR_INDEXAR = function () {
   const HOME_OUT = homes[0] || null;
   const HOME_IN = homes[1] || homes[0] || null;
   const HOME = S.logged ? HOME_IN : HOME_OUT;
-  const CLOSE = S.base || "back";
+  const CLOSE = S.base || (S.sobreAtual ? "fundo" : "back"); // "fundo" = fecha tudo e volta à tela de baixo
   const nameOf = (el) => (el && el.getAttribute && el.getAttribute("data-pencil-name")) || "";
   const textOf = (el) => (el.textContent || "").replace(/\s+/g, " ").replace(/\s*→\s*$/, "").trim();
   const inside = (el, re) => {

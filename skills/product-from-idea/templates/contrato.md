@@ -3,7 +3,7 @@
 > Fase: 5 — Contrato  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncora: `.docs/mvp.md` · `.docs/prototipo.md`  
+> Âncora: `docs/mvp.md` · `docs/prototipo.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/05-contract/playbook.md` + `modules/05-contract/target-model.md` + Petstore OpenAPI
 > Linguagem: especialista → leigo (sem inventar nome de API)
 

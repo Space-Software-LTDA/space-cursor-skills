@@ -1,6 +1,6 @@
 # Referência de densidade — Fase 10 Manual comercial
 
-> **Não é o documento vivo do produto.** Vivo: `.docs/{slug}.md`.  
+> **Não é o documento vivo do produto.** Vivo: `docs/{slug}.md`.  
 > **Lei:** abrir o **arquivo real** (PDF / HTML). Resumo no chat **não** conta como anexo.
 
 ## Fontes reais (arquivos no disco — abrir)
@@ -39,7 +39,7 @@
 1. Abrir o **PDF do Airbnb** (slides de problema / solução / produto / modelo).  
 2. Abrir o **PDF da carta da Stripe** ou o HTML do Payments.  
 3. Abrir o HTML da **Apple** para o tom de quem usa.  
-4. Costurar os fatos do `.docs/` **deste** produto no `templates/manual-produto.md`.  
+4. Costurar os fatos do `docs/` **deste** produto no `templates/manual-produto.md`.  
 5. Gate F6.
 
 ---

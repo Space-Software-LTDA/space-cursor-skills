@@ -11,7 +11,8 @@
 //   largura/altura: só quando foge do padrão (computador 1440 · celular 390×844; documentação = largura do frame)
 //   posição (opcional): só para JANELA SOLTA — janela ou gaveta exportada sem a tela de trás desenhada
 //     (frame mais estreito que a tela de trás). O shell mostra a tela de trás escurecida e a janela por cima;
-//     clicar fora ou Esc volta. "centro" (padrão) · "direita" (gaveta, altura toda) · [x, y] (menu suspenso)
+//     clicar fora ou Esc volta. "centro" (padrão) · "direita" (gaveta, altura toda) · "baixo" (gaveta de baixo do
+//     celular: pode ter a largura toda da tela) · [x, y] (menu suspenso)
 //   Título com " *" = tela que ainda não existe no produto (aviso no rodapé da lista)
 window.PR_CONFIG = {
   produto: "{Nome do produto}",
@@ -20,7 +21,7 @@ window.PR_CONFIG = {
   inicio: "{id do Manual da marca}", // tela de abertura
   home: { d: ["{id home deslogado}", "{id home logado}"], m: ["{id}", "{id}"] }, // [deslogado, logado]; sem login: o mesmo id duas vezes
   semLinkChegando: [],          // telas abertas só pela lista (ex.: 404) — o verificar não acusa
-  imagensDoCanvas: "../{pasta do canvas}/images", // pasta images/ ao lado do arquivo do canvas (relativa a esta pasta)
+  imagensDoCanvas: "../design/images", // pasta images/ ao lado do arquivo do canvas (design/), relativa a esta pasta
   // Opcionais (raro): ignorar: /regex/ de layers não clicáveis (padrão: "Fundo · marcador…", "… (fundo)");
   // titulos: /regex/ de layers que nunca viram link (padrão: Título, Subtítulo, Cabeçalho, Topo…)
 };

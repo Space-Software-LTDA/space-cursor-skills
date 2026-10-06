@@ -1,30 +1,30 @@
 ---
 description: >-
-  Âncora da skill product-from-idea: mapa das fases 0–11, um arquivo por fase em .docs/,
+  Âncora da skill product-from-idea: mapa das fases 0–11, um arquivo por fase em docs/,
   gates. Sempre ativo neste workspace de criação de produto.
 alwaysApply: true
 ---
 
 # Produto — fases e gates (âncora)
 
-Mapa completo: `{SKILL_DIR}/reference/passo-a-passo.md`. Fase aberta: `.docs/README.md`.
+Mapa completo: `{SKILL_DIR}/reference/passo-a-passo.md`. Fase aberta: `docs/README.md`.
 
 ```text
-0 Mapa (âncora + .docs/README.md)
-1 Discovery → .docs/discovery.md
-2 Pesquisa de mercado → .docs/pesquisa-mercado.md
-3 Protótipo → .docs/prototipo.md
-4 MVP → .docs/mvp.md (+ .docs/produto.md, brief interno)
-5 Contrato → .docs/contrato.md
-6 Setup → .docs/setup.md
-7 Design System → .docs/DESIGN_SYSTEM.md + canvas (design-system-forge)
-8 Telas → .docs/telas.md + canvas (Home primeiro; por tela: OK → Apply → próxima)
-8.5 Protótipo navegável → prototipo/ fora do .docs/ (molde da skill; npm run prototipo:start) + seção em .docs/telas.md
-9 Revisão → .docs/revisao.md (revisor sem contexto)
-10 Manual comercial → .docs/{slug}.md
-11 Tarefas → .docs/tarefas.md + .task/ (po-techlead-scrum, uma fatia por vez) ← FIM
+0 Mapa (âncora + docs/README.md)
+1 Discovery → docs/discovery.md
+2 Pesquisa de mercado → docs/pesquisa-mercado.md
+3 Protótipo → docs/prototipo.md
+4 MVP → docs/mvp.md (+ docs/produto.md, brief interno)
+5 Contrato → docs/contrato.md
+6 Setup → docs/setup.md
+7 Design System → docs/DESIGN_SYSTEM.md + canvas (design-system-forge)
+8 Telas → docs/telas.md + canvas (Home primeiro; por tela: OK → Apply → próxima)
+8.5 Protótipo navegável → prototipo/ fora do docs/ (molde da skill; npm run prototipo:start) + seção em docs/telas.md
+9 Revisão → docs/revisao.md (revisor sem contexto)
+10 Manual comercial → docs/{slug}.md
+11 Tarefas → docs/tarefas.md + .task/ (po-techlead-scrum, uma fatia por vez) ← FIM
 ```
 
 - Cada fase: subagente com o `AGENT.md` do módulo (`{SKILL_DIR}/modules/NN-*/`) + `target-model.md` + pelo menos um anexo real.  
 - Gate só com o arquivo da fase gravado. Fora de hora → uma linha “fica na fase X” e volta à fase atual.  
-- Ao fechar a fase: atualizar `.docs/README.md`, encerrar o subagente, abrir o próximo com contexto limpo.
+- Ao fechar a fase: atualizar `docs/README.md`, encerrar o subagente, abrir o próximo com contexto limpo.

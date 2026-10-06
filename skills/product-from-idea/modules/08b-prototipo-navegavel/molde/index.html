@@ -115,8 +115,17 @@
   // Janela solta: tem tela de trás no mesmo dispositivo e é mais estreita que ela (o canvas não desenhou o fundo escurecido)
   let fundo = null; // última tela cheia mostrada (fundo das janelas "sobre a tela atual")
   const baseDe = (s) => (s && s.sobreAtual ? fundo : s && s.base);
-  const solta = (s) => { const b = baseDe(s); return !!(b && SC[b] && SC[b].device === s.device && s.width < SC[b].width); };
-  const fechar = () => { const j = SC[cur]; if (j.sobreAtual) goBack(); else show(j.base); };
+  // "baixo" = gaveta de baixo do celular: pode ter a largura toda da tela de trás
+  const solta = (s) => { const b = baseDe(s); return !!(b && SC[b] && SC[b].device === s.device && (s.width < SC[b].width || s.pos === "baixo")); };
+  // Janela "sobre a tela atual" fecha voltando à tela de baixo, mesmo aberta a partir de outra janela
+  // (ex.: gaveta do Menu → gaveta da busca: o X fecha as duas). O histórico é cortado até ela.
+  const voltarAoFundo = () => {
+    const v = fundo && SC[fundo] && fundo !== cur ? fundo : homeOf(dev);
+    const i = back.lastIndexOf(v);
+    if (i >= 0) back.length = i; else if (cur) back.push(cur);
+    fwd = []; cur = null; show(v, true);
+  };
+  const fechar = () => { const j = SC[cur]; if (j.sobreAtual) voltarAoFundo(); else show(j.base); };
   // Janela "*" aberta direto (pela lista ou pelo endereço), sem histórico: fecha para a última tela cheia ou a Home
   const semVolta = () => { const j = SC[cur]; return j && j.sobreAtual && !back.length; };
   const isDoc = (id) => SC[id].device === "doc";
@@ -172,7 +181,7 @@
     posJanela();
   }
 
-  // Posição da janela solta sobre a tela de trás: "centro" (padrão) · "direita" (gaveta, altura toda) · [x, y]
+  // Posição da janela solta sobre a tela de trás: "centro" (padrão) · "direita" (gaveta, altura toda) · "baixo" (gaveta de baixo do celular) · [x, y]
   function posJanela() {
     const j = SC[cur];
     if (!solta(j)) { ov.hidden = true; return; }
@@ -184,6 +193,7 @@
     const w = j.width, pos = j.pos || "centro";
     let x, y;
     if (pos === "direita") { x = W0 - w; y = 0; h = H0; }
+    else if (pos === "baixo") { x = 0; y = Math.max(0, H0 - h); }
     else if (Array.isArray(pos)) { x = pos[0]; y = pos[1]; }
     else { x = (W0 - w) / 2; y = Math.max(24, Math.min(96, (H0 - h) / 2)); }
     Object.assign(ifr2.style, { left: x + "px", top: y + "px", width: w + "px", height: h + "px" });
@@ -205,6 +215,7 @@
 
   function show(id, fromHistory) {
     if (id === "back") return goBack();
+    if (id === "fundo") return voltarAoFundo();
     if (!SC[id]) id = START;
     if (id === cur) return;
     if (cur && !fromHistory) { back.push(cur); fwd = []; }

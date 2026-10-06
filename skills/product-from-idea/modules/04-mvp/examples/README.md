@@ -1,6 +1,6 @@
 # Exemplos — Fase 4 MVP
 
-> Casos **reais**. Documento vivo do produto: `.docs/mvp.md` (não estes arquivos).  
+> Casos **reais**. Documento vivo do produto: `docs/mvp.md` (não estes arquivos).  
 > Barra (estrutura + critérios de aceite + anti-padrões): [`../target-model.md`](../target-model.md)
 
 ## Ler primeiro

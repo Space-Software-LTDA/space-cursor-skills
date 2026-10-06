@@ -1,6 +1,6 @@
 # Modelo-alvo — Fase 11 Tarefas
 
-> Vivo: `.docs/tarefas.md` (plano de fatias + gate) + `.task/{projeto}/{fatia}.md` + ClickUp  
+> Vivo: `docs/tarefas.md` (plano de fatias + gate) + `.task/{projeto}/{fatia}.md` + ClickUp  
 > Método: skill **`po-techlead-scrum`** (checklist “antes de entregar descrição” é parte da barra)
 
 ## Fontes reais (anexadas)
@@ -24,14 +24,14 @@ Formato de referência da skill: `po-techlead-scrum/templates.md` + `decomposica
 
 ## Nosso modelo-alvo
 
-**`.docs/tarefas.md`:** Dicionário · plano de fatias (uma linha por fatia: ordem, entrega, jornadas e telas cobertas, camadas, dependências, status, link) · cobertura das jornadas do dia 1 · Confirmado / Hipótese / Aberto · Gate.  
+**`docs/tarefas.md`:** Dicionário · plano de fatias (uma linha por fatia: ordem, entrega, jornadas e telas cobertas, camadas, dependências, status, link) · cobertura das jornadas do dia 1 · Confirmado / Hipótese / Aberto · Gate.  
 **Cada tarefa:** o formato da skill `po-techlead-scrum`.
 
 ## Critérios de aceitação
 
 | # | CA | Barra |
 |---|-----|--------|
-| TK1 | Plano de fatias em `.docs/tarefas.md` | Uma linha por fatia; aprovado pelo cliente antes da primeira tarefa |
+| TK1 | Plano de fatias em `docs/tarefas.md` | Uma linha por fatia; aprovado pelo cliente antes da primeira tarefa |
 | TK2 | Cobertura: toda jornada do dia 1 (`mvp.md`) cai em alguma fatia | Tabela de cobertura sem jornada órfã |
 | TK3 | Ordem com dependências explícitas | Ex.: conta antes de créditos; rota antes da tela que a consome |
 | TK4 | Cada fatia passou pelo pipeline do PO na ordem | Sem rota nova → motivo anotado para pular o Apidog |
@@ -40,7 +40,7 @@ Formato de referência da skill: `po-techlead-scrum/templates.md` + `decomposica
 | TK7 | Checklist da skill PO cumprido | Tom professor · Dado/Quando/Então · regras de pronto · “não deve” no final |
 | TK8 | Aprovação local antes de publicar; link registrado | Linha da fatia com status e link |
 | TK9 | Gate gravado | fechado · adiado com risco · bloqueado |
-| **TK.CL** | **CL0–CL5** em `tarefas.md` e no corpo da tarefa | Júnior entende sem a conversa; sem meta de roteamento; sem caminho `.docs/` no ClickUp |
+| **TK.CL** | **CL0–CL5** em `tarefas.md` e no corpo da tarefa | Júnior entende sem a conversa; sem meta de roteamento; sem caminho `docs/` no ClickUp |
 
 ## Anti-padrões (Tarefas)
 

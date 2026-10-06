@@ -11,11 +11,11 @@ Transformar o protótipo em **telas de verdade** no canvas, usando só o Design 
 
 | Artefato | Caminho |
 |----------|---------|
-| Documento da fase (lista de telas + gate) | `.docs/telas.md` (template: `templates/telas.md`) |
+| Documento da fase (lista de telas + gate) | `docs/telas.md` (template: `templates/telas.md`) |
 | Telas | Arquivo de canvas do produto — área “Telas” oficial (+ “Rascunho · …”) |
-| Relatórios de cada rodada do Apply | `.docs/design-system-forge/QA_REPORTS/…-rN.md` |
-| Diferenças para os devs (se já existe código ou construtor) | `.docs/design-system-forge/DIFERENCAS_PARA_DEVS.md` |
-| Novas versões do Design System (se a tela revelar falta) | `.docs/DESIGN_SYSTEM.md` — linha nova na tabela de versões |
+| Relatórios de cada rodada do Apply | `docs/design-system-forge/QA_REPORTS/…-rN.md` |
+| Diferenças para os devs (se já existe código ou construtor) | `docs/design-system-forge/DIFERENCAS_PARA_DEVS.md` |
+| Novas versões do Design System (se a tela revelar falta) | `docs/DESIGN_SYSTEM.md` — linha nova na tabela de versões |
 
 ## Ler antes de gravar (ordem)
 
@@ -24,7 +24,7 @@ Transformar o protótipo em **telas de verdade** no canvas, usando só o Design 
 3. [`target-model.md`](target-model.md)  
 4. Anexos reais listados em [`examples/README.md`](examples/README.md) — obrigatório o canvas de telas reais `examples/anexos/buscai-telas.pen`; apoio: deck de Design System real (capítulo “Tudo junto na prática”) · Polaris superfícies  
 5. Skill **`design-system-apply`** — **ferramenta** de conferência, varredura e correção: `SKILL.md`, `VISUAL_QA_METHOD.md`, `report-template.md`. A **sequência** é regra **deste módulo** e vale por cima da ordem própria do Apply (tabela abaixo).  
-6. Âncoras do produto: `.docs/prototipo.md` (telas e estados) · `.docs/mvp.md` (o que é essencial no dia 1) · `.docs/DESIGN_SYSTEM.md` (lei visual) · `.docs/contrato.md` (o que cada tela pode mostrar) · `.docs/setup.md` (superfícies e tamanhos)  
+6. Âncoras do produto: `docs/prototipo.md` (telas e estados) · `docs/mvp.md` (o que é essencial no dia 1) · `docs/DESIGN_SYSTEM.md` (lei visual) · `docs/contrato.md` (o que cada tela pode mostrar) · `docs/setup.md` (superfícies e tamanhos)  
 7. [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md)  
 8. [`../../shared/controller/handoff.md`](../../shared/controller/handoff.md)
 
@@ -84,12 +84,12 @@ F2 + F6 (+ F4 no documento)
 
 ## Anti-pressa (obrigatório)
 
-Antes de gravar `.docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
+Antes de gravar `docs/`: ler [`../../shared/anti-rush.md`](../../shared/anti-rush.md) + [`../../shared/docs-clarity.md`](../../shared/docs-clarity.md).  
 Ler o arquivo alvo **inteiro**. Não otimizar para fechar o gate. CL0 em cada seção tocada. Termos da skill Apply (ALIGNED, mini-A, re-Scan, P0/P1/P2) **traduzidos** no Dicionário de `telas.md`.
 
 ## Pronto quando
 
-1. `.docs/telas.md` com a lista de telas, uma linha por tela (ação, tamanhos, onde está no canvas, data do OK do cliente, relatório do Apply sem pendência), versões do Design System geradas, pendências e gate  
+1. `docs/telas.md` com a lista de telas, uma linha por tela (ação, tamanhos, onde está no canvas, data do OK do cliente, relatório do Apply sem pendência), versões do Design System geradas, pendências e gate  
 2. Todas as telas **essenciais** aprovadas pelo cliente uma a uma, cada uma com o Apply sem pendência; cada tela nas superfícies da lista; estados de tela cobertos ou pendência explícita  
 3. Cliente validou o gate da fase (fechado / adiado com risco / bloqueado) — Controlador confirma  
 4. Devolver ao Controlador — **não** abrir a Fase 9 (Revisão) nesta conversa

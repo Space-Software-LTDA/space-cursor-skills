@@ -1,6 +1,6 @@
 # Modelo-alvo — Fase 8 Telas
 
-> Vivo: `.docs/telas.md` (índice + gate) + telas oficiais no canvas + relatórios do Apply  
+> Vivo: `docs/telas.md` (índice + gate) + telas oficiais no canvas + relatórios do Apply  
 > Ferramenta: skill **`design-system-apply`** (varredura, correção, re-Scan) · Sequência: [`playbook.md`](playbook.md) deste módulo (conferência com o gosto uma vez; por tela: OK do cliente → Apply na tela → novo OK se mudou)
 
 ## Fontes reais (anexadas)
@@ -12,7 +12,7 @@
 | [`../07-design-system/examples/anexos/bateubet-design-system-estrutura.md`](../07-design-system/examples/anexos/bateubet-design-system-estrutura.md) (o PDF, 37 MB, fica fora do pacote — pedir ao humano se precisar das imagens) | Deck de Design System real — slide 43 “Tudo junto na prática” | Tela real montada **só** com tokens e componentes do guia = a barra da tela-prova |
 | [`../07-design-system/examples/anexos/polaris-multi-surface.md`](../07-design-system/examples/anexos/polaris-multi-surface.md) | Shopify Polaris — várias superfícies, um sistema | Cada superfície (site, popup de extensão, celular) com seu tamanho e subconjunto de peças |
 
-Formato do relatório de cada rodada: `design-system-apply/report-template.md` (régua do processo, não exemplo de produto). A lista de telas, o OK do cliente e o resultado do Apply por tela ficam em `.docs/telas.md`, não no relatório do Apply.
+Formato do relatório de cada rodada: `design-system-apply/report-template.md` (régua do processo, não exemplo de produto). A lista de telas, o OK do cliente e o resultado do Apply por tela ficam em `docs/telas.md`, não no relatório do Apply.
 
 ## Mínimos que os modelos reais exigem
 
@@ -21,7 +21,7 @@ Formato do relatório de cada rodada: `design-system-apply/report-template.md` (
 3. Estados de tela visíveis (vazio, carregando, erro), não só o caminho feliz.  
 4. O que a tela revelou de falta volta para o sistema, não vira exceção na tela.
 
-## Nosso modelo-alvo (`.docs/telas.md`)
+## Nosso modelo-alvo (`docs/telas.md`)
 
 1. Dicionário (tela-prova, tema principal, lista de telas, peça ligada ao componente, conferência do Apply, telas alinhadas, mini-A traduzida, superfície)  
 2. Onde estão as telas (arquivo de canvas + nome da área oficial)  

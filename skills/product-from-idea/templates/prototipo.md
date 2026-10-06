@@ -3,7 +3,7 @@
 > Fase: 3 — Protótipo  
 > Status: rascunho  
 > Última atualização: YYYY-MM-DD  
-> Âncora: `.docs/discovery.md`  
+> Âncora: `docs/discovery.md`  
 > **Para o agente (não copiar para o arquivo final):** qualidade = `modules/03-prototype/target-model.md` + examples/anexos/
 ---
 
