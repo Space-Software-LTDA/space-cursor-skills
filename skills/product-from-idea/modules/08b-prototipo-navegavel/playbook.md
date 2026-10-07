@@ -192,6 +192,7 @@ Depois de qualquer atualização: `verificar` sem erro + print das telas mexidas
 | Armadilha | Sintoma | O que fazer |
 |-----------|---------|-------------|
 | Export com `box-sizing: content-box` | Bloco com padding fica maior que o desenhado: botão cortado na borda, rodapé mais largo e mais alto | O `preparar` troca por `box-border` (no canvas, largura e altura já incluem o padding) |
+| Código longo empurra a tela | Texto sem espaço (código Pix, chave, URL) num bloco que preenche o espaço alarga o cartão e joga a coluna da direita para fora da tela | O motor (1.6.0) deixa todo bloco “preencher” encolher e quebrar texto longo, como no canvas; não mexer no HTML |
 | Barra de rolagem dentro da tela | Scroll horizontal no computador (a barra come ~15px dos 1440) | O motor esconde as barras e trava o eixo X; não mexer na largura do frame |
 | Imagens “sumidas” | Fundo/capa sem imagem | Conferir `imagensDoCanvas` e rodar `preparar` de novo (ele avisa a imagem que falta). A pasta pode ter outro nome ao lado do canvas (`imagens/`): o `preparar` usa o nome do fim de `imagensDoCanvas` |
 | Janela abre isolada | Clicar num botão que abre modal mostra só a janela, sem a tela de trás | Canvas sem o fundo escurecido desenhado: preencher a tela de trás e a largura da janela no `screens.js` (janela solta); o shell monta a tela de trás por baixo |

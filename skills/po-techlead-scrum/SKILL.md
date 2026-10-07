@@ -70,7 +70,7 @@ Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + su
 | 1. Objetivo | Não — Controlador | Eco na conversa | O quê · para quem · fora do escopo, confirmados pelo PO | Falta exemplo real | PO |
 | 2. Regra de negócio | Sim, se a regra for longa | Regras em `.task/{projeto}/` | Casos de borda listados; cadastro × configuração definido; PO fechou | Falta exemplo real | PO |
 | 3. Banco | Sim | DBML + tabela coluna a coluna em `.task/` | Nomenclatura GO-12 aplicada; PO validou o DBML | Falta exemplo real | PO |
-| 4. Rotas → Apidog | Sim | OpenAPI importado | Pastas visíveis no Apidog **deste** produto; Project ID e moduleId perguntados | Falta exemplo real | PO |
+| 4. Rotas → Apidog | Sim | OpenAPI importado | Pastas visíveis no Apidog **deste** produto; IDs achados por `apidog_resolve_ids.py` (pergunta só se ambíguo); import na Root do módulo | Falta exemplo real | PO |
 | 5. Task | Sim — uma por task (ou por fatia) | `.task/{projeto}/*.md` | “Checklist antes de entregar” completo; tela com print da tela aprovada | [`exemplos/tarefa-real-back-spacebet-relatorios.md`](exemplos/tarefa-real-back-spacebet-relatorios.md) · [`exemplos/tarefa-real-front-spacesoft-ds-modais-home.md`](exemplos/tarefa-real-front-spacesoft-ds-modais-home.md) | PO: “pode publicar” |
 | Revisão sem contexto | Sim — subagente novo | Lista de achados | Cada item do checklist numa linha com evidência; filtro conversa → corpo conferido | — | Controlador |
 | 6. Publicar | Não | Link do ClickUp | Link informado ao PO | — | PO |
@@ -147,12 +147,12 @@ Quando a entrega tiver **API** (CMS, público, ingest), **não** pular para o ma
 | 1 | **Objetivo** | Entender o quê / para quem / o que sai de escopo | PO confirma |
 | 2 | **Regra de negócio** | Flags, sync, CRUD vs só config, edge cases | PO fecha regras |
 | 3 | **DB** | DBML + tabela coluna a coluna (nomenclatura GO-12) | PO valida DBML |
-| 4 | **Rotas → Apidog** | OpenAPI + import. **Sem Project ID ou moduleId deste produto/módulo → perguntar.** Não reusar ID de outro cliente | Pastas visíveis no docs **deste** produto |
+| 4 | **Rotas → Apidog** | OpenAPI + import. IDs **deste** produto/módulo descobertos pelo nome (`scripts/apidog_resolve_ids.py`); **ambíguo → perguntar**. Não reusar ID de outro cliente | Pastas visíveis no docs **deste** produto |
 | 5 | **Task ClickUp** | Markdown professor; contrato canônico = Apidog | PO aprova publicar |
 
 Front-only **sem** endpoint novo: pular o passo 4.
 
-Detalhe operacional: **[apidog.md](apidog.md)**. Doc: [openapi.apidog.io](https://openapi.apidog.io/). Token da conta: `APIDOG_ACCESS_TOKEN`. **Project ID e moduleId: perguntar sempre** — não ficam no `.env`.
+Detalhe operacional: **[apidog.md](apidog.md)**. Doc: [openapi.apidog.io](https://openapi.apidog.io/). Token da conta: `APIDOG_ACCESS_TOKEN`. **Project ID, moduleId e pasta: descobrir pelo nome** com `scripts/apidog_resolve_ids.py` (perguntar só se ambíguo) — não ficam no `.env`.
 
 **Proibido:** task com API nova só no yaml local, sem import; critério “o dev que atualize o Apidog”.
 
@@ -301,7 +301,7 @@ Sempre montar uma **tabela** no topo (após o aviso de IA), com o que o dev prec
 | **API (Front)** | Se Front consome API — URL base conhecida (ex. staging) + nome da env (`NEXT_PUBLIC_API_URL`) |
 | **`.env.example`** | Sempre que houver vars novas ou a task tocar config: dizer **criar** se não existir, ou **atualizar** listando as keys (sem secrets) |
 | **Protótipo / Diagrama DB** | Quando existir URL |
-| **Contrato API (Apidog)** | Se a task tem rotas — link do **docs deste produto** + pasta. Sem ID → perguntar. Nunca path local `.docs/` |
+| **Contrato API (Apidog)** | Se a task tem rotas — link do **docs deste produto** + pasta. Sem o link → perguntar. Nunca path local `.docs/` |
 
 Inferir repos pelo `git remote` do workspace quando possível. Se não achar, perguntar.
 

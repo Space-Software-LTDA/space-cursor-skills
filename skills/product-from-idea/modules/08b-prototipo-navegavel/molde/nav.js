@@ -2,7 +2,7 @@
 // Injetado em cada tela exportada (por scripts/preparar.mjs), depois de screens.js e rotas.js.
 // Marca as áreas clicáveis e navega entre telas. Dentro do shell (index.html) conversa via
 // postMessage; aberta sozinha, navega direto para o arquivo da tela.
-window.PR_MOLDE_VERSAO = "1.5.0";
+window.PR_MOLDE_VERSAO = "1.6.0";
 
 // Índice id → tela, montado a partir de PR_GROUPS (screens.js). Também usado pelo shell.
 window.PR_INDEXAR = function () {
@@ -32,7 +32,10 @@ window.PR_INDEXAR = function () {
 
   // Sem barra de rolagem dentro da tela: ela come largura e cria scroll horizontal
   const base = document.createElement("style");
-  base.textContent = "html,body{overflow-x:hidden;scrollbar-width:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}";
+  // Bloco que preenche o espaço (flex 1 1 0 no export) nunca alarga o pai, como no canvas: pode encolher
+  // abaixo do conteúdo, e texto sem espaço (código Pix, chave, URL) quebra em vez de empurrar a tela
+  base.textContent = "html,body{overflow-x:hidden;scrollbar-width:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}" +
+    '[class*="[flex:1_1_0]"]{min-width:0;min-height:0;overflow-wrap:anywhere}';
   document.head.appendChild(base);
 
   // Celular: no canvas, a tela tem a altura do aparelho e o miolo recorta (clip) o que passa.

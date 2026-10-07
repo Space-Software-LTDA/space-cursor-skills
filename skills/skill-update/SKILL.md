@@ -133,7 +133,7 @@ Imagem (print, diagrama) de task no ClickUp **anexa direto na task** — **não*
 ### Pipeline PO (task com API)
 
 Na skill `po-techlead-scrum`: **Objetivo → regra de negócio → DB → rotas no Apidog → task ClickUp**.  
-Project ID e moduleId: **perguntar sempre** (não ficam no `.env`). Detalhe: `skills/po-techlead-scrum/apidog.md`.
+Project ID, moduleId e pasta: **descobrir pelo nome** com o `apidog-cli` (`scripts/apidog_resolve_ids.py`); perguntar só se ambíguo (não ficam no `.env`). Detalhe: `skills/po-techlead-scrum/apidog.md`.
 
 ### Método de execução (todas as skills)
 

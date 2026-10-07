@@ -83,7 +83,7 @@ Não substituem [padrao-ouro.md](padrao-ouro.md) nem [nomenclatura.md](nomenclat
 
 O contrato de rotas vive no **Apidog** **antes** da task ClickUp (não como “lembrar o dev de documentar no fim”).
 
-Pipeline do PO (`po-techlead-scrum`): Objetivo → regra de negócio → DB → **import OpenAPI no Apidog do produto certo** → markdown da task. Sem Project ID ou moduleId → **perguntar**. Operação: skill `apidog.md` + API [openapi.apidog.io](https://openapi.apidog.io/).
+Pipeline do PO (`po-techlead-scrum`): Objetivo → regra de negócio → DB → **import OpenAPI no Apidog do produto certo** → markdown da task. Project ID e moduleId são descobertos pelo nome do produto (skill `apidog.md`); **ambíguo → perguntar**. Operação: skill `apidog.md` + API [openapi.apidog.io](https://openapi.apidog.io/).
 
 Critérios da PBI: **seguir o Apidog**; não inventar path. O anexo OpenAPI é espelho.
 
