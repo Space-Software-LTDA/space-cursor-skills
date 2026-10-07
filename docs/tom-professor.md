@@ -61,6 +61,7 @@ Vale para a task (`po-techlead-scrum`). A documentação não muda.
 | Onde as coisas estão; como o sistema funciona hoje | DBML, schema, pseudocódigo ou payload completo que o PO **não** decidiu |
 | Direção: para onde olhar | A solução pronta |
 
+- Antes de escrever, quem escreve confere se o que vai pedir **já existe** e se é **mesmo necessário** (YAGNI, DRY, KISS). É checagem de quem escreve, não conteúdo do card.
 - A task **conduz**, não resolve. Direcionar para a solução é uma coisa; solucionar pelo dev é outra.
 - Quanto mais sênior o dev, menos detalhe do **como**. Problema e resultado esperado não encolhem.
 - Correção e integração: preferir o caminho mais simples e deixar a escolha com o dev.

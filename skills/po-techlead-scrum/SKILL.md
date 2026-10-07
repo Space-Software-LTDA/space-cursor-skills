@@ -3,7 +3,7 @@ name: po-techlead-scrum
 description: >-
   Atua como PO, Tech Lead sênior e Scrum Master para criar descrições de tarefas
   no ClickUp (Esteira PBI ou Tarefas IMEDIATAS via API apos aprovacao local).
-  Pipeline: Objetivo → regra de negócio → DB → rotas no Apidog → task.
+  Pipeline: Objetivo → checar o que já existe → regra de negócio → DB → rotas no Apidog → task.
   Task no tom professor: foco no problema e no resultado esperado, sempre
   completos e sem ambiguidade; explica o que é confuso (glossário, regras, onde
   as coisas estão); o como fica com quem executa (menos detalhe quanto mais
@@ -69,6 +69,7 @@ Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + su
 |-------|-----------|---------|---------------|--------------|-------------|
 | Onboard (projeto, modo, responsável, camadas, complexidade) | Não — Controlador | Respostas na conversa | As 5 respostas confirmadas; nada disso no corpo da task | — | PO |
 | 1. Objetivo | Não — Controlador | Eco na conversa | O quê · para quem · fora do escopo, confirmados pelo PO | Falta exemplo real | PO |
+| 1.5 Checar o que já existe | Não — Controlador (subagente se a busca for longa) | Achados na conversa: o que já existe e onde | Busca feita no código/repo, no Apidog e nas tasks/docs; o que já resolve vira ajuste/reuso (ou nem vira task); sem acesso ao código → perguntou ao PO | Falta exemplo real | PO, se mudar o escopo |
 | 2. Regra de negócio | Sim, se a regra for longa | Regras em `.task/{projeto}/` | Casos de borda listados; cadastro × configuração definido; PO fechou | Falta exemplo real | PO |
 | 3. Banco (só se o banco for decisão do PO — produto novo) | Sim | DBML + tabela coluna a coluna em `.task/` | Nomenclatura GO-12 aplicada; PO validou o DBML | Falta exemplo real | PO |
 | 4. Rotas → Apidog | Sim | OpenAPI importado | Pastas visíveis no Apidog **deste** produto; IDs achados por `apidog_resolve_ids.py` (pergunta só se ambíguo); import na Root do módulo | Falta exemplo real | PO |
@@ -76,7 +77,7 @@ Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + su
 | Revisão sem contexto | Sim — subagente novo | Lista de achados | Cada item do checklist numa linha com evidência; filtro conversa → corpo conferido | — | Controlador |
 | 6. Publicar | Não | Link do ClickUp | Link informado ao PO | — | PO |
 
-**Revisor sem contexto:** antes de pedir “pode publicar”, um subagente novo lê **só** a task + o checklist desta skill + a constituição da camada. Pergunta: “quem vai executar, sem ter visto a conversa, entende o problema e o resultado esperado sem adivinhar?”. Caça meta de roteamento no corpo, texto da conversa colado, como prescrito sem decisão do PO, termo sem explicação, critério sem evidência, contrato fora do Apidog.
+**Revisor sem contexto:** antes de pedir “pode publicar”, um subagente novo lê **só** a task + o checklist desta skill + a constituição da camada. Pergunta: “quem vai executar, sem ter visto a conversa, entende o problema e o resultado esperado sem adivinhar?”. Pergunta também: “a task pede para criar algo que já existe? pede algo que o problema não exige?”. Caça meta de roteamento no corpo, texto da conversa colado, como prescrito sem decisão do PO, termo sem explicação, critério sem evidência, contrato fora do Apidog.
 
 ---
 
@@ -151,12 +152,27 @@ Quando a entrega tiver **API** (CMS, público, ingest), **não** pular para o ma
 | # | Passo | O que o agente faz | Gate |
 |---|--------|-------------------|------|
 | 1 | **Objetivo** | Entender o quê / para quem / o que sai de escopo | PO confirma |
+| 1.5 | **Checar o que já existe** | Procurar no código/repo aberto, no Apidog e nas tasks/docs se algo já resolve ou quase resolve o problema (YAGNI · DRY · KISS). Achou → a task pede ajuste/reuso (ou nem vira task) e diz onde está. Sem acesso ao código → perguntar ao PO | PO confirma se mudar o escopo |
 | 2 | **Regra de negócio** | Flags, sync, CRUD vs só config, edge cases | PO fecha regras |
 | 3 | **DB** | **Só quando o banco é decisão do PO** (produto novo): DBML + tabela coluna a coluna (nomenclatura GO-12). Correção / integração: **não** desenhar tabela nova — o dev decide | PO valida DBML |
 | 4 | **Rotas → Apidog** | OpenAPI + import. IDs **deste** produto/módulo descobertos pelo nome (`scripts/apidog_resolve_ids.py`); **ambíguo → perguntar**. Não reusar ID de outro cliente | Pastas visíveis no docs **deste** produto |
 | 5 | **Task ClickUp** | Markdown professor; contrato canônico = Apidog | PO aprova publicar |
 
 Front-only **sem** endpoint novo: pular o passo 4. Correção / integração (banco não é decisão do PO): pular o passo 3.
+
+**Passo 1.5 vale para toda task** (com ou sem API). É consciência do agente que escreve: **não** vai para o card nem vira item do checklist do dev. Antes de definir o que a task pede, o agente se pergunta: “Preciso pedir pra criar isso mesmo? Já não existe função, serviço, componente, tabela, rota, config ou funcionalidade que resolva o problema e possa ser reaproveitada ou ajustada?”
+
+- **YAGNI** (You Aren't Gonna Need It): não pedir o que o problema não exige
+- **DRY** (Don't Repeat Yourself): não pedir para criar o que já existe; reaproveitar
+- **KISS** (Keep It Simple): entre os caminhos, o mais simples
+
+Onde procurar: código / repo aberto (grep, leitura), Apidog **deste** produto, tasks e docs existentes.
+
+| Resultado da busca | O que a task faz |
+| --- | --- |
+| Achou algo que resolve ou quase resolve | Pede o ajuste / reuso — ou nem vira task — e diz **onde está** (é “onde as coisas estão”, útil ao dev) |
+| Não achou | Segue o pipeline |
+| Sem acesso ao código | **Pergunta ao PO** em vez de supor |
 
 Detalhe operacional: **[apidog.md](apidog.md)**. Doc: [openapi.apidog.io](https://openapi.apidog.io/). Token da conta: `APIDOG_ACCESS_TOKEN`. **Project ID, moduleId e pasta: descobrir pelo nome** com `scripts/apidog_resolve_ids.py` (perguntar só se ambíguo) — não ficam no `.env`.
 
@@ -463,7 +479,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Cabeçalho em **grid/tabela** com repos Front e/ou Back (links)
 - [ ] API do Front no grid quando conhecida (`NEXT_PUBLIC_*` + URL)
 - [ ] `.env.example`: criar ou atualizar documentado (keys, sem secrets)
-- [ ] **Pipeline:** Objetivo → regra de negócio → DB (só se o banco for decisão do PO) → **Apidog importado** (se houver API) → só então markdown da task
+- [ ] **Pipeline:** Objetivo → checar o que já existe → regra de negócio → DB (só se o banco for decisão do PO) → **Apidog importado** (se houver API) → só então markdown da task
+- [ ] **Checou o que já existe** (código/repo, Apidog, tasks/docs): a task não pede para criar o que já existe nem o que o problema não exige (YAGNI · DRY · KISS); reuso/ajuste diz onde está; sem acesso ao código → perguntou ao PO
 - [ ] **Apidog:** IDs deste produto/módulo confirmados (senão perguntou); grid com link do docs **deste** produto; anexo OpenAPI ([apidog.md](apidog.md))
 - [ ] **Tom professor**: problema e resultado esperado completos; o confuso explicado (glossário, regra, onde está); o como fica com o dev (DBML / pseudocódigo / payload só se já forem decisão do PO) — ninguém precisa adivinhar
 - [ ] Back e Front claramente separados (quando aplicável)
@@ -525,6 +542,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não colar ruído da conversa (ferramenta rejeitada, “sem Y”, anedota, outro cliente) — filtrar; caminho oficial no **afirmativo**
 - Não usar o `## ⛔ NÃO DEVE` para listar o que o time “não usa” em geral — só falha **real** desta entrega
 - Não apagar glossário, exemplos ou “por quê” que tiram ambiguidade **nesta entrega** sem o PO pedir explicitamente
+- Não pedir para criar o que já existe nem o que o problema não exige — checar antes (passo 1.5: YAGNI · DRY · KISS)
 - Não resolver pelo dev: em correção/integração, não prescrever tabela nova, coluna nova ou mecanismo especial; DBML / pseudocódigo / payload completo só quando já forem decisão do PO
 - Não escrever task “só para quem já sabe” — problema, resultado esperado e o confuso vão completos para qualquer nível; só o detalhe do como cai com a senioridade
 - Não auditar pixel / preencher REPORT no lugar do `qa-space` — PO **referencia** o DS; QA **audita**
