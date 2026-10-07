@@ -144,7 +144,7 @@ flowchart TD
 
 **Para quê:** anti-critérios. Se qualquer linha for verdade, a entrega **não** está pronta — mesmo que o caminho feliz “pareça ok”. Não misturar com Critérios de Aceitação nem com Observações (risco ≠ proibição).
 
-**Como preencher:** casos **desta** entrega. Tom professor na 2ª coluna (o *porquê* em uma frase). Não copiar a tabela de outra task. Não enxugar.
+**Como preencher:** casos **desta** entrega. Tom professor na 2ª coluna (o *porquê* em uma frase). Não copiar a tabela de outra task. Cada linha com o porquê completo; só o que é útil a quem executa.
 
 **Mínimo:** 5 linhas Front+Back; 3 uma camada. Incluir sempre, se o escopo pedir:
 
@@ -172,6 +172,8 @@ Exemplo do bug: conversa “não usamos [stack X]; sobe Dockerfile no EasyPanel�
 - Certo: “`Dockerfile` no EasyPanel; banco como serviço separado; vars no `.env.example`.”
 
 **O que não entra:** passo de implementação, “não esquecer de commitar”, meta de Scrum, path `.task/` do PO, ruído da conversa (ver **Filtro conversa → corpo** no `SKILL.md`).
+
+**Card só com o útil a quem executa** (vale para a task inteira, não só o NÃO DEVE): nada de contexto da conversa entre PO e IA, nem as restrições que o PO deu para guiar a escrita copiadas (ex.: “sem tabela nova”, “rota igual pra todos”, observação sobre header). Elas guiam **como** escrevemos; não são conteúdo do card.
 
 ### Destaque no ClickUp (módulo com fundo)
 

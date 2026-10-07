@@ -1,6 +1,6 @@
 # po-techlead-scrum — índice da skill
 
-Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professor.
+Skill para PO / Tech Lead / Scrum Master gerar **tasks ClickUp** em tom professor: foco no problema e no resultado esperado; o como fica com quem executa.
 
 ## Fluxo do agente (ordem)
 

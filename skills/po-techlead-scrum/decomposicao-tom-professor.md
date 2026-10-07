@@ -5,6 +5,8 @@ Este arquivo é só a **granularidade da task** (unidade mínima tela/aba/KPI/�
 
 **Toda task** gerada por `po-techlead-scrum` segue este arquivo — **não** só telas com abas, **não** só um produto, **não** só Front.
 
+Granularidade = não deixar ambíguo **o que** entregar (tela, aba, KPI…). **Não** obriga o **como** — ver [explicar não é resolver](../docs/tom-professor.md#na-task-explicar-não-é-resolver).
+
 Se o júnior precisar abrir o protótipo ou adivinhar o que um campo faz → **task incompleta** (ver também `tom-professor.md`).
 
 ---
@@ -21,16 +23,16 @@ Se o júnior precisar abrir o protótipo ou adivinhar o que um campo faz → **t
 
 ### Regra de ouro
 
-| PO flexibiliza | Task **ainda** explica tintim por tintim |
+| Fica com quem executa (o como) | Task **sempre** deixa claro (o quê) |
 | --- | --- |
-| Schema, rotas, shape JSON final | Comportamento, campos, fluxos, tooltips, mocks |
-| Dev sênior propõe arquitetura | Júnior implementa com spec na task |
+| Schema, rotas, shape JSON final — salvo quando já forem decisão do PO | Problema, resultado esperado, comportamento, campos, fluxos, tooltips, mocks |
+| Arquitetura e implementação — detalhe do como cai com a senioridade | O que é confuso: domínio, termos, regras, onde as coisas estão |
 
 ---
 
 ## 🔁 Regra GLOBAL de decomposição
 
-**Unidade mínima de escrita** = **1 bloco autônomo** que o júnior implementa ou testa sozinho.
+**Unidade mínima de escrita** = **1 bloco autônomo** que quem executa entende e testa sem adivinhar o que entregar.
 
 | Tipo de escopo | Unidade mínima | Nunca agrupar como |
 | --- | --- | --- |
@@ -39,7 +41,7 @@ Se o júnior precisar abrir o protótipo ou adivinhar o que um campo faz → **t
 | **Modal / drawer** | Seção própria | Mencionar só em passing |
 | **KPI / métrica** | 1 subseção com Back + Front + tooltip | Lista sem explicação |
 | **Endpoint** | Comportamento + query/body + exemplo | "CRUD users" |
-| **Coluna / campo DB** | Linha na tabela coluna-a-coluna | Só DBML sem Notes |
+| **Coluna / campo DB** *(quando o schema for decisão do PO)* | Linha na tabela coluna-a-coluna | Só DBML sem Notes |
 | **Token / placeholder** | Linha no glossário + exemplo antes→depois | Citado uma vez no texto |
 | **Integração / mock** | O que é real vs 🎭 mock | Misturar sem marcar |
 | **Fluxo (impersonate, webhook)** | Passos numerados ou diagrama imagem | Só diagrama sem prosa |
@@ -128,8 +130,7 @@ Copiar **para cada** unidade mínima (tela, aba, KPI, endpoint crítico):
 ## 🖥️ Back — checklist por task com API
 
 - [ ] **Cada endpoint** do escopo: método, path, query/body, response mínimo
-- [ ] Tabela **coluna a coluna** (não só DBML)
-- [ ] DBML + Notes em JSONB/enums
+- [ ] Schema é decisão do PO (produto novo)? Tabela **coluna a coluna** + DBML com Notes em JSONB/enums. Correção / integração: apontar onde está e o resultado esperado; a estrutura fica com o dev
 - [ ] curl de exemplo por endpoint crítico
 - [ ] O que é mock 🎭 vs dado real
 - [ ] Audit log / auth / guard quando sensível

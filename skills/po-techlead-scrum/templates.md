@@ -4,7 +4,7 @@
 
 Princípios: [`../docs/tom-professor.md`](../docs/tom-professor.md).  
 Granularidade: [decomposicao-tom-professor.md](decomposicao-tom-professor.md).  
-Incluir glossário, colunas, DBML, exemplos e “por quê” — **não** enxugar.
+Foco: **problema** e **resultado esperado**, completos e sem ambiguidade. Explicar o confuso (glossário, regras, onde está, “por quê”). O **como** fica com quem executa; colunas, DBML, pseudocódigo e payload completo só quando já forem decisão do PO.
 
 ---
 
@@ -42,7 +42,7 @@ Omite a linha do repo que não se aplica (só Front ou só Back).
 
 ## Template — SuperAgente / Direto pro Dev (corpo igual)
 
-O **modo** (SuperAgente vs direto) decide-se no chat. O markdown entregue é o mesmo padrão abaixo — **didático**, para o **dev júnior**.
+O **modo** (SuperAgente vs direto) decide-se no chat. O markdown entregue é o mesmo padrão abaixo — **didático**, para **quem vai executar** (detalhe do como conforme a senioridade).
 
 ```markdown
 > ⚠️ Esta tarefa foi estruturada com auxílio de Inteligência Artificial com base nas informações fornecidas. Embora o conteúdo tenha sido organizado para facilitar o entendimento, podem existir interpretações incorretas ou incompletas. Em caso de dúvida, valide com o solicitante antes de iniciar o desenvolvimento.
@@ -85,13 +85,13 @@ O **modo** (SuperAgente vs direto) decide-se no chat. O markdown entregue é o m
 
 ### 🖥️ Backend
 
-#### 1. Schema — o que é cada coluna
+#### 1. Schema — o que é cada coluna *(só se o schema for decisão do PO)*
 
 | Coluna | Tipo | Para que serve |
 | --- | --- | --- |
 | … | … | … |
 
-#### 2. DBML (colar no dbdiagram.io)
+#### 2. DBML (colar no dbdiagram.io) *(idem)*
 
 ```dbml
 // bloco completo com Notes
@@ -224,7 +224,7 @@ flowchart TD
 
 ## Template — Direto pro Dev (Imediatas)
 
-Mesmo detalhe didático do template acima **exceto**:
+Mesmo molde e mesmo tom do template acima **exceto**:
 
 - **Sem** `## Passo a passo sugerido` (sem PBI, sem Espera/Bloqueia, sem Dependência)
 - **Sem** `## 🚀 Ordem de Execução` e **sem** `- [ ]` no markdown
@@ -234,7 +234,7 @@ Mesmo detalhe didático do template acima **exceto**:
 
 ## Template — Só Backend ou Só Frontend
 
-Mesmo template; omitir a seção da camada ausente e a linha do repo correspondente no grid. Manter Critérios só da camada envolvida. **Manter** glossário/colunas/DBML se a camada for Backend.
+Mesmo template; omitir a seção da camada ausente e a linha do repo correspondente no grid. Manter Critérios só da camada envolvida. **Manter** glossário; colunas/DBML se a camada for Backend **e** o schema for decisão do PO.
 
 ---
 
@@ -245,11 +245,12 @@ Mesmo template; omitir a seção da camada ausente e a linha do repo corresponde
 | Tom | Professor: explica o porquê + exemplo | “Implementar conforme protótipo” |
 | Cabeçalho | Grid com links dos repos + API URL | “Modo SuperAgente…” / complexidade |
 | Schema | Coluna + “para que serve” + DBML | Só `CREATE TABLE` sem explicação |
-| Payload | Formato completo com tipos | "Enviar os dados do cadastro" |
+| Payload | Formato completo com tipos (contrato já decidido) | "Enviar os dados do cadastro" |
+| Solução | Direção: onde olhar, resultado esperado | Tabela/coluna/mecanismo novo prescrito em correção ou integração |
 | Env | Keys no `.env.example` + placeholder | Secret real colado na task |
 | Critério | Dado/Quando/Então por camada | "Deve funcionar corretamente" |
 | DDD | Pronto + paralelos + prova HML | "Testar no final" |
 | Passo a passo | Esteira: tabela 5 colunas + Por quê + mermaid duplo. Imediatas: **omitir**; checklist nativo no ClickUp | "Ver ordem no chat" / `- [ ]` no markdown da Imediata |
 | Front | Campo + print com legenda; visual **repo → DS → mock** | "Ajustar a tela" / copiar neon do Lovable |
 | UI | Legenda + `assets/{task-slug}/…` relativo (vira anexo no ClickUp); chrome do produto | Caminho `C:\...`; hex do mock; push de imagem em repo |
-| Tamanho | Longo e claro | Curto e ambíguo |
+| Tamanho | Essencial e claro (o confuso explicado) | Curto e ambíguo — ou longo resolvendo o como pelo dev |

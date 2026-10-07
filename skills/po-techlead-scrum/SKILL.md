@@ -4,9 +4,10 @@ description: >-
   Atua como PO, Tech Lead sênior e Scrum Master para criar descrições de tarefas
   no ClickUp (Esteira PBI ou Tarefas IMEDIATAS via API apos aprovacao local).
   Pipeline: Objetivo → regra de negócio → DB → rotas no Apidog → task.
-  Specs SEMPRE no tom professor para devs juniors (tintim por tintim:
-  glossário, colunas, DBML, payloads, exemplos). SuperAgente Scrum Ritter ou
-  direto pro dev. Use em planejamento, backlog, user stories, PBIs, ClickUp ou Apidog.
+  Task no tom professor: foco no problema e no resultado esperado, sempre
+  completos e sem ambiguidade; explica o que é confuso (glossário, regras, onde
+  as coisas estão); o como fica com quem executa (menos detalhe quanto mais
+  sênior). SuperAgente Scrum Ritter ou direto pro dev. Use em planejamento, backlog, user stories, PBIs, ClickUp ou Apidog.
 disable-model-invocation: true
 ---
 
@@ -69,13 +70,13 @@ Segue [`../docs/metodo-agentes.md`](../docs/metodo-agentes.md): Controlador + su
 | Onboard (projeto, modo, responsável, camadas, complexidade) | Não — Controlador | Respostas na conversa | As 5 respostas confirmadas; nada disso no corpo da task | — | PO |
 | 1. Objetivo | Não — Controlador | Eco na conversa | O quê · para quem · fora do escopo, confirmados pelo PO | Falta exemplo real | PO |
 | 2. Regra de negócio | Sim, se a regra for longa | Regras em `.task/{projeto}/` | Casos de borda listados; cadastro × configuração definido; PO fechou | Falta exemplo real | PO |
-| 3. Banco | Sim | DBML + tabela coluna a coluna em `.task/` | Nomenclatura GO-12 aplicada; PO validou o DBML | Falta exemplo real | PO |
+| 3. Banco (só se o banco for decisão do PO — produto novo) | Sim | DBML + tabela coluna a coluna em `.task/` | Nomenclatura GO-12 aplicada; PO validou o DBML | Falta exemplo real | PO |
 | 4. Rotas → Apidog | Sim | OpenAPI importado | Pastas visíveis no Apidog **deste** produto; IDs achados por `apidog_resolve_ids.py` (pergunta só se ambíguo); import na Root do módulo | Falta exemplo real | PO |
 | 5. Task | Sim — uma por task (ou por fatia) | `.task/{projeto}/*.md` | “Checklist antes de entregar” completo; tela com print da tela aprovada | [`exemplos/tarefa-real-back-spacebet-relatorios.md`](exemplos/tarefa-real-back-spacebet-relatorios.md) · [`exemplos/tarefa-real-front-spacesoft-ds-modais-home.md`](exemplos/tarefa-real-front-spacesoft-ds-modais-home.md) | PO: “pode publicar” |
 | Revisão sem contexto | Sim — subagente novo | Lista de achados | Cada item do checklist numa linha com evidência; filtro conversa → corpo conferido | — | Controlador |
 | 6. Publicar | Não | Link do ClickUp | Link informado ao PO | — | PO |
 
-**Revisor sem contexto:** antes de pedir “pode publicar”, um subagente novo lê **só** a task + o checklist desta skill + a constituição da camada. Pergunta: “um júnior que não viu a conversa implementa sem adivinhar?”. Caça meta de roteamento no corpo, termo sem explicação, critério sem evidência, contrato fora do Apidog.
+**Revisor sem contexto:** antes de pedir “pode publicar”, um subagente novo lê **só** a task + o checklist desta skill + a constituição da camada. Pergunta: “quem vai executar, sem ter visto a conversa, entende o problema e o resultado esperado sem adivinhar?”. Caça meta de roteamento no corpo, texto da conversa colado, como prescrito sem decisão do PO, termo sem explicação, critério sem evidência, contrato fora do Apidog.
 
 ---
 
@@ -106,22 +107,25 @@ Prompt da AI Skill **Estruturador** (ClickUp, não Cursor): [estruturador-clicku
 **Granularidade da task** (tela/aba/KPI/endpoint): [decomposicao-tom-professor.md](decomposicao-tom-professor.md).  
 **Cola markdown:** [templates.md](templates.md). **DDD / NÃO DEVE:** [evidencias-dod.md](evidencias-dod.md).
 
-Público da descrição = **dev júnior**. Se precisar adivinhar coluna, status, env ou botão → task incompleta.
+Público da descrição = **quem vai executar**. Foco: **qual é o problema** e **qual resultado esperamos** — sempre completos, para qualquer nível. O **como** fica com o dev: quanto mais sênior, menos detalhe do como. A task **conduz**, não resolve ([explicar não é resolver](../docs/tom-professor.md#na-task-explicar-não-é-resolver)).
+
+Se precisar adivinhar o problema, o resultado, um termo, coluna, status, env ou botão → task incompleta.
 
 ### O que SEMPRE incluir na task (quando aplicável ao escopo)
 
 | Item | Por quê |
 | --- | --- |
+| **Problema e resultado esperado** | Sempre completos e claros, para qualquer nível |
 | **Glossário** | Termos do domínio em português simples |
-| **Tabela coluna a coluna** | Cada campo com “para que serve” (não só o tipo SQL) |
-| **DBML completo** | Bloco para dbdiagram.io + Notes dos JSONB |
-| **Shapes JSON** | Exemplo comentado campo a campo |
+| **Tabela coluna a coluna** | **Quando o schema já for decisão do PO.** Cada campo com “para que serve” (não só o tipo SQL) |
+| **DBML completo** | **Quando já for decisão do PO** (ex.: produto novo). Bloco para dbdiagram.io + Notes dos JSONB |
+| **Shapes JSON** | **Quando já for decisão do PO.** Exemplo comentado campo a campo |
 | **Por quê** | Motivo da decisão |
 | **Exemplos didáticos** | Tabelas “se X então Y” |
-| **Pseudocódigo / curl** | Helpers críticos e exemplos de chamada |
-| **Payloads e rotas** | Completos, com tipos e obrigatoriedade |
+| **Pseudocódigo / curl** | **Quando já for decisão do PO.** Helpers críticos e exemplos de chamada |
+| **Payloads e rotas** | **Quando já forem decisão do PO** (ex.: contrato publicado no Apidog). Completos, com tipos e obrigatoriedade |
 | **Edge cases** | Falha, omitir campo, dia fora da recorrência, etc. |
-| **Prints + legenda** | O que o júnior deve observar |
+| **Prints + legenda** | O que quem executa deve observar |
 | **CA Back e Front separados** | Dado/Quando/Então testáveis por camada |
 | **REGRAS DE DDD** | Tom **ordenante** (Faça/Abra/Confirme) — ver `tom-professor.md` + [evidencias-dod.md](evidencias-dod.md) |
 | **Passo a passo** | **Só Esteira.** Imediatas: checklist **nativo** do ClickUp |
@@ -132,9 +136,11 @@ Público da descrição = **dev júnior**. Se precisar adivinhar coluna, status,
 - Seguir [`../docs/tom-professor.md`](../docs/tom-professor.md)
 - **Contexto / regra:** “Exemplo:” + cenário concreto. **DDD:** sem “Imagine que…” — Faça / Abra / Confirme
 - Destacar `⚠️` o que o protótipo mente
-- **Não** enxugar glossário, DBML, colunas ou exemplos sem o PO pedir
+- **Não** cortar o que explica o confuso (glossário, regra, exemplo) sem o PO pedir
+- **Não** acrescentar o como que o PO não decidiu. Em correção e integração: sem tabela nova, coluna nova ou mecanismo especial prescrito — caminho mais simples, escolha do dev
+- Card só com o que é útil a quem executa — nada vazado da conversa entre PO e IA
 
-**Default:** máximo detalhe para júnior.
+**Default:** menos é mais. Problema e resultado completos; o confuso explicado; o como proporcional à senioridade de quem executa.
 
 ---
 
@@ -146,11 +152,11 @@ Quando a entrega tiver **API** (CMS, público, ingest), **não** pular para o ma
 |---|--------|-------------------|------|
 | 1 | **Objetivo** | Entender o quê / para quem / o que sai de escopo | PO confirma |
 | 2 | **Regra de negócio** | Flags, sync, CRUD vs só config, edge cases | PO fecha regras |
-| 3 | **DB** | DBML + tabela coluna a coluna (nomenclatura GO-12) | PO valida DBML |
+| 3 | **DB** | **Só quando o banco é decisão do PO** (produto novo): DBML + tabela coluna a coluna (nomenclatura GO-12). Correção / integração: **não** desenhar tabela nova — o dev decide | PO valida DBML |
 | 4 | **Rotas → Apidog** | OpenAPI + import. IDs **deste** produto/módulo descobertos pelo nome (`scripts/apidog_resolve_ids.py`); **ambíguo → perguntar**. Não reusar ID de outro cliente | Pastas visíveis no docs **deste** produto |
 | 5 | **Task ClickUp** | Markdown professor; contrato canônico = Apidog | PO aprova publicar |
 
-Front-only **sem** endpoint novo: pular o passo 4.
+Front-only **sem** endpoint novo: pular o passo 4. Correção / integração (banco não é decisão do PO): pular o passo 3.
 
 Detalhe operacional: **[apidog.md](apidog.md)**. Doc: [openapi.apidog.io](https://openapi.apidog.io/). Token da conta: `APIDOG_ACCESS_TOKEN`. **Project ID, moduleId e pasta: descobrir pelo nome** com `scripts/apidog_resolve_ids.py` (perguntar só se ambíguo) — não ficam no `.env`.
 
@@ -249,16 +255,17 @@ A conversa com o PO tem **ruído útil para o agente** (decisões, rejeições, 
 - Anedota da conversa, “fulano disse”, “na call vimos que…”
 - Alternativas descartadas, comparação com outro cliente, “não confundir com o projeto Z” sem Z estar na entrega
 - Checklist interno do agente, path `.task/` / `.docs/`, status de skill
+- Restrições que o PO deu para guiar a escrita (ex.: “sem tabela nova”, “rota igual pra todos”, observação sobre header) — guiam **como** escrevemos; não são conteúdo do card
 
 **Como escrever o caminho certo:** diga o que **é** (ex.: Dockerfile no EasyPanel; DB como serviço separado; vars de env). **Não** abra parêntese “e não use [ferramenta rejeitada na conversa]”.
 
 Detalhe do `## ⛔ NÃO DEVE`: [evidencias-dod.md](evidencias-dod.md) — só falha **real** desta entrega.
 
-### ⚠️ Ao limpar meta de roteamento, NÃO remover conteúdo didático
+### ⚠️ Ao limpar meta de roteamento, NÃO remover conteúdo útil
 
 Remover só processo interno (modo SuperAgente, complexidade de roteamento) **e** o ruído do filtro acima.  
-**Nunca** trocar “explicativo útil ao júnior” por “enxuto” sem o PO pedir explicitamente.  
-Manter glossário, colunas, DBML, payloads, curls, exemplos e pseudocódigo **quando forem desta entrega**.
+**Nunca** apagar o que explica o confuso (glossário, regra de negócio, onde as coisas estão, exemplo) sem o PO pedir explicitamente.  
+Manter colunas, DBML, payloads, curls e pseudocódigo **quando forem desta entrega e já forem decisão do PO**.
 
 ## Modo SuperAgente (ClickUp)
 
@@ -269,7 +276,7 @@ O PO aprova o markdown local; o agente **publica na Esteira** (tipo **Task** pad
 ### O que a descrição DEVE conter
 
 A descrição é a **fonte única de verdade** (SuperAgente + devs).  
-Tom **professor** (seção 🎓): tintim por tintim, para júnior não adivinhar — **sem** texto de processo Scrum.
+Tom **professor** (seção 🎓): problema e resultado esperado claros, o confuso explicado, sem ambiguidade — **sem** texto de processo Scrum e **sem** resolver o como pelo dev.
 
 **Seções obrigatórias:**
 
@@ -279,7 +286,7 @@ Tom **professor** (seção 🎓): tintim por tintim, para júnior não adivinhar
 4. **Contexto** — dor + motivação + **glossário** quando houver termos novos
 5. **Objetivo** — resultado esperado em 1–2 frases
 6. **Alterações Necessárias**
-   - **Backend** — numerado; schema com **tabela coluna a coluna**; **DBML**; payloads; endpoints; fluxos; **env / `.env.example`**; “por quê” das decisões
+   - **Backend** — numerado; o que muda e onde; schema (**tabela coluna a coluna** + **DBML**) e payloads **só quando já forem decisão do PO**; endpoints; fluxos; **env / `.env.example`**; “por quê” das decisões
    - **Frontend** — numerado; telas; campos; comportamentos; estados; **URL da API / `NEXT_PUBLIC_*`**; alinhamento aos prints
 7. **Critérios de Aceitação** — Dado / Quando / Então; em Front+Back, **separar Backend e Frontend**
 8. **`## Passo a passo sugerido`** — **só Esteira.** Tabela = PBI, linha = Task (`1.1`) + Espera/Bloqueia. **Imediatas: omitir esta seção** (sem PBI, sem Dependência). Molde: [evidencias-dod.md](evidencias-dod.md)
@@ -315,12 +322,12 @@ Inferir repos pelo `git remote` do workspace quando possível. Se não achar, pe
 
 - Separar claramente **Back**, **Front** e **Critérios de Aceitação**
 - Critérios Front+Back: seções **Backend** e **Frontend**
-- Incluir exemplos de payload, curl, tabelas (“se X então Y”)
+- Incluir exemplos (tabelas “se X então Y”); payload e curl quando o contrato já for decisão do PO
 - Documentar fluxos com tabelas ou diagramas (PNG; no ClickUp via attachment)
 - Marcar armadilhas com `⚠️` (protótipo vs real, o que não fazer)
 - Sem ambiguidade: fixo vs env vs configurável — dizer explicitamente
 - Critérios descrevem **comportamento**, não “refatorar arquivo X”
-- **Nunca** enxugar conteúdo didático para “caber menos”
+- Menos é mais: o essencial + o confuso explicado. **Nunca** cortar o que tira ambiguidade; **não** ditar o como que o PO não decidiu
 - Texto da task = útil para o **dev**; meta de roteamento PO fica só no chat
 
 Para template completo e exemplo, ver [templates.md](templates.md).
@@ -329,7 +336,7 @@ O que o SuperAgente espera ao quebrar PBIs/Tasks: [super-agente-clickup.md](supe
 
 ## Modo Direto pro Dev
 
-Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBML, Back/Front, critérios, DDD, observações, NÃO DEVE), mas:
+Mesma estrutura **didática** do SuperAgente (contexto, glossário, Back/Front, critérios, DDD, observações, NÃO DEVE; colunas/DBML só se forem decisão do PO), mas:
 
 - Escrita como **instrução de execução imediata**
 - **Não** incluir `## Passo a passo sugerido` com PBI / Espera / Bloqueia / Dependência — o SuperAgente **não** passa nesta lista
@@ -339,8 +346,8 @@ Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBM
   - Uma camada → checklist na task
   - Front+Back → **um** checklist na `[BACKEND]` e **um** na `[FRONTEND]`
 - Cada item do checklist = uma “tarefa” que o dev marca. Incluir implementação **e** as provas `P-*` daquela camada
-- Pode detalhar arquivos/módulos no **corpo** (tom professor); a ordem de execução que o dev tica é o checklist
-- **Não** enxugar explicações por ser “urgente”
+- Pode apontar arquivos/módulos no **corpo** (onde as coisas estão); o como fica com o dev. A ordem de execução que o dev tica é o checklist
+- “Urgente” não tira clareza: problema, resultado esperado e o confuso explicado continuam completos — sem virar passo a passo da solução
 - DDD **mais fechado**: cada prova nomeada; sem “testa depois”
 - Prova só na camada que **altera código**. Front com alteração zero naquela tela → Back prova
 
@@ -352,7 +359,7 @@ Mesma estrutura **didática** do SuperAgente (contexto, glossário, colunas, DBM
 - Explicar termos técnicos em uma frase quando necessário
 
 ### Em entregáveis (descrições de tarefa)
-- **Tom professor** (seção 🎓): detalhado, didático, sem medo de alongar
+- **Tom professor** (seção 🎓): didático no que é confuso; menos é mais no resto; o como fica com quem executa
 - Estruturado com títulos, subtítulos, listas e tabelas
 - Emojis nos títulos de seção (como no padrão do time)
 - Parágrafos curtos; preferir várias seções claras a um bloco denso
@@ -456,14 +463,14 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Cabeçalho em **grid/tabela** com repos Front e/ou Back (links)
 - [ ] API do Front no grid quando conhecida (`NEXT_PUBLIC_*` + URL)
 - [ ] `.env.example`: criar ou atualizar documentado (keys, sem secrets)
-- [ ] **Pipeline:** Objetivo → regra de negócio → DB → **Apidog importado** (se houver API) → só então markdown da task
+- [ ] **Pipeline:** Objetivo → regra de negócio → DB (só se o banco for decisão do PO) → **Apidog importado** (se houver API) → só então markdown da task
 - [ ] **Apidog:** IDs deste produto/módulo confirmados (senão perguntou); grid com link do docs **deste** produto; anexo OpenAPI ([apidog.md](apidog.md))
-- [ ] **Tom professor**: glossário / colunas explicadas / DBML / exemplos — júnior não precisa adivinhar
+- [ ] **Tom professor**: problema e resultado esperado completos; o confuso explicado (glossário, regra, onde está); o como fica com o dev (DBML / pseudocódigo / payload só se já forem decisão do PO) — ninguém precisa adivinhar
 - [ ] Back e Front claramente separados (quando aplicável)
 - [ ] Critérios de aceitação em Dado/Quando/Então (separados Back/Front se ambos)
 - [ ] **REGRAS DE DDD** (pronto + paralelos + prova HML); tom **ordenante**; prova na camada que **mudou código**; Imediatas: provas nomeadas ([evidencias-dod.md](evidencias-dod.md))
 - [ ] **`## ⛔ NÃO DEVE`** no **final** da task (tabela desta entrega + `>` no bloqueio e na frase de ouro; tabela fora do quote)
-- [ ] **Filtro conversa → corpo:** nada de ferramenta/abordagem fora do caminho “só para negar”; NÃO DEVE só com falha **real** desta entrega ([evidencias-dod.md](evidencias-dod.md))
+- [ ] **Filtro conversa → corpo:** card só com o útil a quem executa (nada da conversa PO ↔ IA nem das restrições que o PO deu para guiar a escrita); nada de ferramenta/abordagem fora do caminho “só para negar”; NÃO DEVE só com falha **real** desta entrega ([evidencias-dod.md](evidencias-dod.md))
 - [ ] Caminho oficial no **afirmativo** (o que fazer). Não citar o que não entra, salvo tentação real desta spec
 - [ ] **Esteira:** passo a passo se houver mais de um passo (tabela 5 colunas + Por quê; mermaid imagem **e** fonte). **Imediatas:** **sem** essa seção; checklist nativo na task de cada dev
 - [ ] **Imediatas ao publicar:** sem subtarefa; `--checklist-name` + `--checklist-item` na task (uma camada) **ou** na `[BACKEND]` e na `[FRONTEND]` vinculadas (`--link`)
@@ -479,7 +486,7 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] Tarefa Front: seção 🖼️ Referência visual; PNGs em `assets/{task-slug}/` da task, anexados no ClickUp com inline (sem push em repositório)
 - [ ] Publicado baixado e conferido: toda imagem é attachment (zero `raw.githubusercontent` / `mermaid.ink` / caminho local)
 - [ ] Link do protótipo incluído quando existir
-- [ ] **Não** enxugou conteúdo didático ao “limpar” a task
+- [ ] **Não** apagou o que explica o confuso ao “limpar” a task; **não** prescreveu tabela/coluna/mecanismo novo em correção ou integração
 - [ ] Markdown em `.task/{projeto}/{task-slug}.md` (não `task/` sem ponto; não solto na raiz)
 - [ ] Se workspace é git repo: `.task/` (e `.playwright-capture/` / `.skill/` se usados) no `.gitignore`
 - [ ] Se for publicar: aprovação local explícita + dry-run/script ClickUp (ver [clickup-task-guide.md](clickup-task-guide.md))
@@ -517,8 +524,9 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - Não colocar no markdown da task: modo SuperAgente, “não é direto pro dev”, complexidade de roteamento, checklist meta do agente
 - Não colar ruído da conversa (ferramenta rejeitada, “sem Y”, anedota, outro cliente) — filtrar; caminho oficial no **afirmativo**
 - Não usar o `## ⛔ NÃO DEVE` para listar o que o time “não usa” em geral — só falha **real** desta entrega
-- Não enxugar glossário, DBML, tabela de colunas, exemplos ou “por quê” **úteis ao júnior nesta entrega** sem o PO pedir explicitamente
-- Não escrever task “só para quem já sabe” — default é júnior
+- Não apagar glossário, exemplos ou “por quê” que tiram ambiguidade **nesta entrega** sem o PO pedir explicitamente
+- Não resolver pelo dev: em correção/integração, não prescrever tabela nova, coluna nova ou mecanismo especial; DBML / pseudocódigo / payload completo só quando já forem decisão do PO
+- Não escrever task “só para quem já sabe” — problema, resultado esperado e o confuso vão completos para qualquer nível; só o detalhe do como cai com a senioridade
 - Não auditar pixel / preencher REPORT no lugar do `qa-space` — PO **referencia** o DS; QA **audita**
 - Não commitar `clickup.env` / `apidog.env` / tokens
 - Não inventar List ID, custom type ou option do campo Projeto — usar env / API
