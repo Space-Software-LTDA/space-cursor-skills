@@ -103,7 +103,7 @@ Com homologação validada e **evidências de pronto** anexadas (o que a task li
 ## Migration vai junto com o código
 
 - A migration que cria ou muda a coluna vai **no mesmo PR** do código que usa a coluna.
-- **Mudança de dado no banco só por migration**, nunca direto no banco (nem `UPDATE` em cliente SQL, nem console do framework). Motivo: o mesmo código roda em vários bancos (um por cliente/casa) e a migration roda em todos no deploy. Regras da migration: [banco.md](banco.md) BD-08 a BD-11.
+- **Mudança de dado no banco só por migration**, nunca direto no banco (nem `UPDATE` em cliente SQL, nem console do framework). Motivo: o mesmo código roda em vários bancos (um por cliente/casa) e a migration roda em todos no deploy. Regras da migration: [banco.md](banco.md) BD-09 a BD-12.
 - Leitura direta no banco para conferir pode.
 
 ---
