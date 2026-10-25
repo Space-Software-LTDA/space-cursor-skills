@@ -8,6 +8,7 @@ Atualizar **este arquivo** sempre que criar, renomear ou remover uma skill.
 | Skill (pasta) | Trigger | Função | Artefatos locais | ClickUp env |
 |---------------|---------|--------|------------------|-------------|
 | `skill-update` | `/skill-update` | Hub: sync, manutenção, catálogo, regras transversais | N/A (só docs da skill) | Não |
+| `create-feature` | `/create-feature` | Feature nova num projeto existente, do pedido ao PR: demanda → snapshot/dores → impactos → regras e métricas → canvas (DS geral + DS do produto) → "pode codar" → banco (`banco.md`) → código com componente reutilizável → lado a lado em 3 larguras → revisor sem contexto → validação do dono → PR para `HML`. Só ordem, gates e critérios; aponta para a constituição | `docs/demandas/` do projeto (versionado) + canvas + âncora em `.docs/create-feature/` | Não |
 | `po-techlead-scrum` | anexar / PO-task | Tasks ClickUp + contrato Apidog (Objetivo → regra → DB → rotas → task) | `.task/` | Sim (`clickup.env` + `apidog.env`) |
 | `project-context-doc` | anexar / contexto produto | Doc de contexto + Docs ClickUp | `.docs/` (+ multipágina se aplicável) | Sim |
 | `qa-space` | `/qa-space` | QA front + Space DS + DS produto/`P-…` se houver + ui-gosto (geral + tipo §11) + REPORT | `.task/` | Não |
@@ -23,6 +24,7 @@ Skills de produto **leem `docs/README.md` primeiro**. Conteúdo das skills = **g
 
 ```text
 /skill-update          → mantém o pack (sync, nova skill, path, .env)
+create-feature         → Controlador: fases 1–12 de uma feature num projeto existente; gates (regras aprovadas · "pode codar" · validação do dono); grava em docs/demandas/; termina no PR para HML
 po-techlead-scrum      → Objetivo → regra → DB → Apidog → task ClickUp
 qa-space               → grava .task/; NÃO publica ClickUp (passa pro PO)
 project-context-doc    → grava .docs/; publica Doc ClickUp após aprovação

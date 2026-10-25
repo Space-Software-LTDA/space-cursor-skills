@@ -761,7 +761,7 @@ Ver AP-TYPE-03.
 
 `limit=1000`, `data.slice(page * 25)`. A UI tem “página 2”. O servidor mandou um recorte mentiroso.
 
-**Ouro.** `page` + `limit` (ou cursor) de verdade. Per page 10/25/50/100.
+**Ouro.** `page` + `limit` (ou cursor) de verdade. Per page 10/25/50 (padrão 10, nunca mais que 50).
 
 **Sev:** P1
 

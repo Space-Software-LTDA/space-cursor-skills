@@ -54,6 +54,7 @@ npm run sync
 | Pasta | Função |
 |-------|--------|
 | `skills/skill-update` | **Hub** — sync, catálogo, criar/alterar skills, constituição (`/skill-update`) |
+| `skills/create-feature` | **Feature nova** num projeto existente, do pedido ao PR para `HML` (`/create-feature`): demanda, snapshot, impactos, regras, canvas, "pode codar", banco, código, lado a lado em 3 larguras, revisor sem contexto, validação do dono. Guarda só ordem, gates e critérios; as regras são da constituição |
 | `skills/po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) + contrato Apidog — lê `docs/README.md` como **PO**. Inclui prompt do **Estruturador** ClickUp: `estruturador-clickup.md` (espelho `skill.md` na raiz; colar na AI Skill do ClickUp — não é skill Cursor) |
 | `skills/project-context-doc` | Doc de contexto + Docs ClickUp — lê `docs/README.md` como **contexto** (G-xxx apontam ouro/entry) |
 | `skills/qa-space` | QA front / Design System Space — lê `docs/README.md` como **QA** (audita o feito; DS inteiro) |
