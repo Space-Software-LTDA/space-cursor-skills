@@ -137,12 +137,36 @@ O que é **inviolável** até o PO escrever o contrário na task:
 | Onde | Padrão |
 | --- | --- |
 | Repo GitHub | `cliente_projeto_tipo` em **minúsculas** + underscore. Zero CamelCase. |
-| Branch de feature | `PBI-{id}` a partir de `main`. |
+| Branch de feature | `PBI-{id}-{descricao}` a partir da `HML` (sem PBI: `tipo/AAAA-MM-DD-slug`) — [git-fluxo.md](git-fluxo.md). |
 | Commit | `tipo: mensagem` |
 | EasyPanel | projeto `cliente_projeto`; app = nome do serviço; app sobe com **`Dockerfile`**; banco/cache = **outro serviço** (AP-NAM-07) |
 | Banco | **PostgreSQL**. Usuário `space_[cliente]`. Tabela `snake_case`. Coluna **camelCase**. `createdAt` e `updatedAt` em **toda** tabela. |
 
-Entity TypeORM / migration / SQL da task têm que contar a **mesma** história (AP-DB-04). Task que cria tabela sem esse grid está incompleta.
+Entity TypeORM / migration / SQL da task têm que contar a **mesma** história (AP-DB-04). Task que cria tabela sem esse grid está incompleta. Modelagem (dinheiro, datas, ids externos, fornecedores) e migrations: [banco.md](banco.md) BD-01…BD-13.
+
+---
+
+## GO-13 — Escolha em tempo de execução é um dicionário
+
+O código escolhe a implementação em tempo de execução (o gateway pelo nome no token, o adaptador pelo `code` do fornecedor). O dono quer **ler** esse ponto e, com um clique em "ir para definição", cair na função concreta.
+
+```ts
+const CASH_IN = {
+  gatewayA: GatewayA.cashIn,
+  gatewayB: GatewayB.cashIn,
+}
+
+await CASH_IN[gateway](payload)
+```
+
+- **Dicionário**: uma linha por opção, apontando direto para a função concreta.
+- **Proibido** para despachar: interface + mapa de classes (o "ir para definição" para na interface), `switch` para escolher implementação, service que só repassa a chamada (AP-LAY-01).
+- Legibilidade vem antes de reaproveitamento: nem toda repetição pede abstração.
+- Na dúvida de gosto, mostrar as opções lado a lado antes de implementar.
+
+Caso real (2026-10-07): duas versões seguidas reprovadas num serviço de pagamentos (interface + classes; depois `switch`); aprovado o dicionário.
+
+O dicionário de roteamento usa o mesmo identificador da pasta e do banco (GO-02).
 
 ---
 
@@ -168,3 +192,5 @@ Responder em voz alta a pergunta da [entry-point.md](entry-point.md) §9 **e** e
 - [ ] Teste de comportamento do capítulo, não “assert Promise”
 - [ ] Validado no runtime que produção usa quando isso importa (`start` ≠ `dev`)
 - [ ] Nomes da empresa: repo/branch/commit/tabela/coluna segundo [nomenclatura.md](nomenclatura.md) (GO-12) — tabela `snake_case`, coluna camelCase, `createdAt`/`updatedAt`
+- [ ] Escolha em runtime por dicionário, sem interface/`switch`/repasse (GO-13)
+- [ ] Banco: checklist de [banco.md](banco.md) (centavos, UTC, id externo, migration genérica e idempotente)

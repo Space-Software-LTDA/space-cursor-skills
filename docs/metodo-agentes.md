@@ -1,7 +1,8 @@
 # Método de execução das skills Space
 
 > Vale para **todas** as skills do pack. Cada skill aplica este método às próprias etapas (seção **“Método de execução”** do `SKILL.md`) — sem copiar este texto.  
-> Origem: piloto de criação de produto (setembro de 2026), em que estas quatro práticas foram as que mais seguraram a qualidade.
+> Origem: piloto de criação de produto (setembro de 2026), em que estas quatro práticas foram as que mais seguraram a qualidade; ampliado em 2026-10-24 com as regras de execução de um projeto real (modelo pela tarefa, checkpoints, processos, roteamento de correção).  
+> Fora das skills, o mesmo método vale para o trabalho do dia a dia num projeto: cada solicitação vira demanda ([metodo-demandas.md](metodo-demandas.md)) e cada etapa é executada por subagente com o cartão [`_moldes/tarefa-subagente.md`](_moldes/tarefa-subagente.md).
 
 ## Dicionário
 
@@ -14,6 +15,8 @@
 | **Pronto quando (DoD)** | O critério verificável de que a etapa terminou — com evidência (arquivo, print, linha), não opinião |
 | **Revisor sem contexto** | Subagente novo que confere o artefato **sem** ter visto a conversa: recebe só o artefato, os critérios e as leis |
 | **Lista de correções** | Tabela do que foi corrigido na sessão, com a causa e o que muda na skill |
+| **Checkpoint** | Linha "feito até aqui: …" que o subagente grava no artefato (ou na etapa) ao terminar cada parte. Permite retomar se ele for interrompido |
+| **Regras do projeto** | Arquivo de regras sempre ativo do repositório (ex.: `.claude/CLAUDE.md`, `AGENTS.md`), escrito pelo dono do repositório |
 
 ---
 
@@ -33,7 +36,15 @@
 3. **Paralelo** quando os itens são independentes (ex.: varrer várias telas, revisar vários arquivos). Decisões do humano continuam **uma por vez**.  
 4. **Quando não precisa:** pedido de uma etapa só e curto (ex.: um sync, uma pergunta). O chat resolve direto.  
 5. **Sem ferramenta de subagente:** um chat novo por etapa, colando o mesmo cartão.
-6. **Custo:** quando a ferramenta deixar escolher o modelo, o subagente roda num modelo **mais barato** que o do Controlador (revisão e texto: intermediário; buscas e trocas mecânicas: o mais leve). Correção pequena e mecânica o Controlador faz direto, sem abrir subagente — cada subagente relê tudo do zero.
+6. **Modelo pela tarefa, sem tabela fixa:** quando a ferramenta deixar escolher o modelo, o Controlador escolhe **pela complexidade e pelo risco da tarefa**. Referência: varredura, leitura e troca mecânica → o mais leve; implementação e desenho seguindo regra escrita → intermediário; revisão de dinheiro, de regra de negócio ou caso ambíguo → o mais forte. Nomes de modelo mudam por ferramenta e por época: não fixar uma tabela de modelos em skill nem em regra de projeto.  
+7. **Correção pequena** (1 ou 2 passos: um texto, um botão) o Controlador faz direto, sem abrir subagente — cada subagente relê tudo do zero e custaria mais.  
+8. **O contexto do subagente são os documentos:** o artefato da etapa (objetivo, como, resultado esperado, pronto quando) + as seções exatas das regras e da constituição. Nunca a conversa.  
+9. **Subagente não pergunta ao humano.** Dúvida volta como "Aberto" no cartão de retorno; o Controlador decide ou pergunta.  
+10. **Checkpoints e retomada:** o subagente grava um checkpoint ao terminar cada parte. Subagente interrompido (limite de uso, erro) é retomado pela ferramenta, quando ela permitir, ou um novo continua a partir do último checkpoint.  
+11. **Paralelo só com fronteira clara:** dois subagentes nunca editam o mesmo arquivo; no canvas (Pencil, Figma), um editor por vez.  
+12. **Processos:** o subagente só encerra processo que **ele mesmo** abriu, filtrando pela linha de comando (ex.: o diretório de perfil próprio do navegador automatizado). Proibido encerrar em massa (`taskkill`, `Stop-Process`, `pkill` geral de navegador, `node`, `php`): isso fecha o navegador do humano e os servidores locais. Caso real: 2026-10-21.
+
+Em projeto com [método de demandas](metodo-demandas.md), o cartão é o molde [`_moldes/tarefa-subagente.md`](_moldes/tarefa-subagente.md): a etapa da demanda vira a especificação e o subagente preenche nela o resultado. Os dois cartões abaixo são a forma curta, usada pelas skills.
 
 **Cartão de abertura (Controlador → subagente):**
 
@@ -117,7 +128,18 @@ A re-conferência cega do `design-system-apply` (conferir de novo sem olhar a li
    |---|--------------------|---------------------------|----------------------|---------------------|
 
 3. **Chamar `/skill-update`** (fluxo “Registrar correção”): editar a skill no repo de forma **genérica**, registrar no `CORRECOES.md` da skill e rodar o sync.  
-4. **Não vai para a skill:** dado do produto (preço, nome, ID) e preferência pontual do humano que não vale para outros produtos — fica no artefato.  
+4. **Não vai para a skill:** dado do produto (preço, nome, ID) e preferência pontual do humano que não vale para outros produtos — fica no artefato.
+
+**Para onde vai cada correção (roteador):**
+
+| A correção é… | Vai para | Como |
+|---------------|----------|------|
+| Regra geral de trabalho (vale para qualquer projeto Space) | Esta constituição (`docs/`) ou a skill | `/skill-update`, de forma genérica; o caso do projeto pode entrar como exemplo curto |
+| Regra que só vale num projeto, ou exceção do projeto à constituição | Regras do projeto (ex.: `.claude/CLAUDE.md`), na seção do assunto, como regra afirmativa | Edição direta pelo Controlador, com o motivo e a data |
+| Fato de como o sistema funciona hoje | `docs/sistema/` do projeto | No fechamento da demanda |
+| Decisão de uma demanda | Tabela de decisões da demanda | Na hora |
+
+Na dúvida, geral, com a parte particular como exemplo. Correção geral presa nas regras de um projeto não chega aos outros (caso real, outubro de 2026: regras de banco e de tela de um projeto ficaram semanas só nele).  
 5. Skill ainda em rascunho local (não promovida): o registro vai para o arquivo de lições do rascunho; ao promover, as lições viram regra.
 
 ---
@@ -141,7 +163,9 @@ Próximo passo: {1 linha}
 | Onde a skill roda | Onde fica a âncora |
 |-------------------|--------------------|
 | **Workspace dedicado** ao trabalho da skill (ex.: workspace de criação de produto) | Regra `.cursor/rules/{skill}.mdc` sempre ativa e curta + `AGENTS.md` curto, gerados do modelo da skill. A pasta inteira existe para aquilo |
-| **Repositório de código** (PO, QA, contexto, Apply num produto existente) | Só o arquivo `ANCORA.md` dentro da pasta de artefatos (`.task/{projeto}/` ou `.docs/{skill}/`), já fora do git. **Proibido** escrever no `AGENTS.md` do repositório ou criar regra sempre ativa nele |
+| **Repositório de código** (PO, QA, contexto, Apply num produto existente) | Só o arquivo `ANCORA.md` dentro da pasta de artefatos (`.task/{projeto}/` ou `.docs/{skill}/`), já fora do git. **Proibido** a skill escrever no `AGENTS.md` do repositório ou criar regra sempre ativa nele |
+
+A proibição é para a **âncora da skill**. As **regras do projeto**, escritas pelo dono do repositório (ex.: `.claude/CLAUDE.md`), podem e devem existir: guardam o que é do projeto e as exceções a esta constituição, e começam mandando ler a constituição. A skill não escreve nelas; correção de regra do projeto segue o roteador do §4.
 
 **Uso:**
 
@@ -162,3 +186,11 @@ Próximo passo: {1 linha}
 | Clareza para leigo | Termo técnico explicado na primeira vez; nada de recado de processo ou de conversa dentro do artefato |
 | Nada apagado sem OK | Versão antiga vai para uma área de rascunho |
 | Arquivo de trabalho protegido | Canvas e arquivos grandes: cópia com data antes e depois de cada rodada; um só editor aberto; conferir que o arquivo mudou no disco |
+| Responder em português | Toda resposta, explicação, documento e comentário de script em português (pt-BR), desde a primeira mensagem |
+| Ideia não é ordem | Quando o humano diz "mas passa", "já é opinião minha" ou comenta uma alternativa, é conversa: responder e perguntar se quer mudar. Não sair alterando |
+| Impactos antes de mexer | Antes de propor ou executar, listar o que mais muda (cada front, dinheiro, métricas, banco, integrações, multi-tenant, operação). A lista de áreas é do projeto; o passo está em [metodo-demandas.md](metodo-demandas.md) §4.6 |
+| Métrica num dicionário só | Antes de pôr métrica em tela ou relatório, procurar no dicionário de métricas do projeto: existe → mesmo nome e mesma fórmula; não existe → criar a entrada (nome, definição, fórmula, fonte, data) e só depois usar. Nada de dois nomes para a mesma coisa. Toda informação de uma página segue o filtro de período de cima, salvo valor "agora", sempre marcado |
+| Plano aprovado mora no repositório | Dentro da demanda (`docs/demandas/…`), nunca só na pasta de planos da ferramenta |
+| Bases de usuários nunca apagadas | Em qualquer limpeza (PC, servidor, pasta): arquivo com dado de usuário (dump, banco, planilha, CSV, JSON de base, ZIP de base, texto com e-mail ou telefone) é salvo e agrupado num lugar só, com a origem anotada, mesmo dentro de pasta marcada para apagar. Não copiar o conteúdo para o chat nem para docs: só nome, tamanho e tipo de dado |
+| Marca do humano é dele | Em lista que o humano marcou, só preencher item em branco; conferir as marcas antes e depois de editar |
+| Credencial fora do texto | Credencial nunca vai para o git, para `docs/` nem para o chat: só o nome do serviço e onde está guardada ([padrao-ouro.md](padrao-ouro.md) GO-09) |

@@ -58,7 +58,7 @@ Pastas densas = clone do boilerplate / scaffold — não inventar árvore no set
 
 ### 4) Ambientes
 
-Local · HML · Produção (sem provisionar). `dev` só se houver ambiente de desenvolvimento compartilhado (`../docs/git-fluxo.md`) — perguntar.
+Local · HML · Produção (sem provisionar). Não existe `dev` (`../docs/git-fluxo.md`, decisão de 2026-10-24).
 
 ### 5) Contas / ferramentas
 

@@ -4,7 +4,27 @@ Esta pasta **não é skill**. É a constituição do time: o que o código deve 
 
 **Regra de ouro para qualquer agente:** antes de abrir `entry-point.md`, `design-system.md` ou qualquer outro arquivo daqui, leia **este README**. Ele decide *qual* skill lê *o quê*, *por quê* e *como usar* o texto. As skills **não** inventam o mapa de leitura. As skills **não** resumem estes arquivos no `SKILL.md`.
 
-Edite no repo `space-cursor-skills/docs/`. A pasta no Cursor (`SKILLS_DEST_PATH/docs/`) é cópia — rode `npm run sync`.
+Edite no repo `space-cursor-skills/docs/`. A pasta no Cursor (`SKILLS_DEST_PATH/docs/`) e a do Claude Code (`CLAUDE_SKILLS_DEST_PATH/docs/`, padrão `~/.claude/skills/docs/`) são cópia — rode `npm run sync`.
+
+---
+
+## Trabalho num projeto (fora de uma skill)
+
+A constituição também vale para o dia a dia de qualquer projeto Space, não só quando uma skill é chamada. As **regras do projeto** (ex.: `.claude/CLAUDE.md` do repositório) começam mandando ler este README e guardam só o que é do projeto e as exceções a esta constituição, com o motivo.
+
+```text
+1. Este README
+2. metodo-demandas.md   ← toda solicitação vira demanda (pedido literal, snapshot, dor/causa, etapas, reaproveitamento)
+3. metodo-agentes.md    ← controlador + subagentes, roteador de correção, leis comuns
+4. Conforme o trabalho:
+   - banco, migration, dinheiro, datas, ids externos → banco.md (+ nomenclatura.md, padrao-ouro.md)
+   - git, PR, deploy → git-fluxo.md
+   - tela (desenho, admin, listas, skeleton) → ui-gosto.md §0.1, §3.5, §6.7–§6.9, §7.4–§7.5, §11.2
+   - código de back → backend.md, entry-point.md, padrao-ouro.md, anti-padroes.md
+5. As regras do projeto (exceções e o que é só dele)
+```
+
+Moldes do método: [`_moldes/`](_moldes/) (`demanda.md`, `snapshot.md`, `etapa.md`, `tarefa-subagente.md`).
 
 ---
 
@@ -62,7 +82,8 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 | Arquivo | Por quê | Como usar (não é o mesmo que o QA) |
 | --- | --- | --- |
 | [entry-point.md](entry-point.md) | Padrão central de fluxo Back | A task **exige** roteiro no `index.ts` da feature. Checklist da task incompleto se não citar o teste de ouro (“abri só o entry, sei o fluxo?”). **Não** auditar um PR no browser — isso não é QA. |
-| [padrao-ouro.md](padrao-ouro.md) | Princípios GO-02…GO-12 | Viram decisão na task: type por operação, JWT, HTTP, jobs, **e nomes da empresa** (repo/tabela/coluna — GO-12). Escrever o **porquê** para o júnior. |
+| [padrao-ouro.md](padrao-ouro.md) | Princípios GO-02…GO-13 | Viram decisão na task: type por operação, JWT, HTTP, jobs, **nomes da empresa** (repo/tabela/coluna — GO-12) e **escolha em runtime por dicionário** (GO-13). Escrever o **porquê** para o júnior. |
+| [banco.md](banco.md) | BD-01…BD-13: dinheiro em centavos `…Cents`, UTC, id externo texto e `external…`, fornecedor como cadastro + `jsonb`, FK para o nosso id, transação, migrations (genérica, idempotente, banco compartilhado, trava), colação, cache versionado | Task que cria ou muda tabela, coluna, migration, dinheiro, data ou integração **cita os BD-* que valem**. Não resumir o arquivo na task. |
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* | O que a task **proíbe**. Critérios podem citar o ID (`AP-HTTP-01`, `AP-NAM-05` no banco). Forma pedagógica: cenário + ouro (ver [tom-professor.md](tom-professor.md)). |
 | [nomenclatura.md](nomenclatura.md) | Manufatura: GitHub, branch, commit, EasyPanel, **PostgreSQL** | **Sempre.** Toda task nomeia alguma coisa. Tabela `snake_case`, coluna camelCase, `createdAt`/`updatedAt`, usuário `space_[cliente]`. Deploy: app = serviço EasyPanel via **`Dockerfile`**; banco = serviço separado (AP-NAM-07). |
 
@@ -83,7 +104,7 @@ Após o sync, o path relativo a partir da pasta da skill é `../docs/<arquivo>.m
 
 | Arquivo | Quando | Como usar |
 | --- | --- | --- |
-| [git-fluxo.md](git-fluxo.md) | Branch, PR, hotfix, “pra qual branch?” (além da leitura **Sempre** de HML/DDD) | Escrever o fluxo **corrigido** na task (merge PBI→`dev` permitido; `hml`/`main` só PR). |
+| [git-fluxo.md](git-fluxo.md) | Branch, PR, hotfix, “pra qual branch?” (além da leitura **Sempre** de HML/DDD) | Escrever o fluxo **corrigido** na task: branch a partir da `HML`, PR para `HML`, `HML` → `main` por PR; não existe `dev`. |
 | [backend.md](backend.md) | Projeto novo ou stack da task | Mandar partir do [boilerplate-back-elysia](https://github.com/Space-Software-LTDA/boilerplate-back-elysia), feature-based, entry no `index.ts`. |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding, Coder, Apidog, **ou** task Docker/README/EasyPanel | Setup/ambiente: app sobe com **`Dockerfile`** no EasyPanel; banco/cache = serviço separado (AP-NAM-07). Caminho no **afirmativo**. |
 
@@ -231,18 +252,21 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 
 | Arquivo | Tema | Integral? |
 | --- | --- | --- |
-| [metodo-agentes.md](metodo-agentes.md) | Como toda skill executa: subagentes por etapa, “Pronto quando” + exemplo real, revisor sem contexto, registro de correções | Sim — todas as skills |
+| [metodo-agentes.md](metodo-agentes.md) | Como toda skill executa: subagentes por etapa, modelo pela tarefa, checkpoints, “Pronto quando” + exemplo real, revisor sem contexto, roteador de correções, leis comuns | Sim — todas as skills e todo projeto |
+| [metodo-demandas.md](metodo-demandas.md) | Como toda solicitação vira registro num projeto: demanda, pedido literal, snapshot antes/depois, dor → causa, já existe?, impactos, decisões, etapas, reaproveitamento, tags, status | Sim — todo projeto com `docs/` versionado |
+| [_moldes/](_moldes/) | Moldes do método: `demanda.md`, `snapshot.md`, `etapa.md`, `tarefa-subagente.md` | Copiar para o `docs/_moldes/` do projeto (ou apontar) |
+| [banco.md](banco.md) | BD-01…BD-13: modelagem, dinheiro, datas, ids externos, fornecedores, migrations, cache | Sim |
 | [tom-professor.md](tom-professor.md) | Didática para júnior (PO + Context; QA opcional) | Sim — princípios; moldes de artefato ficam nas skills |
 | [entry-point.md](entry-point.md) | Roteiro no topo do `index.ts`; 16 seções; proibido `prepare`/`handle` | Sim — não resumir |
-| [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-11 | Sim |
+| [padrao-ouro.md](padrao-ouro.md) | GO-02 … GO-13 | Sim |
 | [anti-padroes.md](anti-padroes.md) | Catálogo AP-* (cenário / por quê / ouro / exemplo / erro comum) + Front | Sim |
 | [design-system.md](design-system.md) | Space UI DS v1.0 | Sim — QA lê inteiro |
-| [ui-gosto.md](ui-gosto.md) | DO / DON’T visual Space: parte geral + regras por tipo de produto (cassino, admin/B2B) | Sim — Forge e Apply leem; não resumir na skill |
+| [ui-gosto.md](ui-gosto.md) | DO / DON’T visual Space: do desenho ao código (§0.1), parte geral (multi-cliente, botão pelo significado, datas, skeleton, lista lembra o estado) + regras por tipo de produto (cassino, admin/B2B com estrutura de tela) | Sim — Forge e Apply leem; todo trabalho de tela segue §0.1; não resumir na skill |
 | [stacks-e-estrutura.md](stacks-e-estrutura.md) | Onboarding empresa (git, stack, Coder, Apidog, EasyPanel) | Sim |
-| [git-fluxo.md](git-fluxo.md) | PBI → dev / PR hml / PR main, hotfix; HML ≈ main (banco); evidência de pronto | Sim — sem contradizer “commit direto” vs merge em `dev` |
+| [git-fluxo.md](git-fluxo.md) | Tarefa (a partir da `HML`) → PR `HML` → PR `main`, sem `dev`; nome de branch; validação do dono antes do git; migration junto; deploy EasyPanel; hotfix; HML ≈ main (banco); evidência de pronto | Sim |
 | [backend.md](backend.md) | Bun + Elysia + TypeORM + boilerplate | Sim |
 | [frontend.md](frontend.md) | Next + Tailwind + DS + boilerplate | Sim |
-| [nomenclatura.md](nomenclatura.md) | Repos, branches, commits, EasyPanel, **banco** (tabela/coluna/user) | Sim — padrão de manufatura (GO-12) |
+| [nomenclatura.md](nomenclatura.md) | Repos, branches (`PBI-xxxx-descricao`, `tipo/AAAA-MM-DD-slug`), commits, EasyPanel, **banco** (tabela/coluna/user) | Sim — padrão de manufatura (GO-12) |
 
 Não existe `codigo-ouro.md` monolítico. Este README **é** o mapa (o que antes seria “Parte V”).
 
@@ -253,5 +277,6 @@ Não existe `codigo-ouro.md` monolítico. Este README **é** o mapa (o que antes
 1. Texto da constituição → `space-cursor-skills/docs/`
 2. Mapa skill → arquivo → **este README**
 3. Ponteiro fino no `SKILL.md` da skill de produto
-4. `npm run sync` na máquina onde o Cursor lê as skills
+4. `npm run sync` na máquina onde o Cursor e o Claude Code leem as skills (copia para os dois destinos)
 5. Reiniciar o chat se a skill já estava carregada
+6. Regra que nasceu num projeto e vale para todos: entra aqui, genérica, e sai das regras do projeto (roteador em [metodo-agentes.md](metodo-agentes.md) §4)

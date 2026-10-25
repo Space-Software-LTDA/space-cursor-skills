@@ -1,6 +1,6 @@
 # space-cursor-skills
 
-Repositório central das **skills pessoais** do Cursor, sincronizadas entre PCs e servidor.
+Repositório central das **skills pessoais** do Cursor e do Claude Code, e da **Constituição Space** (`docs/`), sincronizadas entre PCs e servidor.
 
 ## Setup (em qualquer máquina)
 
@@ -16,7 +16,7 @@ npm run sync
 ## Uso diário
 
 ```bash
-npm run sync          # git pull + copia skills/ e docs/ → SKILLS_DEST_PATH + gera clickup.env / apidog.env
+npm run sync          # git pull + copia skills/ e docs/ → SKILLS_DEST_PATH (Cursor) e CLAUDE_SKILLS_DEST_PATH (Claude Code) + gera clickup.env / apidog.env
 npm run sync:dry      # simula sem alterar nada
 ```
 
@@ -29,6 +29,7 @@ Uma única fonte de credenciais ClickUp para **project-context-doc** e **po-tech
 | Variável | Descrição |
 |----------|-----------|
 | `SKILLS_DEST_PATH` | Onde o Cursor **desta máquina** lê skills. **Obrigatório no Coders** (path ≠ home). Vazio → fallback `$HOME/.cursor/skills` |
+| `CLAUDE_SKILLS_DEST_PATH` | Onde o Claude Code **desta máquina** lê skills (segundo destino). Vazio → fallback `$HOME/.claude/skills`. `off` → não copia. Igual ao `SKILLS_DEST_PATH` → copia uma vez só |
 | `CLICKUP_API_TOKEN` | Personal token ClickUp |
 | `CLICKUP_WORKSPACE_ID` | Workspace (SPACE DEV = `90131082033`) |
 | `CLICKUP_LIST_ESTEIRA` / `CLICKUP_LIST_IMEDIATAS` | List IDs (criar tasks) |
@@ -65,11 +66,18 @@ space-cursor-skills/
 
 1. Detecta Windows / Linux / macOS
 2. `git pull` (se configurado)
-3. Copia `skills/` → `SKILLS_DEST_PATH`
-4. Copia `docs/` → `SKILLS_DEST_PATH/docs/`
-5. Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino **e** em `docs/` (**nao edite a copia**)
-6. Gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
-7. Gera `apidog.env` em `po-techlead-scrum/` a partir do `.env`
+3. Para **cada destino** — Cursor (`SKILLS_DEST_PATH`) e Claude Code (`CLAUDE_SKILLS_DEST_PATH`):
+   1. copia `skills/` → destino
+   2. copia `docs/` → `destino/docs/`
+   3. escreve `00-COPIA-LEIA-ME.md` em cada skill **do repo** no destino **e** em `docs/` (**nao edite a copia**); pastas de terceiros no destino (plugins, skills pessoais, `synced/` do Claude Code) não são tocadas
+   4. gera `clickup.env` em `project-context-doc/` **e** `po-techlead-scrum/` a partir do `.env`
+   5. gera `apidog.env` em `po-techlead-scrum/` a partir do `.env`
+
+O sync só **copia e sobrescreve** os arquivos do repo; não apaga nada no destino. Skill renomeada ou removida no repo fica no destino até ser apagada à mão.
+
+### Claude Code
+
+O Claude Code lê skills pessoais em `~/.claude/skills/<skill>/SKILL.md` (mesmo formato do Cursor). A constituição fica em `~/.claude/skills/docs/` (sem `SKILL.md`, não vira skill; as skills acham por `../docs/`). Num projeto, as **regras do projeto** (ex.: `.claude/CLAUDE.md`) mandam ler `docs/README.md` da constituição — ver [docs/README.md](docs/README.md), "Trabalho num projeto".
 
 Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 
@@ -103,6 +111,6 @@ Método de execução de **todas** as skills: [`docs/metodo-agentes.md`](docs/me
 ## Regra de ouro para o agente
 
 Editar skills **neste repo** (`skills/...`), commit/push, depois `npm run sync` **na máquina alvo**.  
-Não tratar a pasta de destino (`SKILLS_DEST_PATH`) como fonte da verdade — e não assumir o mesmo path em PC e Coders.
+Não tratar as pastas de destino (`SKILLS_DEST_PATH`, `CLAUDE_SKILLS_DEST_PATH`) como fonte da verdade — e não assumir o mesmo path em PC e Coders.
 
 **Cursor:** leia [AGENTS.md](AGENTS.md) e a rule em `.cursor/rules/space-cursor-skills.mdc`. Cada `SKILL.md` e o `00-COPIA-LEIA-ME.md` no destino repetem o fluxo.

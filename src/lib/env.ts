@@ -3,12 +3,15 @@ import path from "node:path";
 import dotenv from "dotenv";
 import { collectApidogVarsFromProcessEnv, type ApidogCreds } from "./apidog-env.js";
 import type { ClickupCreds } from "./clickup-env.js";
-import { defaultSkillsDest, expandHome } from "./platform.js";
+import { defaultClaudeSkillsDest, defaultSkillsDest, expandHome } from "./platform.js";
 
 export interface SyncConfig {
   repoRoot: string;
   skillsSource: string;
+  /** Destino do Cursor (SKILLS_DEST_PATH). */
   skillsDest: string;
+  /** Destino do Claude Code (CLAUDE_SKILLS_DEST_PATH). Ausente = desligado ou igual ao do Cursor. */
+  claudeSkillsDest?: string;
   gitPull: boolean;
   dryRun: boolean;
   clickup?: ClickupCreds;
@@ -23,6 +26,32 @@ function parseBool(value: string | undefined, fallback: boolean): boolean {
 function opt(name: string): string | undefined {
   const v = process.env[name]?.trim();
   return v || undefined;
+}
+
+const DISABLED_VALUES = ["off", "false", "0", "no", "none", "nenhum"];
+
+/**
+ * CLAUDE_SKILLS_DEST_PATH: vazio → ~/.claude/skills; "off" (ou false/0/no/none) → desligado.
+ * Mesmo caminho do Cursor → desligado (não copiar duas vezes para o mesmo lugar).
+ */
+export function resolveClaudeSkillsDest(
+  raw: string | undefined,
+  cursorDest: string,
+): string | undefined {
+  const value = raw?.trim() ?? "";
+  if (DISABLED_VALUES.includes(value.toLowerCase())) return undefined;
+
+  const dest = expandHome(value || defaultClaudeSkillsDest());
+  if (samePath(dest, cursorDest)) return undefined;
+  return dest;
+}
+
+function samePath(a: string, b: string): boolean {
+  const ra = path.resolve(a);
+  const rb = path.resolve(b);
+  // Windows e macOS (padrão) não diferenciam maiúsculas em caminho.
+  if (process.platform === "linux") return ra === rb;
+  return ra.toLowerCase() === rb.toLowerCase();
 }
 
 export function loadConfig(repoRoot: string, dryRun: boolean): SyncConfig {
@@ -41,6 +70,7 @@ export function loadConfig(repoRoot: string, dryRun: boolean): SyncConfig {
     repoRoot,
     skillsSource: path.join(repoRoot, "skills"),
     skillsDest,
+    claudeSkillsDest: resolveClaudeSkillsDest(process.env.CLAUDE_SKILLS_DEST_PATH, skillsDest),
     gitPull: parseBool(process.env.GIT_PULL, true),
     dryRun,
   };

@@ -62,7 +62,8 @@ Ao criar/alterar skill: se o texto só fizer sentido para um cliente, **generali
 | Clone típico (PC) | `G:\space\Documents\space\space-cursor-skills` (ou path do usuário) |
 | Skills versionadas | `skills/<nome>/` **neste repo** |
 | Destino Cursor | `SKILLS_DEST_PATH` no `.env` **da máquina** (não hardcodar) |
-| Constituição | `docs/` na raiz deste repo → sync copia para `{SKILLS_DEST_PATH}/docs/` |
+| Destino Claude Code | `CLAUDE_SKILLS_DEST_PATH` no `.env` da máquina (padrão `~/.claude/skills`; `off` desliga) |
+| Constituição | `docs/` na raiz deste repo → sync copia para `{SKILLS_DEST_PATH}/docs/` e `{CLAUDE_SKILLS_DEST_PATH}/docs/` |
 | Direcionamento agente no repo | `AGENTS.md` + `.cursor/rules/space-cursor-skills.mdc` |
 | Credenciais ClickUp | `.env` na **raiz** do repo (sync gera `clickup.env` nas skills que usam) |
 | Credenciais Apidog | Mesmo `.env` (`APIDOG_*`) — sync gera `apidog.env` em `po-techlead-scrum` |

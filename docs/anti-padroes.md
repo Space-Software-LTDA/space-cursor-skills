@@ -66,14 +66,14 @@ Outro caso: a pasta no disco é `payments`, a chave no banco é `billing`, as cl
 
 ### AP-NAM-04 — Repo, branch ou commit fora da manufatura Space
 
-**Cenário.** A task pede um serviço novo. O júnior cria `Space-Cardapius-Backend` (CamelCase, hífen, maiúscula). Ou a branch `feat/login` em vez de `PBI-2304`. Ou commit `"ajustes"` sem tipo. O próximo clone, o EasyPanel e o ClickUp não batem. Ninguém acha o repo pelo padrão `[cliente]_[projeto]_[tipo]`.
+**Cenário.** A task pede um serviço novo. O júnior cria `Space-Cardapius-Backend` (CamelCase, hífen, maiúscula). Ou a branch `feat/login` em vez de `PBI-2304-login-social`. Ou commit `"ajustes"` sem tipo. O próximo clone, o EasyPanel e o ClickUp não batem. Ninguém acha o repo pelo padrão `[cliente]_[projeto]_[tipo]`.
 
 **Por que dói.** Nome de repo e de branch é como o time **encontra** o trabalho. Fora do padrão, o onboarding mente e o SuperAgente/ClickUp não amarra PBI ↔ git.
 
 **Ouro.** [nomenclatura.md](nomenclatura.md) + [git-fluxo.md](git-fluxo.md):
 
 - Repo na org Space: `cliente_projeto_tipo` (tudo minúsculo, underscore). Na org do cliente: `projeto_tipo`.
-- Branch: `PBI-2304` a partir de `main`. Hotfix: `hotfix_descricao` a partir de `main`.
+- Branch: `PBI-2304-descricao-curta` a partir da `HML` (sem PBI: `tipo/AAAA-MM-DD-slug`). Hotfix: `hotfix_descricao` a partir de `main`.
 - PR: `PBI-2304 - O que está sendo ajustado`.
 - Commit: `feat: …` / `fix: …`.
 

@@ -49,18 +49,18 @@ Se o repositório for na organização do cliente:
 
 Resumo. Texto normativo completo: [git-fluxo.md](git-fluxo.md).
 
-- Branch da tarefa: a partir de `main`, nome `PBI-2304` (ID do ClickUp).
-- **`dev`:** merge da branch do PBI + push (teste / stage). Isso **não** é commit solto em cima de `dev`.
-- **`hml`:** só Pull Request da PBI, com code review.
-- **`main`:** só Pull Request a partir de `hml`, Tech Lead / Release Manager.
-- `hml` e `main` protegidas. Proibido commit direto (editar arquivos e commitar) em `dev`, `hml` ou `main`.
-- Hotfix: branch `hotfix_*` a partir de `main` → PR para `main` → back-merge em `hml` e `dev`.
+- Ambientes: **`HML`** (homologação) e **`main`** (produção). Não existe `dev` (desde 2026-10-24).
+- Branch da tarefa: a partir da `HML`, nome `PBI-2304-descricao-curta` (ID do ClickUp + descrição); sem PBI, `tipo/AAAA-MM-DD-slug`.
+- **`HML`:** só Pull Request da tarefa, com code review.
+- **`main`:** só Pull Request a partir da `HML`, Tech Lead / Release Manager.
+- Proibido commit direto (editar arquivos e commitar) em `HML` ou `main`.
+- Nada vai para o git antes de o dono validar no ambiente de desenvolvimento.
+- Hotfix: branch `hotfix_*` a partir de `main` → PR para `main` → back-merge na `HML`.
 - Commit: `tipo: mensagem` (exemplo `feat: adicionar filtro de status`).
 
 ```text
-PBI-xxxx (a partir de main)
-    ├── merge + push → dev
-    └── PR → hml → PR → main
+PBI-xxxx-descricao (a partir da HML)
+    └── PR → HML → PR → main
 ```
 
 Diagramas no Doc ClickUp: usar **PNG** (anexo) ou imagem mermaid.ink. Não colar bloco `mermaid` cru se o Doc quebrar o render.
@@ -108,7 +108,7 @@ Nomes de projeto/app: [nomenclatura.md](nomenclatura.md). Sempre backup de banco
 - Colunas: **camelCase**
 - `createdAt` e `updatedAt` **obrigatórias**
 
-Exemplo e anti-typo (`createdAt`, não `createAt`): [nomenclatura.md](nomenclatura.md). Isso é **padrão de código** (GO-12 / AP-NAM-05), não só texto de boas-vindas.
+Exemplo e anti-typo (`createdAt`, não `createAt`): [nomenclatura.md](nomenclatura.md). Isso é **padrão de código** (GO-12 / AP-NAM-05), não só texto de boas-vindas. Modelagem e migrations (centavos, UTC, id externo, fornecedor, trava de migration): [banco.md](banco.md).
 
 ---
 

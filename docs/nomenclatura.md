@@ -38,13 +38,21 @@ Não use hífen no nome do repo Space se o padrão do time naquele cliente já �
 
 ## Branches de feature
 
-A partir de `main` (ver [git-fluxo.md](git-fluxo.md)):
+A partir da `HML` (ver [git-fluxo.md](git-fluxo.md)):
 
 ```text
-PBI-{id-customizado-clickup}
+PBI-{id-customizado-clickup}-{descricao-curta}
 ```
 
-Exemplo: `PBI-2304`. Não usar `feat/foo`, `dev-joao` ou o título da task no nome da branch.
+Exemplo: `PBI-3741-cancelamento-de-saque-manual` (descrição em minúsculas, com hífen, curta). Não usar `feat/foo`, `dev-joao` ou o título inteiro da task no nome da branch.
+
+Trabalho **sem PBI** (documentação, configuração, ajuste interno):
+
+```text
+{tipo}/AAAA-MM-DD-{slug}
+```
+
+Exemplos: `docs/2026-10-24-fechamento`, `chore/2026-10-24-env-example`. `tipo` = o mesmo dos commits (`docs`, `chore`, `fix`…).
 
 Hotfix: `hotfix_{descricao-curta}` a partir de `main`.
 
@@ -110,7 +118,9 @@ O onboarding antigo escrevia `createAt` — o nome correto da coluna é **`creat
 
 TypeScript da entity e a migration precisam contar a **mesma** história ([AP-DB-04](anti-padroes.md)). Rename de coluna/tabela persistida é migração com alias, não search-replace.
 
-Banco da empresa = **PostgreSQL**. Não abrir MySQL/Mongo “só para essa feature” sem o PO escrever isso na task.
+Banco da empresa = **PostgreSQL**. Não abrir MySQL/Mongo “só para essa feature” sem o PO escrever isso na task. Projeto legado em outro banco registra a exceção nas regras do projeto, com o motivo.
+
+Modelagem (dinheiro em centavos `…Cents`, datas em UTC, id externo como texto e `external…`, fornecedor como cadastro com `jsonb`, ligar pelo id) e migrations: [banco.md](banco.md).
 
 Backup de banco e de arquivos: local seguro, rotina — não “quando der”. Isso vale junto com o nome no EasyPanel.
 
