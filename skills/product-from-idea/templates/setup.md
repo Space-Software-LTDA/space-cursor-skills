@@ -96,7 +96,6 @@ Org: `Space-Software-LTDA/` + nome. Agente aplica a lei e confirma.
 | Ambiente | Quem usa | O que precisa existir | URL (se souber) |
 |----------|----------|------------------------|-----------------|
 | Local | | | |
-| Desenvolvimento (`dev`, só se houver ambiente compartilhado) | | | |
 | Homologação | | | |
 | Produção | | | |
 

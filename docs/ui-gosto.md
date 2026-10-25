@@ -4,6 +4,7 @@
 > **Não** substitui [`design-system.md`](design-system.md) (metodologia/tokens Space B2B) nem o `.docs/DESIGN_SYSTEM.md` do produto.  
 > Skills leem [README.md](README.md) primeiro.  
 > **Escopo:** visual / UX. Código Front (AP-FE, FDD) **fora** — isso é `qa-space`.  
+> **Também vale fora das skills:** todo trabalho de tela em qualquer projeto segue §0.1 (desenho antes do código), §3.5, §6.7–§6.9, §7.4–§7.5 e, em painel admin, §11.2.  
 > **Estrutura:** §1–§10 = **parte geral** (vale para todo produto). §11 = **regras por tipo de produto** (cassino, admin…). §12 = anti-slop (geral).  
 > **Marcas:** `[AS-IS]` = decisão travada pelo dono do gosto (reviews, glossário, Figma, decisões 2026-09-21/22). `[INFERIDO]` = consolidado de hubs/QA — alinhar com o humano se houver dúvida.  
 > **Origem:** guia 33 (`uiux-miguel-pack`) + decisões 2026-09-21/22 + AI tells compatíveis ([Taste Skill](https://github.com/Leonxlnx/taste-skill) — método, não estética).
@@ -46,6 +47,21 @@ Proibido puxar regra de um tipo para outro (ex.: energia de cassino em admin; ti
 | **Forge** | Antes do STOP: confrontar o DS (documento + canvas) com geral + tipo. Fora do gosto → corrigir **ou** exceção nomeada com OK humano. |
 | **Apply** | Fase A: confrontar de novo (o DS pode ter mudado) e alterar o DS. Fases B/C: régua do Scan e do Fix. |
 | **Ambos** | **Review humano no workspace** (notas, prints, clip) = checklist ALTA — **não** ALIGNED / PASS enquanto bullet ALTA falhar. Conflito DS × review → mini-A, não PASS silencioso. |
+
+### 0.1 Do desenho ao código `[AS-IS 2026-10-24]`
+
+Vale para **todo** trabalho de tela (com ou sem skill), em qualquer projeto.
+
+1. **Toda tela nova ou mudança de tela é desenhada primeiro no canvas** (Pencil por padrão). O dono aprova o desenho; só depois vai para o código.
+2. **Enquanto a tela e as métricas estão sendo definidas, não se mexe em código**, nem no cálculo por trás: só docs (decisões, dicionário de métricas) e canvas. Iterar no canvas custa muito menos que no código.
+3. **O código só começa quando o dono disser explicitamente que pode codar** ("aprovado, pode implementar"). Aprovar um desenho ou uma decisão de métrica **não** é ordem para codar.
+4. **Antes de criar qualquer componente, consultar o DS do produto** (fundamentos e componentes no canvas) e usar instância do componente que já existe. Só criar o que não existe — e criar como componente do DS, com nome no padrão do DS, não como peça solta. Peças soltas achadas numa tela são trocadas pelas oficiais, e o dono recebe a lista do que foi trocado.
+5. **Nunca apagar tela no canvas.** A versão antiga vai para um frame de **rascunho**, de topo, fora do frame das telas atuais. Nova versão = **cópia da anterior melhorada**, não refazer do zero.
+6. **Não desenhar instância por instância** de um componente que já existe (confirmação, modal, menu ⋮, toast…): desenhar **um exemplo** e listar o conteúdo de cada caso (título, texto, botões, itens) numa **tabela no doc** da demanda. No código, cada padrão vira **um componente reutilizável** alimentado por essa tabela.
+7. **Toda ação que abre popup tem o popup desenhado**, inclusive item de menu ⋮ (o destino de cada item).
+8. **Pedido numa tela vale para o mesmo componente em todas as telas.** Aplicar sem esperar o dono repetir.
+9. **Ponto de partida do código é o que o canvas exporta** (código e estilos do frame), não a aparência padrão do framework de UI. Os valores do DS vencem o padrão do framework nas telas novas.
+10. **Tela só é entregue depois de conferida no navegador, lado a lado com o PNG do canvas** (mesma largura, mesma tela, logado com um usuário que vê todas as ações): posição de cada bloco, tamanho e peso da fonte, cantos, espaçamento, cor de botão, badge e switch. Revisão visual só pelo HTML ou pelo código não vale. Diferença aceita: só a cor da marca quando o canvas usa a de outro cliente. Larguras: §11.2 "Viewport de QA".
 
 ---
 
@@ -150,6 +166,14 @@ Dentro de card/modal: fills internos usam **surface-2 + border**, nunca `backgro
 - Branco puro `#FFFFFF` em quase todo texto no dark.
 - Gradiente decorativo em chrome (ok só em **arte** promocional).
 
+### 3.5 Produto multi-cliente (white-label): tudo deriva da Primary `[AS-IS 2026-10-24]`
+- Quando cada cliente (casa, loja, marca) configura a **própria cor primária**, trocar a Primary muda **absolutamente tudo** o que é da marca. A cor do manual é só a de um cliente.
+- Tudo o que é marca usa a Primary e as derivadas (`primary`, `primary-hover`, `primary-fg`, `primary-soft`, `focus`) — no canvas como variável, no código como token/variável CSS. Nunca hex digitado.
+- **Cor fixa só para significado:** sucesso, aviso, erro/destrutivo e "ao vivo". Fundos e textos neutros vêm das variáveis de superfície e texto.
+- Estado (recusa em andamento, alerta de painel) usa **superfície neutra** + borda; vermelho só no botão destrutivo e em ícone/badge pequeno de status — nunca fundo ou borda vermelha de painel inteiro.
+- **Conferir no canvas trocando o tema de marca** (cliente A ↔ cliente B): nada que é da marca pode continuar na cor do primeiro.
+- Antes de desenhar para um cliente, conferir a Primary configurada dele e a variável do arquivo.
+
 ---
 
 ## 4. Tipografia e hierarquia
@@ -231,6 +255,30 @@ Botão Google/Apple: tipografia alinhada ao sistema (mesma família e tamanhos d
 - Vale para telas, componentes **e pranchas do canvas** (inclusive o manual da marca).
 - Exceção só com nome no DS (ex.: estado vazio com ilustração grande centralizada — o ícone **é** o conteúdo).
 
+### 6.7 Botão pelo significado `[AS-IS 2026-10-24]`
+A variante do botão segue o propósito da ação (variantes do componente Botão do DS do produto). Nunca trocar todos os botões de uma tela para a mesma variante.
+
+| Ação | Variante |
+|------|----------|
+| Ação principal da seção (criar na lista, salvar) | **Primário** — um por seção |
+| Ação de seção (Adicionar…, Ligar…, Enviar…) e ação principal de linha que navega ou escolhe | **Contorno** (borda na Primary) |
+| Ação positiva (Aceitar, Aprovar, Reativar) | **Sucesso suave** |
+| Apagar / tirar / recusar | **Contorno destrutivo** (ou Destrutivo na confirmação) |
+| Secundária (Cancelar, Reordenar) | **Contorno neutro** |
+| Ação que não queremos destacar | **Fantasma** |
+
+Contorno neutro em ação principal fica "morto".
+
+### 6.8 Badge, chip, toast, alerta
+- **Badge** = status fixo, sempre **ícone + texto** (nunca só cor).
+- **Chip** = selecionável (filtro, opção).
+- **Toast** = temporário; **alerta** = fica na tela; informação é neutra (sem cor de marca).
+
+### 6.9 Datas em lista de transação `[AS-IS 2026-10-24]`
+- Lista de transação (depósito, saque, pedido, pagamento) mostra **quando foi criada** e **quando fechou o status**, em colunas com o nome do evento: **Criado em**, **Pago em**, **Aprovado em**, **Rejeitado em**, **Cancelado em** (vazio enquanto não aconteceu).
+- Nunca mostrar a "data de atualização" genérica do registro (`updatedAt`) como se fosse um desses eventos: ela muda a cada alteração e esconde quando o fato aconteceu.
+- A data aparece no fuso de quem vê; no banco é UTC ([banco.md](banco.md) BD-02).
+
 ---
 
 ## 7. Motion e feedback
@@ -253,6 +301,20 @@ Botão Google/Apple: tipografia alinhada ao sistema (mesma família e tamanhos d
 - Success/destructive só semânticos.
 - Toasts curtos; empty/loading/error tratados (skeleton no formato do conteúdo).
 - Sucesso seco (check + valor) — sem confetti.
+
+### 7.4 Skeleton na hora do clique `[AS-IS 2026-10-24]`
+- Vale para todo front (site, painéis, app).
+- **No momento do clique**, a área que vai mudar mostra o **skeleton**, sem esperar a resposta do servidor: navegação, troca de aba, filtro, busca, paginação, ordem e abertura de popup. Se esperar a resposta, parece atraso e a pessoa acha que o clique não pegou.
+- **Sem atraso no indicador:** nada de "mostrar o carregando só depois de 200 ms" (nem o "loading com atraso" que o framework oferece). Popup abre na hora com o esqueleto do conteúdo e se completa quando os dados chegam.
+- **Um componente de skeleton por front**, usado em todas as telas (não tela por tela).
+
+### 7.5 Lista lembra o estado `[AS-IS 2026-10-24]`
+- Vale para **todas** as listas, em todo front. Ao entrar num item e voltar, a lista volta **como estava**: ordenação, filtros, chips, aba e página.
+- **Dois tipos de estado:**
+  - **Preferência permanente, por pessoa, guardada no servidor:** ordem, colunas (visíveis e ordem delas) e linhas por página. Cada pessoa tem a sua ("eu sempre prefiro ver por data de cadastro; outras pessoas têm outras necessidades, até as colunas").
+  - **Filtros, chips, aba e página valem só para o momento:** ficam na **URL** da lista (voltar pelo navegador restaura; uma aba nova ou outro dia abre a lista limpa). Nada de guardar filtro na sessão: a sessão fazia uma aba nova, em outro momento, abrir já filtrada.
+- **A busca nunca é guardada:** a caixa de busca abre sempre vazia (nem sessão, nem URL, nem preferência). Motivo: buscar o e-mail de uma pessoa e, em outra aba e outro momento, a lista vir filtrada por esse e-mail.
+- Um padrão só por front, aplicado em toda lista. A implementação (qual mecanismo do framework) fica nas regras do projeto.
 
 ---
 
@@ -491,6 +553,7 @@ Monocromia (SpaceBatch, dangpt, SHER AI): válida para produtos monocromáticos;
 #### Viewport de QA
 
 - Desktop admin default: **~1300×800** (notebook), **mais** mobile. 1440 sozinho **esconde** crush de KPI/tabela (`GP-QA-NOTEBOOK`).
+- **Entrega de tela de admin (desde 2026-10-24): validar em 3 larguras — 1280, 1536 e 1920 px CSS** (`GP-QA-3-WIDTHS`). A de 1536 é um monitor de 1920 com o sistema em 125%, configuração comum do dono. Nenhuma tabela passa da largura do card em nenhuma delas. Validar só em 1440 deixou passar tabela vazando para fora do card (caso real 2026-10-21).
 
 #### Padrões bons (`GP-…`)
 
@@ -507,6 +570,34 @@ Monocromia (SpaceBatch, dangpt, SHER AI): válida para produtos monocromáticos;
 | GP-SHEET-448 | Drawer create/edit ~448px |
 | GP-PAGINATION-NESTED | Contador + per page + nav dentro do bloco da tabela |
 | GP-GRAPH-OK | Chart com Primary + no máx. um acento de série (não no chrome) |
+
+#### Estrutura de tela de admin (`GP-…`) `[AS-IS 2026-10-24]`
+
+> Correções do dono num painel administrativo real (outubro de 2026), rodadas 1 a 10 de revisão no canvas. Valem para toda tela nova ou redesenhada de painel admin/B2B.
+
+| ID | Regra |
+|----|--------|
+| GP-SAVE-TOP | **Salvar e Cancelar no topo**, à direita do título da página. Nunca no rodapé |
+| GP-SWITCH-STATUS | **Switch é só liga/desliga; o status continua visível.** Na lista: switch rápido por linha **e** coluna Status com o estado e os erros (badge ícone + texto: revisar, sem imagem, fora do ar, OK…). Na edição: switch de ativo no cabeçalho do card principal. Aviso não vai ao lado do nome: vai na coluna Status |
+| GP-REORDER-MODE | **Ordenar só em modo de ordem:** botão "Reordenar" → aparecem as alças → "Concluir" ou "Cancelar". Fora desse modo, sem alça. O **Cancelar é obrigatório e desfaz** (foto da ordem ao entrar, restaurada no Cancelar), mesmo que a biblioteca grave cada arrasto. Limitação da biblioteca não é motivo para tirar o Cancelar |
+| GP-ROW-ACTIONS | Ações da linha: switch (quando houver liga/desliga) + menu ⋮ com o resto; no máximo **uma** ação visível além do menu |
+| GP-RELATED-BADGES | Lista de itens relacionados numa célula vira **badges**, com "…" no texto comprido e "+N" quando não cabe |
+| GP-CREATE-INPLACE | **Criar no lugar:** ao lado de um seletor, botão **visível** (Contorno, não fantasma) "Adicionar…" que abre popup para escolher o que existe ou criar novo |
+| GP-POPUP-FOOTER | **Rodapé do popup:** ação secundária (criar novo, mostrar mais, opção) à esquerda; Cancelar e a ação principal à direita |
+| GP-CREATE-IN-SECTION | **Botão de criar fica no título da seção** (card ou tabela) a que pertence. Repetir no topo da página é opcional; faltar no título da seção não pode |
+| GP-DERIVED-TAB | **Lista derivada de uma entidade vira aba na tela da entidade**, não tela nova no menu |
+| GP-TABS-ONE-LEVEL | **Nunca duas fileiras de abas.** Abas só no primeiro nível; o segundo nível vira filtro (chips) ou botão |
+| GP-KPI-TOP | **Toda tela de lista começa com uma linha de cards de KPI** com os contadores do que a tela mostra |
+| GP-KPI-3SUB | **Card de KPI tem 3 submétricas** (o padrão). Rótulos e fórmulas vêm do dicionário de métricas do projeto; nada inventado. Card de tela nova começa pelos cards que já existem no painel principal, com as mesmas submétricas |
+| GP-KPI-BIG-NUMBER | **O número grande do card é o mais importante para o negócio**, não uma regra de formato (ex.: em "primeiros depósitos", a **quantidade** vale mais que o valor; em "depósitos", o **total em dinheiro**). O valor secundário vai ao lado, na mesma linha ("1.412 · R$ 89.000,00") |
+| GP-SECTION-CARD | **Seção = card** com, no topo, título (ícone + nome + nota), filtros e ações; embaixo, a tabela ou o conteúdo, **dentro do mesmo card**. Cabeçalho **em uma linha** sempre que couber (medir, não chutar); só quando não couber, filtros descem. Na linha com busca, **a busca ocupa toda a largura que sobra**. Cabeçalho alinhado ao centro. Assuntos diferentes = seções diferentes |
+| GP-TABLE-PAGESIZE | Tabela começa com **10 linhas por página** e tem seletor **10, 25 e 50** — **nunca mais que 50** (para não derrubar o servidor). A escolha é preferência permanente da pessoa (§7.5) |
+| GP-FILTER-ALL | **Todo filtro de seleção tem "Todas"/"Todos"** (ou botão de limpar visível). Filtrar e não conseguir voltar à lista inteira é erro |
+| GP-COLUMN-PICKER | Tabela com colunas opcionais: botão **"Colunas · N de M"** (Contorno neutro, na linha de filtros do card) + popup seletor de colunas (checkbox por coluna, alça para reordenar, coluna principal fixa, "Restaurar padrão" à esquerda e "Aplicar" à direita). Coluna que sai do padrão continua disponível, desmarcada. Escolha salva por pessoa (§7.5) |
+| GP-TABLE-FIT | **Nenhuma tabela passa da largura do card** nas 3 larguras de QA: texto comprido corta com reticências e o texto inteiro vai no `title`; motivo longo vai no tooltip |
+| GP-ROW-CLICK | **A linha inteira da tabela é clicável** e abre a edição. Não pode depender de clicar na foto ou no nome |
+| GP-ENTITY-LINK | Imagem ou logo de **outra entidade** é link para a tela dela no painel |
+| GP-LESS-TEXT | **Menos texto de apoio:** a célula mostra o dado e um status; o detalhe fica na edição ou no tooltip |
 
 #### Anti-padrões (`AP-…`) — FAIL em Apply
 
@@ -531,6 +622,13 @@ Monocromia (SpaceBatch, dangpt, SHER AI): válida para produtos monocromáticos;
 | AP-CTA-SPREAD | Par de CTAs com `justify-between` / um em cada borda — **deserto horizontal** entre Primary e outline |
 | AP-META-BASELINE | Valor alto + meta (ID) com `items-end` / baseline inferior — **poço acima** da meta |
 | AP-TWO-FONTS | Display/duas famílias dentro de célula de tabela |
+| AP-SAVE-FOOTER | Salvar/Cancelar no rodapé da página (GP-SAVE-TOP) |
+| AP-SWITCH-AS-STATUS | Switch como único sinal de estado; erro/aviso ao lado do nome em vez da coluna Status (GP-SWITCH-STATUS) |
+| AP-HANDLE-ALWAYS | Alça de arrastar sempre visível; modo de ordem sem Cancelar que desfaz (GP-REORDER-MODE) |
+| AP-TWO-TAB-ROWS | Duas fileiras de abas (GP-TABS-ONE-LEVEL) |
+| AP-FILTER-NO-RESET | Filtro de seleção sem "Todas"/limpar (GP-FILTER-ALL) |
+| AP-TABLE-OVERFLOW-CARD | Tabela vazando da largura do card em 1280/1536/1920 (GP-TABLE-FIT) |
+| AP-PAGESIZE-UNBOUNDED | Seletor de linhas por página acima de 50 ou sem seletor (GP-TABLE-PAGESIZE) |
 
 #### Checklist admin (PASS/FAIL)
 
@@ -542,7 +640,10 @@ Monocromia (SpaceBatch, dangpt, SHER AI): válida para produtos monocromáticos;
 - [ ] Tabela: align, sem rainbow, `⋯`, total se financeiro, paginação nested  
 - [ ] Labels ≥14  
 - [ ] Forms: sem AP-GRID-HOLE / AP-CTA-SPREAD / AP-META-BASELINE (caçar **dentro** do card, não só entre seções)  
-- [ ] Scan feito em **1300** + mobile  
+- [ ] Scan feito em **1300** + mobile; entrega de tela conferida × PNG do canvas em **1280, 1536 e 1920** (GP-QA-3-WIDTHS)  
+- [ ] Estrutura: Salvar no topo · switch + coluna Status · Reordenar com Cancelar · ⋮ + no máx. 1 ação · criar no título da seção · abas de um nível · KPIs no topo com 3 submétricas · seção em card com cabeçalho em uma linha  
+- [ ] Tabela: 10/25/50 · filtro com "Todas" · "Colunas · N de M" · linha inteira clicável · nada vaza do card  
+- [ ] Skeleton na hora do clique (§7.4) · lista volta como estava (§7.5)  
 - [ ] Prints/círculos do humano no chat → cada um PASS/FAIL com evidência (proibido “mitigado” sem reabrir a rota)  
 
 ### 11.3 Novo tipo
@@ -588,3 +689,4 @@ Adaptado de [Taste Skill](https://github.com/Leonxlnx/taste-skill) (método). **
 | 2.2.0 | 2026-09-23 | Admin: GP-FORM-DENSE-ROW; AP-GRID-HOLE / AP-CTA-SPREAD / AP-META-BASELINE; caça **intra-card** + prints humanos |
 | 3.0.0 | 2026-09-28 | **Generalizado:** parte geral (G1–G8, §3–§10, §12) vale para todo produto; regras de cassino → §11.1 (prova social = §11.1.5); admin/B2B → §11.2; §11.3 para novos tipos. Usado por **Forge** (confronto antes do STOP) e **Apply** (Fase A + Scan). |
 | 3.1.0 | 2026-09-28 | §6.6 ícone e selo na linha do título (proibido ícone/selo sozinho numa linha); vale também para pranchas do canvas e manual da marca. Checklist §10 + anti-slop §12. |
+| 3.2.0 | 2026-10-24 | Regras gerais vindas de um projeto real: §0.1 do desenho ao código ("pode codar", nunca apagar tela, conferência × PNG); §3.5 multi-cliente deriva da Primary; §6.7 botão pelo significado; §6.8 badge/chip/toast; §6.9 datas em lista de transação; §7.4 skeleton no clique; §7.5 lista lembra o estado; §11.2 estrutura de tela de admin (GP-SAVE-TOP … GP-LESS-TEXT, AP novos) e QA em 1280/1536/1920. |

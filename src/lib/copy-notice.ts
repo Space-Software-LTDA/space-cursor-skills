@@ -2,14 +2,18 @@ import fs from "node:fs";
 import path from "node:path";
 
 /**
- * Carimba aviso em cada skill no destino (SKILLS_DEST_PATH do .env desta maquina).
+ * Carimba aviso em cada skill do repo no destino (SKILLS_DEST_PATH ou CLAUDE_SKILLS_DEST_PATH).
  * Esta pasta e COPIA — editar no repo space-cursor-skills e rodar npm run sync.
+ * So carimba as skills que vieram do repo (opts.skillNames): pastas de terceiros no
+ * destino (plugins, skills pessoais, `synced/` do Claude Code) nao sao tocadas.
  */
 export function writeCopyNotices(
   skillsDest: string,
   opts: {
     repoRoot: string;
     dryRun: boolean;
+    skillNames: string[];
+    envVarName: string;
   },
 ): string[] {
   if (!fs.existsSync(skillsDest)) return [];
@@ -17,10 +21,12 @@ export function writeCopyNotices(
   const written: string[] = [];
   const repoUrl = "https://github.com/Space-Software-LTDA/space-cursor-skills";
   const repoRoot = opts.repoRoot;
+  const fromRepo = new Set(opts.skillNames);
 
   for (const entry of fs.readdirSync(skillsDest, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
-    // pular pastas que nao sao skills do repo (plugins etc.)
+    // pular pastas que nao sao skills do repo (plugins, skills pessoais etc.)
+    if (!fromRepo.has(entry.name)) continue;
     const skillDir = path.join(skillsDest, entry.name);
     const skillMd = path.join(skillDir, "SKILL.md");
     if (!fs.existsSync(skillMd)) continue;
@@ -31,7 +37,7 @@ export function writeCopyNotices(
 Os arquivos desta pasta (\`${entry.name}\`) sao uma **copia** gerada pelo sync nesta maquina.
 
 **Destino atual:** \`${skillsDest}\`  
-(vem de \`SKILLS_DEST_PATH\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
+(vem de \`${opts.envVarName}\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
 
 ## Onde alterar
 
@@ -44,7 +50,7 @@ cd ${repoRoot}
 npm run sync
 \`\`\`
 
-O Sync usa o \`.env\` local (\`SKILLS_DEST_PATH\` + ClickUp + Apidog).
+O Sync usa o \`.env\` local (\`SKILLS_DEST_PATH\`, \`CLAUDE_SKILLS_DEST_PATH\`, ClickUp e Apidog) e copia para os dois destinos (Cursor e Claude Code).
 
 ## Credenciais ClickUp / Apidog
 
@@ -72,7 +78,7 @@ _Gerado automaticamente por \`npm run sync\`. Nao versionar este arquivo no dest
 Os arquivos desta pasta (\`docs/\`) sao uma **copia** da constituição do time, gerada pelo sync nesta maquina.
 
 **Destino atual:** \`${docsDest}\`  
-(vem de \`SKILLS_DEST_PATH\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
+(vem de \`${opts.envVarName}\` no \`.env\` da raiz do repo — PC local e Coders usam paths diferentes)
 
 ## Onde alterar
 

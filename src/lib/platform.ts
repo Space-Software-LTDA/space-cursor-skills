@@ -9,8 +9,14 @@ export function detectPlatform(): Platform {
   return "linux";
 }
 
+/** Onde o Cursor lê as skills pessoais, se SKILLS_DEST_PATH estiver vazio. */
 export function defaultSkillsDest(): string {
   return path.join(os.homedir(), ".cursor", "skills");
+}
+
+/** Onde o Claude Code lê as skills pessoais, se CLAUDE_SKILLS_DEST_PATH estiver vazio. */
+export function defaultClaudeSkillsDest(): string {
+  return path.join(os.homedir(), ".claude", "skills");
 }
 
 export function expandHome(input: string): string {

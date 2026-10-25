@@ -75,7 +75,10 @@ Não substituem [padrao-ouro.md](padrao-ouro.md) nem [nomenclatura.md](nomenclat
 - HTTP externo é caro; session/identidade no JWT nosso quando a regra do produto for essa; token do parceiro ≠ JWT interno.
 - Runtime de produção é o que vale (`bun start` vs `dev` se forem diferentes).
 - Cron: `startJobs()` depois do listen, lock, sem side-effect no `import`, sem tenant hardcoded.
-- **Banco na task:** PostgreSQL; tabela `snake_case`; coluna camelCase; `createdAt`/`updatedAt` obrigatórias; usuário `space_[cliente]` — GO-12 / AP-NAM-05.
+- **Banco na task:** PostgreSQL; tabela `snake_case`; coluna camelCase; `createdAt`/`updatedAt` obrigatórias; usuário `space_[cliente]` — GO-12 / AP-NAM-05. Dinheiro, datas, ids externos, fornecedores e migrations: [banco.md](banco.md).
+- Escolha de implementação em runtime (gateway, fornecedor): dicionário — GO-13.
+- **Integração nova com serviço externo** (gateway, KYC, fornecedor) vai no serviço de integração do produto (o backend novo), não no front nem no sistema legado, salvo exceção escrita nas regras do projeto. O que é próprio do fornecedor fica no adaptador dele (BD-05).
+- **Dependência do runtime:** código que usa extensão ou biblioteca nativa (ex.: extensão do PHP, binário do sistema) confere que o `Dockerfile` de **cada** serviço que roda esse código instala a dependência. A imagem de desenvolvimento costuma ter mais coisas que a de produção, então o teste local não pega a falta (caso real, 2026-10-22: painel de produção caiu por extensão ausente).
 
 ---
 

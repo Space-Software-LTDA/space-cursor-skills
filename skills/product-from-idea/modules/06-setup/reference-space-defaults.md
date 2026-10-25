@@ -108,7 +108,7 @@ Quando o setup escolhe ferramenta de terceiros para uma superfície (portal de d
 ## 7. Git e ambientes (lembrete genérico)
 
 - Default Space: **1 repo por peça** (A), salvo monorepo pedido e fechado em gate.  
-- Branches: seguir `../docs/git-fluxo.md` da constituição: `hml` + `main` sempre; `dev` **só quando houver ambiente de desenvolvimento compartilhado** (perguntar; sem esse ambiente, a promoção começa no PR para `hml`).  
+- Branches: seguir `../docs/git-fluxo.md` da constituição: `HML` + `main`; não existe `dev` (decisão de 2026-10-24); a promoção começa no PR para `HML`.  
 - App: Dockerfile / EasyPanel; banco = serviço separado (quando deploy entrar no mapa).
 
 ---

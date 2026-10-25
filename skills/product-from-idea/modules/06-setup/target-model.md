@@ -21,7 +21,7 @@
 4. Decisão de Git (A/B/C) fechada ou adiada com risco  
 5. Origem de cada peça (projeto-base, lei da extensão ou referência + mapa de pasta)  
 6. Quem cria os repositórios: **o dev, ao iniciar** (escrito)  
-7. Ambientes: local / homologação / produção (`dev` só se houver ambiente de desenvolvimento compartilhado)  
+7. Ambientes: local / homologação (`HML`) / produção (`main`); não existe `dev`  
 8. Lista de contas externas, com a consequência de cada ferramenta pronta que define uma superfície  
 9. Ponteiros para as Fases 7 e 11 e para `qa-space`  
 10. Confirmado · Hipótese · Aberto · Gate  
@@ -55,7 +55,7 @@
 | Nome fora do formato | Sem `<cliente>`; separador diferente do que o cliente já usa; `api` / `web` sem confirmar o padrão Space `backend` / `frontend` |
 | Tudo num servidor só | Fornecedores externos sem a pergunta da camada de integração |
 | Referência de memória | Framework de um projeto de referência citado sem conferir no código |
-| Ambiente `dev` presumido | `dev` gravado (ou proibido) sem perguntar se existe ambiente de desenvolvimento compartilhado |
+| Ambiente `dev` presumido | `dev` gravado no setup; a constituição não tem `dev` desde 2026-10-24 (`HML` → `main`) |
 | Extensão em JavaScript puro | “vamos de JS puro / um script” |
 | Meta de conversa / abreviação | `qtd.`, `TBD`, títulos com cara de prompt |
 | Mini-Forge / mini-QA | Cor ou auditoria visual aqui |

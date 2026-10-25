@@ -10,6 +10,7 @@ Cada máquina tem o **próprio** `.env` na raiz deste clone. O path de destino *
 | Variável | Papel |
 |----------|--------|
 | `SKILLS_DEST_PATH` | Onde o Cursor **desta máquina** lê as skills |
+| `CLAUDE_SKILLS_DEST_PATH` | Onde o Claude Code **desta máquina** lê as skills (padrão `~/.claude/skills`; `off` desliga) |
 
 Exemplos típicos (valores reais ficam no `.env` local, não no git):
 
@@ -36,8 +37,8 @@ npm run sync
 ## O que o sync faz
 
 - `git pull` (se `GIT_PULL=true`)
-- Copia `skills/` → **`SKILLS_DEST_PATH` do `.env` local**
-- Copia `docs/` → **`SKILLS_DEST_PATH/docs/`** (constituição; skills leem `../docs/README.md` primeiro)
+- Copia `skills/` → **`SKILLS_DEST_PATH` do `.env` local** (Cursor) **e** `CLAUDE_SKILLS_DEST_PATH` (Claude Code)
+- Copia `docs/` → **`<destino>/docs/`** nos dois destinos (constituição; skills leem `../docs/README.md` primeiro)
 - Escreve `00-COPIA-LEIA-ME.md` em cada skill do destino (com o path real desta máquina)
 - Gera `clickup.env` em skills que usam ClickUp (a partir do mesmo `.env`)
 - Gera `apidog.env` em `po-techlead-scrum` (a partir do mesmo `.env`)
@@ -75,6 +76,7 @@ Manutenção do pack: skill **`skill-update`** (não espalhar o fluxo só nas sk
 - **Método de execução** de toda skill: [`docs/metodo-agentes.md`](docs/metodo-agentes.md) — Controlador + subagente por etapa, etapas com “Pronto quando” e exemplo real, revisor sem contexto. Cada `SKILL.md` tem a seção “Método de execução” e cada pasta um `CORRECOES.md`
 - **Toda correção vira atualização da skill:** lista de correções → `/skill-update` (fluxo F) → edição genérica + registro no `CORRECOES.md` + sync
 - Responder em português quando trabalhar nestas skills (padrão Space)
+- Regra geral que nasceu num projeto (método de demandas, banco, git, telas) entra na constituição de forma genérica; o projeto guarda só o particular e as exceções ([`docs/metodo-agentes.md`](docs/metodo-agentes.md) §4, roteador)
 
 ## Docs humanas
 
