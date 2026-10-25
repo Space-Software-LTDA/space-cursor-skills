@@ -116,7 +116,7 @@ Usar durante Fase 2 (browser). Para cada tela, marcar pass/fail e anotar evidên
 | Check | Pass? | Notas |
 |-------|-------|-------|
 | Pagination (Anterior · páginas · Próximo) | | |
-| **Per page** (10·25·50·100, default 25) | | |
+| **Per page** (10·25·50, default 10, nunca mais que 50) | | |
 | Zebra striping (tokens Primary/Surface) | | |
 | Sort clicável + indicador Asc/Desc | | |
 | Column picker **⋯** no headerRight do WidgetShell | | |

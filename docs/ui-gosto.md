@@ -116,9 +116,9 @@ Cada princípio: **regra / por quê / exemplo bom / anti-exemplo**.
 - **Anti:** Um pill e outro retângulo; um h-9 e outro h-12; hover com scale diferente que “pula” o par.
 
 ### G5 — Radius médio ~8; encaixado; NÃO pill/IA
-- **Regra `[AS-IS]`:** Controles e cards em família **~8px** (salvo marca que defina outra escala). Nested/encaixado (camadas de superfície + borda). **Proibido** look pill em CTA de form.
+- **Regra `[AS-IS]`:** Padrão Space de cantos: **controle 8px, card 12px, modal 16px** (`design-system.md` §5; o DS do produto pode definir outra escala, registrada como exceção nas regras do projeto). Nested/encaixado (camadas de superfície + borda). **Proibido** look pill em CTA de form.
 - **Por quê:** Similarity familiar sem “brinquedo/IA”. Pill = assinatura de genérico de IA.
-- **Bom:** Button/input/card `8px`; modal desktop `12px`; sheet mobile top `16px` `[INFERIDO]`.
+- **Bom:** Button/input `8px`; card `12px`; modal desktop `16px`; sheet mobile top `16px`.
 - **Anti:** `rounded-full` em CTA; `rounded-3xl` em tudo; cards com glow em vez de encaixe.
 
 ### G6 — Encaixe > glow
@@ -492,7 +492,7 @@ Densidades: home de jogos alta (tiles densos, gaps 8–12); depósito média (va
 | Strip nested no jackpot + painel Maiores ganhos | **PASS** se não houver ticker global e o DS nomeou o nested |
 
 #### 11.1.6 Componentes do tipo `[AS-IS]`
-- **Game cards:** compactos; aspect **3:4** `[INFERIDO]`; radius **8**; borda neutra; hover desktop = overlay escuro + CTA **Jogar** Primary radius 8 (**não pill**); mobile = tile **inteiro tocável**; badges máx. 2 (ribbon + Hot) top-left; contadores jogadores + R$ success.
+- **Game cards:** compactos; aspect **3:4** `[INFERIDO]`; radius do card (**12**, ou o do DS do produto); borda neutra; hover desktop = overlay escuro + CTA **Jogar** Primary radius 8 (**não pill**); mobile = tile **inteiro tocável**; badges máx. 2 (ribbon + Hot) top-left; contadores jogadores + R$ success.
 - **Auth:** desktop com arte **full-bleed** + card overlay na base; mobile login form-first + confiança PIX / +18; overlay `black/65` + blur leve.
 - **Rodapé:** **Jogo responsável** + **+18** visíveis.
 - **Provedores:** rail com logo (`object-contain`, ex. h-5).
@@ -520,7 +520,7 @@ Monocromia (SpaceBatch, dangpt, SHER AI): válida para produtos monocromáticos;
 - [ ] **PASS/FAIL** — Prova social **GLOBAL**: ticker **ou** painel (não os dois). Strip nested nomeado no DS não conta como duplicata.
 - [ ] **PASS/FAIL** — Sidebar no desktop; mobile = drawer/sheet coerente.
 - [ ] **PASS/FAIL** — Jackpot / maiores ganhos legíveis, sem muro ilegível; lista contextual sem glow/teatro.
-- [ ] **PASS/FAIL** — Game cards densos; radius ~8; CTA Jogar não-pill; mobile tocável.
+- [ ] **PASS/FAIL** — Game cards densos; radius do card (12 ou o do DS do produto); CTA Jogar não-pill; mobile tocável.
 - [ ] **PASS/FAIL** — Auth mobile padrão celular; cadastro sem banner 16:6.
 - [ ] **PASS/FAIL** — Provedores **com logo**.
 - [ ] **PASS/FAIL** — Rodapé com jogo responsável + +18.

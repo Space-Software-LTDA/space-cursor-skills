@@ -15,7 +15,7 @@
 | A6 | Multi-cliente: tudo que é marca deriva da primária; tema trocado sem sobra | `ui-gosto.md` §3.5 |
 | A7 | Tipografia na escala; pesos permitidos; hierarquia de card | `design-system.md` §4 · `ui-gosto.md` §4 |
 | A8 | Espaçamento na escala de 4 | `design-system.md` §6 "Escala de spacing" |
-| A9 | Cantos: controle, card, modal | DS do produto · `ui-gosto.md` §8.1 · `design-system.md` §5. Conflito conhecido: §8.1 (card 8, modal 12) × `design-system.md` §5 (card 12, modal 16) — vale o DS do produto; sem ele, `ui-gosto.md` |
+| A9 | Cantos: controle, card, modal | DS do produto · `ui-gosto.md` §8.1 · `design-system.md` §5. Padrão Space: controle 8, card 12, modal 16 (decisão do usuário, 2026-10-25); o DS do produto pode ter outra escala (exceção registrada nas regras do projeto) |
 | A10 | Bordas 1 px do token; seleção por borda primária ou fundo suave, nunca brilho | `ui-gosto.md` §6.5, §8.2, §8.3, G6–G7 · `design-system.md` §7 |
 | A11 | Botão pelo significado; um Primário por seção | `ui-gosto.md` §6.7 · `design-system.md` §10.1 |
 | A12 | Badge = ícone + texto; chip = selecionável; toast × alerta | `ui-gosto.md` §6.8 · `design-system.md` §9 |
@@ -23,7 +23,7 @@
 | A14 | Estados desenhados: carregando (skeleton no formato), vazio, erro | `design-system.md` §16 · `ui-gosto.md` §7.3 |
 | A15 | Datas de transação pelo evento, nunca a data de atualização genérica | `ui-gosto.md` §6.9 |
 | A16 | Painel admin: estrutura de tela | `ui-gosto.md` §11.2 "Estrutura de tela de admin" (`GP-SAVE-TOP` … `GP-LESS-TEXT`) e "Anti-padrões" |
-| A17 | Tabela de admin | `ui-gosto.md` §11.2 (`GP-TABLE-*`, `GP-FILTER-ALL`, `GP-COLUMN-PICKER`, `GP-ROW-CLICK`) · `design-system.md` §11. Linhas por página: `GP-TABLE-PAGESIZE` vence `design-system.md` §11 e §19 |
+| A17 | Tabela de admin | `ui-gosto.md` §11.2 (`GP-TABLE-*`, `GP-FILTER-ALL`, `GP-COLUMN-PICKER`, `GP-ROW-CLICK`) · `design-system.md` §11. Linhas por página: 10 · 25 · 50, padrão 10, nunca mais que 50 (`GP-TABLE-PAGESIZE`, igual ao `design-system.md` §11) |
 | A18 | Rótulos e fórmulas de métrica iguais ao dicionário do projeto | `metodo-agentes.md` §6 "Métrica num dicionário só" |
 | A19 | Sem glow, gradiente decorativo, neon, card dentro de card | `design-system.md` §18 · `ui-gosto.md` §12 |
 | A20 | Tipo do produto: só as regras do tipo (cassino §11.1, admin §11.2) | `ui-gosto.md` §0 "Tipo de produto" |

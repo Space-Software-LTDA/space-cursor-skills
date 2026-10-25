@@ -459,8 +459,8 @@ Shadcn padrão; Separator usa border token.
 
 | Item | Padrão |
 |------|--------|
-| Opções Per page | `10 · 25 · 50 · 100` |
-| Default Per page | **25** |
+| Opções Per page | `10 · 25 · 50` (nunca mais que 50: protege o servidor) |
+| Default Per page | **10** (a escolha fica salva por pessoa) |
 | Preferência | paginação **server-side** em produtos reais |
 | Zebra | obrigatória |
 | Sort | clicável no header; indicador visual Asc/Desc |
@@ -712,7 +712,7 @@ Antes de merge / entrega Lovable:
 - [ ] Radius: botão/input 8 · card 12 · modal 16
 - [ ] Spacing na escala 4–64
 - [ ] Badges: padding ≥ 5×12; Título = Primary-soft; Evolução = success/destructive-soft
-- [ ] Tabelas com Pagination + Per page (default 25) + **zebra** + **sort** + **column picker (⋯)** (cores do projeto)
+- [ ] Tabelas com Pagination + Per page (10 · 25 · 50, default 10) + **zebra** + **sort** + **column picker (⋯)** (cores do projeto)
 - [ ] Button Primary sólido; Secondary = borda + texto Primary, fundo transparente
 - [ ] Fonte UI = **Inter**
 - [ ] Ícones só Lucide; ativo = Primary
