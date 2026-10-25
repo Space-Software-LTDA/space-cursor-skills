@@ -305,7 +305,7 @@ Contorno neutro em ação principal fica "morto".
 ### 7.4 Skeleton na hora do clique `[AS-IS 2026-10-24]`
 - Vale para todo front (site, painéis, app).
 - **No momento do clique**, a área que vai mudar mostra o **skeleton**, sem esperar a resposta do servidor: navegação, troca de aba, filtro, busca, paginação, ordem e abertura de popup. Se esperar a resposta, parece atraso e a pessoa acha que o clique não pegou.
-- **Sem atraso no indicador:** nada de "mostrar o carregando só depois de 200 ms" (ex.: `wire:loading.delay`). Popup abre na hora com o esqueleto do conteúdo e se completa quando os dados chegam.
+- **Sem atraso no indicador:** nada de "mostrar o carregando só depois de 200 ms" (nem o "loading com atraso" que o framework oferece). Popup abre na hora com o esqueleto do conteúdo e se completa quando os dados chegam.
 - **Um componente de skeleton por front**, usado em todas as telas (não tela por tela).
 
 ### 7.5 Lista lembra o estado `[AS-IS 2026-10-24]`

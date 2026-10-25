@@ -44,12 +44,12 @@ Como cada skill usa este arquivo: [README.md](README.md).
 ### BD-05 — Fornecedor é cadastro; o que é dele vai em `jsonb`
 
 - Fornecedor (gateway, agregador, provedor de KYC…) é **uma linha de uma tabela de cadastro**, não um `enum` no código nem uma coluna por fornecedor. O código usa o `code` da linha para escolher o adaptador (dicionário — [padrao-ouro.md](padrao-ouro.md) GO-13).
-- O que é **próprio de um fornecedor** (credenciais, configuração, campos que um tem e outro não) vai numa coluna **`jsonb`**, nunca em coluna fixa. Exemplo: um fornecedor usa `agentId` + `agentSecret`; outro usa `agentToken` + `secretKey` — os dois cabem no mesmo `jsonb`.
+- O que é **próprio de um fornecedor** (credenciais, configuração, campos que um tem e outro não) vai numa coluna **`jsonb`** (PostgreSQL; `json` no MySQL), nunca em coluna fixa. Exemplo: um fornecedor usa `clientId` + `clientSecret`; outro usa `apiKey` — os dois cabem na mesma coluna.
 - O valor da credencial **nunca** vai para o git nem para `docs/` (GO-09): o `jsonb` é preenchido no ambiente.
 
 ### BD-06 — Referência interna é FK para o nosso id
 
-- Tabelas apontam umas para as outras pelo **nosso id** (`gameId` → `games.id`), nunca pelo código externo.
+- Tabelas apontam umas para as outras pelo **nosso id** (`productId` → `products.id`), nunca pelo código externo.
 - O código externo (`externalCode`) mora numa tabela só: a **dona** dele. Se o fornecedor troca o código, atualiza-se um lugar só (GO-04).
 
 ### BD-07 — Pessoa liga pelo id, nunca por dado de contato
@@ -102,7 +102,7 @@ Quando dois ou mais repositórios (ex.: site e painel) usam o **mesmo banco** e 
 
 ### BD-13 — Mudou o formato do que está em cache, sobe a versão da chave
 
-- Se o conteúdo guardado numa chave de cache muda de formato (campo novo, texto formatado diferente), a chave ganha versão nova (`home_games_v3` → `home_games_v4`) no mesmo PR, em todos os lugares que leem e gravam a chave.
+- Se o conteúdo guardado numa chave de cache muda de formato (campo novo, texto formatado diferente), a chave ganha versão nova (`catalog_v3` → `catalog_v4`) no mesmo PR, em todos os lugares que leem e gravam a chave.
 - Sem isso, o código novo lê o formato velho até o cache expirar.
 - Se só o filtro muda e o formato não, a chave fica.
 
