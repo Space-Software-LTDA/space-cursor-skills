@@ -50,6 +50,7 @@ space-cursor-skills/
 ├── docs/                   ← constituição (README = mapa PO vs QA vs contexto)
 ├── skills/                 ← fonte versionada
 │   ├── skill-update/       ← hub /skill-update
+│   ├── create-feature/     ← feature nova, do pedido ao PR
 │   ├── po-techlead-scrum/
 │   ├── qa-space/
 │   ├── design-system-forge/
@@ -87,6 +88,7 @@ Cada `SKILL.md` tambem tem um aviso **COPIA** no topo.
 | Skill | Uso |
 |-------|-----|
 | `skill-update` | **Hub** do pack (`/skill-update`): sync, catálogo, nova/alterar skill, PC vs Coders |
+| `create-feature` | Feature nova num projeto existente, do pedido ao PR para `HML` (`/create-feature`): fases com gates e "Pronto quando", apontando para a constituição |
 | `po-techlead-scrum` | Tasks ClickUp (Esteira / Imediatas) em tom professor — pipeline Objetivo → regra → DB → Apidog → task |
 | `qa-space` | QA / Design System Space — constituição via `docs/README.md` (audita o feito; lê DS inteiro) |
 | `design-system-forge` | **Cria** o DS do produto: manual da marca + DS (`.docs/`) + componentes no canvas (Pencil padrão); essencial, com opção de evoluir para ouro |

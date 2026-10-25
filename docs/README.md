@@ -24,6 +24,8 @@ A constituição também vale para o dia a dia de qualquer projeto Space, não s
 5. As regras do projeto (exceções e o que é só dele)
 ```
 
+Feature nova de ponta a ponta (do pedido ao PR) num projeto que já existe: a skill `create-feature` conduz a ordem acima em fases com gates — leitura dela no mapa abaixo.
+
 Moldes do método: [`_moldes/`](_moldes/) (`demanda.md`, `snapshot.md`, `etapa.md`, `tarefa-subagente.md`).
 
 ---
@@ -40,6 +42,7 @@ PO, QA e contexto de produto **não** são o mesmo leitor. O mesmo arquivo serve
 | `design-system-apply` | Aplicar o DS **já aprovado** nas telas (canvas por padrão; construtor ou código) | Régua = DS do produto + **[ui-gosto.md](ui-gosto.md)** (Fase A confronta DS; Fase B varre telas; Fase C corrige no canvas em loop). Space DS apoia gaps. Artefatos sob `.docs/`. |
 | `project-context-doc` | Documentar o produto que **já existe** no código | A constituição vira **guardrail G-xxx** quando o código de fluxo/contrato importa. Não gera PBI. |
 | `product-from-idea` | Definir um produto novo da ideia à tarefa (12 fases) | A constituição entra só nas fases do time (Setup, DS, Telas, Tarefas), pelas skills que ela chama. Nas fases de produto (1–5) não se lê constituição. |
+| `create-feature` | Levar uma feature nova num produto que **já existe** do pedido ao PR para `HML` (12 fases com gates) | A constituição é a **regra de cada fase**: a skill guarda só a ordem, os gates e o "Pronto quando" e aponta arquivo + seção/ID. Quem executa a fase lê o trecho apontado, não um resumo. |
 | `skill-update` | Manter o pack | Garante que o mapa deste README continue verdadeiro. Não usa a constituição para task nem para QA. |
 
 **Proibido:** a skill de QA “completar” uma task de back com entry point. A skill de PO “aprovar visual” no lugar do QA. A skill de contexto inventar stack nova em vez de descrever o que o repo faz. Forge inventariar mock como lei. Apply inventar `P-…` ausente (voltar ao Forge).
@@ -228,6 +231,33 @@ Task com **API nova/alterada:** o contrato vai ao **Apidog** no pipeline da skil
 | [tom-professor.md](tom-professor.md) e o resto do mapa do PO | Fase 11 | Pela skill `po-techlead-scrum` |
 
 **Esta skill não lê para:** auditar código, escrever task fora da Fase 11, nem criar o DS sem o Forge.
+
+---
+
+### `create-feature` — feature nova, do pedido ao PR
+
+**Objetivo com estas docs:** cada fase da feature seguir a regra escrita sem que a skill vire uma segunda constituição. A skill tem a ordem, os gates (regras aprovadas · "pode codar" · validação do dono) e o "Pronto quando"; o subagente de cada fase lê **só** o trecho apontado.
+
+**Sempre ler:**
+
+| Arquivo | Por quê | Como usar |
+| --- | --- | --- |
+| [metodo-agentes.md](metodo-agentes.md) | Controlador + subagente por fase, revisor sem contexto, roteador de correção, leis comuns (impactos, métrica num dicionário) | Arquitetura da skill; Fase 10 = §3 |
+| [metodo-demandas.md](metodo-demandas.md) + [_moldes/](_moldes/) | A feature é uma demanda: pedido literal, snapshot, dor/causa, impactos, decisões, etapas, fechamento | Fases 1–4 e 12; cada fase executada vira uma etapa do molde |
+| As regras do projeto | Exceções à constituição, lista de áreas de impacto, canvas e DS do produto, dicionário de métricas, ambiente local | Antes da Fase 1; exceção do projeto vence a regra genérica |
+
+**Se o trabalho tocar:**
+
+| Arquivo | Quando | Como usar |
+| --- | --- | --- |
+| [ui-gosto.md](ui-gosto.md) §0, §0.1, §3, §3.5, §4, §6.5–§6.9, §7, §8, §10, §11 do tipo, §12 | Tela (Fases 5, 8, 9) | Pelo `checklist-front.md` da skill (item → seção). §0.1 é o gate "pode codar" |
+| [design-system.md](design-system.md) §3–§11, §16–§19 | Tela (Fases 5, 8, 9) | Método nos buracos do DS do produto (cores, tipografia, cantos, espaçamento, tabela, estados, acessibilidade) |
+| [frontend.md](frontend.md) | Código de front (Fase 8) | Prioridade visual, contrato com a API, onde mora o HTTP |
+| [banco.md](banco.md) + [nomenclatura.md](nomenclatura.md) "Banco de dados" | Banco e migrations (Fase 7) | Modelo com o `BD-xx` de cada coluna; checklist de PR marcado |
+| [padrao-ouro.md](padrao-ouro.md) · [anti-padroes.md](anti-padroes.md) · [backend.md](backend.md) · [entry-point.md](entry-point.md) | Código (Fase 8) | GO-08/GO-11/GO-13; AP-FE-* e as partes de back tocadas |
+| [git-fluxo.md](git-fluxo.md) | Branch, validação do dono, PR (Fases 8, 11, 12) | Branch da `HML`, nada no git antes da validação, PR para `HML` sem juntar |
+
+**Esta skill não lê para:** escrever task para outro dev (é o `po-techlead-scrum`), auditar front de terceiros (`qa-space`), criar o DS do produto (`design-system-forge`).
 
 ---
 
