@@ -58,6 +58,23 @@ garantir_chave() { # garante ~/.ssh/id_ed25519(.pub) da máquina que roda a skil
   echo "INFO   chave nova criada em $k.pub (a privada fica só nesta máquina)"
 }
 
+aviso_tailscale_local() { # IP 100.64.0.0/10 é do Tailscale: esta máquina precisa estar na mesma rede
+  local ip=${1#*@} ts="" b
+  ip=${ip%%:*}
+  b=$(printf '%s' "$ip" | sed -n 's/^100\.\([0-9]\{1,3\}\)\.[0-9]\{1,3\}\.[0-9]\{1,3\}$/\1/p')
+  { [ -n "$b" ] && [ "$b" -ge 64 ] && [ "$b" -le 127 ]; } || return 0
+  if command -v tailscale >/dev/null 2>&1; then ts=tailscale
+  elif [ -x "/c/Program Files/Tailscale/tailscale.exe" ]; then ts="/c/Program Files/Tailscale/tailscale.exe"; fi
+  if [ -z "$ts" ]; then
+    echo "       $ip é um IP do Tailscale e esta máquina não tem o Tailscale. Instale e entre com a mesma conta dos servidores"
+    echo "       (Windows: winget install Tailscale.Tailscale; Linux: curl -fsSL https://tailscale.com/install.sh | sh && tailscale up), ou use o IP público do servidor."
+  elif ! "$ts" status >/dev/null 2>&1; then
+    echo "       $ip é um IP do Tailscale e o Tailscale desta máquina está desligado ou sem login. Rode 'tailscale up' (ou abra o app) e tente de novo."
+  else
+    echo "       $ip é um IP do Tailscale e esta máquina está no Tailscale: confira se o servidor aparece em 'tailscale status' (mesma conta)."
+  fi
+}
+
 checar_ssh() { # host|local -> 0 se acessa; senão imprime a instrução e devolve 1
   local tgt=$1 err motivo
   if [ "$tgt" = local ]; then echo "INFO   $tgt: pulado (roda nesta máquina)"; return 0; fi
@@ -69,6 +86,7 @@ checar_ssh() { # host|local -> 0 se acessa; senão imprime a instrução e devol
     rede)
       echo "FALHA  sem acesso SSH a $tgt: o servidor não respondeu (tempo esgotado, host inalcançável, porta 22 fechada ou IP errado)."
       echo "       Confira o IP, o firewall (porta 22) e se o servidor está ligado. Detalhe: $(printf '%s' "$err" | head -n1)"
+      aviso_tailscale_local "$tgt"
       return 1 ;;
     hostkey)
       echo "FALHA  sem acesso SSH a $tgt: a chave do servidor mudou ou não é conhecida. Rode 'ssh $tgt' uma vez à mão para aceitar, ou confira ~/.ssh/known_hosts."

@@ -36,7 +36,7 @@ Conteúdo **genérico**: nenhum IP, casa ou serviço real. Tudo isso o usuário 
 1. **Perguntar só o que faltar:** SSH da origem (`root@ip`), serviço da origem (ex. `projeto_servico`), (banco(s) só se quiser restringir: por padrão vão TODOS os bancos de usuário da origem), SSH do destino, serviço do destino. Opcional: `--origem-host` (IP/nome que o destino usa para falar com a origem; padrão = IP do Tailscale da origem), `--porta`.
 2. **Rodar `ssh` primeiro** (`$S ssh --origem-ssh root@IP_O --destino-ssh root@IP_D`). Se algum servidor falhar por **permissão negada**, o script gera a chave desta máquina (se não existir) e imprime a **chave pública** e o comando pronto: **mostre ao usuário, para cada servidor, a chave pública e o comando**, peça que cole como root no console/terminal do servidor (ex. terminal do provedor da VPS), espere o "pronto" e rode `ssh` de novo. Se falhar por **rede** (tempo esgotado, porta 22), o problema é IP/firewall: diga isso, não a chave. Nunca pedir nem mostrar a chave privada. `verificar` e `montar` repetem essa checagem e param com a mesma instrução.
 3. **Conferir com o usuário os pré-requisitos que ele faz à mão** (a skill não faz):
-   - Tailscale nos dois hosts, com *key expiry* desligado;
+   - Tailscale nos dois hosts, com *key expiry* desligado; se o SSH usar IP `100.x` (Tailscale), **a máquina que roda a skill também precisa estar no Tailscale, com login na mesma conta** (senão, usar o IP público);
    - porta 3306 publicada no serviço de origem;
    - serviço MySQL padrão criado no destino, versão >= origem, **sem porta publicada**;
 4. **Rodar `verificar`** e mostrar o relatório (uma linha por item: OK · AVISO · FALHA). FALHA = parar e explicar a correção.
