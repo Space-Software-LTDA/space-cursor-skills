@@ -5,7 +5,8 @@
 set -euo pipefail
 
 BASE="${REPLICAR_DIR_BASE:-/root}"   # onde ficam .replicacao/ e backups/ no host de destino (testes: outro caminho)
-SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new)
+SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new -o ForwardAgent=no -o ForwardX11=no)
+MAX_CHAVES=5   # no máximo 5 chaves privadas testadas por host (fail2ban bane o IP depois de poucas tentativas)
 SISTEMA="'mysql','sys','information_schema','performance_schema'"
 MIN_VERSAO=8.0.26
 LIMITE_CONTAGEM=1000000   # tabelas com mais linhas estimadas que isto não têm COUNT(*) exato
@@ -18,8 +19,9 @@ TRAVAR=0 REFAZER=0 CONFIRMO=0 OPWF="" DPWF="" SEGUIR_LONGA=0 BANCO_INFORMADO=0
 OCONT="" DCONT="" CANDS="" CANDS_N=0
 FALHAS=0 AVISOS=0
 OVERS="" OSID="" OUUID="" DVERS="" DUUID="" TAMANHO=0 SRC_UUID=""
-PRECISA_PONTE=0
-O_SERVICO="" O_PUBLICADA="" O_PONTE="" O_PONTE_BIND="" O_USADAS="" O_REDES=""
+PRECISA_PONTE=0 FORCAR_PONTE_IP=0 AUTORIZAR=0
+REPL_U=""
+O_SERVICO="" O_PUBLICADA="" O_PONTE="" O_PONTE_BIND="" O_PONTE_ESTADO="" O_USADAS="" O_REDES=""
 P_REDE="" P_ALVO=""
 TS_ESTADO=""
 ACESSIVEIS=()
@@ -28,8 +30,9 @@ uso() {
   cat <<'USO'
 Uso: replicar-mysql.sh <ssh|listar|verificar|ponte|montar|status|bloquear-porta> [opções]
   ssh             confere o acesso SSH; se faltar, tenta as chaves que já existem nesta máquina e instala a chave da skill sozinha; só pede para colar onde nada funcionou
+                  (a instalação automática da chave só acontece em ssh, verificar e montar; os demais só checam e mandam rodar 'ssh')
   listar          lista os serviços MySQL/MariaDB de cada host e sugere o par origem -> destino
-  verificar       confere origem, rede e destino (não altera nada)
+  verificar       confere origem, rede e destino (não altera nada no MySQL)
   ponte           cria (ou reaproveita) a ponte da origem: container socat só no IP do Tailscale, porta 29901-29999
   montar          faz o dump, importa e liga a replicação (cria a ponte se a origem não tiver porta)
   status          estado da réplica (aceita só o destino: descobre a origem pelo Source_Host/Port)
@@ -39,7 +42,8 @@ Uso: replicar-mysql.sh <ssh|listar|verificar|ponte|montar|status|bloquear-porta>
   --banco a,b    (opcional) padrão: TODOS os bancos de usuário da origem; só aceito se a origem não tiver outros
   --origem-host  host/IP que o DESTINO usa para falar com a origem (padrão: IP da ponte ou tailscale ip -4 da origem)
   --porta N      força a porta da origem (padrão: descoberta no serviço ou na ponte da casa)
-  --ponte-ip IP  IP em que a ponte escuta (padrão: tailscale ip -4 da origem; testes usam outro IP local)
+  --ponte-ip IP  IP em que a ponte escuta (padrão: tailscale ip -4 da origem; só aceita 100.64.0.0/10)
+  --forcar-ponte-ip  (testes) aceita --ponte-ip privado fora do Tailscale, com AVISO; 0.0.0.0, :: e IP público são sempre recusados
   --forcar-porta aceita porta de ponte fora da faixa 29900-29999
   --server-id N  (padrão: aleatório, diferente da origem e das outras réplicas)
   --travar-tudo  dump com --lock-all-tables (TRAVA AS GRAVAÇÕES da origem durante o dump inteiro)
@@ -77,6 +81,14 @@ eh_ip_ts() { # IP 100.64.0.0/10 é do Tailscale
   local b
   b=$(printf '%s' "$1" | sed -n 's/^100\.\([0-9]\{1,3\}\)\.[0-9]\{1,3\}\.[0-9]\{1,3\}$/\1/p')
   [ -n "$b" ] && [ "$b" -ge 64 ] && [ "$b" -le 127 ]
+}
+
+eh_ip_privado() { # 10/8, 172.16/12, 192.168/16, 127/8, 169.254/16 (nunca IP público)
+  case "$1" in
+    10.*|127.*|192.168.*|169.254.*) return 0 ;;
+    172.*) local b=${1#172.}; b=${b%%.*}; [ "$b" -ge 16 ] && [ "$b" -le 31 ] ;;
+    *) return 1 ;;
+  esac
 }
 
 # ---------- SSH ----------
@@ -157,12 +169,17 @@ chaves_candidatas() { # chaves privadas de ~/.ssh e IdentityFile do ~/.ssh/confi
 }
 
 autorizar_sozinho() { # host -> 0 se conseguiu instalar a chave da skill (chave antiga ou salto por outro host)
-  local tgt=$1 k pub inst h
+  local tgt=$1 k pub inst h tentadas=0
   garantir_chave >/dev/null || return 1
   pub=$(pub_da_skill)
   inst=$(cmd_instalar_chave "$pub")
   while IFS= read -r k; do
     [ -n "$k" ] || continue
+    if [ "$tentadas" -ge "$MAX_CHAVES" ]; then
+      echo "INFO   $tgt: parei depois de $MAX_CHAVES chaves testadas (evita o fail2ban banir este IP); as demais não foram tentadas"
+      break
+    fi
+    tentadas=$((tentadas + 1))
     if ssh -n -i "$k" -o IdentitiesOnly=yes "${SSH_OPTS[@]}" "$tgt" true >/dev/null 2>&1; then
       if ssh -n -i "$k" -o IdentitiesOnly=yes "${SSH_OPTS[@]}" "$tgt" "$inst" >/dev/null 2>&1 && testar_ssh "$tgt"; then
         echo "INFO   $tgt: a chave da skill foi instalada sozinha (entrei com a chave existente ${k##*/})"
@@ -231,7 +248,10 @@ acesso_ssh() { # confere origem e destino (pula local); 0 só se todos acessam
         echo "FALHA  sem acesso SSH a $t: a chave do servidor não foi aceita (Host key verification failed). Detalhe: ${errs[$i]}"
         rc=1 ;;
       chave)
-        if autorizar_sozinho "$t"; then ok "acesso SSH a $t"; ACESSIVEIS+=("$t"); else instrucao_colar "$t" || true; rc=1; fi ;;
+        if [ "$AUTORIZAR" != 1 ]; then
+          echo "FALHA  sem acesso SSH a $t: permissão negada. Este subcomando só confere; rode primeiro 'ssh --origem-ssh ... --destino-ssh ...' (ele tenta as chaves existentes e instala a da skill)."
+          rc=1
+        elif autorizar_sozinho "$t"; then ok "acesso SSH a $t"; ACESSIVEIS+=("$t"); else instrucao_colar "$t" || true; rc=1; fi ;;
     esac
   done
   return $rc
@@ -239,8 +259,15 @@ acesso_ssh() { # confere origem e destino (pula local); 0 só se todos acessam
 
 # ---------- containers ----------
 setcont() { # lado -> preenche OCONT/DCONT; falha (1) se não achar exatamente um (CANDS/CANDS_N = o que achou)
-  local lado=$1 serv out n
+  local lado=$1 serv out n lbl
   if [ "$lado" = o ]; then serv=$OSERV; else serv=$DSERV; fi
+  # nome de container de task (serv.N.id) -> trocar pelo nome do serviço (rótulo), para a trava de "mais de um container" valer
+  lbl=$(hexec "$lado" "docker ps --format '{{.Names}}|{{.Label \"com.docker.swarm.service.name\"}}'" </dev/null 2>/dev/null | awk -F'|' -v n="$serv" '$1==n && $2!="" {print $2; exit}' || true)
+  if [ -n "$lbl" ] && [ "$lbl" != "$serv" ]; then
+    echo "INFO   '$serv' é o container de uma task: usando o nome do serviço '$lbl'" >&2
+    serv=$lbl
+    if [ "$lado" = o ]; then OSERV=$lbl; else DSERV=$lbl; fi
+  fi
   out=$(hexec "$lado" "docker ps --filter 'label=com.docker.swarm.service.name=$serv' --format '{{.Names}}'" 2>/dev/null) || out=""
   n=$(printf '%s' "$out" | grep -c . || true)
   if [ "$n" -eq 0 ]; then
@@ -316,8 +343,13 @@ eh_mysql() {
   esac
   return 1
 }
-achar_ponte() { # nomes (separados por espaço) -> nome do container da ponte que aponta para algum deles
-  for p in $(docker ps --format '{{.Names}}' </dev/null | grep -E '^replicacao-.*-ponte-[0-9]+$'); do
+achar_ponte() { # nomes (o primeiro é o nome do serviço) -> nome do container da ponte (rodando ou parada)
+  svc=${1%% *}
+  # 1) pelo rótulo (pontes criadas pela skill)
+  p=$(docker ps -a --filter "label=replicacao.origem-servico=$svc" --format '{{.Names}}' </dev/null | head -n1)
+  if [ -n "$p" ]; then echo "$p"; return 0; fi
+  # 2) ponte antiga, sem rótulo: pelo nome replicacao-*-ponte-<porta> e pelo destino do socat (nome do serviço ou alias específico)
+  for p in $(docker ps -a --format '{{.Names}}' </dev/null | grep -E '^replicacao-.*-ponte-[0-9]+$'); do
     alvo=$(docker inspect "$p" --format '{{range .Args}}{{.}} {{end}}' </dev/null | sed -n 's/.*[Tt][Cc][Pp]:\([^: ]*\):[0-9]*.*/\1/p' | tr 'A-Z' 'a-z')
     [ -n "$alvo" ] || continue
     for a in $1; do
@@ -327,10 +359,12 @@ achar_ponte() { # nomes (separados por espaço) -> nome do container da ponte qu
   done
   return 1
 }
-nomes_da() { # id nome servico -> serviço + aliases (ou nome do container)
+ponte_rodando() { docker inspect -f '{{.State.Running}}' "$1" </dev/null 2>/dev/null; }
+ponte_bind() { docker inspect -f '{{range $k,$v := .HostConfig.PortBindings}}{{range $v}}{{.HostIp}}:{{.HostPort}}{{end}}{{end}}' "$1" </dev/null 2>/dev/null; }
+nomes_da() { # id nome servico -> nome do serviço + o alias mais específico (o mais longo); ou nome do container
   if [ -n "$3" ]; then
     printf '%s ' "$3"
-    docker service inspect "$3" --format '{{range .Spec.TaskTemplate.Networks}}{{range .Aliases}}{{.}} {{end}}{{end}}' </dev/null 2>/dev/null
+    docker service inspect "$3" --format '{{range .Spec.TaskTemplate.Networks}}{{range .Aliases}}{{.}} {{end}}{{end}}' </dev/null 2>/dev/null | tr ' ' '\n' | awk 'length>m{m=length;l=$0} END{print l}'
   else
     printf '%s' "$2"
   fi
@@ -345,7 +379,9 @@ lista_mysql() { # rep|norep -> linhas TSV: servico nome imagem publicada ponte(p
       pub=$(docker port "$id" 3306/tcp </dev/null 2>/dev/null | head -n1 | sed 's/.*://')
     fi
     al=$(nomes_da "$id" "$nm" "$sv")
-    pt=$(achar_ponte "$al" | sed 's/.*-ponte-//')
+    p=$(achar_ponte "$al" || true)
+    pt=$(printf '%s' "$p" | sed 's/.*-ponte-//')
+    if [ -n "$p" ] && [ "$(ponte_rodando "$p")" != true ]; then pt="${pt}(parada)"; fi
     rep=-
     if [ "$1" = rep ]; then
       if out=$(docker exec "$id" sh -c 'MYSQL_PWD="$MYSQL_ROOT_PASSWORD" mysql -uroot -N -B -e "SELECT CONCAT(host,\":\",port) FROM performance_schema.replication_connection_configuration LIMIT 1" 2>/dev/null' </dev/null); then
@@ -380,10 +416,11 @@ else
   done
 fi
 al=$(nomes_da "$cont" "$nm" "$sv")
-p=$(achar_ponte "$al")
+p=$(achar_ponte "$al" || true)
 if [ -n "$p" ]; then
   echo "PONTE=$p"
-  echo "PONTE_BIND=$(docker port "$p" 3306/tcp </dev/null 2>/dev/null | head -n1)"
+  echo "PONTE_BIND=$(ponte_bind "$p")"
+  echo "PONTE_ESTADO=$(ponte_rodando "$p")"
 fi
 usadas=$( { ss -Hltn 2>/dev/null | awk '{n=split($4,a,":"); print a[n]}'
   docker ps --format '{{.Ports}}' </dev/null 2>/dev/null | tr ',' '\n' | sed -n 's/.*:\([0-9][0-9]*\)->.*/\1/p'
@@ -394,7 +431,7 @@ RSEOF
 # ---------- descoberta da origem (P6) e ponte (P7/P12) ----------
 descobrir_origem() { # preenche O_* a partir do container da origem (OCONT)
   local l k v
-  O_SERVICO="" O_PUBLICADA="" O_PONTE="" O_PONTE_BIND="" O_USADAS="" O_REDES=""
+  O_SERVICO="" O_PUBLICADA="" O_PONTE="" O_PONTE_BIND="" O_PONTE_ESTADO="" O_USADAS="" O_REDES=""
   while IFS= read -r l; do
     k=${l%%=*}; v=${l#*=}
     case $k in
@@ -402,6 +439,7 @@ descobrir_origem() { # preenche O_* a partir do container da origem (OCONT)
       PUBLICADA) O_PUBLICADA=$v ;;
       PONTE) O_PONTE=$v ;;
       PONTE_BIND) O_PONTE_BIND=$v ;;
+      PONTE_ESTADO) O_PONTE_ESTADO=$v ;;
       USADAS) O_USADAS=$v ;;
       REDE) O_REDES="$O_REDES$v"$'\n' ;;
     esac
@@ -422,13 +460,17 @@ proxima_porta_livre() {
 casa_nome() { printf '%s' "${O_SERVICO:-$OSERV}" | tr 'A-Z' 'a-z' | tr -c 'a-z0-9\n-' '-' | sed 's/^-*//; s/-*$//'; }
 
 escolher_rede() { # preenche P_REDE e P_ALVO a partir de O_REDES (linhas: nome attachable alias...)
-  local l n att al melhor="" outro="" fallback=""
+  local l n att al x melhor="" outro="" fallback=""
   P_REDE="" P_ALVO=""
   while IFS= read -r l; do
     [ -n "$l" ] || continue
     # shellcheck disable=SC2086
     set -- $l
-    n=$1; att=${2:-false}; al=${3:-${O_SERVICO:-$OSERV}}
+    n=$1; att=${2:-false}
+    shift 2 || true
+    al=""
+    for x in "$@"; do if [ "${#x}" -gt "${#al}" ]; then al=$x; fi; done   # alias mais específico (<projeto>-<servico>), nunca o curto
+    al=${al:-${O_SERVICO:-$OSERV}}
     if [ "$att" != true ]; then fallback=${fallback:-$n}; continue; fi
     case $n in
       easypanel-*) [ -n "$melhor" ] || melhor="$n $al" ;;
@@ -452,20 +494,36 @@ testar_porta_host() { # lado ip porta -> 0 se abre conexão TCP (a partir do pr�
 ip_tailscale_origem() { hexec o "tailscale ip -4 2>/dev/null | head -n1" </dev/null 2>/dev/null || true; }
 
 fazer_ponte() { # cria (ou reaproveita) a ponte da casa; preenche PORTA e OHOST (se vazio)
-  local ip porta casa nome bind
+  local ip porta casa nome bind svc
   if [ -n "$O_PONTE" ]; then
-    porta=${O_PONTE##*-ponte-}
+    porta=${O_PONTE_BIND##*:}
     ip=${O_PONTE_BIND%:*}
+    if [ "$O_PONTE_ESTADO" != true ]; then
+      [ "$CONFIRMO" = 1 ] || morrer "a ponte $O_PONTE está PARADA; religar mexe no host de origem e exige --confirmo"
+      echo "       ponte $O_PONTE parada: religando com 'docker start' (o Tailscale pode ter subido depois do Docker)"
+      hexec o "docker start '$O_PONTE'" </dev/null >/dev/null 2>&1 || true
+      sleep 2
+      if [ "$(hexec o "docker inspect -f '{{.State.Running}}' '$O_PONTE'" </dev/null 2>/dev/null || true)" != true ]; then
+        echo "       últimas linhas do log da ponte:" >&2
+        hexec o "docker logs --tail 5 '$O_PONTE' 2>&1" </dev/null | cut -c1-200 >&2 || true
+        morrer "a ponte $O_PONTE não subiu. Se o erro for 'cannot assign requested address', o IP $ip ainda não existe no host: o Tailscale não subiu (veja 'tailscale status' no host de origem) e rode de novo"
+      fi
+      O_PONTE_ESTADO=true
+    fi
     if testar_porta_host o "$ip" "$porta"; then
       ok "ponte da casa já existe e responde: $O_PONTE ($ip:$porta)"
       PORTA=$porta; [ -n "$OHOST" ] || OHOST=$ip
       return 0
     fi
-    morrer "a ponte $O_PONTE existe mas não responde em $ip:$porta (o Tailscale subiu depois do Docker? veja 'docker logs $O_PONTE' e 'docker restart $O_PONTE')"
+    morrer "a ponte $O_PONTE existe mas não responde em $ip:$porta (veja 'docker logs $O_PONTE')"
   fi
   [ "$CONFIRMO" = 1 ] || morrer "criar a ponte mexe no host de origem e exige --confirmo"
   ip=${PONTE_IP:-$(ip_tailscale_origem)}
   [ -n "$ip" ] || morrer "não achei o IP do Tailscale da origem para a ponte; passe --ponte-ip"
+  if eh_ip_ts "$ip"; then :; else
+    [ "$FORCAR_PONTE_IP" = 1 ] || morrer "o IP da ponte ($ip) não é do Tailscale (100.64.0.0/10)"
+    av "ponte em $ip, que NÃO é IP do Tailscale (--forcar-ponte-ip): use só em teste; a ponte dá acesso ao MySQL da casa"
+  fi
   if [ "$PORTA_FORCADA" = 1 ]; then
     porta=$PORTA
     if { [ "$porta" -lt 29900 ] || [ "$porta" -gt 29999 ]; } && [ "$FORCAR_PORTA" != 1 ]; then
@@ -479,8 +537,10 @@ fazer_ponte() { # cria (ou reaproveita) a ponte da casa; preenche PORTA e OHOST 
   casa=$(casa_nome)
   [[ $casa =~ ^[a-z0-9][a-z0-9-]*$ ]] || morrer "nome de casa inválido para a ponte: '$casa'"
   nome="replicacao-$casa-ponte-$porta"
+  svc=${O_SERVICO:-$OSERV}
+  [[ $svc =~ ^[A-Za-z0-9_.-]+$ ]] || morrer "nome de serviço inválido para o rótulo da ponte: '$svc'"
   echo "       criando a ponte $nome: $ip:$porta -> $P_ALVO:3306 na rede $P_REDE (imagem $IMG_SOCAT, reinício automático)"
-  hexec o "docker run -d --name '$nome' --restart unless-stopped --network '$P_REDE' --label replicacao.casa='$casa' -p '$ip:$porta:3306' '$IMG_SOCAT' 'TCP-LISTEN:3306,fork,reuseaddr' 'TCP:$P_ALVO:3306'" </dev/null >/dev/null ||
+  hexec o "docker run -d --name '$nome' --restart unless-stopped --network '$P_REDE' --label replicacao.casa='$casa' --label replicacao.origem-servico='$svc' --label replicacao.porta='$porta' -p '$ip:$porta:3306' '$IMG_SOCAT' 'TCP-LISTEN:3306,fork,reuseaddr' 'TCP:$P_ALVO:3306'" </dev/null >/dev/null ||
     morrer "docker run da ponte falhou (porta $ip:$porta ocupada ou IP $ip não existe no host?)"
   sleep 2
   bind=$(hexec o "docker port '$nome' 3306/tcp 2>/dev/null | head -n1" </dev/null || true)
@@ -513,7 +573,15 @@ validar() {
   [[ $OSERV =~ $re_n ]] || [ -z "$OSERV" ] || morrer "--origem-servico inválido"
   [[ $DSERV =~ $re_n ]] || [ -z "$DSERV" ] || morrer "--destino-servico inválido"
   [[ $OHOST =~ ^[A-Za-z0-9_.:-]*$ ]] || morrer "--origem-host inválido"
-  [[ $PONTE_IP =~ ^[0-9.]*$ ]] || morrer "--ponte-ip inválido (use um IPv4)"
+  [[ $PONTE_IP =~ ^[0-9.]*$ ]] || morrer "--ponte-ip inválido (use um IPv4 do Tailscale, 100.64.0.0/10)"
+  if [ -n "$PONTE_IP" ]; then
+    [[ $PONTE_IP =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]] || morrer "--ponte-ip inválido (use um IPv4 do Tailscale, 100.64.0.0/10)"
+    if [ "$PONTE_IP" = 0.0.0.0 ]; then morrer "--ponte-ip 0.0.0.0 abriria o MySQL na internet: recusado sempre"; fi
+    if ! eh_ip_ts "$PONTE_IP"; then
+      [ "$FORCAR_PONTE_IP" = 1 ] || morrer "--ponte-ip $PONTE_IP não é do Tailscale (100.64.0.0/10). A ponte só escuta no Tailscale; para teste com IP privado use --forcar-ponte-ip"
+      eh_ip_privado "$PONTE_IP" || morrer "--ponte-ip $PONTE_IP é um IP público: recusado sempre (a ponte abriria o MySQL na internet)"
+    fi
+  fi
   [[ $PORTA =~ ^[0-9]*$ ]] || morrer "--porta inválida"
   [[ $SID =~ ^[0-9]*$ ]] || morrer "--server-id inválido"
   [[ $PORTAS_FW =~ ^[0-9,]*$ ]] || morrer "--portas inválido (números separados por vírgula)"
@@ -530,10 +598,35 @@ validar() {
 
 exigir() { local v; for v in "$@"; do [ -n "${!v}" ] || morrer "falta opção: $v"; done; }
 
-repl_usuario() { # um usuário de replicação por destino: repl_<destino sanitizado>, até 32 caracteres
+hash8() { printf '%s' "$1" | { sha256sum 2>/dev/null || shasum -a 256 2>/dev/null || cksum; } | cut -c1-8; }
+
+repl_usuario_antigo() { # formato das versões anteriores: repl_<destino sanitizado>, até 32 caracteres (só para reaproveitar o que já existe)
   local s
   s=$(printf '%s' "$DSERV" | tr 'A-Z' 'a-z' | tr -c 'a-z0-9_' '_')
   printf 'repl_%s' "$s" | cut -c1-32
+}
+
+repl_usuario_novo() { # repl_ + parte legível do serviço (18) + _ + hash curto de (host de destino + serviço de destino) = 32
+  local s hid
+  s=$(printf '%s' "$DSERV" | tr 'A-Z' 'a-z' | tr -c 'a-z0-9_' '_' | cut -c1-18)
+  hid=$(hexec d "cat /etc/machine-id 2>/dev/null || hostname" </dev/null 2>/dev/null | head -n1)
+  printf 'repl_%s_%s' "$s" "$(hash8 "$hid:$DSERV")"
+}
+
+resolver_repl() { # decide REPL_U (usuário de replicação deste destino); FALHA se o usuário já existe na origem e o .env deste destino não tem a senha dele
+  local env="$BASE/.replicacao/$DSERV.env" gravado temsenha antigo novo existe
+  gravado=$(hexec d "sed -n 's/^REPL_USUARIO=//p' '$env' 2>/dev/null | head -n1" </dev/null 2>/dev/null || true)
+  if hexec d "grep -Eq '^REPL_SENHA=[A-Za-z0-9]{32}\$' '$env' 2>/dev/null" </dev/null 2>/dev/null; then temsenha=1; else temsenha=0; fi
+  antigo=$(repl_usuario_antigo); novo=$(repl_usuario_novo)
+  if [[ $gravado =~ ^repl_[a-z0-9_]{1,27}$ ]]; then REPL_U=$gravado
+  elif [ "$temsenha" = 1 ] && [ "$(q o "SELECT COUNT(*) FROM mysql.user WHERE user='$antigo' AND host='%'" || echo 0)" = 1 ]; then REPL_U=$antigo
+  else REPL_U=$novo; fi
+  existe=$(q o "SELECT COUNT(*) FROM mysql.user WHERE user='$REPL_U' AND host='%'" || echo 0)
+  if [ "${existe:-0}" -gt 0 ] && [ "$temsenha" != 1 ]; then
+    fa "o usuário de replicação '$REPL_U' já existe na origem e este destino não tem a senha dele ($env): pode ser de outra réplica; a skill não troca a senha. Use outro nome de serviço de destino ou apague o usuário na origem se for sobra sua"
+    return 1
+  fi
+  if [ "${existe:-0}" -gt 0 ]; then ok "usuário de replicação '$REPL_U' já existe na origem e este destino tem a senha dele (reaproveitado)"; else ok "usuário de replicação novo: '$REPL_U'"; fi
 }
 
 consultas_longas() { # limite em segundos -> quantidade na origem
@@ -684,9 +777,18 @@ verificar() {
     if [ "$PORTA_FORCADA" = 1 ]; then
       ok "porta $PORTA informada por --porta (forçada)"
     elif [ -n "$O_PONTE" ]; then
-      PORTA=${O_PONTE##*-ponte-}
+      PORTA=${O_PONTE_BIND##*:}
       [ -n "$OHOST" ] || OHOST=${O_PONTE_BIND%:*}
-      ok "ponte da casa: $O_PONTE ($O_PONTE_BIND)"
+      if [ "$O_PONTE_ESTADO" = true ]; then
+        ok "ponte da casa: $O_PONTE ($O_PONTE_BIND)"
+      else
+        PRECISA_PONTE=1
+        if [ "$CONFIRMO" = 1 ]; then
+          av "a ponte da casa ($O_PONTE) está PARADA (o Tailscale pode ter subido depois do Docker). O 'montar' religa com 'docker start'. Rede ainda não testada"
+        else
+          fa "a ponte da casa ($O_PONTE) está PARADA: rode 'ponte --confirmo --origem-ssh ... --origem-servico ...' (faz docker start) ou 'docker start $O_PONTE' no host de origem"
+        fi
+      fi
     elif [ -n "$O_PUBLICADA" ]; then
       PORTA=$O_PUBLICADA
       ok "porta publicada do serviço de origem: $PORTA"
@@ -733,6 +835,7 @@ verificar() {
         else
           checar_rede
         fi
+        resolver_repl || true
         ids=$(q o 'SHOW REPLICAS' | cut -f1 | tr '\n' ' ' || true)
         if [ -n "$SID" ]; then
           if [ "$SID" = "$OSID" ]; then fa "--server-id $SID é o da origem"; fi
@@ -784,7 +887,7 @@ ponte() {
   setcont o || morrer "origem: $(msg_containers "$OSERV")"
   descobrir_origem
   if [ -z "$O_PONTE" ] && [ -n "$O_PUBLICADA" ] && [ "$PORTA_FORCADA" = 0 ]; then
-    echo "INFO   o serviço já publica a porta $O_PUBLICADA; a ponte só é necessária quando ele não tem porta publicada. Criando a ponte mesmo assim (--confirmo dado)."
+    echo "INFO   o serviço já publica a porta $O_PUBLICADA; a ponte só é necessária quando ele não tem porta publicada. Seguindo mesmo assim."
   fi
   fazer_ponte
   avaliar_porta
@@ -798,15 +901,15 @@ ler_status_replica() { # destino -> saída vertical (mysql -E, SQL pela entrada 
 
 servico_por_porta() { # porta -> serviço MySQL da origem que a publica (ou tem a ponte dela)
   { rscript o "$RS_COMUM
-lista_mysql norep" || true; } | awk -F'\t' -v p="$1" '$4==p || $5==p {print $1; exit}'
+lista_mysql norep" || true; } | awk -F'\t' -v p="$1" '$4==p || $5==p || $5==p"(parada)" {print $1; exit}'
 }
 
 rstatus() {
-  local st io sql lag e1 e2 rc=0 sh sp suuid gd go pscount rcs
+  local st io sql lag e1 e2 rc=0 sh sp suuid gd go pscount rcs ouuid_s pst
   setcont d || morrer "destino: $(msg_containers "$DSERV")"
   if st=$(ler_status_replica); then rcs=0; else rcs=$?; fi
   if [ -z "$st" ]; then
-    if [ "$rcs" -ne 0 ]; then echo "FALHA  não consegui consultar o destino (mysql saiu com código $rcs; confira a senha root do container)"; return 1; fi
+    if [ "$rcs" -ne 0 ]; then echo "FALHA  não consegui consultar o destino (saída com código $rcs; 255 = falha do ssh, tente de novo; senão confira a senha root do container)"; return 1; fi
     pscount=$(q d "SELECT COUNT(*) FROM performance_schema.replication_connection_configuration" || echo 0)
     if [ "${pscount:-0}" -gt 0 ]; then
       echo "FALHA  SHOW REPLICA STATUS veio vazio, mas o performance_schema tem configuração de réplica. A leitura falhou; rode de novo."
@@ -836,9 +939,22 @@ rstatus() {
   if [ -n "$OSSH" ] && [ -n "$OSERV" ] && setcont o 2>/dev/null; then
     go=$(q o 'SELECT @@GLOBAL.gtid_executed' | tr -d '\n ' | head -c 300)
     echo "gtid_executed origem:  $go"
+    ouuid_s=$(q o 'SELECT @@server_uuid' | head -n1)
+    if [ -n "$suuid" ] && [ -n "$ouuid_s" ] && [ "$suuid" != "$ouuid_s" ]; then
+      echo "AVISO  a origem informada/descoberta ($OSERV) NÃO é a que a réplica segue (Source_UUID $suuid × server_uuid $ouuid_s): confira o par origem/destino"
+    fi
     if [ -n "$go" ] && [ "$go" = "$gd" ]; then echo "GTID igual nos dois lados"; else echo "GTID diferente (normal se a origem está gravando; o atraso acima manda)"; fi
   else
     echo "INFO   origem não informada nem descoberta: passe --origem-ssh e --origem-servico para comparar o GTID"
+  fi
+  # ponte da origem (faixa 29900-29999): parada é a causa mais comum de IO parado depois de reiniciar o servidor
+  if [ -n "$OSSH" ] && [[ $sp =~ ^299[0-9][0-9]$ ]]; then
+    pst=$(hexec o "docker ps -a --filter 'name=-ponte-$sp' --format '{{.Names}} {{.Status}}' | head -n1" </dev/null 2>/dev/null || true)
+    case "$pst" in
+      '') ;;
+      *Up*) echo "Ponte da origem: $pst" ;;
+      *) echo "FALHA  a ponte da origem está PARADA ($pst): rode 'ponte --confirmo --origem-ssh ... --origem-servico ...' (faz docker start) ou 'docker start' no host de origem"; rc=1 ;;
+    esac
   fi
   if [ "$io" != Yes ] || [ "$sql" != Yes ]; then rc=1; fi
   if [ -z "$lag" ] || [ "$lag" = NULL ] || ! [[ $lag =~ ^[0-9]+$ ]] || [ "$lag" -gt 60 ]; then rc=1; fi
@@ -920,7 +1036,7 @@ montar() {
   verificar || morrer "verificar falhou; nada foi alterado"
   if [ "$PRECISA_PONTE" = 1 ]; then
     echo
-    echo "       origem sem porta publicada: criando a ponte (único ajuste no host de origem)"
+    echo "       ponte da origem: criando ou religando (único ajuste no host de origem)"
     fazer_ponte
     descobrir_origem
     PRECISA_PONTE=0; FALHAS=0
@@ -928,7 +1044,8 @@ montar() {
     checar_rede
     [ "$FALHAS" -eq 0 ] || morrer "a ponte existe mas o destino não chega na origem por ela (nada mais foi alterado)"
   fi
-  ru=$(repl_usuario)
+  ru=$REPL_U
+  [ -n "$ru" ] || morrer "usuário de replicação não definido"
   if [ -z "$SID" ]; then
     cur=$(q d 'SELECT @@server_id')
     ids=$(q o 'SHOW REPLICAS' | cut -f1 | tr '\n' ' ' || true)
@@ -962,7 +1079,7 @@ montar() {
   passo 3 "origem: usuário de replicação '$ru' (um por destino, REQUIRE SSL, sem ir para o binlog)"
   guarda
   repl_env="$BASE/.replicacao/$DSERV.env"
-  hexec d "umask 077; mkdir -p '$BASE/.replicacao'; if ! grep -Eq '^REPL_SENHA=[A-Za-z0-9]{32}\$' '$repl_env' 2>/dev/null; then p=\$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32); printf 'REPL_SENHA=%s\n' \"\$p\" > '$repl_env'; fi; chmod 600 '$repl_env'" || morrer "não consegui guardar a senha de replicação no destino"
+  hexec d "umask 077; mkdir -p '$BASE/.replicacao'; if ! grep -Eq '^REPL_SENHA=[A-Za-z0-9]{32}\$' '$repl_env' 2>/dev/null; then p=\$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 32); printf 'REPL_SENHA=%s\n' \"\$p\" > '$repl_env'; fi; grep -qx 'REPL_USUARIO=$ru' '$repl_env' || { sed -i '/^REPL_USUARIO=/d' '$repl_env'; printf 'REPL_USUARIO=%s\n' '$ru' >> '$repl_env'; }; chmod 600 '$repl_env'" || morrer "não consegui guardar a senha de replicação no destino"
   repl_pw=$(hexec d "sed -n 's/^REPL_SENHA=//p' '$repl_env' | head -n1")
   [ "${#repl_pw}" -eq 32 ] || morrer "senha de replicação inválida em $repl_env"
   printf "SET SESSION sql_log_bin=0;\nCREATE USER IF NOT EXISTS '%s'@'%%' IDENTIFIED BY '%s' REQUIRE SSL;\nALTER USER '%s'@'%%' IDENTIFIED BY '%s' REQUIRE SSL;\nGRANT REPLICATION SLAVE ON *.* TO '%s'@'%%';\n" "$ru" "$repl_pw" "$ru" "$repl_pw" "$ru" |
@@ -1058,6 +1175,7 @@ fw_script() { # $1 = portas separadas por espaço
 PORTAS="@PORTAS@"
 IFACE=$(ip route show default 2>/dev/null | awk '{print $5; exit}')
 [ -n "$IFACE" ] || { echo "replicacao-firewall: sem interface default" >&2; exit 1; }
+case "$IFACE" in tailscale0|lo|docker*|br-*|veth*) echo "replicacao-firewall: interface padrão $IFACE não é a pública; nada feito" >&2; exit 1 ;; esac
 for ipt in iptables ip6tables; do
   command -v "$ipt" >/dev/null 2>&1 || continue
   $ipt -S DOCKER-USER >/dev/null 2>&1 || $ipt -N DOCKER-USER
@@ -1114,6 +1232,9 @@ bloquear_porta() {
   echo "INFO   portas no script depois desta execução: $todas (já no script: ${atuais:-nenhuma})"
   iface=$(hexec o "ip route show default 2>/dev/null | awk '{print \$5; exit}'" </dev/null || true)
   [ -n "$iface" ] || morrer "o host de origem não tem interface default (ip route)"
+  case "$iface" in
+    tailscale0|lo|docker*|br-*|veth*) morrer "a rota padrão do host de origem sai por '$iface' (VPN, exit node ou rede do Docker): fechar a porta nessa interface derrubaria o Tailscale ou a rede interna. Ajuste a rota padrão ou feche à mão na interface pública" ;;
+  esac
   echo "INFO   interface de internet do host de origem: $iface"
   for p in $todas; do
     if hexec o "iptables -C DOCKER-USER -i '$iface' -p tcp -m conntrack --ctorigdstport '$p' --ctdir ORIGINAL -j DROP" </dev/null >/dev/null 2>&1; then
@@ -1193,6 +1314,7 @@ while [ $# -gt 0 ]; do
     --confirmo) CONFIRMO=1; shift ;;
     --dry-run) DRY_RUN=1; shift ;;
     --forcar-porta) FORCAR_PORTA=1; shift ;;
+    --forcar-ponte-ip) FORCAR_PONTE_IP=1; shift ;;
     --seguir-com-consulta-longa) SEGUIR_LONGA=1; shift ;;
     -h|--ajuda|--help) uso; exit 0 ;;
     *) morrer "opção desconhecida: $1" ;;
@@ -1200,11 +1322,11 @@ while [ $# -gt 0 ]; do
 done
 validar
 case "$SUB" in
-  ssh) [ -n "$OSSH$DSSH" ] || morrer "falta --origem-ssh e/ou --destino-ssh"; acesso_ssh ;;
+  ssh) [ -n "$OSSH$DSSH" ] || morrer "falta --origem-ssh e/ou --destino-ssh"; AUTORIZAR=1; acesso_ssh ;;
   listar) [ -n "$OSSH$DSSH" ] || morrer "falta --origem-ssh e/ou --destino-ssh"; listar ;;
-  verificar) exigir OSSH OSERV DSSH DSERV; verificar ;;
+  verificar) exigir OSSH OSERV DSSH DSERV; AUTORIZAR=1; verificar ;;
   ponte) exigir OSSH OSERV; ponte ;;
-  montar) exigir OSSH OSERV DSSH DSERV; montar ;;
+  montar) exigir OSSH OSERV DSSH DSERV; AUTORIZAR=1; montar ;;
   status) exigir DSSH DSERV; rstatus ;;
   bloquear-porta) exigir OSSH; bloquear_porta ;;
   *) uso; exit 2 ;;
