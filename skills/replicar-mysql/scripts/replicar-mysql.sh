@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # replicar-mysql.sh — monta e confere replicação MySQL (origem -> réplica) entre dois hosts.
-# Subcomandos: ssh | listar | verificar | ponte | montar | status | bloquear-porta
+# Subcomandos: ssh | listar | criar-destino | verificar | ponte | montar | status | bloquear-porta
 # Regra dura: nenhuma senha em tela, argumento, log ou arquivo versionado. Nunca usar `set -x`.
 set -euo pipefail
 
@@ -17,6 +17,7 @@ OSSH="" OSERV="" DSSH="" DSERV="" BANCOS="" OHOST="" PORTA="" SID=""
 PORTA_FORCADA=0 FORCAR_PORTA=0 PONTE_IP="" DRY_RUN=0 PORTAS_FW=""
 TRAVAR=0 REFAZER=0 CONFIRMO=0 OPWF="" DPWF="" SEGUIR_LONGA=0 BANCO_INFORMADO=0
 OCONT="" DCONT="" CANDS="" CANDS_N=0
+DPAINEL="" DPROJ="databases" DNOME="" TOKEN_ARQ="" IMAGEM="mysql:9"
 FALHAS=0 AVISOS=0
 OVERS="" OSID="" OUUID="" DVERS="" DUUID="" TAMANHO=0 SRC_UUID=""
 PRECISA_PONTE=0 FORCAR_PONTE_IP=0 AUTORIZAR=0
@@ -28,10 +29,11 @@ ACESSIVEIS=()
 
 uso() {
   cat <<'USO'
-Uso: replicar-mysql.sh <ssh|listar|verificar|ponte|montar|status|bloquear-porta> [opções]
+Uso: replicar-mysql.sh <ssh|listar|criar-destino|verificar|ponte|montar|status|bloquear-porta> [opções]
   ssh             confere o acesso SSH; se faltar, tenta as chaves que já existem nesta máquina e instala a chave da skill sozinha; só pede para colar onde nada funcionou
                   (a instalação automática da chave só acontece em ssh, verificar e montar; os demais só checam e mandam rodar 'ssh')
   listar          lista os serviços MySQL/MariaDB de cada host e sugere o par origem -> destino
+  criar-destino   cria o serviço MySQL de destino pela API do EasyPanel (token em arquivo 600; senhas aleatórias nunca mostradas; sem porta publicada)
   verificar       confere origem, rede e destino (não altera nada no MySQL)
   ponte           cria (ou reaproveita) a ponte da origem: container socat só no IP do Tailscale, porta 29901-29999
   montar          faz o dump, importa e liga a replicação (cria a ponte se a origem não tiver porta)
@@ -48,10 +50,15 @@ Uso: replicar-mysql.sh <ssh|listar|verificar|ponte|montar|status|bloquear-porta>
   --server-id N  (padrão: aleatório, diferente da origem e das outras réplicas)
   --travar-tudo  dump com --lock-all-tables (TRAVA AS GRAVAÇÕES da origem durante o dump inteiro)
   --seguir-com-consulta-longa  não parar por consulta longa rodando na origem
+  --destino-painel URL  (criar-destino) painel do EasyPanel do destino (https://painel/ ou http://IP:3000)
+  --destino-projeto P   (criar-destino) projeto do painel (padrão databases; criado se faltar)
+  --destino-servico-nome N  (criar-destino) nome do serviço (padrão <casa>-database, casa vinda de --origem-servico)
+  --token-arquivo ARQ   (criar-destino) arquivo modo 600 com o token da API do painel (nunca token em argumento)
+  --imagem IMG   (criar-destino) imagem do MySQL (padrão mysql:9)
   --refazer      refaz réplica existente (só se o destino já for réplica desta origem, cópia dela ou vazio)
   --portas a,b   (bloquear-porta) portas a fechar; padrão: todas as de MySQL publicadas em 0.0.0.0/:: na origem
-  --dry-run      (bloquear-porta) mostra o que faria, sem mudar nada
-  --confirmo     obrigatório em montar, ponte (quando for criar) e bloquear-porta (sem --dry-run)
+  --dry-run      (bloquear-porta, criar-destino) mostra o que faria, sem mudar nada
+  --confirmo     obrigatório em montar, criar-destino, ponte (quando for criar) e bloquear-porta (sem --dry-run)
   --origem-senha-arquivo / --destino-senha-arquivo  caminho (no host remoto) com a senha root, se o container não tiver MYSQL_ROOT_PASSWORD
 Variável: REPLICAR_DIR_BASE (padrão /root) — base de .replicacao/ e backups/ no host de destino.
 USO
@@ -278,6 +285,13 @@ setcont() { # lado -> preenche OCONT/DCONT; falha (1) se não achar exatamente u
   if [ "$lado" = o ]; then OCONT=$out; else DCONT=$out; fi
 }
 
+msg_destino() { # serviço de destino -> msg_containers + dica do criar-destino quando não existe
+  msg_containers "$1"
+  if [ "${CANDS_N:-0}" -eq 0 ]; then
+    printf ". Se o MySQL de destino ainda não existe, crie com: criar-destino --confirmo --origem-servico <serviço-origem> --destino-ssh root@IP_D --destino-painel URL --token-arquivo ARQ (veja --ajuda)"
+  fi
+}
+
 msg_containers() { # serviço -> texto do problema (nenhum × vários)
   if [ "${CANDS_N:-0}" -gt 1 ]; then
     printf "há %s containers rodando para '%s': %s. Pare os que sobram (docker stop <nome>; o certo é o que 'docker service ps' mostra como Running) e rode de novo" "$CANDS_N" "$1" "$CANDS"
@@ -288,7 +302,7 @@ msg_containers() { # serviço -> texto do problema (nenhum × vários)
 
 guarda() { # re-acha os dois containers antes de cada passo; nenhum ou mais de um = para (antes de qualquer escrita do passo)
   setcont o || morrer "origem: $(msg_containers "$OSERV")"
-  setcont d || morrer "destino: $(msg_containers "$DSERV")"
+  setcont d || morrer "destino: $(msg_destino "$DSERV")"
 }
 
 mcmd() { # lado [flags] -> comando de host que lê SQL do stdin, como root; senha vem do container (nunca em argumento)
@@ -593,6 +607,11 @@ validar() {
   fi
   [[ $OPWF =~ ^[A-Za-z0-9_./-]*$ ]] || morrer "--origem-senha-arquivo inválido"
   [[ $DPWF =~ ^[A-Za-z0-9_./-]*$ ]] || morrer "--destino-senha-arquivo inválido"
+  [[ $DPAINEL =~ ^(https?://[A-Za-z0-9_.:-]+(/[A-Za-z0-9_./-]*)?)?$ ]] || morrer "--destino-painel inválido (ex.: https://painel.exemplo.com ou http://IP:3000)"
+  [[ $DPROJ =~ ^[a-z0-9][a-z0-9_-]*$ ]] || morrer "--destino-projeto inválido (minúsculas, números, - e _)"
+  [[ $DNOME =~ ^[A-Za-z0-9_.-]*$ ]] || morrer "--destino-servico-nome inválido"
+  [[ $TOKEN_ARQ =~ ^[A-Za-z0-9_./~-]*$ ]] || morrer "--token-arquivo inválido (caminho de arquivo; nunca o token)"
+  [[ $IMAGEM =~ ^[a-z0-9][a-z0-9./_:-]*$ ]] || morrer "--imagem inválida"
   if [ -n "$PORTA" ]; then PORTA_FORCADA=1; fi
 }
 
@@ -681,7 +700,7 @@ lista_mysql rep" || true)
       done
       if [ "$cnt" -eq 1 ] && [ "$bestn" -gt 0 ]; then echo "SUGESTAO  origem $o  ->  destino $best"
       elif [ "$cnt" -gt 1 ]; then echo "AMBIGUO   origem $o: mais de um destino parecido; pergunte ao usuário"
-      else echo "SEM PAR   origem $o: nenhum destino com o mesmo nome de casa"; fi
+      else echo "SEM PAR   origem $o: nenhum destino com o mesmo nome de casa. Se o MySQL de destino não existe, crie: criar-destino --origem-servico $o --destino-ssh ... --destino-painel ... --token-arquivo ... --confirmo"; fi
     done
   fi
 }
@@ -812,7 +831,7 @@ verificar() {
 
   echo "== Destino =="
   if setcont d; then ok "container do destino: $DCONT"; else
-    fa "destino: $(msg_containers "$DSERV")"; fi
+    fa "destino: $(msg_destino "$DSERV")"; fi
   if [ -n "$DCONT" ]; then
     if row=$(q d 'SELECT @@version,@@server_uuid,@@server_id'); then
       local dsid
@@ -906,7 +925,7 @@ lista_mysql norep" || true; } | awk -F'\t' -v p="$1" '$4==p || $5==p || $5==p"(p
 
 rstatus() {
   local st io sql lag e1 e2 rc=0 sh sp suuid gd go pscount rcs ouuid_s pst
-  setcont d || morrer "destino: $(msg_containers "$DSERV")"
+  setcont d || morrer "destino: $(msg_destino "$DSERV")"
   if st=$(ler_status_replica); then rcs=0; else rcs=$?; fi
   if [ -z "$st" ]; then
     if [ "$rcs" -ne 0 ]; then echo "FALHA  não consegui consultar o destino (saída com código $rcs; 255 = falha do ssh, tente de novo; senão confira a senha root do container)"; return 1; fi
@@ -1292,6 +1311,158 @@ bloquear_porta() {
   [ "$FALHAS" -eq 0 ]
 }
 
+# ---------- criar-destino (cria o serviço MySQL de destino pela API do EasyPanel) ----------
+# Regras duras: o token só vai em arquivo de config do curl (-K, modo 600); o corpo da resposta da API NUNCA é impresso
+# (ela ecoa as senhas, também nas mensagens de erro): só o código HTTP. As senhas são geradas aqui e nunca aparecem.
+CD_TMP=""
+cd_limpar() {
+  if [ -n "$CD_TMP" ] && [ -d "$CD_TMP" ]; then
+    rm -f "$CD_TMP/curl.cfg" "$CD_TMP/body.json" "$CD_TMP/resp.json"
+    rmdir "$CD_TMP" 2>/dev/null || true
+  fi
+}
+
+senha_aleatoria() { { LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom 2>/dev/null | head -c 32; } || true; }
+
+casa_padrao() { # nome do serviço de origem -> casa (palavras sem as genéricas de banco e sem repetição, na ordem, unidas por '-')
+  printf '%s' "$1" | tr 'A-Z' 'a-z' | tr '_.-' '\n\n\n' | grep -vxE 'database|databasse|databases|db|bd|banco|mysql|mariadb|[0-9]*' | grep -E '.{2,}' | awk '!v[$0]++' | paste -sd- - || true
+}
+
+projeto_existe() { # arquivo-json nome -> 0 se existe um PROJETO com esse nome (olha só a lista de projetos, não os serviços)
+  python3 -c '
+import json,sys
+def nomes(o):
+    if isinstance(o,dict):
+        if "projects" in o and isinstance(o["projects"],list): return o["projects"]
+        for v in o.values():
+            r=nomes(v)
+            if r is not None: return r
+    elif isinstance(o,list):
+        for v in o:
+            r=nomes(v)
+            if r is not None: return r
+    return None
+try:
+    d=json.load(open(sys.argv[1])); p=nomes(d)
+    if p is None:
+        # formato sem chave "projects": lista de objetos com "name" no primeiro nível de dados
+        j=d.get("result",{}).get("data",{}).get("json",d) if isinstance(d,dict) else d
+        p=j if isinstance(j,list) else []
+    sys.exit(0 if any(isinstance(x,dict) and x.get("name")==sys.argv[2] for x in p) else 1)
+except Exception: sys.exit(1)
+' "$1" "$2" 2>/dev/null
+}
+
+api_codigo() { # metodo(GET|POST) rota [arquivo-corpo] -> imprime só o código HTTP; a resposta vai para $CD_TMP/resp.json (nunca para a tela)
+  local metodo=$1 rota=$2 corpo=${3:-} code
+  if [ "$metodo" = GET ]; then
+    code=$(curl -sS -K "$CD_TMP/curl.cfg" --connect-timeout 10 --max-time 60 -G --data-urlencode 'input={"json":null}' \
+      -o "$CD_TMP/resp.json" -w '%{http_code}' "$DPAINEL/api/trpc/$rota" 2>/dev/null) || code=000
+  else
+    code=$(curl -sS -K "$CD_TMP/curl.cfg" --connect-timeout 10 --max-time 120 -X POST -H 'Content-Type: application/json' --data-binary "@$corpo" \
+      -o "$CD_TMP/resp.json" -w '%{http_code}' "$DPAINEL/api/trpc/$rota" 2>/dev/null) || code=000
+  fi
+  printf '%s' "$code"
+}
+
+criar_destino() {
+  FALHAS=0; AVISOS=0
+  local casa dbn svc_full tok mode code portas im overs="" dvers row
+  acesso_ssh || return 1
+  casa=$(casa_padrao "$OSERV")
+  [ -n "$DNOME" ] || DNOME="${casa:-casa}-database"
+  [[ $DNOME =~ ^[a-z0-9][a-z0-9-]*$ ]] || morrer "nome do serviço de destino inválido ($DNOME): use letras minúsculas, números e '-' (ou passe --destino-servico-nome)"
+  if [ "$BANCO_INFORMADO" = 1 ] && [[ $BANCOS != *,* ]]; then dbn=$BANCOS; else dbn=$(printf '%s' "${casa:-casa}" | tr '-' '_'); fi
+  [[ $dbn =~ ^[A-Za-z0-9_]+$ ]] || morrer "nome do banco inválido ($dbn)"
+  svc_full="${DPROJ}_${DNOME}"
+  DSERV=$svc_full
+  im=$IMAGEM
+
+  echo "== Plano =="
+  echo "INFO   painel: $DPAINEL | projeto: $DPROJ | serviço: $DNOME (no Swarm: $svc_full) | imagem: $im"
+  echo "INFO   banco e usuário: $dbn | senhas: geradas agora (32 caracteres) e nunca mostradas | sem porta publicada"
+
+  echo "== Token =="
+  [ -f "$TOKEN_ARQ" ] || { fa "arquivo do token não existe: $TOKEN_ARQ"; return 1; }
+  mode=$(stat -c '%a' "$TOKEN_ARQ" 2>/dev/null || stat -f '%Lp' "$TOKEN_ARQ" 2>/dev/null || echo ?)
+  if [ "$mode" != 600 ]; then fa "o arquivo do token precisa ter modo 600 (está $mode). Rode: chmod 600 $TOKEN_ARQ"; return 1; fi
+  tok=$(tr -d '\r\n ' < "$TOKEN_ARQ")
+  [[ $tok =~ ^[A-Za-z0-9._~+/=-]+$ ]] || { fa "o arquivo do token está vazio ou com caracteres inesperados (só o token, numa linha)"; return 1; }
+  ok "arquivo do token com modo 600"
+
+  echo "== Destino: o serviço ainda não existe? =="
+  if hexec d "docker service ls --format '{{.Name}}'" </dev/null 2>/dev/null | grep -qxF "$svc_full"; then
+    fa "o serviço $svc_full já existe no destino: nada a criar. Rode 'verificar' com --destino-servico $svc_full"; return 1
+  fi
+  if hexec d "docker ps -a --format '{{.Names}}'" </dev/null 2>/dev/null | grep -qE "^${svc_full//./\\.}(\\.|\$)"; then
+    fa "já há container com o nome $svc_full no destino: nada a criar"; return 1
+  fi
+  ok "$svc_full não existe no destino"
+
+  if [ "$DRY_RUN" = 1 ]; then
+    echo
+    echo "DRY-RUN  não chamei a API nem criei nada. Faria, com --confirmo:"
+    echo "         1) conferir o projeto '$DPROJ' no painel (e criar se faltar: projects.createProject)"
+    echo "         2) criar o serviço: services.mysql.createService (projeto $DPROJ, serviço $DNOME, imagem $im, banco/usuário $dbn, senhas aleatórias)"
+    echo "         3) esperar o container subir e o root do MySQL responder; conferir versão e que não há porta publicada"
+    return 0
+  fi
+  [ "$CONFIRMO" = 1 ] || morrer "criar-destino cria coisas no servidor de destino: precisa de --confirmo (depois do OK do usuário) ou --dry-run"
+
+  CD_TMP=$(umask 077; mktemp -d)
+  trap cd_limpar EXIT
+  ( umask 077; printf 'header = "Authorization: Bearer %s"\n' "$tok" > "$CD_TMP/curl.cfg" )
+  tok=""
+
+  echo "== Painel: projeto '$DPROJ' =="
+  code=$(api_codigo GET projects.listProjectsAndServices)
+  if [ "$code" != 200 ]; then fa "o painel respondeu HTTP $code ao listar os projetos (000 = sem conexão; 401/403 = token errado ou sem permissão). Confira o URL e o token no painel. A resposta não é mostrada"; return 1; fi
+  if projeto_existe "$CD_TMP/resp.json" "$DPROJ"; then
+    ok "o projeto $DPROJ existe"
+  else
+    printf '{"json":{"name":"%s"}}' "$DPROJ" > "$CD_TMP/body.json"
+    code=$(api_codigo POST projects.createProject "$CD_TMP/body.json")
+    if [ "$code" = 200 ]; then ok "projeto $DPROJ criado"; else fa "criar o projeto $DPROJ: o painel respondeu HTTP $code. Olhe o painel (a resposta não é mostrada)"; return 1; fi
+  fi
+
+  echo "== Criar o serviço MySQL =="
+  local u r
+  u=$(senha_aleatoria); r=$(senha_aleatoria)
+  if [ "${#u}" -ne 32 ] || [ "${#r}" -ne 32 ]; then fa "não consegui gerar as senhas aleatórias"; return 1; fi
+  ( umask 077; printf '{"json":{"projectName":"%s","serviceName":"%s","image":"%s","databaseName":"%s","user":"%s","password":"%s","rootPassword":"%s"}}' \
+      "$DPROJ" "$DNOME" "$im" "$dbn" "$dbn" "$u" "$r" > "$CD_TMP/body.json" )
+  u=""; r=""
+  code=$(api_codigo POST services.mysql.createService "$CD_TMP/body.json")
+  rm -f "$CD_TMP/body.json" "$CD_TMP/resp.json"
+  if [ "$code" = 200 ]; then ok "o painel aceitou a criação de $DNOME (HTTP 200)"; else
+    fa "criar o serviço: o painel respondeu HTTP $code. A resposta não é mostrada (ela ecoa senhas). Olhe o painel: se o serviço apareceu, apague-o ou use-o; senão, tente de novo"; return 1; fi
+
+  echo "== Esperar o MySQL do destino =="
+  if esperar_mysql d 240; then ok "container do destino: $DCONT; root do MySQL responde"; else
+    fa "o MySQL de $svc_full não respondeu em 4 min. Olhe o serviço no painel (logs) e rode 'verificar' depois"; return 1; fi
+  if row=$(q d 'SELECT @@version'); then
+    dvers=$row; ok "MySQL $dvers"
+    if ver_ge "$dvers" "$MIN_VERSAO"; then ok "versão >= $MIN_VERSAO"; else fa "versão $dvers < $MIN_VERSAO (use --imagem mysql:8.4 ou mysql:9)"; fi
+    if [ -n "$OSSH" ] && setcont o 2>/dev/null; then overs=$(q o 'SELECT @@version' || true); fi
+    if [ -n "$overs" ]; then
+      if ver_ge "$dvers" "$overs"; then ok "versão do destino ($dvers) >= origem ($overs)"; else fa "versão do destino ($dvers) < origem ($overs): recrie com --imagem de versão igual ou maior"; fi
+    else
+      echo "INFO   versão da origem não conferida (passe --origem-ssh para conferir)"
+    fi
+  else fa "não consegui ler a versão do destino"; fi
+  portas=$(hexec d "docker service inspect '$svc_full' --format '{{range .Endpoint.Ports}}{{.PublishedPort}} {{end}}'" </dev/null 2>/dev/null | tr -d ' \n' || true)
+  if [ -z "$portas" ] && ! hexec d "docker ps --filter 'name=$svc_full' --format '{{.Ports}}'" </dev/null 2>/dev/null | grep -q -- '->'; then
+    ok "nenhuma porta publicada no destino"
+  else
+    fa "o serviço de destino tem porta publicada (${portas:-?}). Tire a publicação no painel (aba Avançado/Domínios e portas) ou feche com 'bloquear-porta'"
+  fi
+  echo
+  if [ "$FALHAS" -eq 0 ]; then
+    echo "PRONTO  destino criado. Próximo: verificar --destino-servico $svc_full (as senhas ficam só no painel e no container)"
+  fi
+  [ "$FALHAS" -eq 0 ]
+}
+
 # ---------- main ----------
 [ $# -ge 1 ] || { uso; exit 2; }
 SUB=$1; shift
@@ -1309,6 +1480,11 @@ while [ $# -gt 0 ]; do
     --server-id) SID=$2; shift 2 ;;
     --origem-senha-arquivo) OPWF=$2; shift 2 ;;
     --destino-senha-arquivo) DPWF=$2; shift 2 ;;
+    --destino-painel) DPAINEL=${2%/}; shift 2 ;;
+    --destino-projeto) DPROJ=$2; shift 2 ;;
+    --destino-servico-nome) DNOME=$2; shift 2 ;;
+    --token-arquivo) TOKEN_ARQ=$2; shift 2 ;;
+    --imagem) IMAGEM=$2; shift 2 ;;
     --travar-tudo) TRAVAR=1; shift ;;
     --refazer) REFAZER=1; shift ;;
     --confirmo) CONFIRMO=1; shift ;;
@@ -1323,6 +1499,7 @@ done
 validar
 case "$SUB" in
   ssh) [ -n "$OSSH$DSSH" ] || morrer "falta --origem-ssh e/ou --destino-ssh"; AUTORIZAR=1; acesso_ssh ;;
+  criar-destino) exigir OSERV DSSH DPAINEL TOKEN_ARQ; [ "$DRY_RUN" = 1 ] || AUTORIZAR=1; criar_destino ;;
   listar) [ -n "$OSSH$DSSH" ] || morrer "falta --origem-ssh e/ou --destino-ssh"; listar ;;
   verificar) exigir OSSH OSERV DSSH DSERV; AUTORIZAR=1; verificar ;;
   ponte) exigir OSSH OSERV; ponte ;;
