@@ -43,6 +43,8 @@ Dois esquemas, nesta ordem: **banco + redis** → importar o modelo → **apps**
 | Arquivo 600 copiado para o container ilegível pelo usuário do serviço | Dono root | Passar a senha pela entrada padrão (ou `chmod 644` dentro do container) |
 | Cópia do modelo lenta | Passava pela máquina do agente | Cópia direta entre servidores, pelo script do produto (ver o exemplo) |
 | Painel errado | O painel das réplicas é outro servidor | O token da API é do painel do servidor novo |
+| `listProjects` não volta `[]` | O servidor já hospeda outro projeto | Confirmar com o usuário projeto separado e slug único; reaproveitar Tailscale, registry e modelo; nunca tocar nos outros projetos |
+| `verificar` da réplica: FALHA "o destino já tem tabelas" | O destino `<slug>-database` já existia com dados de outra origem (ex.: teste antigo); não é réplica, então `--refazer` não vale | Investigar só lendo e perguntar; só com OK explícito no chat (descartável): dump em `<base>/backups/` (600), conferir o dump, `DROP DATABASE`, `verificar`, `montar` |
 
 ## Roteiro manual equivalente aos scripts
 

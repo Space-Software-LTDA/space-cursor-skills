@@ -46,13 +46,13 @@ Ordem: entradas → reconhecer → DNS → modelo → copiar → construir → v
 
 1. **Reunir as entradas** (perguntar só o que faltar):
    - o **produto** (para ler o exemplo) e o SSH do **servidor novo** e do **ambiente modelo** (`root@IP`), se o produto usa modelo;
-   - **painel do servidor novo** (`http://IP:3000`) e o **token da API** (painel → Settings/Configurações → Users → token da API). O usuário grava o token num **arquivo 600 fora do git** (ex.: `~/.easypanel/<slug>.token`) e a skill lê de lá a cada comando (`EASYPANEL_TOKEN="$(cat ARQ)"`): o shell do agente não guarda variável entre chamadas, e o token nunca vai em argumento, no git ou digitado no comando. O painel tem de ser `http://IP:3000` **do próprio servidor novo**, nunca um domínio `*.easypanel.host`;
+   - **painel do servidor novo** (`http://IP:3000`) e o **token da API** (painel → Settings/Configurações → Users → token da API). O usuário grava o token num **arquivo 600 fora do git** (ex.: `~/.easypanel/<slug>.token`) e a skill lê de lá a cada comando (`EASYPANEL_TOKEN="$(cat ARQ)"`): o shell do agente não guarda variável entre chamadas, e o token nunca vai em argumento, no git ou digitado no comando. O painel tem de ser `http://IP:3000` **do próprio servidor novo**, nunca um domínio `*.easypanel.host`. Se o usuário colar o token no chat, gravar no arquivo 600 sem repetir o valor (nem na conversa, nem em argumento de comando externo) e, no relatório, recomendar gerar um token novo;
    - **nome** e **slug** (minúsculas, números, hífen; é também o nome do banco e do usuário do banco);
    - **domínios com os nomes exatos dos subdomínios**: perguntar ou ler da Cloudflare, nunca presumir o padrão; cadastrar sempre o `www`;
    - **admins**: quais ficam e o e-mail do admin novo (a senha o usuário põe num arquivo 600; nunca no chat);
    - **branch/versão** de cada app (ver o exemplo; confirmar com o usuário);
    - painel e token do **servidor de réplicas** (para criar o MySQL de destino), também num arquivo 600.
-2. **Reconhecer (só leitura):** `ssh` no servidor novo (`hostname; nproc; free -g; df -h /; docker info`: Swarm ativo, espaço) e `projects.listProjects` com o token (responde `[]` em servidor limpo; 401 = painel errado). Conferir que o servidor do token é o servidor novo (o painel das réplicas é outro servidor).
+2. **Reconhecer (só leitura):** `ssh` no servidor novo (`hostname; nproc; free -g; df -h /; docker info`: Swarm ativo, espaço) e `projects.listProjects` com o token (responde `[]` em servidor limpo; 401 = painel errado). Conferir que o servidor do token é o servidor novo (o painel das réplicas é outro servidor). **O servidor pode já ter outros projetos:** se o `listProjects` não vier `[]`, mostrar os projetos e serviços que existem, confirmar com o usuário que o app novo entra como **projeto separado** e que o slug é único no servidor. O que já existe ali (Tailscale, registry local, modelo, imagens) é reaproveitado; perguntar se reaproveita o modelo ou gera de novo. O build pula as imagens que já existem.
 3. **DNS (usuário, Cloudflare):** `A` para a raiz e cada subdomínio → IP; `CNAME` `www` → raiz. Proxy laranja funciona (o Traefik serve o certificado). Pode propagar depois; a skill testa com `curl --resolve`.
 4. **Gerar o modelo no ambiente modelo (só leitura):** ver o exemplo do produto. Fora de deploy e fora do pico; o ambiente modelo está no ar: nada de escrita nele. Conferir o relatório do gerador (tudo classificado, nenhum dado de usuário final ou dinheiro).
 5. **Copiar o modelo direto entre servidores** (dry-run antes; conferir a impressão digital). Nunca passar o modelo pela máquina do agente em disco (14 min contra 7 s).
@@ -61,13 +61,13 @@ Ordem: entradas → reconhecer → DNS → modelo → copiar → construir → v
 8. **Subir:** orquestrador do produto com `EASYPANEL_TOKEN="$(cat ARQ_TOKEN)"`, primeiro em `--dry-run`, mostrar ao usuário, e só então de verdade. Cobre: banco/redis (`createFromSchema`) → importar modelo → apps → deploy → inicialização → testes de domínio. Se preferir à mão, o `reference.md` traz o roteiro equivalente. **Antes do primeiro deploy**, comparar as variáveis dos apps com um serviço já no ar (`docker service inspect`).
 9. **Usuário: identidade visual e cadastros do produto** (ver o exemplo; alguns produtos travam a abertura sem isso). Avisar antes de dizer "no ar".
 10. **Tailscale no servidor novo** (necessário para a réplica): se não houver, instalar com **OK explícito** do usuário (`curl -fsSL https://tailscale.com/install.sh | sh`; `tailscale up --hostname=<slug>` em segundo plano), entregar **só a URL de login** e esperar o "pronto". O usuário desliga o *key expiry*.
-11. **Criar o MySQL de destino** no projeto `databases` do **painel de réplicas** pela API (`services.mysql.createService`, token desse painel lido do arquivo 600 por `curl -K`, nunca na linha de comando; `mysql:9`, **sem porta**, nome `<slug>-database`, banco e usuário = slug). **Nunca imprimir o corpo da resposta** (ela ecoa senhas): `-o /dev/null -w '%{http_code}'`.
+11. **Criar o MySQL de destino** no projeto `databases` do **painel de réplicas** pela API (`services.mysql.createService`, token desse painel lido do arquivo 600 por `curl -K`, nunca na linha de comando; `mysql:9`, **sem porta**, nome `<slug>-database`, banco e usuário = slug). **Nunca imprimir o corpo da resposta** (ela ecoa senhas): `-o /dev/null -w '%{http_code}'`. **Se o destino `<slug>-database` já existe** (o `listar` da `replicar-mysql` mostra; o `verificar` dá FALHA se ele tem tabelas): investigar só lendo (data de criação, tabelas, usuários, se é réplica) e perguntar ao usuário o que é. Só se o usuário disser **no chat** que é descartável (teste, sem usuário real e sem dinheiro): dump completo em `<base>/backups/<serviço>-ANTIGO-<data>.sql.gz` (600) no destino (`<base>` = `REPLICAR_DIR_BASE` da `replicar-mysql`, padrão `/root`), conferir o dump (existe, não está vazio, termina em `Dump completed`), `DROP DATABASE` dos bancos a replicar e `verificar` com 0 falha. Sem esse OK, criar um destino com outro nome. Nunca apagar sem o dump conferido; o dump nunca é apagado.
 12. **Réplica:** chamar a skill [`replicar-mysql`](../replicar-mysql/SKILL.md) (`ssh` → `listar` → confirmar o par → `verificar` → OK do usuário → `montar --confirmo`). Ponte `299NN` só no IP do Tailscale. **Nunca publicar a 3306.**
 13. **Relatório final:** domínios e status HTTP, serviços e versões das imagens, admins, réplica (IO/SQL = Yes, atraso, `gtid_executed`), e a lista **do usuário** (ver o exemplo).
 
 ## Leis desta skill
 
-- **Só projetos novos.** Nunca rodar em projeto com usuários ou dinheiro. A inicialização do produto só age com **banco vazio** (importa o modelo, roda migrations, limpa a cópia, cria o admin) e recusa rodar de novo.
+- **Só projetos novos.** Nunca rodar em projeto com usuários ou dinheiro. O servidor pode ter outros projetos: eles nunca são tocados. Única exceção de apagar dado: destino de réplica que o usuário declarou descartável no chat, com dump conferido antes (etapa 11). A inicialização do produto só age com **banco vazio** (importa o modelo, roda migrations, limpa a cópia, cria o admin) e recusa rodar de novo.
 - **O ambiente modelo está no ar: só leitura.**
 - **Serviços nativos do EasyPanel, criados por esquema (`createFromSchema`); nada de Compose** (no Compose o painel não mostra portas nem volumes por serviço: não dá para abrir porta da réplica nem ver volume de backup). Decisão do usuário, 2026-10-27.
 - **Build no servidor novo + registry local `127.0.0.1:5000`;** sem GitHub no servidor (o EasyPanel sempre faz *pull* no deploy).
@@ -88,18 +88,18 @@ Segue [`../../docs/metodo-agentes.md`](../../docs/metodo-agentes.md). Registro: 
 
 **Âncora:** em repositório de código, só `.task/subir-app-easypanel/ANCORA.md` (modelo em `../../docs/metodo-agentes.md` §5): aponta para este `SKILL.md`, o produto/exemplo, etapa atual e próximo passo. Não escrever no `AGENTS.md` do repositório.
 
-Exemplo real de cada etapa: [`exemplos/bet.md`](exemplos/bet.md) (caso Los Hermanos, 2026-10-27).
+Exemplo real de cada etapa: [`exemplos/bet.md`](exemplos/bet.md) (o primeiro uso real e os seguintes estão no exemplo).
 
 | Etapa | Subagente | Entrega | Pronto quando | Exemplo real | Quem aprova |
 |-------|-----------|---------|---------------|--------------|-------------|
-| Entradas e reconhecimento | Não — Controlador | Tabela de entradas preenchida; saída do reconhecimento (sem token) | Swarm ativo no novo; token responde `[]`; domínios exatos confirmados | `exemplos/bet.md` | Humano |
+| Entradas e reconhecimento | Não — Controlador | Tabela de entradas preenchida; saída do reconhecimento (sem token) | Swarm ativo no novo; token responde (`[]`, ou os projetos que já existem, confirmados com o usuário); domínios exatos confirmados | `exemplos/bet.md` | Humano |
 | DNS | Não — usuário | Registros criados na Cloudflare | Nomes dos subdomínios conferidos (propagação pode demorar) | `exemplos/bet.md` | Humano |
 | Gerar e copiar o modelo | Sim (leve) — roda os scripts do produto | Saída do gerador e da cópia | Tudo classificado; só admin; nenhum dado de usuário final (ver o exemplo do produto); modelo no novo (600) | `exemplos/bet.md` | Humano |
 | Construir imagens | Sim — roda o script de build do produto | Versões das imagens | Imagens em `127.0.0.1:5000/*` | `exemplos/bet.md` | Controlador |
 | Arquivo de variáveis | Não — Controlador | Arquivo 600 fora do git (só nomes na conversa) | Obrigatórias preenchidas; nenhum valor impresso | `exemplos/bet.md` | Controlador |
 | Subir o projeto | Sim — roda o orquestrador (dry-run, depois real) | Saída do orquestrador | Apps no ar; domínios 200/302; admin novo criado | `exemplos/bet.md` | Humano (OK após o dry-run) |
 | Identidade visual | Não — usuário | Cadastros exigidos pelo produto | Produto abre normalmente | `exemplos/bet.md` | Humano |
-| Tailscale e destino da réplica | Não — Controlador (OK explícito) | URL de login entregue; destino criado sem corpo de resposta na tela | IP `100.x` no novo; destino no projeto `databases` sem porta | `exemplos/bet.md` | Humano |
+| Tailscale e destino da réplica | Não — Controlador (OK explícito) | URL de login entregue; destino criado sem corpo de resposta na tela | IP `100.x` no novo; destino no projeto `databases` sem porta (se já existia com dados: dump guardado e OK do usuário antes de apagar) | `exemplos/bet.md` | Humano |
 | Réplica | Sim — via `replicar-mysql` | Relatório do `montar` | IO/SQL = Yes; atraso 0; `gtid_executed` e contagem iguais | `exemplos/bet.md` | Humano |
 | Revisão sem contexto | Sim — subagente novo | Lista de achados | Nenhum segredo na saída; estado final bate com a lista de pronto | — | Controlador |
 

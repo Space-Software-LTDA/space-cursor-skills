@@ -5,6 +5,9 @@
 
 | Data | O que estava errado | Causa | Regra nova / ajuste | Onde |
 |------|--------------------|-------|---------------------|------|
+| 2026-10-27 | O "servidor novo" já hospedava outro projeto; o `listProjects` não veio `[]` | A skill presumia servidor limpo | Reconhecer mostra os projetos que existem; confirmar projeto separado e slug único; reaproveitar Tailscale, registry e modelo; nunca tocar nos outros | SKILL.md (etapa 2, leis), reference.md |
+| 2026-10-27 | O destino da réplica já existia com dados de teste antigos; `verificar` deu FALHA e `--refazer` não servia | Serviço criado antes, fora deste fluxo | Investigar só lendo, perguntar; com OK explícito no chat, dump em `<base>/backups/` conferido e `DROP DATABASE`; sem OK, destino com outro nome | SKILL.md (etapa 11), reference.md |
+| 2026-10-27 | O usuário colou os tokens dos painéis no chat | Mais rápido para ele | Gravar em arquivo 600 sem repetir o valor; recomendar gerar token novo no relatório | SKILL.md (etapa 1) |
 | 2026-10-27 | Skill nascia presa a um produto | Criada a partir do primeiro uso, com scripts, apps e branches do produto no texto | Generalizada: renomeada `subir-app-easypanel`; `SKILL.md` e `reference.md` só com o processo comum; produto em `exemplos/` | SKILL.md, reference.md, exemplos/ |
 | 2026-10-27 | Réplica: porta 3306 da origem publicada por minutos em `0.0.0.0` | Seguiu-se uma cópia antiga da `replicar-mysql`, que listava "porta publicada na origem" como pré-requisito | Nunca publicar a 3306; usar o clone atualizado, que cria ponte `socat` só na rede privada. Desfeito despublicando a porta e conferido com `ss -ltn` | SKILL.md (leis, etapa 12) |
 | 2026-10-27 | Senhas do MySQL apareceram na tela | A resposta da criação do serviço e o erro da troca de credenciais ecoam as senhas | Nunca imprimir corpo de resposta das rotas de serviço; só código HTTP. Serviço vazado apagado e recriado | SKILL.md (leis), reference.md |
@@ -19,8 +22,6 @@
 | 2026-10-27 | Senha do root do MySQL visível na lista de processos do container | Senha na linha de comando do cliente no gerador | Passar a senha por variável de ambiente (`docker exec -e`) | SKILL.md (leis), exemplos/ |
 | 2026-10-27 | Skill `replicar-mysql` da máquina estava velha, sem correções e sem permissão de execução | Cópia sincronizada não atualizada | Usar o clone atualizado do pacote ou `npm run sync` antes | SKILL.md (cabeçalho) |
 
-## Pendências (sugestões do primeiro uso, ainda não feitas)
+## Pendências (sugestões dos usos, ainda não feitas)
 - A inicialização do produto cadastrar o logo informado, para o app não travar na primeira abertura.
 - Produto: não travar a tela de carregamento quando não há logo.
-- `replicar-mysql`: criar o MySQL de destino sozinha quando não existir (pedindo o token do painel de destino), em vez de parar no "SEM PAR".
-- Primeira rodada completa do orquestrador do produto de ponta a ponta (no primeiro uso os passos foram feitos um a um).

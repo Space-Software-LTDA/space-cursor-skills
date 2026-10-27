@@ -66,4 +66,12 @@ Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10
 - Cópia de 241 MB passando pelo Coder (14 min): `copiar-modelo.sh` direto, 6,6 s.
 - Senha do root na lista de processos: `gerar-modelo.sh` usa `MYSQL_PWD` via `docker exec -e`.
 - Home presa na tela de carregamento: `LoadingScreen` só some com `global.logo` e o `bet:fabrica` zera o logo; domínio `partners.` (não `parceiros.`).
-- Pendências: `inicializar.sh app` receber `CASA_LOGO_URL`/`CASA_FAVICON_URL`; primeira rodada completa do `subir-casa.sh`.
+- Pendências: `inicializar.sh app` receber `CASA_LOGO_URL`/`CASA_FAVICON_URL` (a primeira rodada completa do `subir-casa.sh` foi feita no segundo uso, abaixo).
+
+## Segundo uso: BossPlay (2026-10-27)
+
+- **Mesmo servidor da Los Hermanos**, como projeto separado (`listProjects` = `['loshermanos']`). Tailscale, registry local e modelo reaproveitados; o build só refez o backoffice (a HML andou).
+- **Primeira rodada completa do `subir-casa.sh`**: sem erro, 2 min 46 s (sem contar o build). Variáveis iguais às da Los Hermanos; as únicas diferenças (`PORT`, `GIT_SHA`, `DEPLOY_TIMESTAMP`) vêm do `Dockerfile`.
+- **Destino da réplica já existia** no projeto `databases`, com dados de teste antigos (não era réplica): dump em `/root/backups/…-ANTIGO-TESTE-…sql.gz`, `DROP DATABASE`, `verificar` 0 falha, `montar` (ponte 29902, GTID igual).
+- Tokens colados no chat pelo usuário: gravados em 600, recomendado gerar novos.
+- Roteiro: `space-spacesoft-bet/docs/demandas/2026-10-26-subir-casa-nova/etapas/05-segunda-casa-bossplay.md`.
