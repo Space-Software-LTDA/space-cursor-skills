@@ -79,3 +79,12 @@ Roda em containers de teste (origem, duas réplicas e um servidor avulso) na mes
 - Testa **por dentro**: do destino (`--destino-ssh`), a porta pelo IP do Tailscale continua abrindo; depois confere a réplica. **Por fora** (outra rede, sem Tailscale) é conferido pelo usuário.
 - `--dry-run` lê tudo e mostra o que faria, sem mudar nada. Sem systemd o script só aplica as regras agora (AVISO: não sobrevivem ao reboot).
 - Não testado: a ativação real do serviço no systemd (o ambiente de teste não tem systemd); o texto do serviço é idêntico ao que funcionou à mão num servidor real.
+
+## Criar o destino (`criar-destino`)
+- **Quando:** o destino não tem o MySQL (o `listar` mostra `SEM PAR`). Roda nesta máquina (curl contra o painel) e no destino por SSH (docker, só para conferir).
+- **Antes de criar:** `docker service ls` no destino (se o serviço `<projeto>_<nome>` já existe, para) e `projects.listProjectsAndServices` (GET `/api/trpc/projects.listProjectsAndServices?input={"json":null}`); se o projeto não existe, `projects.createProject` (POST, corpo `{"json":{"name":"<projeto>"}}`).
+- **Criar:** `POST <painel>/api/trpc/services.mysql.createService`, corpo `{"json":{"projectName","serviceName","image","databaseName","user","password","rootPassword"}}`. Padrões: projeto `databases`; serviço `<casa>-database`; imagem `mysql:9`; banco e usuário = casa (ou `--banco`); senhas aleatórias de 32 caracteres; sem porta publicada. No Swarm o serviço se chama `<projeto>_<serviço>`.
+- **Autenticação:** cabeçalho `Authorization: Bearer <token>`, num arquivo de config do curl (`-K`, modo 600, apagado no fim). O token vem de `--token-arquivo` (modo 600 obrigatório).
+- **Segredo:** a API ecoa as senhas na resposta e nos erros; o script grava a resposta num arquivo temporário 600 e **nunca a imprime** (só `-w '%{http_code}'`). Erro: só o código; olhar o painel. As senhas ficam só no painel e no container (o script lê o root pelo `MYSQL_ROOT_PASSWORD` do container, como nos outros subcomandos).
+- **Depois:** espera o container (até 4 min) e o `mysql -uroot`; confere versão >= 8.0.26 e >= origem (se `--origem-ssh`), e que não há porta publicada.
+- **Testado:** `--dry-run`, `bash -n` e servidor HTTP falso (que ecoa a senha no corpo) com `docker` falso; não testado contra um EasyPanel real (a rota segue a API tRPC do painel; se uma versão nova mudar o formato, o código HTTP aparece e o painel resolve à mão).
