@@ -5,7 +5,7 @@
 
 ## Scripts (repo do bet)
 
-Ficam em `space-spacesoft-bet/deploy/casa-nova/` na `main`; até o merge do PR que os traz, na branch `docs/2026-10-26-compose-casa-nova` (conferir com `git ls-tree origin/main deploy/casa-nova`). Variáveis do `casa.env`: `deploy/casa-nova/README.md`.
+Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10-27). Variáveis do `casa.env`: `deploy/casa-nova/README.md`.
 
 | Script | Para quê |
 |--------|----------|
