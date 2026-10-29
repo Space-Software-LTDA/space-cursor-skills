@@ -75,3 +75,12 @@ Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10
 - **Destino da réplica já existia** no projeto `databases`, com dados de teste antigos (não era réplica): dump em `/root/backups/…-ANTIGO-TESTE-…sql.gz`, `DROP DATABASE`, `verificar` 0 falha, `montar` (ponte 29902, GTID igual).
 - Tokens colados no chat pelo usuário: gravados em 600, recomendado gerar novos.
 - Roteiro: `space-spacesoft-bet/docs/demandas/2026-10-26-subir-casa-nova/etapas/05-segunda-casa-bossplay.md`.
+
+## Terceiro uso: atualizar casas antigas (2026-10-29)
+
+- **Duas casas antigas no mesmo servidor**, subidas por *upload* de código (sem git e sem registry), sem Redis; um terceiro projeto no servidor ficou intocado.
+- **Branches:** Home do **fork do Davi** (`home-davi`, HML; conferido em dia com a Home padrão) e backoffice da HML. O `construir-no-servidor.sh` rodou com `REPOS_DIR` numa pasta temporária com links: `space-spacesoft-bet-home` → clone do `home-davi`.
+- **ENV:** faltavam `REDIS_*`, `CACHE_*`, `APP_TIMEZONE`, `INTERNAL_API_TOKEN` (os dois apps) e `HOME_INTERNAL_URL` (backoffice; o depósito manual precisa). `SESSION_DRIVER` passou de `cookie` para `redis` (deslogou todo mundo uma vez). O cache da Home fica em `file` de propósito (`config/cache.php` fixo). Avisados e não mexidos: `APP_NAME` de outra casa e `MAIL_MAILER=log`.
+- **Ordem:** uma casa por vez, Home antes do backoffice; imagens antigas guardadas como `antes-<app>:<data>`; backoffice confere a rede interna (`HOME_INTERNAL_URL` → 200).
+- **`www`** nunca tinha sido cadastrado (404): `createDomain` (com `id`).
+- **Capas dos jogos:** a Home não montava a pasta do catálogo e devolvia `text/html` nas capas. Correção: cópia direta do `images/catalog` do modelo (223 MB em 9 s, agente SSH temporário) para uma pasta de apoio, `rsync -a --ignore-existing` em `<volume do backoffice>/catalog` com dono `www-data`, `mounts.createMount` só da subpasta `catalog` na Home (`/var/www/html/public/images/catalog`) e deploy; depois `catalog:import-images --pack=… --pack-dir=… --limit=10000` como `www-data` (teste antes): ~1,6 mil capas do pack por casa, 0 caminho sem arquivo. O resto o agendador baixa (200 a cada 10 min).
