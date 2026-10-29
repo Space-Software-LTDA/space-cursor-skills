@@ -185,6 +185,7 @@ A proibição é para a **âncora da skill**. As **regras do projeto**, escritas
 | Sem pressa | Ler o arquivo inteiro antes de editar; inspecionar **tudo** (todas as telas, todos os quadros), não uma amostra |
 | Clareza para leigo | Termo técnico explicado na primeira vez; nada de recado de processo ou de conversa dentro do artefato |
 | Nada apagado sem OK | Versão antiga vai para uma área de rascunho |
+| Limpar ao terminar | Tarefa concluída (PR juntado ou entrega aceita pelo humano) → o agente remove o que **ele mesmo criou** para ela e não serve mais: worktree e branch local já juntadas, container, imagem e rede de teste, processo ou servidor deixado rodando, arquivo temporário, entrada de stash. Não toca no que é de outra sessão em andamento nem no ambiente principal; volume ou arquivo com dado só com OK (e "Bases de usuários nunca apagadas" vale). Ao fechar, diz em uma linha o que removeu e o que ficou, e por quê. A lista do que conta como ambiente principal é do projeto |
 | Arquivo de trabalho protegido | Canvas e arquivos grandes: cópia com data antes e depois de cada rodada; um só editor aberto; conferir que o arquivo mudou no disco |
 | Responder em português | Toda resposta, explicação, documento e comentário de script em português (pt-BR), desde a primeira mensagem |
 | Ideia não é ordem | Quando o humano diz "mas passa", "já é opinião minha" ou comenta uma alternativa, é conversa: responder e perguntar se quer mudar. Não sair alterando |
