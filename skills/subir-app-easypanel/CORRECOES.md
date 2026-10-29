@@ -5,6 +5,11 @@
 
 | Data | O que estava errado | Causa | Regra nova / ajuste | Onde |
 |------|--------------------|-------|---------------------|------|
+| 2026-10-29 | `domains.createDomain` deu 400 `id Required` | A referência não citava o `id` nem o formato completo | Formato completo na tabela da API, copiado de um `listDomains` | reference.md |
+| 2026-10-29 | `services.app.updateMounts` deu 404 | Rota inexistente | `mounts.createMount {projectName, serviceName, values}` e `mounts.listMounts` | reference.md |
+| 2026-10-29 | Arquivo do volume servido como página do site (200 `text/html`) | Só o app que grava montava a pasta; o que serve não | Montar a subpasta compartilhada nos dois apps e fazer o deploy | reference.md (tropeços) |
+| 2026-10-29 | Não havia roteiro para atualizar projeto antigo subido por *upload* | A skill cobria só projeto novo e atualização de projeto criado por ela | Roteiro "Projeto antigo": só lendo primeiro, migrations no plano, imagem e ENV antigas guardadas, ENV conferida (só nomes) com projeto novo e com o código, apoio por `createFromSchema`, arquivos de volume só com `--ignore-existing`, um app por vez, como voltar atrás | reference.md, SKILL.md (papel, leis) |
+| 2026-10-29 | (revisão sem contexto) Roteiro de atualização deixava migrations, cópia de arquivos e volta atrás implícitas | Primeira versão do roteiro | Migrations listadas antes do deploy; item de arquivos de volume; lista explícita de valores que podem aparecer; passo "Voltar atrás" | reference.md |
 | 2026-10-27 | O "servidor novo" já hospedava outro projeto; o `listProjects` não veio `[]` | A skill presumia servidor limpo | Reconhecer mostra os projetos que existem; confirmar projeto separado e slug único; reaproveitar Tailscale, registry e modelo; nunca tocar nos outros | SKILL.md (etapa 2, leis), reference.md |
 | 2026-10-27 | O destino da réplica já existia com dados de teste antigos; `verificar` deu FALHA e `--refazer` não servia | Serviço criado antes, fora deste fluxo | Investigar só lendo, perguntar; com OK explícito no chat, dump em `<base>/backups/` conferido e `DROP DATABASE`; sem OK, destino com outro nome | SKILL.md (etapa 11), reference.md |
 | 2026-10-27 | O usuário colou os tokens dos painéis no chat | Mais rápido para ele | Gravar em arquivo 600 sem repetir o valor; recomendar gerar token novo no relatório | SKILL.md (etapa 1) |

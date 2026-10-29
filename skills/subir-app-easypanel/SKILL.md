@@ -23,7 +23,7 @@ disable-model-invocation: true
 
 ## Papel
 
-Subir **um projeto novo** (nunca mexer em um existente) num servidor novo com EasyPanel, com serviços **nativos** (`<slug>-database`, `<slug>-redis`, um serviço por app, no projeto `<slug>`), iguais aos dos projetos já no ar, e deixar a réplica do banco montada. O agente conduz; o usuário faz só o que é dele (DNS, identidade visual, Tailscale se não houver OK, integrações externas).
+Subir **um projeto novo** (nunca mexer em um existente) num servidor novo com EasyPanel, com serviços **nativos** (`<slug>-database`, `<slug>-redis`, um serviço por app, no projeto `<slug>`), iguais aos dos projetos já no ar, e deixar a réplica do banco montada. **Atualizar um projeto que já está no ar** é outro roteiro: [`reference.md`](reference.md), "Atualizar um projeto já no ar". O agente conduz; o usuário faz só o que é dele (DNS, identidade visual, Tailscale se não houver OK, integrações externas).
 
 **Primeiro passo: perguntar qual produto é** e ler `exemplos/<produto>.md`. O que depende do produto (modelo de dados, scripts, apps, branches, inicialização, o que o usuário cadastra) mora lá; esta skill traz só o roteiro comum. Produto sem exemplo: levantar com o usuário, executar e registrar o exemplo novo pelo `/skill-update`.
 
@@ -36,7 +36,7 @@ Conteúdo **genérico**: nenhum IP, token ou senha real; nada de um produto fora
 | Arquivo | Para quê |
 |---------|----------|
 | [`reference.md`](reference.md) | API do EasyPanel (tRPC), tropeços conhecidos com a correção, roteiro manual |
-| [`CORRECOES.md`](CORRECOES.md) | Registro das correções do primeiro uso |
+| [`CORRECOES.md`](CORRECOES.md) | Registro das correções de cada uso |
 | [`exemplos/`](exemplos/) | Um arquivo por produto: scripts, apps, branches e caso real |
 | Skill irmã | [`../replicar-mysql/SKILL.md`](../replicar-mysql/SKILL.md): a réplica do banco (etapa final) |
 
@@ -67,7 +67,7 @@ Ordem: entradas → reconhecer → DNS → modelo → copiar → construir → v
 
 ## Leis desta skill
 
-- **Só projetos novos.** Nunca rodar em projeto com usuários ou dinheiro. O servidor pode ter outros projetos: eles nunca são tocados. Única exceção de apagar dado: destino de réplica que o usuário declarou descartável no chat, com dump conferido antes (etapa 11). A inicialização do produto só age com **banco vazio** (importa o modelo, roda migrations, limpa a cópia, cria o admin) e recusa rodar de novo.
+- **Só projetos novos.** Nunca rodar este fluxo em projeto com usuários ou dinheiro (atualizar um projeto que já existe é outro roteiro: `reference.md`, "Atualizar um projeto já no ar", só código, ENV, montagens e serviços de apoio, nunca dado, com plano e OK antes). O servidor pode ter outros projetos: eles nunca são tocados. Única exceção de apagar dado: destino de réplica que o usuário declarou descartável no chat, com dump conferido antes (etapa 11). A inicialização do produto só age com **banco vazio** (importa o modelo, roda migrations, limpa a cópia, cria o admin) e recusa rodar de novo.
 - **O ambiente modelo está no ar: só leitura.**
 - **Serviços nativos do EasyPanel, criados por esquema (`createFromSchema`); nada de Compose** (no Compose o painel não mostra portas nem volumes por serviço: não dá para abrir porta da réplica nem ver volume de backup). Decisão do usuário, 2026-10-27.
 - **Build no servidor novo + registry local `127.0.0.1:5000`;** sem GitHub no servidor (o EasyPanel sempre faz *pull* no deploy).
