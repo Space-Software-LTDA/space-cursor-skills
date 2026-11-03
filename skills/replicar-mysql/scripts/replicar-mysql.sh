@@ -808,13 +808,12 @@ verificar() {
           fa "a ponte da casa ($O_PONTE) está PARADA: rode 'ponte --confirmo --origem-ssh ... --origem-servico ...' (faz docker start) ou 'docker start $O_PONTE' no host de origem"
         fi
       fi
-    elif [ -n "$O_PUBLICADA" ]; then
-      PORTA=$O_PUBLICADA
-      ok "porta publicada do serviço de origem: $PORTA"
     else
+      # Réplica sempre pela ponte, mesmo com porta publicada no serviço: a porta publicada nunca é o caminho.
       PRECISA_PONTE=1
       PORTA=$(proxima_porta_livre || true)
-      av "o serviço de origem não tem porta publicada. O 'montar' cria a ponte (container socat só no IP do Tailscale, porta ${PORTA:-?} da faixa 29900-29999): sem reiniciar o MySQL e sem abrir a internet. Rede ainda não testada"
+      [ -z "$O_PUBLICADA" ] || av "o serviço de origem publica a porta $O_PUBLICADA: a réplica NÃO usa essa porta. Feche com 'bloquear-porta --confirmo' (OK à parte) depois de montar"
+      av "O 'montar' cria a ponte (container socat só no IP do Tailscale, porta ${PORTA:-?} da faixa 29900-29999): sem reiniciar o MySQL e sem abrir a internet. Rede ainda não testada"
     fi
   fi
   if [ "$PRECISA_PONTE" = 1 ]; then
@@ -905,9 +904,6 @@ ponte() {
   acesso_ssh || exit 1
   setcont o || morrer "origem: $(msg_containers "$OSERV")"
   descobrir_origem
-  if [ -z "$O_PONTE" ] && [ -n "$O_PUBLICADA" ] && [ "$PORTA_FORCADA" = 0 ]; then
-    echo "INFO   o serviço já publica a porta $O_PUBLICADA; a ponte só é necessária quando ele não tem porta publicada. Seguindo mesmo assim."
-  fi
   fazer_ponte
   avaliar_porta
   relatorio_acesso
