@@ -5,6 +5,9 @@
 
 | Data | O que estava errado | Causa | Regra nova / ajuste | Onde |
 |------|--------------------|-------|---------------------|------|
+| 2026-11-03 | App subiu sem a integração obrigatória do produto (verificação de identidade) e o usuário teve de cobrar | O roteiro tratava integrações como "do usuário" e o modelo vem com a integração desligada | Integração obrigatória do produto é passo do agente, sempre, com teste ponta a ponta e item na lista de pronto | SKILL.md (etapa 9a), exemplos/ |
+| 2026-11-02 | Script de cópia não copiava e não dava erro | Um `ssh` anterior ao `read` consumia a entrada padrão | `ssh -n` em todo `ssh` que não precisa de entrada antes de um `read` | exemplos/ |
+| 2026-11-02 | Servidor com plano gratuito cheio | O roteiro só previa projeto novo | Serviços do app novo num projeto que já existe, com aviso ao usuário de que apagar o projeto apaga o app | SKILL.md (etapa 2), exemplos/ |
 | 2026-10-29 | `domains.createDomain` deu 400 `id Required` | A referência não citava o `id` nem o formato completo | Formato completo na tabela da API, copiado de um `listDomains` | reference.md |
 | 2026-10-29 | `services.app.updateMounts` deu 404 | Rota inexistente | `mounts.createMount {projectName, serviceName, values}` e `mounts.listMounts` | reference.md |
 | 2026-10-29 | Arquivo do volume servido como página do site (200 `text/html`) | Só o app que grava montava a pasta; o que serve não | Montar a subpasta compartilhada nos dois apps e fazer o deploy | reference.md (tropeços) |

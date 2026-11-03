@@ -27,7 +27,12 @@ Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10
 - **Logo e favicon travam a Home:** a `LoadingScreen` só some com `global.logo`. O usuário cadastra no backoffice → Designer → Personalização, logo após o deploy; avisar antes de dizer "no ar".
 - **Variáveis a comparar com a casa modelo:** `SESSION_*` (`SESSION_DRIVER=redis`), `QUEUE_CONNECTION=sync`, `LOG_LEVEL=warning`, `APP_MAINTENANCE_DRIVER=file`, `REDIS_PREFIX` por app. Depois do init, `cache:clear` também na Home.
 - **Testes após subir:** casa 200, `www` 200, backoffice 302 → `/admin`, partners 200, uma capa de jogo 200 `image/webp`.
-- **Lista do usuário no relatório:** logo, favicon, banners, cores, gateway, agregador, SMTP, cadastro no proxy, trocar a senha dos admins do modelo.
+- **KYC (verificação de identidade): o agente configura sempre** (regra do usuário, 2026-11-03: "sempre configurar o KYC!"). Passo a passo em `deploy/casa-nova/README.md` ("KYC: sempre configurar"): token e cadastro no proxy (`sign-client-token.js` no `soft_payment-proxy`, token só para arquivo 600), `SPACEPAY_PROXY_URL` na Home e no backoffice (o esquema sobe vazia), token gravado pelo `SpacePayConnection::test`, **ligar `config.kyc_rules.enabled`** (o modelo vem desligado) e testar uma sessão pela Home. O `frame-ancestors` do app de KYC pega a casa nova do proxy sozinho (cache de até 30 min).
+- **Casa modelo = NacionalBet** (decisão do usuário, 2026-11-03): o estado padrão (agregadores, catálogo, capas, fileiras, menu, selos, KYC) está em `space-spacesoft-bet/docs/sistema/estado-padrao-casa.md`; casa nova sai do modelo exportado dela, mudando só a marca.
+- **Projeto que já existe (`CASA_PROJETO`):** com o plano gratuito cheio, os serviços `<slug>-*` entram num projeto que já existe; nomes do Swarm `<projeto>_<slug>-…` e volume em `/etc/easypanel/projects/<projeto>/<slug>-backoffice`. Avisar que apagar o projeto apaga a casa.
+- **Agregadores:** o modelo vem com PlayFivers e IGameWin **ligadas e sem credencial**: criar os agentes antes do DNS (senão cada clique marca erro na versão). O formulário de agente pede senha: o agente preenche o resto e o usuário digita a senha e cria. Credencial lida do painel, gravada por script com entrada padrão.
+- **Cloudflare na frente:** a Home sem `ASSET_URL` monta os scripts em `http://` direto na origem; as casas no ar funcionam pela reescrita automática da Cloudflare. DNS sem Cloudflare = conteúdo misto.
+- **Lista do usuário no relatório:** logo, favicon, banners, cores, gateway, agregador, SMTP, trocar a senha dos admins do modelo.
 - **Réplica:** destino `<slug>-database` no projeto `databases` do painel de réplicas.
 
 ## Os 13 passos no bet
@@ -41,6 +46,8 @@ Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10
 7. `casa.env` (600): `APP_KEY` = `base64:` + 32 bytes, `INTERNAL_API_TOKEN` = `openssl rand -hex 32`, `ADMIN_*`, `WWW=1`.
 8. `subir-casa.sh` em dry-run, depois real (banco/redis → importar → apps → deploy → `inicializar.sh app` → `cache:clear` na Home → testes).
 9. Logo e favicon (usuário).
+9a. KYC (agente, sempre): token no proxy, `SPACEPAY_PROXY_URL`, token gravado, regra ligada, sessão testada.
+9b. Lançamentos (agente): atualizar a data de lançamento dos jogos novos do mês (o selo "Lançamento" vence em 30 dias e a data vem do modelo); lista aprovada pelo usuário antes.
 10. Tailscale (OK explícito; só a URL de login).
 11. MySQL de destino (`mysql:9`, sem porta).
 12. `replicar-mysql` (ponte `299NN`).
@@ -84,3 +91,13 @@ Ficam em `space-spacesoft-bet/deploy/casa-nova/`, na `main` (juntados em 2026-10
 - **Ordem:** uma casa por vez, Home antes do backoffice; imagens antigas guardadas como `antes-<app>:<data>`; backoffice confere a rede interna (`HOME_INTERNAL_URL` → 200).
 - **`www`** nunca tinha sido cadastrado (404): `createDomain` (com `id`).
 - **Capas dos jogos:** a Home não montava a pasta do catálogo e devolvia `text/html` nas capas. Correção: cópia direta do `images/catalog` do modelo (223 MB em 9 s, agente SSH temporário) para uma pasta de apoio, `rsync -a --ignore-existing` em `<volume do backoffice>/catalog` com dono `www-data`, `mounts.createMount` só da subpasta `catalog` na Home (`/var/www/html/public/images/catalog`) e deploy; depois `catalog:import-images --pack=… --pack-dir=… --limit=10000` como `www-data` (teste antes): ~1,6 mil capas do pack por casa, 0 caminho sem arquivo. O resto o agendador baixa (200 a cada 10 min).
+
+## Quarto uso: NacionalBet (2026-11-02 e 03)
+
+- **Dentro de um projeto que já existe** (plano gratuito cheio): `CASA_PROJETO` no `casa.env`. Tropeço: o `inicializar.sh` ainda usava o slug no caminho do volume e copiou as imagens para a pasta errada (corrigido).
+- **`copiar-modelo.sh` não copiava e não dava erro:** o `ssh` da impressão digital lia a entrada padrão e engolia a resposta do `read`. Corrigido com `ssh -n`.
+- **Artes do Pencil do usuário** (Pencil desktop no PC): ponte `supergateway` + `coder ssh -R`; o `TakeScreenshot` sai em 1x e no máximo 400 px, então as artes foram copiadas em escala para um quadro temporário, capturadas em blocos e remontadas.
+- **KYC esquecido** na primeira rodada: o usuário cobrou. Faltavam o token, `SPACEPAY_PROXY_URL` (vazia), a gravação do token e a regra (`enabled: false`). Virou passo obrigatório (acima).
+- **Banner recomendado sem link** derruba a seção na Home (`removeUrlOrigin(null)`): gravar link em todo `desktop_action_btns`/`mobile_action_btns`.
+- **Sync diário da PlayFivers** religava as categorias por provedora e desligava as fileiras da casa: corrigido no backoffice (o sync não mexe mais em categorias).
+- Roteiro: `space-spacesoft-bet/docs/demandas/2026-10-26-subir-casa-nova/etapas/09-quarta-casa-nacionalbet.md`.
