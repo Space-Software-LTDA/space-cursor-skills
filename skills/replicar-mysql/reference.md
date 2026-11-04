@@ -70,7 +70,7 @@ Roda em containers de teste (origem, duas réplicas e um servidor avulso) na mes
 
 ## Descoberta da porta e do par origem → destino
 - `listar` usa o rótulo `com.docker.swarm.service.name` dos containers de imagem `mysql`/`mariadb`/`percona`, a porta publicada (`docker service inspect`, `TargetPort` 3306), a ponte (pelo alvo do `socat`) e consulta o `performance_schema` para saber se já é réplica. A sugestão compara as palavras do nome (sem `database`, `db`, `mysql`...); igual ou prefixo de 4+ letras. Sempre confirmar com o usuário.
-- Porta da origem no `verificar`/`montar`: `--porta` (força) → ponte da casa → porta publicada → ponte nova.
+- Porta da origem no `verificar`/`montar`: `--porta` (força) → ponte da casa → ponte nova. A porta publicada não entra: a réplica sempre passa pela ponte.
 - Aviso de exposição (`ss -ltn`): só IP 100.64.0.0/10 = OK; 0.0.0.0/:: com regra DROP no `DOCKER-USER` = OK; 0.0.0.0/:: sem DROP = AVISO.
 
 ## Firewall (`bloquear-porta`)
