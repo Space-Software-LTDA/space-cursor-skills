@@ -23,7 +23,7 @@ Na documentação (`project-context-doc`), vale o parágrafo de cima.
 | Fazer | Não fazer |
 | --- | --- |
 | Explicar como professor paciente: contexto → cenário → exemplo → consequência | Jogar informação solta ou telegráfica |
-| Exemplos concretos (curl, JSON, persona, certo vs errado) | Só abstração (“o tenant”, “a bet”, “implementar CRUD”) |
+| Exemplos concretos (curl, JSON, persona, certo vs errado) — na task, o exemplo **explica um conceito**; nunca é a resposta tirada da documentação de terceiros (ver abaixo) | Só abstração (“o tenant”, “a bet”, “implementar CRUD”) |
 | Glossário dos termos que aparecem no texto | Assumir que o leitor conhece MinIO, JSONB, soft delete, RBAC, etc. |
 | Preferir **mais exemplo** a menos texto abstrato | Enxugar didática da **documentação** “para caber” ou “porque o sênior já sabe” (na task, o detalhe do **como** escala com quem executa — ver abaixo) |
 | Frases curtas; subtítulos; tabelas quando ajudam | Um parágrafo denso para um módulo inteiro |
@@ -60,6 +60,8 @@ Vale para a task (`po-techlead-scrum`). A documentação não muda.
 | Domínio, termos, regras de negócio | Tabela nova, coluna nova ou mecanismo especial em correção e integração |
 | Onde as coisas estão; como o sistema funciona hoje | DBML, schema, pseudocódigo ou payload completo que o PO **não** decidiu |
 | Direção: para onde olhar | A solução pronta |
+| **Do que** o sistema precisa, como conceito (ex.: “para o depósito ser confirmado, precisa de uma rota que receba o aviso da gateway”) | **A resposta que está na documentação** do fornecedor ou de terceiros: rota, campos, corpo, curl, tabela de status, valores (ex.: “use `POST /v2/pix` com os campos X, Y, Z”). O dev é **obrigado** a ler a documentação e descobrir |
+| Possibilidades, quando ajudam a enxergar o problema | Escolher entre elas — a escolha do como é sempre do dev |
 
 - Antes de escrever, quem escreve confere se o que vai pedir **já existe** e se é **mesmo necessário** (YAGNI, DRY, KISS). É checagem de quem escreve, não conteúdo do card.
 - A task **conduz**, não resolve. Direcionar para a solução é uma coisa; solucionar pelo dev é outra.
@@ -68,6 +70,8 @@ Vale para a task (`po-techlead-scrum`). A documentação não muda.
 - DBML, schema, pseudocódigo e payload completo entram **só quando já são decisão do PO** (ex.: produto novo, contrato já publicado no Apidog).
 - O card leva **só o que é útil a quem executa**. Nada vazado da conversa entre PO e IA: as restrições que o PO deu para guiar a escrita guiam **como** escrevemos — não são conteúdo do card.
 - “Mais exemplo” vale para o que é confuso, não para o como.
+- **A documentação é leitura obrigatória do dev.** A task aponta a doc (link ou anexo) e a seção que importa; não copia campos, rotas, corpos nem curl dela. Se o dev não precisar abrir a doc para executar, a task resolveu por ele.
+- **Task curta.** Task longa é lida pela metade e o que importa passa batido. Corte o que a doc já diz, o glossário de termo óbvio e a repetição; fica o problema, o resultado, o confuso explicado, onde está no nosso código e as armadilhas que o dev não acharia sozinho.
 
 ---
 
