@@ -493,7 +493,8 @@ Usar valor de negócio × esforço × risco. Explicitar trade-offs ao recomendar
 - [ ] **Imediatas ao publicar:** sem subtarefa; `--checklist-name` + `--checklist-item` na task (uma camada) **ou** na `[BACKEND]` e na `[FRONTEND]` vinculadas (`--link`)
 - [ ] **Esteira ao publicar:** subtarefa só se precisar; sprint = MAIN + entregas como subtask; status `detalhar` se já vai para a sprint
 - [ ] Nenhuma descrição duplicada entre MAIN, entregas e subtarefas
-- [ ] Payloads, endpoints, curls e fluxos documentados onde necessário
+- [ ] Payloads, endpoints, curls e fluxos **nossos** documentados onde necessário; API de fornecedor/terceiro só apontada (link/anexo + seção) — o dev lê a doc ([explicar não é resolver](../docs/tom-professor.md#na-task-explicar-não-é-resolver))
+- [ ] Task curta: nada copiado da doc do fornecedor, sem repetição, sem glossário óbvio; nenhuma escolha de como (possibilidades podem aparecer, a escolha é do dev)
 - [ ] Edge cases e riscos em Observações
 - [ ] Aviso de IA no topo
 - [ ] Sem meta de Scrum/roteamento no corpo da task (passo a passo da Esteira e DDD **são** para o time, não “modo SuperAgente”)

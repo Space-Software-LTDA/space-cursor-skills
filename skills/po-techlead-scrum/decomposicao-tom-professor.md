@@ -129,9 +129,9 @@ Copiar **para cada** unidade mínima (tela, aba, KPI, endpoint crítico):
 
 ## 🖥️ Back — checklist por task com API
 
-- [ ] **Cada endpoint** do escopo: método, path, query/body, response mínimo
+- [ ] **Cada endpoint nosso** do escopo, quando o contrato já é decisão do PO: método, path, query/body, response mínimo. API de fornecedor/terceiro: só apontar a documentação (o dev lê) — ver [explicar não é resolver](../docs/tom-professor.md#na-task-explicar-não-é-resolver)
 - [ ] Schema é decisão do PO (produto novo)? Tabela **coluna a coluna** + DBML com Notes em JSONB/enums. Correção / integração: apontar onde está e o resultado esperado; a estrutura fica com o dev
-- [ ] curl de exemplo por endpoint crítico
+- [ ] curl de exemplo por endpoint crítico **nosso** (contrato decidido pelo PO); nunca curl da API do fornecedor
 - [ ] O que é mock 🎭 vs dado real
 - [ ] Audit log / auth / guard quando sensível
 - [ ] Edge cases (404, 403, validação, omitir campo)
