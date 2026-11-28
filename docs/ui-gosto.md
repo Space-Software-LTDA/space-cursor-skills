@@ -62,6 +62,13 @@ Vale para **todo** trabalho de tela (com ou sem skill), em qualquer projeto.
 8. **Pedido numa tela vale para o mesmo componente em todas as telas.** Aplicar sem esperar o dono repetir.
 9. **Ponto de partida do código é o que o canvas exporta** (código e estilos do frame), não a aparência padrão do framework de UI. Os valores do DS vencem o padrão do framework nas telas novas.
 10. **Tela só é entregue depois de conferida no navegador, lado a lado com o PNG do canvas** (mesma largura, mesma tela, logado com um usuário que vê todas as ações): posição de cada bloco, tamanho e peso da fonte, cantos, espaçamento, cor de botão, badge e switch. Revisão visual só pelo HTML ou pelo código não vale. Diferença aceita: só a cor da marca quando o canvas usa a de outro cliente. Larguras: §11.2 "Viewport de QA".
+11. **Conferência visual é obrigatória e não se pula** (LEI, dono 2026-11-26: "quando você fizer um componente novo baseado no PENCIL você OBRIGATORIAMENTE [...] PRECISA comparar os dois VISUALMENTE SEMPRE!"). Vale para tela nova, **componente novo**, modal, menu, popup, e também para ajuste pequeno e para trabalho de subagente:
+    - Para cada peça: exportar o PNG do node do canvas **e** tirar o print logado da mesma peça, aberta no estado real (modal aberto, menu aberto, lista do filtro aberta, hover quando houver), em 1440 e 1680 de largura.
+    - **Abrir as duas imagens e comparar item a item:** fonte (família, tamanho, peso), cores de fundo e texto, cantos, espaçamento, ícones (posição e presença), botões (variante do DS), sobreposição (menu por cima de tudo, modal centralizado) e textos iguais aos do canvas.
+    - Comparar também com uma **tela irmã que já está aprovada** (ex.: a tabela nova ao lado da tabela de Usuários): fonte e tamanhos não podem divergir.
+    - Peça do framework que ficou com o visual padrão (botão cinza solto, lista de select com "comece a digitar", ícone solto no topo de modal) é FAIL, mesmo que funcione.
+    - A entrega ao dono **leva os pares de imagem** (canvas × print) ou a lista do que ainda difere. Sem os pares, não está entregue; suíte verde não substitui.
+    - Caso que originou: telas de saque entregues com suíte verde e sem comparar, com modais, filtros, botões e tabela fora do canvas ("Da uma olhada como tá a tela de níveis! VERGONHOSA!").
 
 ---
 
